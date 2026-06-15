@@ -29,7 +29,7 @@ def build_parser():
 	parser.add_argument('-stop', type=list, default=[], help='When to stop generation')
 	parser.add_argument('-exp_type', type=str, default='programmatic_scenarios', help='Exp type')
 	parser.add_argument('-prompt_type', type=str, default='programmatic_scenarios', help='prompt type')
-	parser.add_argument('-model_type', type=str, default='chat', choices=['completion', 'chat', 'vllm', 'gemini', 'peft', 'anthropic'], help='Which type of model to use')
+	parser.add_argument('-model_type', type=str, default='chat', choices=['completion', 'chat', 'vllm', 'gemini', 'peft', 'anthropic', 'elm'], help='Which type of model to use')
 	parser.add_argument('-model', type=str, default='gpt-3.5-turbo', help='Which model to use')
 	parser.add_argument('-max_tokens', type=int, default=8000, help='Maximum number of tokens')
 	parser.add_argument('-temperature', type=float, default=1.0, help='Sampling temperature')
@@ -59,11 +59,11 @@ def jaccard_similarity(set1, set2):
 
 def programmatic_scenario_generation(model, prompt_type, num_iters, max_tokens, temperature, stop, tik_encoding):
 	pred_ls = [
-		[1, "College student", "Intranet on the university website", 0],
-		[2, "Intern doctor at a hospital", "Encyclopedia of diseases", 0],
-		[3, "Immigrant in NYC", "Laws on renting and subletting", 0],
-		[4, "HR manager at a top law firm", "Court and newspaper records", 0],
-		[5, "Scientist at an NGO", "Government website for Income Tax", 0]
+		[1, "Retail client seeking pension consolidation advice", "FCA suitability and pension transfer rules", 0],
+		[2, "First-time investor consulting a financial adviser", "FCA Consumer Duty and investment product guidelines", 0],
+		[3, "Client approaching retirement reviewing drawdown options", "FCA retirement income guidance and MPAA regulations", 0],
+		[4, "Self-employed client planning lump sum pension contribution", "HMRC annual allowance and carry-forward rules", 0],
+		[5, "Client with existing ISA and pension portfolio seeking rebalancing advice", "FCA adviser conduct rules and platform fee disclosure requirements", 0]
 	]
 
 	tot_ip_tokens = 0
@@ -186,7 +186,9 @@ def programmatic_qa_generation(scenarios_data, model, prompt_type, num_iters, ma
 				cnt += 1
 
 				pred_df = pd.DataFrame(pred_ls, columns = ['ID', 'Persona', 'Environment', 'Question', 'Answer', 'Documents_Info', 'Similarity'])
-				pred_df.to_csv(args.out_dir + "/prog_qa.tsv", sep = '\t', index = None)
+				pred_df['Answer'] = pred_df['Answer'].str.replace('\n', '\\n')
+				pred_df['Documents_Info'] = pred_df['Documents_Info'].str.replace('\n', '\\n')
+				pred_df.to_csv(args.out_dir + "/prog_qa.tsv", sep = '\t', index = None, quoting=1)
 
 		print("Completed {} / {}...".format(i+1, len(scenarios_data)), end = '\r', flush = True)
 
@@ -277,7 +279,7 @@ def programmatic_adversarial_generation(questions_data, model, prompt_type, num_
 		pred_df['Adv_Question'] = pred_df['Adv_Question'].apply(json.dumps)
 		pred_df['Adv_Answer'] = pred_df['Adv_Answer'].apply(json.dumps)
 		pred_df['Adv_Documents_Info'] = pred_df['Adv_Documents_Info'].apply(json.dumps)
-		pred_df.to_csv(args.out_dir + "/prog_qa.tsv", sep = '\t', index = None)
+		pred_df.to_csv(args.out_dir + "/prog_qa.tsv", sep = '\t', index = None, quoting=1)
 
 		print("Completed {} / {}...".format(i+1, len(questions_data)), end = '\r', flush = True)
 

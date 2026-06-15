@@ -16,8 +16,11 @@ from tenacity.retry import retry_if_exception_type
 from tenacity.wait import wait_random_exponential
 import tiktoken
 
-from vllm import LLMEngine, EngineArgs, SamplingParams, RequestOutput
-from vllm.lora.request import LoRARequest
+try:
+    from vllm import LLMEngine, EngineArgs, SamplingParams, RequestOutput
+    from vllm.lora.request import LoRARequest
+except ImportError:
+    pass
 
 def load_model(model_name, peft_model=None, pp_size=1, tp_size=4):
 	additional_configs = {}
@@ -224,6 +227,11 @@ class LargeLanguageModel():
 				api_key=openai_api_key,
 				base_url=openai_api_base,
 			)
+		elif self.model_type in ['elm']:
+			self.client = OpenAI(
+				api_key=os.environ.get("ELM_API_KEY"),
+				base_url=os.environ.get("ELM_BASE_URL"),
+			)
 		elif self.model_type in ['chat', 'completion']:
 			self.client = OpenAI(
 				api_key=openai.api_key,
@@ -255,7 +263,7 @@ class LargeLanguageModel():
 				echo=False
 			)
 			response = response["choices"][0]['text'].lstrip('\n').rstrip('\n')
-		elif self.model_type in ["chat", "vllm"]:
+		elif self.model_type in ["chat", "vllm", "elm"]:
 			response = "error"
 			cur_max_tokens = max_tokens
 			while(cur_max_tokens > 0):

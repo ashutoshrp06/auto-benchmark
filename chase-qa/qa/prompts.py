@@ -87,6 +87,49 @@ Give output in the following format:
 Presence of Relevant Information: True/False
 Relevant Points (if any):
 """
+		
+	elif prompt_type == "presence_type3":
+		sys_prompt = "You are an expert at verifying data."
+		prompt = f"""You are given a document followed by a question and an evidence component. You must check two things:
+1. Presence: Is the evidence component mentioned in the document?
+2. Absence of Conclusion: Does the document avoid explicitly stating the causal conclusion to the question, and instead only provides supporting evidence?
+
+Document:
+{params[2]}
+
+Question: {params[0]}
+
+Evidence Component:
+{params[1]}
+
+Give output in the following format:
+Presence: True/False
+Explanation for Presence:
+
+Absence of Conclusion: True/False
+Explanation for Absence:
+"""
+
+	elif prompt_type == "extra_type3":
+		sys_prompt = "You are an expert at verifying data."
+		prompt = f"""You are given a document followed by a question and some evidence components. You must check two things:
+1. Whether there are additional major evidence components in the document relevant to the question that are missing from the list.
+2. Whether the document explicitly states the causal conclusion to the question rather than just providing evidence.
+
+If neither is true, output "False" to "Presence of Extra Points". Otherwise output "True" and describe what was found.
+
+Document:
+{params[2]}
+
+Question: {params[0]}
+
+Evidence Components:
+{params[1]}
+
+Give output in the following format:
+Presence of Extra Points: True/False
+Extra Points Mentioned (if any):
+"""
 
 	elif prompt_type == "remove":
 		sys_prompt = "You are an expert at correcting data."
@@ -252,7 +295,7 @@ def get_generator_prompt(prompt_type, question=None):
 	prompt = ""
 
 	if prompt_type == "programmatic_docs":
-		sys_prompt = "You are an expert data generator. Following the instruction, you must generate long and correct documents."
+		sys_prompt = "You are an expert data generator specialising in personal financial advice. Following the instruction, you must generate long and accurate documents grounded in FCA regulations and adviser-client contexts."
 		prompt = f"""You need to generate the documents for an example of a retrieval based Question Answering Task. 
 The task consists of n documents provided in English text that consist of information about different topics and a question. To answer the question correctly compulsorily requires using some of the information in some subset of the documents provided.
 
@@ -302,14 +345,14 @@ Original Documents:
 
 You must generate an adversarial question, adversarial answer, and corresponding adversarial documents that ask for something different but on similar topics or type so that it is difficult to answer the original question. Examples of how adversarial questions should look like are provided below:
 
-Original Question: What are the best activities to do in Montreal, Canada during the winter season?
-Adversarial Question: What activities should I look at when visiting Tokyo during the summer?
+Original Question: What must an adviser verify before recommending a pension transfer?
+Adversarial Question: What steps should an adviser take when reviewing a client's drawdown income sustainability?
 
-Original Question: What compliance steps are required to open a laundry business in Mumbai?
-Adversarial Question: Provide the necessary steps to be taken to open an ice-cream shop in London.
+Original Question: How does triggering the MPAA affect a client's contribution capacity?
+Adversarial Question: How does the annual allowance carry-forward rule affect a client's lump sum contribution options?
 
-Original Question: What are the circumstances when a court in Russia would re-open a divorce settlement case?
-Adversarial Question: Provide the possibilities under which a judge in new york may warrant re-opening of a murder case?
+Original Question: What disclosure obligations apply when an adviser recommends a specific investment platform?
+Adversarial Question: What information must an adviser provide when recommending a discretionary fund manager?
 
 Also provide an answer to the adversarial question, which is similar in style to the original answer, but differs significantly in information or specifics. The answer points for the adversarial question should be written in context of that adversarial question, so that they cannot be confused with the original question. Note that none of the points appearing in the original answer should be present in the answer to the adversarial question.
 
@@ -336,17 +379,41 @@ Document 2 Answer points assigned: <Points>
 and so on...
 """
 	
-	elif prompt_type == "programmatic_qa":
-		sys_prompt = "You are an expert generator of data. Do not use ** to start lines or denote points."
-		prompt = f"""You are a research scientist. You want to make data to test an advanced question answering system.
-Give me an example question and corresponding answer that a {question[0]} may ask that compulsorily requires searching a {question[1]}. Make questions that cannot be answered directly with general knowledge but necessarily require some uncommon information that is present in some documents. The answer must be very specific and written in bullet points, so that it is easier to objectively evaluate. Depending on the question, the answer can have anything between 3-6 bullet points without any sub-points.
+	elif prompt_type == "programmatic_qa_type1":
+		sys_prompt = "You are an expert generator of data specialising in personal financial advice. Do not use ** to start lines or denote points."
+		prompt = f"""You are a research scientist. You want to make data to test an advanced question answering system focused on personal financial advice.
+Give me an example question and corresponding answer that a {question[0]} may ask that compulsorily requires searching a {question[1]}. The question must require specific factual or numerical information that cannot be answered from general knowledge. The answer must be very specific and written in bullet points. Depending on the question, the answer can have anything between 3-6 bullet points without any sub-points.
 
-The answer to the question you create must be scattered across different documents (at least 3). Assign each point of the answer to a specific document in which that point will be discussed. You may assign multiple points to the same document, but each point must only be assigned to a single document. You must state the title and answer points assigned for each of the documents.
+The answer to the question must be contained within a single document. Assign all answer points to that one document. You must state the title and answer points assigned for that document. Each answer point must be on its own line starting with "- ".
 
 Answer in the following format:
 
 Question: <Question>
-Answer: <Answer>
+Answer:
+- <point 1>
+- <point 2>
+- <point 3>
+
+Document 1 Title: <Title>
+Document 1 Answer points assigned:
+- <point 1>
+- <point 2>
+- <point 3>"""
+
+	elif prompt_type == "programmatic_qa_type2":
+		sys_prompt = "You are an expert generator of data specialising in personal financial advice. Do not use ** to start lines or denote points."
+		prompt = f"""You are a research scientist. You want to make data to test an advanced question answering system focused on personal financial advice.
+Give me an example question and corresponding answer that a {question[0]} may ask that compulsorily requires searching a {question[1]}. Make questions that cannot be answered directly with general knowledge but necessarily require specific information spread across multiple documents. The answer must be very specific and written in bullet points. Depending on the question, the answer can havre anything between 3-6 bullet points without any sub-points.
+
+The answer to the question you create must be scattered across different documents (at least 3). Assign each point of the answer to a specific document in which that point will be discussed. You may assign multiple points to the same document, but each point must only be assigned to a single document. You must state the title and answer points assigned for each of the documents. Each answer point must be on its own line starting with "- ".
+
+Answer in the following format:
+
+Question: <Question>
+Answer:
+- <point 1>
+- <point 2>
+...
 
 Document 1 Title: <Title>
 Document 1 Answer points assigned: <Points>
@@ -354,13 +421,37 @@ Document 1 Answer points assigned: <Points>
 Document 2 Title: <Title>
 Document 2 Answer points assigned: <Points>
 
-and so on...
-"""
+and so on..."""
+		
+	elif prompt_type == "programmatic_qa_type3":
+		sys_prompt = "You are an expert generator of data specialising in personal financial advice. Do not use ** to start lines or denote points."
+		prompt = f"""You are a research scientist. You want to make data to test an advanced question answering system focused on personal financial advice.
+Give me an example question and corresponding answer that a {question[0]} may ask that compulsorily requires searching a {question[1]}. The question must ask about a causal relationship, trend, or sequence of events in a personal financial advisory context -- for example, how one regulatory change caused a shift in client behaviour, or what sequence of events leads to a specific financial outcome. The question must not be answerable from general knowledge but must require specific causal evidence spread across multiple documents. The answer must be very specific and written in bullet points. Depending on the question, the answer can have anything between 3-6 bullet points without any sub-points. Each bullet point must describe either a cause, an effect, or a connecting mechanism.
+
+The answer to the question you create must be scattered across different documents (at least 3). Assign each point of the answer to a specific document in which that point will be discussed. You may assign multiple points to the same document, but each point must only be assigned to a single document. You must state the title and one evidence component per document. The evidence component must be on its own line starting with "- ". The causal conclusion must never be stated explicitly in any document -- only the supporting evidence.
+
+Answer in the following format:
+
+Question: <Question>
+Answer:
+- <point 1>
+- <point 2>
+...
+
+Document 1 Title: <Title>
+Document 1 Evidence component:
+- <evidence that supports the causal conclusion without stating it explicitly>
+
+Document 2 Title: <Title>
+Document 2 Evidence component:
+- <evidence that supports the causal conclusion without stating it explicitly>
+
+and so on..."""
 
 	elif prompt_type == "programmatic_scenarios":
 		sys_prompt = "You are an expert generator of data."
-		prompt = f"""You are a research scientist. You want to make data to test an advanced question answering system.
-Give me 5 examples of real-life scenarios where a USER_PERSONA may seek information in a COLLECTION_OF_DOCS. Do not consider educational or historical scenarios.
+		prompt = f"""You are a research scientist. You want to make data to test an advanced question answering system focused on UK personal financial advice.
+Give me 5 examples of real-life scenarios where a USER_PERSONA may seek information in a COLLECTION_OF_DOCS. All scenarios must involve a client seeking personal financial advice in the UK, governed by FCA regulations. Do not consider educational, historical, or non-financial scenarios.
 
 Some examples are:
 {question}

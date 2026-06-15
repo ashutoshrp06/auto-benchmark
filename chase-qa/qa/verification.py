@@ -263,6 +263,66 @@ def add_info(args, model, ques, to_add, doc_list):
 			f.write("---------------------------------------------------------\n")
 	return new_doc_list
 
+def presence_check_type3(args, model, ques, doc_ans_pts, rel_doc_list):
+    check_flag = True
+    to_add = {}
+    for doc_no in range(len(rel_doc_list)):
+        ans_pts = doc_ans_pts[str(doc_no + 1)]
+        doc = rel_doc_list[doc_no]
+        add_pts = []
+        for pt in ans_pts:
+            prompt, sys_prompt = get_verification_prompt("presence_type3", params=(ques, pt, doc))
+            og_pred = model.predict(prompt, sys_prompt, args.max_tokens, args.temperature, 1, args.stop)
+            presence_res = False
+            if "true" in og_pred.split("Explanation for Presence")[0].lower():
+                presence_res = True
+            absence_res = False
+            if "true" in og_pred.split("Explanation for Absence")[0].split("Absence of Conclusion:")[1].lower():
+                absence_res = True
+            if presence_res == False or absence_res == False:
+                check_flag = False
+                add_pts.append(pt)
+            with open(args.verification_dir + "/presence_logs.txt", "a") as f:
+                f.write(str(doc) + "\n\n")
+                f.write("Evidence Component: " + str(pt) + "\n\n")
+                f.write("Prediction:\n" + og_pred + "\n")
+                f.write("---------------------------------------------------------\n")
+        to_add[str(doc_no + 1)] = add_pts
+    return check_flag, to_add
+
+
+def extra_check_relevant_type3(args, model, ques, doc_ans_pts, doc_list):
+    check_flag = True
+    to_remove = {}
+    avoid_str = [
+        "none of the points in the document",
+        "document does not provide any information"
+    ]
+    for doc_no in range(len(doc_list)):
+        ans_pts = doc_ans_pts[str(doc_no + 1)]
+        doc = doc_list[doc_no]
+        answer_pts_str = "\n".join(ans_pts)
+        prompt, sys_prompt = get_verification_prompt("extra_type3", params=(ques, answer_pts_str, doc))
+        og_pred = model.predict(prompt, sys_prompt, args.max_tokens, args.temperature, 1, args.stop)
+        res = False
+        if "false" in og_pred.split("Extra Points Mentioned")[0].lower():
+            res = True
+        if res == False:
+            extra_pts_mentioned = og_pred.split("Extra Points Mentioned")[1].split(":")[1].strip()
+            for av_str in avoid_str:
+                if av_str in extra_pts_mentioned.lower():
+                    res = True
+                    break
+            if res == False:
+                to_remove[str(doc_no + 1)] = extra_pts_mentioned
+                check_flag = False
+        with open(args.verification_dir + "/extra_logs.txt", "a") as f:
+            f.write(str(doc) + "\n\n")
+            f.write("Evidence Components: " + str(answer_pts_str) + "\n\n")
+            f.write("Prediction:\n" + og_pred + "\n")
+            f.write("---------------------------------------------------------\n")
+    return check_flag, to_remove
+
 
 def programmatic_docs_verify(args, data):
 	ls = data.to_dict(orient='records')
@@ -305,7 +365,8 @@ def programmatic_docs_verify(args, data):
 					for key_no in range(len(rel_doc_list)+1, num_keys+1):
 						ans_pts_to_del = doc_ans_pts.pop(str(key_no), None)
 						for apt in ans_pts_to_del:
-							ans_pts.remove(apt)
+							matches = [x for x in ans_pts if x.strip() == apt.strip()]
+							if matches: ans_pts.remove(matches[0])
 							ans = ans.replace(apt, "").strip()
 							ans = ans.replace("\n- \n-", "\n-").strip()
 
@@ -405,6 +466,115 @@ def programmatic_docs_verify(args, data):
 		new_df.to_csv(args.out_dir + "/" + args.folder_name + "/" + args.data + "_verified.tsv", sep = '\t', index = None)
 	
 	print("\nVerified Data: ", len(new_df))
+
+def programmatic_docs_verify_type3(args, data):
+    ls = data.to_dict(orient='records')
+    new_ls = []
+
+    if os.path.exists(args.out_dir + "/" + args.folder_name + "/" + args.data + "_verified.tsv"):
+        temp_new_df = pd.read_csv(args.out_dir + "/" + args.folder_name + "/" + args.data + "_verified.tsv", sep="\t")
+        new_ls = temp_new_df.to_dict(orient='records')
+
+    start_idx = len(new_ls)
+
+    _, sys_prompt = get_verification_prompt("presence_type3", params=("", "", ""))
+    model = LargeLanguageModel(model_type=args.model_type, model=args.model, peft_model="none", sys_prompt=sys_prompt, top_p=args.top_p, presence_penalty=args.presence_penalty, frequency_penalty=args.frequency_penalty)
+
+    args.verification_dir = args.out_dir + "/" + args.folder_name + "/" + "verification_logs"
+    if not os.path.exists(args.verification_dir):
+        os.makedirs(args.verification_dir)
+
+    print("Starting at: ", str(start_idx))
+
+    for i in range(start_idx, len(ls)):
+        ques = ls[i]["Question"]
+        ans = ls[i]["Answer"]
+        rel_doc_list = json.loads(ls[i]["Rel_Docs_List"])
+        adv_doc_list = json.loads(ls[i]["Adv_Docs_List"])
+        doc_ans_pts = json.loads(ls[i]["Doc_Ans_Points"])
+        ans_pts = json.loads(ls[i]["Ans_Points"])
+
+        num_keys = len(doc_ans_pts.keys())
+        if num_keys != len(rel_doc_list):
+            rel_doc_list = rel_doc_list[:num_keys]
+
+        with open(args.verification_dir + "/extra_logs.txt", "a") as f:
+            f.write("Question " + str(i+1) + ": " + ques + "\n")
+
+        extra, to_remove = extra_check_relevant_type3(args, model, ques, doc_ans_pts, rel_doc_list)
+
+        with open(args.verification_dir + "/extra_logs.txt", "a") as f:
+            f.write("Final Extra Check: " + str(extra) + "\n\n")
+            f.write("======================================================================================\n")
+
+        temp_rel_doc_list = remove_extra(args, model, ques, doc_ans_pts, to_remove, rel_doc_list)
+
+        with open(args.verification_dir + "/pred_logs.txt", "a") as f:
+            f.write("Question " + str(i+1) + ": " + ques + "\n")
+
+        pred_extra, pred_to_remove = pred_check_relevant(args, model, ques, doc_ans_pts, temp_rel_doc_list)
+
+        with open(args.verification_dir + "/pred_logs.txt", "a") as f:
+            f.write("Final Pred Check: " + str(pred_extra) + "\n\n")
+            f.write("======================================================================================\n")
+
+        new_rel_doc_list = remove_extra(args, model, ques, doc_ans_pts, pred_to_remove, temp_rel_doc_list)
+
+        with open(args.verification_dir + "/extra_logs_adv.txt", "a") as f:
+            f.write("Question " + str(i+1) + ": " + ques + "\n")
+
+        adv_extra, meta_adv_to_remove = extra_check_adversarial(args, model, ques, adv_doc_list)
+
+        with open(args.verification_dir + "/extra_logs_adv.txt", "a") as f:
+            f.write("Final Extra Check: " + str(adv_extra) + "\n\n")
+            f.write("======================================================================================\n")
+
+        temp_adv_doc_list = []
+        for az in range(len(meta_adv_to_remove)):
+            cur_adv_doc_list = remove_extra(args, model, ques, None, meta_adv_to_remove[az], adv_doc_list[az])
+            temp_adv_doc_list.append(cur_adv_doc_list)
+
+        with open(args.verification_dir + "/pred_logs_adv.txt", "a") as f:
+            f.write("Question " + str(i+1) + ": " + ques + "\n")
+
+        adv_pred_extra, meta_adv_pred_to_remove = pred_check_adversarial(args, model, ques, temp_adv_doc_list)
+
+        with open(args.verification_dir + "/pred_logs_adv.txt", "a") as f:
+            f.write("Final Pred Check: " + str(adv_pred_extra) + "\n\n")
+            f.write("======================================================================================\n")
+
+        new_adv_doc_list = []
+        for az in range(len(meta_adv_pred_to_remove)):
+            cur_adv_doc_list = remove_extra(args, model, ques, None, meta_adv_pred_to_remove[az], temp_adv_doc_list[az])
+            new_adv_doc_list.append(cur_adv_doc_list)
+
+        with open(args.verification_dir + "/presence_logs.txt", "a") as f:
+            f.write("Question " + str(i+1) + ": " + ques + "\n")
+
+        presence, to_add = presence_check_type3(args, model, ques, doc_ans_pts, new_rel_doc_list)
+
+        with open(args.verification_dir + "/presence_logs.txt", "a") as f:
+            f.write("Final Presence Check: " + str(presence) + "\n\n")
+            f.write("======================================================================================\n")
+
+        final_rel_doc_list = add_info(args, model, ques, to_add, new_rel_doc_list)
+
+        ls[i]["Rel_Docs_List"] = final_rel_doc_list
+        ls[i]["Adv_Docs_List"] = new_adv_doc_list
+        ls[i]["Ans_Points"] = json.dumps(ans_pts)
+        ls[i]["Doc_Ans_Points"] = json.dumps(doc_ans_pts)
+        ls[i]["Answer"] = ans
+
+        new_ls.append(ls[i])
+
+        print("Completed {} / {}...".format(i+1, len(ls)), end='\r', flush=True)
+
+        new_df = pd.DataFrame(new_ls)
+        new_df['Rel_Docs_List'] = new_df['Rel_Docs_List'].apply(json.dumps)
+        new_df['Adv_Docs_List'] = new_df['Adv_Docs_List'].apply(json.dumps)
+        new_df.to_csv(args.out_dir + "/" + args.folder_name + "/" + args.data + "_verified.tsv", sep='\t', index=None)
+
+    print("\nVerified Data: ", len(new_df))
 
 
 def adv_cross_check(args, model, ques, pt):
@@ -557,6 +727,9 @@ def main(args):
 	if args.exp_type == "programmatic_docs":
 		data = pd.read_csv(args.out_dir + "/" + args.folder_name + "/" + args.data + ".tsv", sep='\t')
 		programmatic_docs_verify(args, data)
+	elif args.exp_type == "programmatic_docs_type3":
+		data = pd.read_csv(args.out_dir + "/" + args.folder_name + "/" + args.data + ".tsv", sep='\t')
+		programmatic_docs_verify_type3(args, data)
 	elif args.exp_type == "programmatic_adversarial":
 		data = pd.read_csv(args.out_dir + "/" + args.folder_name + "/" + args.data + ".tsv", sep='\t')
 		programmatic_adversarial_verify(args, data)

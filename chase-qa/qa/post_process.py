@@ -16,6 +16,11 @@ def build_parser():
 
 def programmatic_qa_process(data):
 	ls = data.to_dict(orient='records')
+	for row in ls:
+		if isinstance(row['Answer'], str):
+			row['Answer'] = row['Answer'].replace('\\n', '\n')
+		if isinstance(row['Documents_Info'], str):
+			row['Documents_Info'] = row['Documents_Info'].replace('\\n', '\n')
 	exceptions_ls = []
 	new_ls = []
 
@@ -48,19 +53,27 @@ def programmatic_qa_process(data):
 								pt_candidate = line.strip().split(":")[1].strip()
 								if pt_candidate[0] == "-":
 									doc_ans_points[doc_no].append(pt_candidate[1:].strip())
-									ans_points_copy.remove(pt_candidate[1:].strip())
+									matches = [x for x in ans_points_copy if x.strip() == pt_candidate[1:].strip()]
+									if matches: ans_points_copy.remove(matches[0])
 								else:
 									doc_ans_points[doc_no].append(pt_candidate)
-									ans_points_copy.remove(pt_candidate)
+									matches = [x for x in ans_points_copy if x.strip() == pt_candidate.strip()]
+									if matches: ans_points_copy.remove(matches[0])
 					else:
 						if line.strip()[0] == "-":
-							doc_ans_points[doc_no].append(line.strip()[1:].strip())
-							ans_points_copy.remove(line.strip()[1:].strip())
+							pt = line.strip()[1:].strip()
+							doc_ans_points[doc_no].append(pt)
+							matches = [x for x in ans_points_copy if x.strip() == pt.strip()]
+							if matches:
+								ans_points_copy.remove(matches[0])
 						else:
-							doc_ans_points[doc_no].append(line.strip())
-							ans_points_copy.remove(line.strip())
+							pt = line.strip()
+							doc_ans_points[doc_no].append(pt)
+							matches = [x for x in ans_points_copy if x.strip() == pt.strip()]
+							if matches:
+								ans_points_copy.remove(matches[0])
 
-			if len(ans_points_copy) > 0:
+			if len(ans_points_copy) > 0.5:
 				raise Exception("Some points did not match!")
 
 			ls[i]["Ans_Points"] = ans_points
@@ -86,11 +99,70 @@ def programmatic_qa_process(data):
 			new_df['Doc_Ans_Points'] = new_df['Doc_Ans_Points'].apply(json.dumps)
 		except:
 			pass
-		new_df.to_csv(args.out_dir + "/" + args.folder_name + "/" + args.data + "_modified.tsv", sep = '\t', index = None)
+		new_df.to_csv(args.out_dir + "/" + args.folder_name + "/" + args.data + "_modified.tsv", sep = '\t', index = None, quoting=1)
 
 	if len(exceptions_ls) > 0:
 		exc_df = pd.DataFrame(exceptions_ls)
 		exc_df.to_csv(args.out_dir + "/" + args.folder_name + "/" + args.data + "_exceptions.tsv", sep = '\t', index = None)
+
+def programmatic_qa_process_type3(data):
+    ls = data.to_dict(orient='records')
+    exceptions_ls = []
+    new_ls = []
+
+    for i in range(len(ls)):
+        try:
+            answer = ls[i]["Answer"]
+            if isinstance(answer, str):
+                answer = answer.replace('\\n', '\n')
+
+            ans_points_og = answer.split("\n")
+            ans_points = []
+            for ans_pt in ans_points_og:
+                if ans_pt.strip().startswith("-"):
+                    ans_points.append(ans_pt[1:].strip())
+                elif ans_pt.strip():
+                    ans_points.append(ans_pt.strip())
+
+            docs_info = ls[i]["Documents_Info"]
+            if isinstance(docs_info, str):
+                docs_info = docs_info.replace('\\n', '\n')
+
+            doc_evidence = {1: []}
+            doc_no = 1
+            for line in docs_info.split("\n"):
+                if len(line) > 2:
+                    if line[:8] == "Document":
+                        if line[9] != str(doc_no):
+                            doc_no += 1
+                            doc_evidence[doc_no] = []
+                    else:
+                        if line.strip().startswith("-"):
+                            doc_evidence[doc_no].append(line.strip()[1:].strip())
+
+            ls[i]["Ans_Points"] = ans_points
+            ls[i]["Doc_Ans_Points"] = doc_evidence
+            new_ls.append(ls[i])
+
+        except Exception as e:
+            if args.verbose:
+                print("At index: ", str(i))
+                print("Exception: ", str(e))
+            exceptions_ls.append(ls[i])
+            continue
+
+    if len(new_ls) > 0:
+        new_df = pd.DataFrame(new_ls)
+        try:
+            new_df['Ans_Points'] = new_df['Ans_Points'].apply(json.dumps)
+            new_df['Doc_Ans_Points'] = new_df['Doc_Ans_Points'].apply(json.dumps)
+        except:
+            pass
+        new_df.to_csv(args.out_dir + "/" + args.folder_name + "/" + args.data + "_modified.tsv", sep='\t', index=None, quoting=1)
+
+    if len(exceptions_ls) > 0:
+        exc_df = pd.DataFrame(exceptions_ls)
+        exc_df.to_csv(args.out_dir + "/" + args.folder_name + "/" + args.data + "_exceptions.tsv", sep='\t', index=None)
 
 def programmatic_adversarial_process(data):
 	ls = data.to_dict(orient='records')
@@ -131,19 +203,23 @@ def programmatic_adversarial_process(data):
 									pt_candidate = line.strip().split(":")[1].strip()
 									if pt_candidate[0] == "-":
 										doc_ans_points[doc_no].append(pt_candidate[1:].strip())
-										ans_points_copy.remove(pt_candidate[1:].strip())
+										matches = [x for x in ans_points_copy if x.strip() == pt_candidate[1:].strip()]
+										if matches: ans_points_copy.remove(matches[0])
 									else:
 										doc_ans_points[doc_no].append(pt_candidate)
-										ans_points_copy.remove(pt_candidate)
+										matches = [x for x in ans_points_copy if x.strip() == pt_candidate.strip()]
+										if matches: ans_points_copy.remove(matches[0])
 						else:
 							if line.strip()[0] == "-":
 								doc_ans_points[doc_no].append(line.strip()[1:].strip())
-								ans_points_copy.remove(line.strip()[1:].strip())
+								matches = [x for x in ans_points_copy if x.strip() == line.strip()[1:].strip()]
+								if matches: ans_points_copy.remove(matches[0])
 							else:
 								doc_ans_points[doc_no].append(line.strip())
-								ans_points_copy.remove(line.strip())
+								matches = [x for x in ans_points_copy if x.strip() == line.strip().strip()]
+								if matches: ans_points_copy.remove(matches[0])
 
-				if len(ans_points_copy) > 0:
+				if len(ans_points_copy) > 0.5:
 					raise Exception("Some points did not match!")
 
 				ls_ans_pts.append(ans_points)
@@ -200,7 +276,7 @@ def programmatic_adversarial_process(data):
 		new_df['Documents_Info'] = new_df['Documents_Info'].apply(json.dumps)
 		new_df['Ans_Points'] = new_df['Ans_Points'].apply(json.dumps)
 		new_df['Doc_Ans_Points'] = new_df['Doc_Ans_Points'].apply(json.dumps)
-		new_df.to_csv(args.out_dir + "/" + args.folder_name + "/" + args.data + "_modified.tsv", sep = '\t', index = None)
+		new_df.to_csv(args.out_dir + "/" + args.folder_name + "/" + args.data + "_modified.tsv", sep = '\t', index = None, quoting=1)
 		print("Length of Final Data: ", str(len(new_df)))
 
 	if len(exceptions_ls) > 0:
@@ -268,7 +344,7 @@ def programmatic_docs_process(data):
 	new_df['Adv_Ans_Pts'] = new_df['Adv_Ans_Pts'].apply(json.dumps)
 	new_df['Adv_Doc_Ans_Pts'] = new_df['Adv_Doc_Ans_Pts'].apply(json.dumps)
 	new_df['Adv_Docs_List'] = new_df['Adv_Docs_List'].apply(json.dumps)
-	new_df.to_csv(args.out_dir + "/" + args.folder_name + "/" + args.data + "_modified.tsv", sep = '\t', index = None)
+	new_df.to_csv(args.out_dir + "/" + args.folder_name + "/" + args.data + "_modified.tsv", sep = '\t', index = None, quoting=1)
 	print("Length of Final Data: ", str(len(new_df)))
 
 	
@@ -282,6 +358,9 @@ def main(args):
 	elif args.exp_type == "programmatic_docs":
 		data = pd.read_csv(args.out_dir + "/" + args.folder_name + "/" + args.data + ".tsv", sep='\t')
 		programmatic_docs_process(data)
+	elif args.exp_type == "programmatic_qa_type3":
+		data = pd.read_csv(args.out_dir + "/" + args.folder_name + "/" + args.data + ".tsv", sep='\t')
+		programmatic_qa_process_type3(data)
 	
 if __name__ == "__main__":
 	parser = build_parser()

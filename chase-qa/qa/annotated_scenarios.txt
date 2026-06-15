@@ -1,14 +1,14 @@
-USER_PERSONA: College student
-COLLECTION_OF_DOCS: Intranet on the university website
+USER_PERSONA: Retail client seeking pension consolidation advice
+COLLECTION_OF_DOCS: FCA suitability and pension transfer rules
 
-USER_PERSONA: Intern doctor at a hospital
-COLLECTION_OF_DOCS: Encyclopedia of diseases
+USER_PERSONA: First-time investor consulting a financial adviser
+COLLECTION_OF_DOCS: FCA Consumer Duty and investment product guidelines
 
-USER_PERSONA: Immigrant in NYC
-COLLECTION_OF_DOCS: Laws on renting and subletting
+USER_PERSONA: Client approaching retirement reviewing drawdown options
+COLLECTION_OF_DOCS: FCA retirement income guidance and MPAA regulations
 
-USER_PERSONA: HR manager at a top law firm
-COLLECTION_OF_DOCS: Court and newspaper records
+USER_PERSONA: Self-employed client planning lump sum pension contribution
+COLLECTION_OF_DOCS: HMRC annual allowance and carry-forward rules
 
-USER_PERSONA: Scientist at an NGO
-COLLECTION_OF_DOCS: Government website for Income Tax
+USER_PERSONA: Client with existing ISA and pension portfolio seeking rebalancing advice
+COLLECTION_OF_DOCS: FCA adviser conduct rules and platform fee disclosure requirements
