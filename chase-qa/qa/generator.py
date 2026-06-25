@@ -59,17 +59,26 @@ def jaccard_similarity(set1, set2):
 
 def programmatic_scenario_generation(model, prompt_type, num_iters, max_tokens, temperature, stop, tik_encoding):
 	pred_ls = [
-		[1, "Retail client seeking pension consolidation advice", "FCA suitability and pension transfer rules", 0],
-		[2, "First-time investor consulting a financial adviser", "FCA Consumer Duty and investment product guidelines", 0],
-		[3, "Client approaching retirement reviewing drawdown options", "FCA retirement income guidance and MPAA regulations", 0],
-		[4, "Self-employed client planning lump sum pension contribution", "HMRC annual allowance and carry-forward rules", 0],
-		[5, "Client with existing ISA and pension portfolio seeking rebalancing advice", "FCA adviser conduct rules and platform fee disclosure requirements", 0]
+		[1, "Retail client seeking pension consolidation advice", "FCA COBS 19 pension transfer rules", 0],
+		[2, "First-time investor consulting a financial adviser", "FCA Consumer Duty (PRIN 2A) and COBS 4 communication rules", 0],
+		[3, "Client approaching retirement reviewing drawdown options", "FCA FG22/5 retirement income guidance and MPAA regulations", 0],
+		[4, "Client weighing long-term care funding options against their pension", "FCA COBS 16.6 communications on long-term care insurance and drawdown pensions", 0],
+		[5, "Homebuyer seeking mortgage affordability advice", "FCA MCOB 11.6 responsible lending and affordability assessment rules", 0],
+		[6, "High-net-worth individual seeking estate planning strategies", "HMRC inheritance tax rules and FCA COBS 9 suitability requirements for advisers", 0],
+		[7, "Individual considering equity release on their property", "FCA MCOB 8 and MCOB 9 equity release advising and disclosure rules", 0],
+		[8, "Parent planning children's education savings", "FCA COBS 9 suitability and COBS 4 disclosure rules for Junior ISAs", 0],
+		[9, "Small business owner setting up workplace pension schemes", "Pensions Act 2008 auto-enrolment duties and FCA workplace pension default fund charge cap rules", 0],
+		[10, "Investor evaluating cryptoasset investment products", "FCA PS23/6 cryptoasset financial promotion rules", 0]
 	]
 
 	tot_ip_tokens = 0
 	tot_op_tokens = 0
 
 	pred_id = len(pred_ls)
+
+	# Write seeded scenarios immediately so num_iters=0 still produces a valid scenarios.tsv
+	pred_df = pd.DataFrame(pred_ls, columns = ['ID', 'Persona', 'Environment', 'Similarity'])
+	pred_df.to_csv(args.out_dir + "/scenarios.tsv", sep = '\t', index = None)
 
 	for i in range(num_iters):
 		if i < 20:

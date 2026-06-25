@@ -343,20 +343,20 @@ Original Answer:
 Original Documents:
 {question[4]}
 
-You must generate an adversarial question, adversarial answer, and corresponding adversarial documents that ask for something different but on similar topics or type so that it is difficult to answer the original question. Examples of how adversarial questions should look like are provided below:
+You must generate an adversarial question, adversarial answer, and corresponding adversarial documents that ask for something different but on similar topics or type so that it is difficult to answer the original question. The adversarial question must come from a genuinely different regulatory area than the original question, not a different angle on the same area. For example, if the original question is about pension transfers, the adversarial question must not be about any other aspect of pensions (drawdown, contributions, MPAA, pension sharing) -- it must come from an entirely separate domain such as mortgages, ISAs, equity release, inheritance tax, or cryptoassets. Pick the regulatory area for the adversarial question first, ensure it shares no underlying subject matter with the original question's domain, and only then construct the question and answer. Never include the literal characters backslash-n in your response. Use only genuine line breaks between points. Examples of how adversarial questions should look like are provided below:
 
 Original Question: What must an adviser verify before recommending a pension transfer?
-Adversarial Question: What steps should an adviser take when reviewing a client's drawdown income sustainability?
+Adversarial Question: What are the disclosure requirements for platform fees when an adviser recommends a Stocks and Shares ISA?
 
 Original Question: How does triggering the MPAA affect a client's contribution capacity?
-Adversarial Question: How does the annual allowance carry-forward rule affect a client's lump sum contribution options?
+Adversarial Question: What loan-to-value limits apply when a client takes out a lifetime mortgage under an equity release plan?
 
 Original Question: What disclosure obligations apply when an adviser recommends a specific investment platform?
-Adversarial Question: What information must an adviser provide when recommending a discretionary fund manager?
+Adversarial Question: What registration and customer due diligence requirements apply to a cryptoasset business under FCA rules?
 
 Also provide an answer to the adversarial question, which is similar in style to the original answer, but differs significantly in information or specifics. The answer points for the adversarial question should be written in context of that adversarial question, so that they cannot be confused with the original question. Note that none of the points appearing in the original answer should be present in the answer to the adversarial question.
 
-The answer to the adversarial question you craft must be scattered across different documents (at least 3) separate from the original answer documents. Assign each point of the adversarial answer to a specific document in which that point will be discussed. You may assign multiple points to the same adversarial document, but each point must only be assigned to a single adversarial document. You must state the title and adversarial answer points assigned for each of the adversarial documents. These adversarial documents should not have any overlapping information with the original answer documents."""
+The answer to the adversarial question you craft must be scattered across different documents (at least 3) separate from the original answer documents. Assign each point of the adversarial answer to a specific document in which that point will be discussed. You may assign multiple points to the same adversarial document, but each point must only be assigned to a single adversarial document. You must state the title and adversarial answer points assigned for each of the adversarial documents. Each adversarial answer point assigned to a document must be repeated verbatim, exactly as written in the adversarial answer above -- do not paraphrase, merge multiple points into one line, or split a single point across multiple lines. These adversarial documents should not have any overlapping information with the original answer documents."""
 		if len(question[5]) > 0:
 			prev_adv_questions = "\n\n".join(question[5])
 			prompt = prompt + f"""
@@ -421,7 +421,9 @@ Document 1 Answer points assigned: <Points>
 Document 2 Title: <Title>
 Document 2 Answer points assigned: <Points>
 
-and so on..."""
+and so on...
+
+Do not use numbers, letters, or any other shorthand (e.g. "1, 2" or "A, B") to refer to answer points under each document. You must repeat the full text of each assigned answer point under its document, exactly as written in the Answer section above."""
 		
 	elif prompt_type == "programmatic_qa_type3":
 		sys_prompt = "You are an expert generator of data specialising in personal financial advice. Do not use ** to start lines or denote points."

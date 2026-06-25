@@ -1,14 +1,29 @@
 USER_PERSONA: Retail client seeking pension consolidation advice
-COLLECTION_OF_DOCS: FCA suitability and pension transfer rules
+COLLECTION_OF_DOCS: FCA COBS 19 pension transfer rules
 
 USER_PERSONA: First-time investor consulting a financial adviser
-COLLECTION_OF_DOCS: FCA Consumer Duty and investment product guidelines
+COLLECTION_OF_DOCS: FCA Consumer Duty (PRIN 2A) and COBS 4 communication rules
 
 USER_PERSONA: Client approaching retirement reviewing drawdown options
-COLLECTION_OF_DOCS: FCA retirement income guidance and MPAA regulations
+COLLECTION_OF_DOCS: FCA FG22/5 retirement income guidance and MPAA regulations
 
-USER_PERSONA: Self-employed client planning lump sum pension contribution
-COLLECTION_OF_DOCS: HMRC annual allowance and carry-forward rules
+USER_PERSONA: Client weighing long-term care funding options against their pension
+COLLECTION_OF_DOCS: FCA COBS 16.6 communications on long-term care insurance and drawdown pensions
 
-USER_PERSONA: Client with existing ISA and pension portfolio seeking rebalancing advice
-COLLECTION_OF_DOCS: FCA adviser conduct rules and platform fee disclosure requirements
+USER_PERSONA: Homebuyer seeking mortgage affordability advice
+COLLECTION_OF_DOCS: FCA MCOB 11.6 responsible lending and affordability assessment rules
+
+USER_PERSONA: High-net-worth individual seeking estate planning strategies
+COLLECTION_OF_DOCS: HMRC inheritance tax rules and FCA COBS 9 suitability requirements for advisers
+
+USER_PERSONA: Individual considering equity release on their property
+COLLECTION_OF_DOCS: FCA MCOB 8 and MCOB 9 equity release advising and disclosure rules
+
+USER_PERSONA: Parent planning children's education savings
+COLLECTION_OF_DOCS: FCA COBS 9 suitability and COBS 4 disclosure rules for Junior ISAs
+
+USER_PERSONA: Small business owner setting up workplace pension schemes
+COLLECTION_OF_DOCS: Pensions Act 2008 auto-enrolment duties and FCA workplace pension default fund charge cap rules
+
+USER_PERSONA: Investor evaluating cryptoasset investment products
+COLLECTION_OF_DOCS: FCA PS23/6 cryptoasset financial promotion rules

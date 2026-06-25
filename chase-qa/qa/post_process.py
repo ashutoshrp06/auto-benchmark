@@ -188,6 +188,9 @@ def programmatic_adversarial_process(data):
 
 				ans_points_copy = ans_points.copy()
 
+				if args.verbose:
+					print(f"  [debug] index={i}, j={j}, ans_points={ans_points}")
+
 				docs_info = json.loads(ls[i]["Adv_Documents_Info"])[j]
 
 				doc_ans_points = {1: []}
@@ -220,6 +223,8 @@ def programmatic_adversarial_process(data):
 								if matches: ans_points_copy.remove(matches[0])
 
 				if len(ans_points_copy) > 0.5:
+					if args.verbose:
+						print(f"  [debug] index={i}, j={j} FAILED -- unmatched points: {ans_points_copy}")
 					raise Exception("Some points did not match!")
 
 				ls_ans_pts.append(ans_points)
