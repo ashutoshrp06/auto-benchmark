@@ -185,6 +185,39 @@ Answer:
 Give output in the following format:
 Relevance: True/False
 """
+	elif prompt_type == "reg_grounding":
+		sys_prompt = "You are an expert at verifying regulatory accuracy."
+		prompt = f"""You are given a question, a document, and the real current regulatory source text that the document's facts must be consistent with. You must check whether every regulatory fact, figure, rule, or rate stated in the document matches the real regulatory source text. The document may contain facts not covered by the source text at all; ignore those, you are only checking for contradiction with what the source text does state, not for completeness.
+
+If every regulatory fact in the document that is covered by the source text is consistent with it, output "True" to "Grounded" without giving any explanation. Otherwise, if and only if the document states a regulatory fact, figure, rule, or rate that contradicts the source text, output "False" and quote the exact sentence from the document that is wrong, along with what the source text actually says.
+
+Question: {params[0]}
+
+Regulatory Source Text:
+{params[1]}
+
+Document:
+{params[2]}
+
+Give output in the following format:
+Grounded: True/False
+Flagged Fact (if False):
+Explanation (if False):
+"""
+
+	elif prompt_type == "reg_regenerate":
+		sys_prompt = "You are an expert at correcting regulatory inaccuracies."
+		prompt = f"""You are given a sentence from a document that has been flagged as factually inconsistent with the real regulatory source text, along with that source text. Your job is to rewrite only the flagged sentence so that it is consistent with the source text. Do not add commentary, do not rewrite anything beyond the single sentence, and keep the same approximate length and style as the original sentence so it fits naturally back into the document.
+
+Regulatory Source Text:
+{params[1]}
+
+Flagged Sentence:
+{params[0]}
+
+Give output in the following format:
+Corrected Sentence: <Corrected Sentence>
+"""
 
 	return prompt, sys_prompt
 
@@ -306,7 +339,7 @@ Answer: {question[3]}
 Given below are the assigned answer points for each document.
 {question[4]}
 
-Your job is to create long documents according to this information. For each document, first create 10-12 unique other points that are in no way related to the topic of the question and answer (different points for each document). These points should discuss very different things about a similar but different topic. Then use these points along with the assigned answer points to create a long document (at least 700 words long). The assigned answer points must be discussed taking into account the question. You must only discuss about these points and nothing else. Change the order of the points so that the answer points are embedded inside the document. Assign an appropriate title to the document. Do not summarize or conclude the document in the end.
+Your job is to create long documents according to this information. For each document, first create 10-12 unique other points that are in no way related to the topic of the question and answer (different points for each document). These points should discuss very different things about a similar but different topic. Then use these points along with the assigned answer points to create a long document (at least 1200-1500 words long). The assigned answer points must be discussed taking into account the question. You must only discuss about these points and nothing else. Change the order of the points so that the answer points are embedded inside the document. Assign an appropriate title to the document. Do not summarize or conclude the document in the end.
 
 Additionally, ensure that the documents you create do not have any information related to the following adversarial question-answer pairs. You should create documents that discuss topics that are completely different from the following information.
 {question[-1]}

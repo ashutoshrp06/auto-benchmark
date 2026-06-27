@@ -1,5 +1,5 @@
 import argparse
-import pandas as pd
+import pandas as pd # type: ignore
 import pdb
 import json
 

@@ -5,7 +5,7 @@ USER_PERSONA: First-time investor consulting a financial adviser
 COLLECTION_OF_DOCS: FCA Consumer Duty (PRIN 2A) and COBS 4 communication rules
 
 USER_PERSONA: Client approaching retirement reviewing drawdown options
-COLLECTION_OF_DOCS: FCA FG22/5 retirement income guidance and MPAA regulations
+COLLECTION_OF_DOCS: FCA COBS 9.2 suitability requirements and HMRC PTM056510 money purchase annual allowance rules
 
 USER_PERSONA: Client weighing long-term care funding options against their pension
 COLLECTION_OF_DOCS: FCA COBS 16.6 communications on long-term care insurance and drawdown pensions
@@ -14,7 +14,7 @@ USER_PERSONA: Homebuyer seeking mortgage affordability advice
 COLLECTION_OF_DOCS: FCA MCOB 11.6 responsible lending and affordability assessment rules
 
 USER_PERSONA: High-net-worth individual seeking estate planning strategies
-COLLECTION_OF_DOCS: HMRC inheritance tax rules and FCA COBS 9 suitability requirements for advisers
+COLLECTION_OF_DOCS: HMRC inheritance tax nil-rate band rules (gov.uk) and FCA COBS 9.2 suitability requirements for advisers
 
 USER_PERSONA: Individual considering equity release on their property
 COLLECTION_OF_DOCS: FCA MCOB 8 and MCOB 9 equity release advising and disclosure rules

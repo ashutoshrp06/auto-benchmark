@@ -1,16 +1,16 @@
-import pandas as pd
+import pandas as pd # type: ignore
 
 import os
 import argparse
 import random
 import json
 import re
-import tiktoken
+import tiktoken # type: ignore
 import pdb
 
-import openai
-import anthropic
-import google.generativeai as genai
+import openai # type: ignore
+import anthropic # type: ignore
+import google.generativeai as genai # type: ignore
 
 from utils import sample_scenarios, process_naive
 from models import LargeLanguageModel
@@ -58,18 +58,24 @@ def jaccard_similarity(set1, set2):
 	return similarity
 
 def programmatic_scenario_generation(model, prompt_type, num_iters, max_tokens, temperature, stop, tik_encoding):
+	with open("reg_clauses.json", "r") as f:
+		reg_clauses = json.load(f)
+
 	pred_ls = [
 		[1, "Retail client seeking pension consolidation advice", "FCA COBS 19 pension transfer rules", 0],
 		[2, "First-time investor consulting a financial adviser", "FCA Consumer Duty (PRIN 2A) and COBS 4 communication rules", 0],
-		[3, "Client approaching retirement reviewing drawdown options", "FCA FG22/5 retirement income guidance and MPAA regulations", 0],
+		[3, "Client approaching retirement reviewing drawdown options", "FCA COBS 9.2 suitability requirements and HMRC PTM056510 money purchase annual allowance rules", 0],
 		[4, "Client weighing long-term care funding options against their pension", "FCA COBS 16.6 communications on long-term care insurance and drawdown pensions", 0],
 		[5, "Homebuyer seeking mortgage affordability advice", "FCA MCOB 11.6 responsible lending and affordability assessment rules", 0],
-		[6, "High-net-worth individual seeking estate planning strategies", "HMRC inheritance tax rules and FCA COBS 9 suitability requirements for advisers", 0],
+		[6, "High-net-worth individual seeking estate planning strategies", "HMRC inheritance tax nil-rate band rules (gov.uk) and FCA COBS 9.2 suitability requirements for advisers", 0],
 		[7, "Individual considering equity release on their property", "FCA MCOB 8 and MCOB 9 equity release advising and disclosure rules", 0],
 		[8, "Parent planning children's education savings", "FCA COBS 9 suitability and COBS 4 disclosure rules for Junior ISAs", 0],
 		[9, "Small business owner setting up workplace pension schemes", "Pensions Act 2008 auto-enrolment duties and FCA workplace pension default fund charge cap rules", 0],
 		[10, "Investor evaluating cryptoasset investment products", "FCA PS23/6 cryptoasset financial promotion rules", 0]
 	]
+
+	for row in pred_ls:
+		row.append(reg_clauses.get(str(row[0]), ""))
 
 	tot_ip_tokens = 0
 	tot_op_tokens = 0
@@ -77,7 +83,7 @@ def programmatic_scenario_generation(model, prompt_type, num_iters, max_tokens, 
 	pred_id = len(pred_ls)
 
 	# Write seeded scenarios immediately so num_iters=0 still produces a valid scenarios.tsv
-	pred_df = pd.DataFrame(pred_ls, columns = ['ID', 'Persona', 'Environment', 'Similarity'])
+	pred_df = pd.DataFrame(pred_ls, columns = ['ID', 'Persona', 'Environment', 'Similarity', 'Reg_Text'])
 	pred_df.to_csv(args.out_dir + "/scenarios.tsv", sep = '\t', index = None)
 
 	for i in range(num_iters):
@@ -117,10 +123,10 @@ def programmatic_scenario_generation(model, prompt_type, num_iters, max_tokens, 
 					if cur_sim > avg_sim:
 						avg_sim = cur_sim
 				if avg_sim < 60:
-					pred_ls.append([pred_id+1, persona, env, avg_sim])
+					pred_ls.append([pred_id+1, persona, env, avg_sim, ""])
 					pred_id += 1
 
-		pred_df = pd.DataFrame(pred_ls, columns = ['ID', 'Persona', 'Environment', 'Similarity'])
+		pred_df = pd.DataFrame(pred_ls, columns = ['ID', 'Persona', 'Environment', 'Similarity', 'Reg_Text'])
 		pred_df.to_csv(args.out_dir + "/scenarios.tsv", sep = '\t', index = None)
 
 		i += 1
@@ -140,6 +146,7 @@ def programmatic_qa_generation(scenarios_data, model, prompt_type, num_iters, ma
 	for i in range(len(scenarios_data)):
 		persona = scenarios_data.loc[i]["Persona"]
 		env = scenarios_data.loc[i]["Environment"]
+		reg_text = scenarios_data.loc[i]["Reg_Text"]
 		with open(args.out_dir + "/logs.txt", "a") as f:
 			f.write("Scenario " + str(i+1) + ":\n\n")
 			f.write("Persona: " + persona + "\n")
@@ -191,10 +198,10 @@ def programmatic_qa_generation(scenarios_data, model, prompt_type, num_iters, ma
 
 			if main_sim < 60:
 				group.append(question)
-				pred_ls.append([i+1, persona, env, question, answer, docs_info, main_sim])
+				pred_ls.append([i+1, persona, env, question, answer, docs_info, main_sim, reg_text])
 				cnt += 1
 
-				pred_df = pd.DataFrame(pred_ls, columns = ['ID', 'Persona', 'Environment', 'Question', 'Answer', 'Documents_Info', 'Similarity'])
+				pred_df = pd.DataFrame(pred_ls, columns = ['ID', 'Persona', 'Environment', 'Question', 'Answer', 'Documents_Info', 'Similarity', 'Reg_Text'])
 				pred_df['Answer'] = pred_df['Answer'].str.replace('\n', '\\n')
 				pred_df['Documents_Info'] = pred_df['Documents_Info'].str.replace('\n', '\\n')
 				pred_df.to_csv(args.out_dir + "/prog_qa.tsv", sep = '\t', index = None, quoting=1)
@@ -223,6 +230,7 @@ def programmatic_adversarial_generation(questions_data, model, prompt_type, num_
 		main_sim = questions_data.loc[i]["Similarity"]
 		ans_pts = questions_data.loc[i]["Ans_Points"]
 		doc_ans_pts = questions_data.loc[i]["Doc_Ans_Points"]
+		reg_text = questions_data.loc[i]["Reg_Text"]
 
 		if str(ans) == "nan":
 			continue
@@ -281,10 +289,10 @@ def programmatic_adversarial_generation(questions_data, model, prompt_type, num_
 
 			num_loops += 1
 
-		pred_ls.append([id1, persona, env, ques, ans, docs_info, adv_ques_ls, adv_ans_ls, adv_docs_info_ls, main_sim, ans_pts, doc_ans_pts])
+		pred_ls.append([id1, persona, env, ques, ans, docs_info, adv_ques_ls, adv_ans_ls, adv_docs_info_ls, main_sim, ans_pts, doc_ans_pts, reg_text])
 		cnt += 1
 
-		pred_df = pd.DataFrame(pred_ls, columns = ['ID', 'Persona', 'Environment', 'Question', 'Answer', 'Documents_Info', 'Adv_Question', 'Adv_Answer', 'Adv_Documents_Info', 'Similarity', 'Ans_Points', 'Doc_Ans_Points'])
+		pred_df = pd.DataFrame(pred_ls, columns = ['ID', 'Persona', 'Environment', 'Question', 'Answer', 'Documents_Info', 'Adv_Question', 'Adv_Answer', 'Adv_Documents_Info', 'Similarity', 'Ans_Points', 'Doc_Ans_Points', 'Reg_Text'])
 		pred_df['Adv_Question'] = pred_df['Adv_Question'].apply(json.dumps)
 		pred_df['Adv_Answer'] = pred_df['Adv_Answer'].apply(json.dumps)
 		pred_df['Adv_Documents_Info'] = pred_df['Adv_Documents_Info'].apply(json.dumps)
@@ -320,6 +328,7 @@ def programmatic_doc_generation(questions_data, model, prompt_type, max_tokens, 
 		docs_info = json.loads(questions_data.loc[i]["Documents_Info"])
 		ans_pts = questions_data.loc[i]["Ans_Points"]
 		doc_ans_pts = json.loads(questions_data.loc[i]["Doc_Ans_Points"])
+		reg_text = questions_data.loc[i]["Reg_Text"]
 
 		if len(ques) != len(docs_info):
 			with open(args.out_dir + "/logs.txt", "a") as f:
@@ -399,10 +408,10 @@ def programmatic_doc_generation(questions_data, model, prompt_type, max_tokens, 
 			f.write("=======================================================================================\n")
 			f.write("=======================================================================================\n\n")
 
-		pred_ls.append([i+1, persona, env, ques, ans, docs_info, ans_pts, doc_ans_pts, documents_list])
+		pred_ls.append([i+1, persona, env, ques, ans, docs_info, ans_pts, doc_ans_pts, documents_list, reg_text])
 		cnt += 1
 
-		pred_df = pd.DataFrame(pred_ls, columns = ['ID', 'Persona', 'Environment', 'Questions', 'Answers', 'Documents_Info', 'Ans_Points', 'Doc_Ans_Points', 'Docs_List'])
+		pred_df = pd.DataFrame(pred_ls, columns = ['ID', 'Persona', 'Environment', 'Questions', 'Answers', 'Documents_Info', 'Ans_Points', 'Doc_Ans_Points', 'Docs_List', 'Reg_Text'])
 
 		pred_df['Questions'] = pred_df['Questions'].apply(json.dumps)
 		pred_df['Answers'] = pred_df['Answers'].apply(json.dumps)
