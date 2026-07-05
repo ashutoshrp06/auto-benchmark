@@ -4,6 +4,7 @@ import argparse
 import uuid
 from typing import List
 import pdb
+import sys
 
 import openai
 import anthropic
@@ -98,6 +99,20 @@ def _get_chat_response(client, engine, prompt, sys_prompt, max_tokens, temperatu
 			top_p=top_p,
 			n=n,
 			stop=stop,
+			presence_penalty=presence_penalty,
+			frequency_penalty=frequency_penalty
+		)
+	if engine.startswith("gpt-5"):
+		return client.chat.completions.create(
+			model=engine,
+			messages = [
+				{"role": "system", "content": sys_prompt},
+				{"role": "user", "content": prompt}
+			],
+			max_completion_tokens=max_tokens,
+			temperature=temperature,
+			top_p=top_p,
+			n=n,
 			presence_penalty=presence_penalty,
 			frequency_penalty=frequency_penalty
 		)
@@ -284,6 +299,7 @@ class LargeLanguageModel():
 					response = response.choices[0].message.content.lstrip('\n').rstrip('\n')
 					break
 				except openai.BadRequestError:
+					print("BadRequestError:", str(sys.exc_info()[1]))
 					cur_max_tokens = cur_max_tokens - 2000
 		elif self.model_type in ["anthropic"]:
 			response = _get_anthropic_response(

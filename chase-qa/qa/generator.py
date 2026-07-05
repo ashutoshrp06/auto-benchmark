@@ -14,7 +14,7 @@ import google.generativeai as genai # type: ignore
 
 from utils import sample_scenarios, process_naive
 from models import LargeLanguageModel
-from prompts import get_generator_prompt
+from prompts import get_generator_prompt, get_verification_prompt
 
 import datetime
 
@@ -135,6 +135,72 @@ def programmatic_scenario_generation(model, prompt_type, num_iters, max_tokens, 
 	print("Total input tokens: ", tot_ip_tokens)
 	print("Total output tokens: ", tot_op_tokens)
 
+def strip_quotes(s):
+	s = s.strip()
+	quote_chars = '"\'“”‘’'
+	while len(s) >= 2 and s[0] in quote_chars and s[-1] in quote_chars:
+		s = s[1:-1].strip()
+	return s
+
+def reg_pregen_grounding_check(args, model, ques, reg_text, answer):
+	prompt, sys_prompt = get_verification_prompt("reg_pregen_grounding", params=(ques, reg_text, answer))
+	og_pred = model.predict(prompt, sys_prompt, args.max_tokens, args.temperature, 1, args.stop)
+
+	grounded_res = True
+	if "false" in og_pred.split("Flagged Point")[0].split("Grounded:")[1].lower():
+		grounded_res = False
+
+	with open(args.out_dir + "/reg_pregen_logs.txt", "a") as f:
+		f.write("Question: " + str(ques) + "\n\n")
+		f.write("Regulatory Source Text:\n" + str(reg_text) + "\n\n")
+		f.write("Answer:\n" + str(answer) + "\n\n")
+		f.write("Prediction:\n" + og_pred + "\n")
+		f.write("---------------------------------------------------------\n")
+
+	if grounded_res:
+		return True, None, None
+
+	flagged_point = og_pred.split("Flagged Point")[1].split("Corrected Point")[0].split(":", 1)[1].strip()
+	corrected_point = og_pred.split("Corrected Point")[1].split(":", 1)[1].strip()
+
+	flagged_point = strip_quotes(flagged_point)
+	corrected_point = strip_quotes(corrected_point)
+
+	return False, flagged_point, corrected_point
+
+
+def reg_pregen_retry(args, model, ques, reg_text, answer):
+	if str(reg_text).strip() == "" or str(reg_text).strip().lower() == "nan":
+		return answer, False
+
+	grounded, flagged_point, corrected_point = reg_pregen_grounding_check(args, model, ques, reg_text, answer)
+
+	if grounded:
+		return answer, False
+
+	if flagged_point in answer:
+		new_answer = answer.replace(flagged_point, corrected_point)
+	else:
+		with open(args.out_dir + "/reg_pregen_logs.txt", "a") as f:
+			f.write("WARNING: flagged point not found verbatim in answer, leaving unmodified before recheck.\nFlagged Point: " + flagged_point + "\n")
+			f.write("---------------------------------------------------------\n")
+		with open(args.out_dir + "/reg_pregen_logs.txt", "a") as f:
+			f.write("DISCARD: splice failed, no correction made, skipping recheck.\n")
+			f.write("---------------------------------------------------------\n")
+		return answer, True
+	regrounded, _, _ = reg_pregen_grounding_check(args, model, ques, reg_text, new_answer)
+
+	if regrounded:
+		with open(args.out_dir + "/reg_pregen_logs.txt", "a") as f:
+			f.write("CORRECTED IN PLACE\nFlagged Point: " + flagged_point + "\nCorrected Point: " + corrected_point + "\n")
+			f.write("---------------------------------------------------------\n")
+		return new_answer, False
+
+	with open(args.out_dir + "/reg_pregen_logs.txt", "a") as f:
+		f.write("DISCARD: still ungrounded after one correction attempt.\n")
+		f.write("---------------------------------------------------------\n")
+	return new_answer, True
+
 def programmatic_qa_generation(scenarios_data, model, prompt_type, num_iters, max_tokens, temperature, stop, tik_encoding):
 	pred_ls = []
 
@@ -157,7 +223,7 @@ def programmatic_qa_generation(scenarios_data, model, prompt_type, num_iters, ma
 
 		for xy in range(num_iters):
 		
-			prompt, sys_prompt = get_generator_prompt(prompt_type, question=(persona, env))
+			prompt, sys_prompt = get_generator_prompt(prompt_type, question=(persona, env, reg_text	))
 
 			og_pred = model.predict(prompt, sys_prompt, max_tokens, temperature, 1, stop)
 
@@ -198,6 +264,10 @@ def programmatic_qa_generation(scenarios_data, model, prompt_type, num_iters, ma
 
 			if main_sim < 60:
 				group.append(question)
+				answer, discard_row = reg_pregen_retry(args, model, question, reg_text, answer)
+				if discard_row:
+					print("Completed {} / {}... (discarded)".format(i+1, len(scenarios_data)), end = '\r', flush = True)
+					continue
 				pred_ls.append([i+1, persona, env, question, answer, docs_info, main_sim, reg_text])
 				cnt += 1
 

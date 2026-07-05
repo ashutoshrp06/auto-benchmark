@@ -185,38 +185,26 @@ Answer:
 Give output in the following format:
 Relevance: True/False
 """
-	elif prompt_type == "reg_grounding":
+	elif prompt_type == "reg_pregen_grounding":
 		sys_prompt = "You are an expert at verifying regulatory accuracy."
-		prompt = f"""You are given a question, a document, and the real current regulatory source text that the document's facts must be consistent with. You must check whether every regulatory fact, figure, rule, or rate stated in the document matches the real regulatory source text. The document may contain facts not covered by the source text at all; ignore those, you are only checking for contradiction with what the source text does state, not for completeness.
+		prompt = f"""You are given a question, an answer written as bullet points, and the real current regulatory source text that the answer's facts must be consistent with. You must check whether every regulatory fact, figure, rule, or rate stated in the answer matches the real regulatory source text. The answer may contain facts not covered by the source text at all; ignore those, you are only checking for contradiction with what the source text does state, not for completeness.
 
-If every regulatory fact in the document that is covered by the source text is consistent with it, output "True" to "Grounded" without giving any explanation. Otherwise, if and only if the document states a regulatory fact, figure, rule, or rate that contradicts the source text, output "False" and quote the exact sentence from the document that is wrong, along with what the source text actually says.
+Only flag statements that assert a specific regulatory fact, figure, rule, or rate. Do not flag narrative, behavioural, or causal claims about outcomes, trends, client behaviour, or adviser behaviour, since these cannot be verified as true or false against regulatory source text, only genuine regulatory facts can.
+
+If every regulatory fact in the answer that is covered by the source text is consistent with it, output "True" to "Grounded" without giving any explanation. Otherwise, if and only if the answer states a regulatory fact, figure, rule, or rate that contradicts the source text, output "False", quote the exact bullet point from the answer that is wrong exactly as written, and provide a corrected version of that same bullet point consistent with the source text, keeping the same approximate length and style.
 
 Question: {params[0]}
 
 Regulatory Source Text:
 {params[1]}
 
-Document:
+Answer:
 {params[2]}
 
 Give output in the following format:
 Grounded: True/False
-Flagged Fact (if False):
-Explanation (if False):
-"""
-
-	elif prompt_type == "reg_regenerate":
-		sys_prompt = "You are an expert at correcting regulatory inaccuracies."
-		prompt = f"""You are given a sentence from a document that has been flagged as factually inconsistent with the real regulatory source text, along with that source text. Your job is to rewrite only the flagged sentence so that it is consistent with the source text. Do not add commentary, do not rewrite anything beyond the single sentence, and keep the same approximate length and style as the original sentence so it fits naturally back into the document.
-
-Regulatory Source Text:
-{params[1]}
-
-Flagged Sentence:
-{params[0]}
-
-Give output in the following format:
-Corrected Sentence: <Corrected Sentence>
+Flagged Point (if False): <exact bullet point as written in the answer>
+Corrected Point (if False): <corrected bullet point>
 """
 
 	return prompt, sys_prompt
@@ -339,7 +327,9 @@ Answer: {question[3]}
 Given below are the assigned answer points for each document.
 {question[4]}
 
-Your job is to create long documents according to this information. For each document, first create 10-12 unique other points that are in no way related to the topic of the question and answer (different points for each document). These points should discuss very different things about a similar but different topic. Then use these points along with the assigned answer points to create a long document (at least 1200-1500 words long). The assigned answer points must be discussed taking into account the question. You must only discuss about these points and nothing else. Change the order of the points so that the answer points are embedded inside the document. Assign an appropriate title to the document. Do not summarize or conclude the document in the end.
+Your job is to create long documents according to this information. For each document, first create 10-12 unique other points that are in no way related to the topic of the question and answer (different points for each document). These points should discuss very different things about a similar but different topic. The unrelated points must be specific and detailed, with the same level of concrete factual content (figures, named rules, named products) as the assigned answer points, not generic statements. They should sit in a closely adjacent area of personal financial advice so they are difficult to distinguish from the genuine answer points on style or specificity alone, while remaining clearly about a different underlying question. Then use these points along with the assigned answer points to create a long document (at least 1200-1500 words long). The assigned answer points must be discussed taking into account the question. You must only discuss about these points and nothing else. Change the order of the points so that the answer points are embedded inside the document. When embedding each assigned answer point into the dialogue, you may restructure the sentence to fit natural conversation, but every specific fact, figure, rate, date, and named rule within that point must be preserved exactly as given, without paraphrasing, rounding, generalising, or omitting any of it. Assign an appropriate title to the document. Do not summarize or conclude the document in the end.
+
+Format the document text as a transcript of a meeting between a financial adviser and their client, not as prose. The text must begin with a single header line in the format "Meeting: <topic>" summarising the meeting's subject, followed by a blank line, then the dialogue. Each line of dialogue must start with "Adviser:" or "Client:". Either speaker may have multiple consecutive lines before the other speaks. Do not use any other speaker labels or formatting. The assigned answer points and the unrelated points must be naturally embedded within the dialogue, spoken by either the adviser or the client as appropriate, and each unrelated point must arise naturally from the flow of conversation rather than appearing as an unconnected aside.
 
 Additionally, ensure that the documents you create do not have any information related to the following adversarial question-answer pairs. You should create documents that discuss topics that are completely different from the following information.
 {question[-1]}

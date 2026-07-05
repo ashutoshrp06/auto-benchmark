@@ -253,6 +253,7 @@ def programmatic_adversarial_process(data):
 			persona = new_ls[i]["Persona"]
 			env = new_ls[i]["Environment"]
 			sim = new_ls[i]["Similarity"]
+			reg_text = new_ls[i]["Reg_Text"]
 			adv_questions = json.loads(new_ls[i]["Adv_Question"])
 			adv_answers = json.loads(new_ls[i]["Adv_Answer"])
 			adv_docs_info = json.loads(new_ls[i]["Adv_Documents_Info"])
@@ -273,9 +274,9 @@ def programmatic_adversarial_process(data):
 				ans_pts_ls.append(adv_ans_pts[j])
 				doc_ans_pts_ls.append(adv_doc_ans_pts[j])
 
-			final_ls.append([id1, persona, env, sim, questions_ls, answers_ls, docs_info_ls, ans_pts_ls, doc_ans_pts_ls])
+			final_ls.append([id1, persona, env, sim, reg_text, questions_ls, answers_ls, docs_info_ls, ans_pts_ls, doc_ans_pts_ls])
 
-		new_df = pd.DataFrame(final_ls, columns = ['ID', 'Persona', 'Environment', 'Similarity', 'Questions', 'Answers', 'Documents_Info', 'Ans_Points', 'Doc_Ans_Points'])
+		new_df = pd.DataFrame(final_ls, columns = ['ID', 'Persona', 'Environment', 'Similarity', 'Reg_Text', 'Questions', 'Answers', 'Documents_Info', 'Ans_Points', 'Doc_Ans_Points'])
 		new_df['Questions'] = new_df['Questions'].apply(json.dumps)
 		new_df['Answers'] = new_df['Answers'].apply(json.dumps)
 		new_df['Documents_Info'] = new_df['Documents_Info'].apply(json.dumps)
@@ -305,6 +306,7 @@ def programmatic_docs_process(data):
 		ans_pts = json.loads(ls[i]["Ans_Points"])
 		doc_ans_pts = json.loads(ls[i]["Doc_Ans_Points"])
 		docs_list = json.loads(ls[i]["Docs_List"])
+		reg_text = ls[i]["Reg_Text"]
 
 		modified_docs_list = []
 		for doc_ls in docs_list:
@@ -336,11 +338,11 @@ def programmatic_docs_process(data):
 			adv_docs_list = modified_docs_list.copy()
 			adv_docs_list.remove(cur_docs)
 
-			new_ls.append([id1, tot_cnt, persona, env, cur_ques, cur_ans, cur_ans_pts, cur_doc_ans_pts, cur_docs, adv_ques, adv_ans, adv_ans_pts, adv_doc_ans_pts, adv_docs_list])
+			new_ls.append([id1, tot_cnt, persona, env, cur_ques, cur_ans, cur_ans_pts, cur_doc_ans_pts, cur_docs, adv_ques, adv_ans, adv_ans_pts, adv_doc_ans_pts, adv_docs_list, reg_text])
 			
 			tot_cnt += 1
 	
-	new_df = pd.DataFrame(new_ls, columns = ['Root_ID', 'Question_No', 'Persona', 'Environment', 'Question', 'Answer', 'Ans_Points', 'Doc_Ans_Points', 'Rel_Docs_List', 'Adv_Question', 'Adv_Answer', 'Adv_Ans_Pts', 'Adv_Doc_Ans_Pts', 'Adv_Docs_List'])
+	new_df = pd.DataFrame(new_ls, columns = ['Root_ID', 'Question_No', 'Persona', 'Environment', 'Question', 'Answer', 'Ans_Points', 'Doc_Ans_Points', 'Rel_Docs_List', 'Adv_Question', 'Adv_Answer', 'Adv_Ans_Pts', 'Adv_Doc_Ans_Pts', 'Adv_Docs_List', 'Reg_Text'])
 	new_df['Ans_Points'] = new_df['Ans_Points'].apply(json.dumps)
 	new_df['Doc_Ans_Points'] = new_df['Doc_Ans_Points'].apply(json.dumps)
 	new_df['Rel_Docs_List'] = new_df['Rel_Docs_List'].apply(json.dumps)

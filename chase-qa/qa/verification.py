@@ -333,6 +333,7 @@ def programmatic_docs_verify(args, data):
 		new_ls = temp_new_df.to_dict(orient='records')
 	
 	start_idx = len(new_ls)
+	new_df = pd.DataFrame(new_ls)
 
 	_, sys_prompt = get_verification_prompt("presence", params=("", "", ""))
 
@@ -447,31 +448,9 @@ def programmatic_docs_verify(args, data):
 		final_rel_doc_list = add_info(args, model, ques, to_add, new_rel_doc_list)
 
 		########################################################################################################
-		# Regulatory grounding check on final rel and adv docs. Retry once, discard row on second failure.
 
-		grounded_rel_doc_list = reg_grounding_retry(args, model, ques, ls[i]["Reg_Text"], final_rel_doc_list)
-
-		grounded_adv_doc_list = []
-		discard_row = grounded_rel_doc_list is None
-		if not discard_row:
-			for az in new_adv_doc_list:
-				result = reg_grounding_retry(args, model, ques, ls[i]["Reg_Text"], az)
-				if result is None:
-					discard_row = True
-					break
-				grounded_adv_doc_list.append(result)
-
-		if discard_row:
-			with open(args.verification_dir + "/reg_grounding_logs.txt", "a") as f:
-				f.write("ROW DISCARDED: " + str(ques) + "\n")
-				f.write("======================================================================================\n")
-			print("Completed {} / {}... (discarded)".format(i+1, len(ls)), end = '\r', flush = True)
-			continue
-
-		########################################################################################################
-
-		ls[i]["Rel_Docs_List"] = grounded_rel_doc_list
-		ls[i]["Adv_Docs_List"] = grounded_adv_doc_list
+		ls[i]["Rel_Docs_List"] = final_rel_doc_list
+		ls[i]["Adv_Docs_List"] = new_adv_doc_list
 		ls[i]["Ans_Points"] = json.dumps(ans_pts)
 		ls[i]["Doc_Ans_Points"] = json.dumps(doc_ans_pts)
 		ls[i]["Answer"] = ans
@@ -497,6 +476,7 @@ def programmatic_docs_verify_type3(args, data):
         new_ls = temp_new_df.to_dict(orient='records')
 
     start_idx = len(new_ls)
+    new_df = pd.DataFrame(new_ls)
 
     _, sys_prompt = get_verification_prompt("presence_type3", params=("", "", ""))
     model = LargeLanguageModel(model_type=args.model_type, model=args.model, peft_model="none", sys_prompt=sys_prompt, top_p=args.top_p, presence_penalty=args.presence_penalty, frequency_penalty=args.frequency_penalty)
@@ -635,6 +615,7 @@ def programmatic_adversarial_verify(args, data):
 		new_ls = temp_new_df.to_dict(orient='records')
 	
 	start_idx = len(new_ls)
+	new_df = pd.DataFrame(new_ls)
 
 	_, sys_prompt = get_verification_prompt("presence", params=("", "", ""))
 
@@ -742,78 +723,6 @@ def programmatic_adversarial_verify(args, data):
 	print("Removed {} pairs and {} examples...".format(num_pairs, num_examples))
 	
 	print("\nVerified Data: ", len(new_df))
-
-def reg_grounding_check(args, model, ques, reg_text, doc_list):
-	check_flag = True
-	failures = {}
-
-	if str(reg_text).strip() == "" or str(reg_text).strip().lower() == "nan":
-		return check_flag, failures
-
-	for doc_no in range(len(doc_list)):
-		doc = doc_list[doc_no]
-
-		prompt, sys_prompt = get_verification_prompt("reg_grounding", params=(ques, reg_text, doc))
-		og_pred = model.predict(prompt, sys_prompt, args.max_tokens, args.temperature, 1, args.stop)
-
-		grounded_res = True
-		if "false" in og_pred.split("Flagged Fact")[0].split("Grounded:")[1].lower():
-			grounded_res = False
-
-		if grounded_res == False:
-			flagged_fact = og_pred.split("Flagged Fact")[1].split("Explanation")[0].split(":", 1)[1].strip()
-			explanation = og_pred.split("Explanation")[1].split(":", 1)[1].strip()
-			failures[str(doc_no + 1)] = (flagged_fact, explanation)
-			check_flag = False
-
-		with open(args.verification_dir + "/reg_grounding_logs.txt", "a") as f:
-			f.write(str(doc) + "\n\n")
-			f.write("Regulatory Source Text:\n" + str(reg_text) + "\n\n")
-			f.write("Prediction:\n" + og_pred + "\n")
-			f.write("---------------------------------------------------------\n")
-
-	return check_flag, failures
-
-
-def reg_grounding_regenerate(args, model, reg_text, flagged_fact):
-	prompt, sys_prompt = get_verification_prompt("reg_regenerate", params=(flagged_fact, reg_text))
-	og_pred = model.predict(prompt, sys_prompt, args.max_tokens, args.temperature, 1, args.stop)
-
-	corrected = og_pred.split("Corrected Sentence:")[1].strip()
-
-	with open(args.verification_dir + "/reg_grounding_logs.txt", "a") as f:
-		f.write("Flagged Fact: " + str(flagged_fact) + "\n")
-		f.write("Regulatory Source Text:\n" + str(reg_text) + "\n\n")
-		f.write("Corrected Sentence: " + str(corrected) + "\n")
-		f.write("---------------------------------------------------------\n")
-
-	return corrected
-
-
-def reg_grounding_retry(args, model, ques, reg_text, doc_list):
-	check_flag, failures = reg_grounding_check(args, model, ques, reg_text, doc_list)
-
-	if check_flag:
-		return doc_list
-
-	new_doc_list = doc_list.copy()
-	for doc_no_str, (flagged_fact, explanation) in failures.items():
-		doc_idx = int(doc_no_str) - 1
-		corrected_sentence = reg_grounding_regenerate(args, model, reg_text, flagged_fact)
-		if flagged_fact in new_doc_list[doc_idx]:
-			new_doc_list[doc_idx] = new_doc_list[doc_idx].replace(flagged_fact, corrected_sentence)
-		else:
-			with open(args.verification_dir + "/reg_grounding_logs.txt", "a") as f:
-				f.write("WARNING: flagged fact not found verbatim in doc, string-replace skipped.\n")
-				f.write("Flagged Fact: " + str(flagged_fact) + "\n")
-				f.write("---------------------------------------------------------\n")
-
-	recheck_flag, recheck_failures = reg_grounding_check(args, model, ques, reg_text, new_doc_list)
-
-	if recheck_flag:
-		return new_doc_list
-	else:
-		return None
 
 def main(args):
 	if args.exp_type == "programmatic_docs":
