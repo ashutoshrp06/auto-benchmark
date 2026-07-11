@@ -12,6 +12,7 @@ import anthropic
 import google.generativeai as genai
 from prompts import get_solver_prompt
 import datetime
+from generator import strip_titles
 
 def build_parser():
 	parser = argparse.ArgumentParser(description='Generate')
@@ -21,7 +22,7 @@ def build_parser():
 	parser.add_argument('-data', type=str, default='chase_qa', help='Data name')
 	parser.add_argument('-stop', type=list, default=[], help='When to stop generation')
 	parser.add_argument('-prompt_type', type=str, default='zero-shot-basic', help='prompt type')
-	parser.add_argument('-model_type', type=str, default='chat', choices=['completion', 'chat', 'vllm', 'gemini', 'peft', 'anthropic'], help='Which type of model to use')
+	parser.add_argument('-model_type', type=str, default='chat', choices=['completion', 'chat', 'vllm', 'gemini', 'peft', 'anthropic','elm'], help='Which type of model to use')
 	parser.add_argument('-model', type=str, default='gpt-4o-mini', help='Which model to use')
 	parser.add_argument('-peft_model', type=str, default='none', help='peft path')
 	parser.add_argument('-max_tokens', type=int, default=2048, help='Maximum number of tokens')
@@ -30,6 +31,7 @@ def build_parser():
 	parser.add_argument('-n', type=int, default=1, help='number of completions to generate for each prompt')
 	parser.add_argument('-presence_penalty', type=float, default=0.0, help='positive values increases model\'s likelihood to talk about new topics')
 	parser.add_argument('-frequency_penalty', type=float, default=0.0, help='positive values decreases model\'s likelihood to repeat same line verbatim')
+	parser.add_argument('-input_tsv', type=str, required=True, help='Path to input TSV with Documents, Question, Answer columns')
 
 	return parser
 
@@ -42,9 +44,11 @@ def solver(data, model, prompt_type, max_tokens, temperature, stop, tik_encoding
 	cnt = 0
 
 	for i in range(len(data)):
-		docs = data.loc[i]["Documents"]
+		root_id = data.loc[i]["Root_ID"]
+		docs = strip_titles(data.loc[i]["Documents"])
 		ques = data.loc[i]["Question"]
 		ans = data.loc[i]["Answer"]
+		adv_answer = data.loc[i]["Adv_Answer"]
 
 		with open(args.out_dir + "/logs.txt", "a") as f:
 			f.write("Documents: \n\n" + docs + "\n\n")
@@ -65,10 +69,10 @@ def solver(data, model, prompt_type, max_tokens, temperature, stop, tik_encoding
 			f.write("Prediction: " + og_pred + "\n")
 			f.write("------------------------------------------------------------------\n\n")
 
-		pred_ls.append([i+1, docs, ques, ans, og_pred])
+		pred_ls.append([root_id, docs, ques, ans, adv_answer, og_pred])
 		cnt += 1
 
-		pred_df = pd.DataFrame(pred_ls, columns = ['ID', 'Documents', 'Question', 'Answer', 'Prediction'])
+		pred_df = pd.DataFrame(pred_ls, columns = ['Root_ID', 'Documents', 'Question', 'Answer', 'Adv_Answer', 'Prediction'])
 		pred_df.to_csv(args.out_dir + "/predictions.tsv", sep = '\t', index = None)
 
 		print("Completed {} / {}...".format(i+1, len(data)), end = '\r', flush = True)
@@ -88,7 +92,7 @@ def main(args):
 
 	model = LargeLanguageModel(model_type=args.model_type, model=args.model, peft_model="none", sys_prompt=sys_prompt, top_p=args.top_p, presence_penalty=args.presence_penalty, frequency_penalty=args.frequency_penalty)
 
-	data = pd.read_csv("data/" + args.data + ".tsv", sep='\t')
+	data = pd.read_csv(args.input_tsv, sep='\t')
 	solver(data, model, args.prompt_type, args.max_tokens, args.temperature, args.stop, tik_encoding)
 
 

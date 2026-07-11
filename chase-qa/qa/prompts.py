@@ -272,6 +272,26 @@ Prediction: {question[2]}
 
 Result:
 """
+	elif prompt_type == "type3-causal-check":
+		sys_prompt = "You are an expert evaluator."
+		prompt = f"""You are given a question, an adversarial wrong answer, the ground-truth answer, and a prediction. You need to evaluate whether the prediction is correct by matching against the ground truth answer. Do not look for exact phrases or words since the prediction can have points that are a paraphrase of the same information. Based on the question, check for the presence of the same ideas or main points in the prediction as in the ground-truth answer. All the main points in the ground-truth answer must be mentioned in the prediction. The order of points mentioned is irrelevant. It is allowed for the prediction to elaborate or provide more specifics or details over the major points in the ground-truth answer. However, the prediction should not contain additional major points that are contradictory or irrelevant for answering the question. Importantly, the prediction must not discuss any of the points mentioned in the "adversarial wrong answer".
+
+Apply the paragraph above as Coverage, using the exact same strictness you would use for a normal factual question. If any main point from the ground-truth answer is missing or only vaguely implied, or if the prediction adds any major point that is not in the ground-truth answer and not merely an elaboration of an existing point, Coverage fails.
+
+If, and only if, Coverage passes, then separately check Connection: the question asks about a causal relationship, trend, or sequence of events. Does the prediction explicitly state the overall causal conclusion that ties the covered evidence points together into an answer to the "why" or "how" the question asks? Merely listing applicable rules, requirements, or facts does NOT satisfy Connection, even if the prediction uses words like "because", "therefore", or "as a result" while doing so. A prediction that lists what a regulation requires, or restates the evidence points as a flat list, has NOT satisfied Connection unless it also states the specific outcome or conclusion that follows from combining those points, in a way that directly answers the causal question asked.
+
+Output the single word "True" or "False" as the first word of your response, based on: False if Coverage fails, False if Coverage passes but Connection fails, True only if both pass. After that first word, always explain your reasoning in detail, covering both your Coverage assessment and, if reached, your Connection assessment, regardless of whether the verdict is True or False.
+
+Question: {question[0]}
+
+Adversarial Wrong Answers: {question[3]}
+
+Ground-truth Answer (evidence points): {question[1]}
+
+Prediction: {question[2]}
+
+Result:
+"""
 
 	return prompt, sys_prompt
 

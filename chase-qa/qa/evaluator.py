@@ -22,7 +22,7 @@ def build_parser():
 	parser.add_argument('-data', type=str, default='chase_qa', help='Output Directory')
 	parser.add_argument('-stop', type=list, default=[], help='When to stop generation')
 	parser.add_argument('-prompt_type', type=str, default='zero-shot-basic', help='prompt type')
-	parser.add_argument('-model_type', type=str, default='chat', choices=['completion', 'chat', 'vllm', 'gemini', 'peft', 'anthropic'], help='Which type of model to use')
+	parser.add_argument('-model_type', type=str, default='chat', choices=['completion', 'chat', 'vllm', 'gemini', 'peft', 'anthropic','elm'], help='Which type of model to use')
 	parser.add_argument('-model', type=str, default='gpt-4o', help='Which model to use')
 	parser.add_argument('-max_tokens', type=int, default=1024, help='Maximum number of tokens')
 	parser.add_argument('-temperature', type=float, default=0.5, help='Sampling temperature')
@@ -30,10 +30,11 @@ def build_parser():
 	parser.add_argument('-n', type=int, default=1, help='number of completions to generate for each prompt')
 	parser.add_argument('-presence_penalty', type=float, default=0.0, help='positive values increases model\'s likelihood to talk about new topics')
 	parser.add_argument('-frequency_penalty', type=float, default=0.0, help='positive values decreases model\'s likelihood to repeat same line verbatim')
+	parser.add_argument('-predictions_tsv', type=str, required=True, help='Path to TSV containing Prediction column')
 
 	return parser
 
-def evaluator(pred_data, full_data, model, prompt_type, max_tokens, temperature, stop, tik_encoding):
+def evaluator(pred_data, model, prompt_type, max_tokens, temperature, stop, tik_encoding):
 	pred_ls = []
 
 	tot_ip_tokens = 0
@@ -47,17 +48,17 @@ def evaluator(pred_data, full_data, model, prompt_type, max_tokens, temperature,
 	adv = 0.0
 
 	for i in range(len(pred_data)):
-		id1 = pred_data.loc[i]["ID"]
+		id1 = pred_data.loc[i]["Root_ID"]
 		ques = pred_data.loc[i]["Question"]
 		ans = pred_data.loc[i]["Answer"]
 		pred = pred_data.loc[i]["Prediction"]
 
-		idx = full_data.index[(full_data["Answer"] == ans) & (full_data["Question"] == ques)].tolist()
-		assert len(idx) == 1
-		idx = idx[0]
+		# idx = full_data.index[(full_data["Answer"] == ans) & (full_data["Question"] == ques)].tolist()
+		# assert len(idx) == 1
+		# idx = idx[0]
 
 		try:
-			adv_answer = json.loads(full_data.loc[idx]['Adv_Answer'])
+			adv_answer = json.loads(pred_data.loc[i]['Adv_Answer'])
 		except:
 			adv_answer = []
 		
@@ -147,11 +148,11 @@ def main(args):
 
 	model = LargeLanguageModel(model_type=args.model_type, model=args.model, peft_model="none", sys_prompt=sys_prompt, top_p=args.top_p, presence_penalty=args.presence_penalty, frequency_penalty=args.frequency_penalty)
 
-	predictions_data = pd.read_csv(args.out_dir + "/predictions.tsv", sep='\t')
-	full_data = pd.read_csv("data/" + args.data + ".tsv", sep='\t')
+	predictions_data = pd.read_csv(args.predictions_tsv, sep='\t')
+	#full_data = pd.read_csv("data/" + args.data + ".tsv", sep='\t')
 
 	if args.exp_type == "model":
-		evaluator(predictions_data, full_data, model, args.prompt_type, args.max_tokens, args.temperature, args.stop, tik_encoding)
+		evaluator(predictions_data, model, args.prompt_type, args.max_tokens, args.temperature, args.stop, tik_encoding)
 
 
 if __name__ == "__main__":
@@ -161,6 +162,9 @@ if __name__ == "__main__":
 	args.out_dir_name = args.out_dir
 
 	args.out_dir = os.path.join(args.out_dir, args.run_name)
+
+	if not os.path.exists(args.out_dir):
+		os.makedirs(args.out_dir)
 
 	openai.api_key = os.getenv("OPENAI_API_KEY")
 	genai.configure(api_key=os.getenv("GEMINI_API_KEY"))

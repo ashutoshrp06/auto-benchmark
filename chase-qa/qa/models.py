@@ -9,13 +9,16 @@ import sys
 import openai
 import anthropic
 from openai import OpenAI
-import google.api_core.exceptions as gemini_exceptions
-import google.generativeai as genai
-from google.generativeai.types import HarmCategory, HarmBlockThreshold
+#import google.api_core.exceptions as gemini_exceptions
+#import google.generativeai as genai
+#from google.generativeai.types import HarmCategory, HarmBlockThreshold
 from tenacity import retry
 from tenacity.retry import retry_if_exception_type
 from tenacity.wait import wait_random_exponential
 import tiktoken
+from google import genai
+from google.genai import types as genai_types
+from google.genai import errors as genai_errors
 
 try:
     from vllm import LLMEngine, EngineArgs, SamplingParams, RequestOutput
@@ -135,7 +138,7 @@ def _get_chat_response(client, engine, prompt, sys_prompt, max_tokens, temperatu
 @retry(
 	retry=retry_if_exception_type(
 			exception_types=(
-				gemini_exceptions.InternalServerError
+				genai_errors.APIError
 			)
 		),
 		wait=wait_random_exponential(
@@ -143,23 +146,24 @@ def _get_chat_response(client, engine, prompt, sys_prompt, max_tokens, temperatu
 			max=0.5,
 		),
 	)
-def _get_gemini_response(model, prompt, max_tokens, temperature, top_p, n, stop):
-	return model.generate_content(
-		prompt,
-		generation_config=genai.types.GenerationConfig(
-			# Only one candidate for now.
+def _get_gemini_response(client, engine, sys_prompt, prompt, max_tokens, temperature, top_p, n, stop):
+	return client.models.generate_content(
+		model=engine,
+		contents=prompt,
+		config=genai_types.GenerateContentConfig(
+			system_instruction=sys_prompt,
 			candidate_count=n,
 			stop_sequences=stop,
 			max_output_tokens=max_tokens,
 			temperature=temperature,
 			top_p=top_p,
-		),
-		safety_settings={
-			HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
-			HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
-			HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
-			HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE
-		}
+			safety_settings=[
+				genai_types.SafetySetting(category="HARM_CATEGORY_HATE_SPEECH", threshold="OFF"),
+				genai_types.SafetySetting(category="HARM_CATEGORY_HARASSMENT", threshold="OFF"),
+				genai_types.SafetySetting(category="HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold="OFF"),
+				genai_types.SafetySetting(category="HARM_CATEGORY_DANGEROUS_CONTENT", threshold="OFF"),
+			],
+		)
 	)
 
 
@@ -256,7 +260,8 @@ class LargeLanguageModel():
 				api_key=anthropic.api_key,
 			)
 		elif self.model_type in ['gemini']:
-			self.gemini = genai.GenerativeModel(model_name=model, system_instruction=sys_prompt)
+				self.gemini_client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
+				self.gemini_sys_prompt = sys_prompt
 		elif self.model_type in ['peft']:
 			self.llm = load_model(model_name=model, peft_model=peft_model)
 
@@ -315,7 +320,9 @@ class LargeLanguageModel():
 			response = response.content[0].text.lstrip('\n').rstrip('\n')
 		elif self.model_type in ["gemini"]:
 			response = _get_gemini_response(
-				model=self.gemini,
+				client=self.gemini_client,
+				engine=self.engine,
+				sys_prompt=self.gemini_sys_prompt,
 				prompt=prompt,
 				max_tokens=max_tokens,
 				temperature=temperature,

@@ -1,0 +1,277 @@
+Question 1: I am applying for a mortgage on a residential property and want to know exactly what the FCA MCOB 11.6 responsible lending and affordability rules require my lender to test before deciding whether the loan is affordable. What specific income, expenditure, and interest-rate assumptions must be considered under the rules, and what is the lender required to do if my mortgage is an interest-only loan with no clear capital repayment strategy?
+
+Ground Truth Answer: - The lender must assess whether the mortgage is affordable based on a realistic and sustainable view of my income and expenditures, not just a simple repayment calculation.
+- The lender must take account of my income, including any expected changes, and my outgoings and committed expenditure, to determine whether I can still meet the mortgage payments alongside other living costs.
+- If the mortgage is interest-only, the lender must be satisfied that there is a credible and evidenced capital repayment strategy to repay the loan at the end of the term.
+- If the lender cannot demonstrate that the mortgage is affordable on the basis required by the rules, it should not advance the loan.
+
+Adversarial Answer: - An adviser must provide clear information about all charges associated with the Stocks and Shares ISA, including platform fees, upfront charges, and ongoing management fees.
+- Any potential impact of the fees on the investment returns must be disclosed, particularly how they could affect the overall performance of the Stocks and Shares ISA over time.
+- Clients should be given a detailed breakdown of the fee structure before they make any investment decisions, with sufficient time to review the document before proceeding.
+- The maximum loan-to-value (LTV) ratio for a lifetime mortgage typically ranges between 20% and 60%, depending on the age of the borrower and the value of the property.  
+- Borrowers aged 55 may receive lower LTV limits compared to those aged 70 or older, reflecting the lender's assessment of the borrower's life expectancy.  
+- Lenders must ensure that the property value is accurately assessed by a qualified surveyor to determine the appropriate LTV ratio applicable.  
+- It is crucial for advisers to inform clients that exceeding the LTV limits can result in higher interest rates or may lead to declined applications.
+- Advisers must provide a clear and comprehensive explanation of the PPI policy, including details on what is covered and any exclusions that apply.
+- It is required for advisers to assess whether the client’s needs align with the specific cover of the PPI policy before making a recommendation.
+- Advisers should disclose the total cost of the PPI, including any potential upfront fees or ongoing premiums that the client is responsible for.
+- Client eligibility criteria must be clearly communicated so that the client understands if they qualify for the insurance offered.
+- Advisers are obliged to maintain accurate records of the advice provided, including client discussions, recommendations, and consent.
+
+Prediction: - The lender must assess affordability using a **realistic and sustainable view** of your finances, not just a simple mortgage repayment calculation.
+
+- The lender must consider your **income**, including:
+  - Your current income.
+  - Any **expected changes** to income, such as a promotion or new job.
+
+- The lender must consider your **expenditure**, including:
+  - Your regular outgoings.
+  - Your committed expenditure.
+  - Whether you can manage the mortgage payments alongside your other living costs.
+
+- The documents do not give a specific numeric interest-rate stress test, but they state that lenders/advisers must consider the implications of **interest-rate changes**, especially for **variable-rate mortgages**.
+
+- If the mortgage is **interest-only**, the lender must be satisfied that there is a **credible and evidenced capital repayment strategy** to repay the loan at the end of the term.
+
+- If there is **no clear or evidenced capital repayment strategy** for an interest-only mortgage, the lender should not treat the loan as affordable.
+
+- If the lender cannot demonstrate that the mortgage is affordable under these rules, it **should not advance the loan**.
+
+Result: False
+
+The prediction is mostly aligned with the ground truth on the income, expenditure, interest-only capital repayment strategy, and refusal to advance the loan if affordability cannot be shown. However, it includes an extra major point about “the documents do not give a specific numeric interest-rate stress test” and discussion of “interest-rate changes” for variable-rate mortgages. The question asks for what the FCA MCOB 11.6 rules require the lender to test, and the ground truth provided here does not mention any specific interest-rate assumption at all. Since the prediction introduces this additional major point, it is not a clean match to the ground truth.
+------------------------------------------------------------------
+
+Question 1: What are the disclosure requirements for platform fees when an adviser recommends a Stocks and Shares ISA?
+
+Ground Truth Answer: - An adviser must provide clear information about all charges associated with the Stocks and Shares ISA, including platform fees, upfront charges, and ongoing management fees.
+- Any potential impact of the fees on the investment returns must be disclosed, particularly how they could affect the overall performance of the Stocks and Shares ISA over time.
+-
+
+Adversarial Answer: - The lender must assess whether the mortgage is affordable based on a realistic and sustainable view of my income and expenditures, not just a simple repayment calculation.
+- The lender must take account of my income, including any expected changes, and my outgoings and committed expenditure, to determine whether I can still meet the mortgage payments alongside other living costs.
+- If the mortgage is interest-only, the lender must be satisfied that there is a credible and evidenced capital repayment strategy to repay the loan at the end of the term.
+- If the lender cannot demonstrate that the mortgage is affordable on the basis required by the rules, it should not advance the loan.
+- The maximum loan-to-value (LTV) ratio for a lifetime mortgage typically ranges between 20% and 60%, depending on the age of the borrower and the value of the property.  
+- Borrowers aged 55 may receive lower LTV limits compared to those aged 70 or older, reflecting the lender's assessment of the borrower's life expectancy.  
+- Lenders must ensure that the property value is accurately assessed by a qualified surveyor to determine the appropriate LTV ratio applicable.  
+- It is crucial for advisers to inform clients that exceeding the LTV limits can result in higher interest rates or may lead to declined applications.
+- Advisers must provide a clear and comprehensive explanation of the PPI policy, including details on what is covered and any exclusions that apply.
+- It is required for advisers to assess whether the client’s needs align with the specific cover of the PPI policy before making a recommendation.
+- Advisers should disclose the total cost of the PPI, including any potential upfront fees or ongoing premiums that the client is responsible for.
+- Client eligibility criteria must be clearly communicated so that the client understands if they qualify for the insurance offered.
+- Advisers are obliged to maintain accurate records of the advice provided, including client discussions, recommendations, and consent.
+
+Prediction: - Provide clear information about all charges associated with the Stocks and Shares ISA.
+- Disclose the platform fees specifically, along with any upfront charges and ongoing management fees.
+- Explain how these fees may affect investment returns and the overall performance of the ISA over time.
+- Make the client aware that withdrawal or exit fees may apply if the ISA is cashed in before an agreed period.
+
+Result: False
+
+The prediction includes the key ground-truth ideas: it says to disclose all charges, specifically platform fees, upfront charges, and ongoing management fees, and it explains that fees may affect returns over time.
+
+However, it also adds an extra major point not present in the ground truth: “withdrawal or exit fees may apply if the ISA is cashed in before an agreed period.” Since the prediction must not contain additional major points that are irrelevant or unsupported by the ground truth, it is not considered correct.
+------------------------------------------------------------------
+
+Question 1: What loan-to-value limits apply when a client takes out a lifetime mortgage under an equity release plan?
+
+Ground Truth Answer: - The maximum loan-to-value (LTV) ratio for a lifetime mortgage typically ranges between 20% and 60%, depending on the age of the borrower and the value of the property.  
+- Borrowers aged 55 may receive lower LTV limits compared to those aged 70 or older, reflecting the lender's assessment of the borrower's life expectancy.  
+- Lenders must ensure that the property value is accurately assessed by a qualified surveyor to determine the appropriate LTV ratio applicable.  
+-
+
+Adversarial Answer: - The lender must assess whether the mortgage is affordable based on a realistic and sustainable view of my income and expenditures, not just a simple repayment calculation.
+- The lender must take account of my income, including any expected changes, and my outgoings and committed expenditure, to determine whether I can still meet the mortgage payments alongside other living costs.
+- If the mortgage is interest-only, the lender must be satisfied that there is a credible and evidenced capital repayment strategy to repay the loan at the end of the term.
+- If the lender cannot demonstrate that the mortgage is affordable on the basis required by the rules, it should not advance the loan.
+- An adviser must provide clear information about all charges associated with the Stocks and Shares ISA, including platform fees, upfront charges, and ongoing management fees.
+- Any potential impact of the fees on the investment returns must be disclosed, particularly how they could affect the overall performance of the Stocks and Shares ISA over time.
+- Clients should be given a detailed breakdown of the fee structure before they make any investment decisions, with sufficient time to review the document before proceeding.
+- Advisers must provide a clear and comprehensive explanation of the PPI policy, including details on what is covered and any exclusions that apply.
+- It is required for advisers to assess whether the client’s needs align with the specific cover of the PPI policy before making a recommendation.
+- Advisers should disclose the total cost of the PPI, including any potential upfront fees or ongoing premiums that the client is responsible for.
+- Client eligibility criteria must be clearly communicated so that the client understands if they qualify for the insurance offered.
+- Advisers are obliged to maintain accurate records of the advice provided, including client discussions, recommendations, and consent.
+
+Prediction: - The maximum loan-to-value (LTV) ratio for a lifetime mortgage typically ranges from **20% to 60%**.
+- The applicable LTV depends mainly on:
+  - The **borrower’s age**.
+  - The **value of the property**.
+- Borrowers aged around **55** may receive **lower LTV limits** than borrowers aged **70 or older**.
+- The property value should be assessed by a **qualified surveyor** to determine the appropriate LTV ratio.
+- Exceeding the LTV limits may result in **higher interest rates** or a **declined application**.
+
+Result: False
+
+The prediction matches the ground truth on the main loan-to-value points: the 20%–60% range, dependence on age and property value, lower LTVs for younger borrowers, and the need for a qualified surveyor’s property valuation.
+
+However, it adds an extra major claim not supported by the ground truth: that exceeding LTV limits may result in higher interest rates or a declined application. This is additional substantive information, not present in the ground truth, so the prediction is not an exact match under the evaluation rules.
+------------------------------------------------------------------
+
+Question 1: What are the regulatory requirements for a financial adviser when recommending a payment protection insurance (PPI) policy?
+
+Ground Truth Answer: - Advisers must provide a clear and comprehensive explanation of the PPI policy, including details on what is covered and any exclusions that apply.
+- It is required for advisers to assess whether the client’s needs align with the specific cover of the PPI policy before making a recommendation.
+- Advisers should disclose the total cost of the PPI, including any potential upfront fees or ongoing premiums that the client is responsible for.
+- Client eligibility criteria must be clearly communicated so that the client understands if they qualify for the insurance offered.
+-
+
+Adversarial Answer: - The lender must assess whether the mortgage is affordable based on a realistic and sustainable view of my income and expenditures, not just a simple repayment calculation.
+- The lender must take account of my income, including any expected changes, and my outgoings and committed expenditure, to determine whether I can still meet the mortgage payments alongside other living costs.
+- If the mortgage is interest-only, the lender must be satisfied that there is a credible and evidenced capital repayment strategy to repay the loan at the end of the term.
+- If the lender cannot demonstrate that the mortgage is affordable on the basis required by the rules, it should not advance the loan.
+- An adviser must provide clear information about all charges associated with the Stocks and Shares ISA, including platform fees, upfront charges, and ongoing management fees.
+- Any potential impact of the fees on the investment returns must be disclosed, particularly how they could affect the overall performance of the Stocks and Shares ISA over time.
+- Clients should be given a detailed breakdown of the fee structure before they make any investment decisions, with sufficient time to review the document before proceeding.
+- The maximum loan-to-value (LTV) ratio for a lifetime mortgage typically ranges between 20% and 60%, depending on the age of the borrower and the value of the property.  
+- Borrowers aged 55 may receive lower LTV limits compared to those aged 70 or older, reflecting the lender's assessment of the borrower's life expectancy.  
+- Lenders must ensure that the property value is accurately assessed by a qualified surveyor to determine the appropriate LTV ratio applicable.  
+- It is crucial for advisers to inform clients that exceeding the LTV limits can result in higher interest rates or may lead to declined applications.
+
+Prediction: - Provide a clear and comprehensive explanation of the PPI policy.
+- Explain what the policy covers and any exclusions that apply.
+- Assess whether the client’s needs align with the specific cover provided by the PPI policy before recommending it.
+- Disclose the total cost of the PPI policy, including any upfront fees and ongoing premiums.
+- Clearly communicate the client eligibility criteria so the client understands whether they qualify for the policy.
+
+Result: True
+------------------------------------------------------------------
+
+Question 2: As a small business owner setting up a workplace pension scheme for auto-enrolled staff, what are the minimum employer and employee contribution percentages under the Pensions Act 2008 auto-enrolment regime, and what is the maximum annual default fund charge cap under FCA workplace pension rules for the relevant default arrangement?
+
+Ground Truth Answer: - Under UK auto-enrolment duties in the Pensions Act 2008 framework, the standard minimum total contribution rate is 8% of qualifying earnings.
+- Of that 8% total, the employer must pay at least 3% of qualifying earnings.
+- The remaining minimum contribution can be met by the employee and tax relief, bringing the total to 8%.
+- For the FCA workplace pension default fund rules, the default arrangement charge cap is 0.75% per year of funds under management.
+- The charge cap applies to the default fund used for auto-enrolled members, limiting charges that would otherwise reduce retirement savings.
+
+Adversarial Answer: - Under FCA rules regarding Stocks and Shares ISAs, advisers must clearly disclose all platform fees to clients prior to making recommendations.
+- The disclosure must include both one-off charges and ongoing fees that could impact the client's overall investment return.
+- Advisers are required to provide a breakdown of these fees in a format that is easy for clients to understand and compare.
+- Additionally, the adviser must inform clients about any potential conflicts of interest arising from the platform fees they receive.
+- Individuals withdrawing funds from an Equity Release plan may incur tax implications depending on their overall income for the tax year.
+- Any withdrawals are typically considered a loan, meaning they are not treated as taxable income at the time of withdrawal.
+- However, the accumulated interest on these loans may affect the individual's estate value and potential inheritance tax liabilities for their heirs.
+- It’s important for individuals to consider that large withdrawals could impact their eligibility for means-tested benefits, as the value of the property may increase their overall financial assessment.
+- Seeking guidance from a qualified financial adviser can help individuals navigate these complexities and understand their personal tax positions.
+- Under mortgage lending practices, a property valuation report must be conducted by a qualified surveyor to assess the market value of the property.
+- The report must adhere to the Royal Institution of Chartered Surveyors (RICS) standards to ensure thoroughness and accuracy.
+- Lenders typically require the valuation to be completed prior to the completion of the mortgage application to assess the risk associated with the loan amount.
+- Borrowers need to ensure that the valuation report is dated and includes clear information regarding any physical or economic conditions that may impact the property's value.
+- An independent assessment ensures that there is no conflict of interest between the lender and the surveyor involved in the valuation process.
+
+Prediction: - Minimum total auto-enrolment contribution: **8% of qualifying earnings**.
+- Minimum employer contribution: **3% of qualifying earnings**.
+- Minimum employee contribution: **5% of qualifying earnings**, which may include employee contributions plus applicable tax relief.
+- Maximum annual charge cap for the workplace pension default arrangement: **0.75% per year of funds under management**.
+
+Result: True
+------------------------------------------------------------------
+
+Question 2: What are the disclosure requirements for platform fees when an adviser recommends a Stocks and Shares ISA?
+
+Ground Truth Answer: - Under FCA rules regarding Stocks and Shares ISAs, advisers must clearly disclose all platform fees to clients prior to making recommendations.
+- The disclosure must include both one-off charges and ongoing fees that could impact the client's overall investment return.
+- Advisers are required to provide a breakdown of these fees in a format that is easy for clients to understand and compare.
+- Additionally, the adviser must inform clients about any potential conflicts of interest arising from the platform fees they receive.
+
+Adversarial Answer: - Under UK auto-enrolment duties in the Pensions Act 2008 framework, the standard minimum total contribution rate is 8% of qualifying earnings.
+- Of that 8% total, the employer must pay at least 3% of qualifying earnings.
+- The remaining minimum contribution can be met by the employee and tax relief, bringing the total to 8%.
+- For the FCA workplace pension default fund rules, the default arrangement charge cap is 0.75% per year of funds under management.
+- The charge cap applies to the default fund used for auto-enrolled members, limiting charges that would otherwise reduce retirement savings.
+- Individuals withdrawing funds from an Equity Release plan may incur tax implications depending on their overall income for the tax year.
+- Any withdrawals are typically considered a loan, meaning they are not treated as taxable income at the time of withdrawal.
+- However, the accumulated interest on these loans may affect the individual's estate value and potential inheritance tax liabilities for their heirs.
+- It’s important for individuals to consider that large withdrawals could impact their eligibility for means-tested benefits, as the value of the property may increase their overall financial assessment.
+- Seeking guidance from a qualified financial adviser can help individuals navigate these complexities and understand their personal tax positions.
+- Under mortgage lending practices, a property valuation report must be conducted by a qualified surveyor to assess the market value of the property.
+- The report must adhere to the Royal Institution of Chartered Surveyors (RICS) standards to ensure thoroughness and accuracy.
+- Lenders typically require the valuation to be completed prior to the completion of the mortgage application to assess the risk associated with the loan amount.
+- Borrowers need to ensure that the valuation report is dated and includes clear information regarding any physical or economic conditions that may impact the property's value.
+- An independent assessment ensures that there is no conflict of interest between the lender and the surveyor involved in the valuation process.
+
+Prediction: - Advisers must clearly disclose all platform fees before making a Stocks and Shares ISA recommendation.
+- The disclosure should include both:
+  - One-off charges
+  - Ongoing fees that may affect investment returns
+- Fees should be presented in a format that is easy for clients to understand and compare.
+- Advisers must inform clients about any potential conflicts of interest arising from platform fees they receive.
+- The purpose is to ensure clients have full fee transparency and can make an informed investment decision.
+
+Result: True
+------------------------------------------------------------------
+
+Question 2: What are the tax implications for individuals withdrawing funds from an Equity Release plan?
+
+Ground Truth Answer: - Individuals withdrawing funds from an Equity Release plan may incur tax implications depending on their overall income for the tax year.
+- Any withdrawals are typically considered a loan, meaning they are not treated as taxable income at the time of withdrawal.
+- However, the accumulated interest on these loans may affect the individual's estate value and potential inheritance tax liabilities for their heirs.
+- It’s important for individuals to consider that large withdrawals could impact their eligibility for means-tested benefits, as the value of the property may increase their overall financial assessment.
+-
+
+Adversarial Answer: - Under UK auto-enrolment duties in the Pensions Act 2008 framework, the standard minimum total contribution rate is 8% of qualifying earnings.
+- Of that 8% total, the employer must pay at least 3% of qualifying earnings.
+- The remaining minimum contribution can be met by the employee and tax relief, bringing the total to 8%.
+- For the FCA workplace pension default fund rules, the default arrangement charge cap is 0.75% per year of funds under management.
+- The charge cap applies to the default fund used for auto-enrolled members, limiting charges that would otherwise reduce retirement savings.
+- Under FCA rules regarding Stocks and Shares ISAs, advisers must clearly disclose all platform fees to clients prior to making recommendations.
+- The disclosure must include both one-off charges and ongoing fees that could impact the client's overall investment return.
+- Advisers are required to provide a breakdown of these fees in a format that is easy for clients to understand and compare.
+- Additionally, the adviser must inform clients about any potential conflicts of interest arising from the platform fees they receive.
+- Under mortgage lending practices, a property valuation report must be conducted by a qualified surveyor to assess the market value of the property.
+- The report must adhere to the Royal Institution of Chartered Surveyors (RICS) standards to ensure thoroughness and accuracy.
+- Lenders typically require the valuation to be completed prior to the completion of the mortgage application to assess the risk associated with the loan amount.
+- Borrowers need to ensure that the valuation report is dated and includes clear information regarding any physical or economic conditions that may impact the property's value.
+- An independent assessment ensures that there is no conflict of interest between the lender and the surveyor involved in the valuation process.
+
+Prediction: - Withdrawals from an Equity Release plan are typically treated as a loan, so they are not usually taxable income at the time of withdrawal.
+- The withdrawal may appear tax-efficient initially, but accumulated interest can reduce the value of the estate over time.
+- Reduced estate value and accumulated loan interest may affect inheritance tax planning and could increase potential inheritance tax liabilities for heirs.
+- Individuals should seek advice from a qualified financial adviser to understand how Equity Release affects their personal tax position.
+
+Result: False
+
+The prediction matches several key points from the ground truth: it says withdrawals are usually treated as a loan and not taxable income at withdrawal, and it mentions accumulated interest affecting estate value and inheritance tax for heirs.
+
+However, it is missing an important ground-truth point: that tax implications depend on the individual’s overall income for the tax year. It also omits the point about large withdrawals potentially affecting eligibility for means-tested benefits. Instead, it adds a general advice point about seeking a financial adviser, which is not one of the required main points.
+
+Because not all main points from the ground truth are included, the prediction is incorrect.
+------------------------------------------------------------------
+
+Question 2: What are the requirements for a property valuation report when obtaining a residential mortgage?
+
+Ground Truth Answer: - Under mortgage lending practices, a property valuation report must be conducted by a qualified surveyor to assess the market value of the property.
+- The report must adhere to the Royal Institution of Chartered Surveyors (RICS) standards to ensure thoroughness and accuracy.
+- Lenders typically require the valuation to be completed prior to the completion of the mortgage application to assess the risk associated with the loan amount.
+- Borrowers need to ensure that the valuation report is dated and includes clear information regarding any physical or economic conditions that may impact the property's value.
+-
+
+Adversarial Answer: - Under UK auto-enrolment duties in the Pensions Act 2008 framework, the standard minimum total contribution rate is 8% of qualifying earnings.
+- Of that 8% total, the employer must pay at least 3% of qualifying earnings.
+- The remaining minimum contribution can be met by the employee and tax relief, bringing the total to 8%.
+- For the FCA workplace pension default fund rules, the default arrangement charge cap is 0.75% per year of funds under management.
+- The charge cap applies to the default fund used for auto-enrolled members, limiting charges that would otherwise reduce retirement savings.
+- Under FCA rules regarding Stocks and Shares ISAs, advisers must clearly disclose all platform fees to clients prior to making recommendations.
+- The disclosure must include both one-off charges and ongoing fees that could impact the client's overall investment return.
+- Advisers are required to provide a breakdown of these fees in a format that is easy for clients to understand and compare.
+- Additionally, the adviser must inform clients about any potential conflicts of interest arising from the platform fees they receive.
+- Individuals withdrawing funds from an Equity Release plan may incur tax implications depending on their overall income for the tax year.
+- Any withdrawals are typically considered a loan, meaning they are not treated as taxable income at the time of withdrawal.
+- However, the accumulated interest on these loans may affect the individual's estate value and potential inheritance tax liabilities for their heirs.
+- It’s important for individuals to consider that large withdrawals could impact their eligibility for means-tested benefits, as the value of the property may increase their overall financial assessment.
+- Seeking guidance from a qualified financial adviser can help individuals navigate these complexities and understand their personal tax positions.
+
+Prediction: - A property valuation report must be carried out by a qualified surveyor.
+- It must assess the market value of the property so the lender can understand the value of the asset securing the mortgage.
+- The report must comply with Royal Institution of Chartered Surveyors (RICS) standards.
+- Lenders typically require the valuation to be completed before the mortgage application is completed, to assess the risk linked to the loan amount.
+- The borrower should receive a copy of the valuation report.
+- The valuation report should be dated.
+- The report should clearly state any physical or economic conditions that may affect the property’s value, as these can influence lending decisions.
+
+Result: True
+------------------------------------------------------------------
+
+Accuracy: 0.5% Incorrect: 0.0% Irrelevant: 0.0% Adversarial: 0.0

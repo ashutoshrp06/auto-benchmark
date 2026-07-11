@@ -1,0 +1,82 @@
+ID	Question	Answer	Prediction	Result	Explanation
+1	I am applying for a mortgage on a residential property and want to know exactly what the FCA MCOB 11.6 responsible lending and affordability rules require my lender to test before deciding whether the loan is affordable. What specific income, expenditure, and interest-rate assumptions must be considered under the rules, and what is the lender required to do if my mortgage is an interest-only loan with no clear capital repayment strategy?	"- The lender must assess whether the mortgage is affordable based on a realistic and sustainable view of my income and expenditures, not just a simple repayment calculation.
+- The lender must take account of my income, including any expected changes, and my outgoings and committed expenditure, to determine whether I can still meet the mortgage payments alongside other living costs.
+- If the mortgage is interest-only, the lender must be satisfied that there is a credible and evidenced capital repayment strategy to repay the loan at the end of the term.
+- If the lender cannot demonstrate that the mortgage is affordable on the basis required by the rules, it should not advance the loan."	"Based on the provided documents, here are the requirements your lender must follow under the FCA MCOB 11.6 rules regarding responsible lending and affordability:
+
+*   **Income Considerations:** The lender must assess your income based on a realistic and sustainable view. This includes accounting for what you currently earn as well as any expected changes, such as anticipated income increases (e.g., a promotion or new job).
+*   **Expenditure Considerations:** The lender must consider your outgoings, committed expenditure, and other living costs to determine if you can manage the mortgage payments alongside them.
+*   **Interest-Rate Assumptions:** *(Note: The provided documents do not contain specific information regarding interest-rate assumptions under the MCOB 11.6 affordability rules).* 
+*   **Interest-Only Loan Requirements:** If you apply for an interest-only mortgage, the lender must be satisfied that there is a credible and evidenced capital repayment strategy in place to repay the loan amount at the end of the term. 
+*   **Lender's Action if Unaffordable:** If the lender cannot demonstrate that the mortgage is affordable based on these required assessments, they should not advance the loan."	0	"False
+
+The prediction matches several of the ground-truth points about assessing income, expenditure, interest-only repayment strategy, and not advancing the loan if affordability cannot be shown. However, it fails to answer the part of the question about the **specific interest-rate assumptions required under FCA MCOB 11.6**: the prediction explicitly says the provided documents do **not** contain that information, which is not an acceptable match to the ground truth because the question asks for those assumptions and the ground truth implies they must be considered.  
+
+Also, the prediction does not actually state the required interest-rate assumptions, so it is incomplete relative to the question."
+2	What are the disclosure requirements for platform fees when an adviser recommends a Stocks and Shares ISA?	"- An adviser must provide clear information about all charges associated with the Stocks and Shares ISA, including platform fees, upfront charges, and ongoing management fees.
+- Any potential impact of the fees on the investment returns must be disclosed, particularly how they could affect the overall performance of the Stocks and Shares ISA over time.
+-"	"Here are the disclosure requirements for platform fees when an adviser recommends a Stocks and Shares ISA based on the provided documents:
+
+* **Provide clear information on all charges:** The adviser must ensure the client has clear details about all charges associated with the ISA, which includes platform fees, upfront charges, and ongoing management fees.
+* **Disclose the impact on returns:** The adviser must disclose any potential impact these fees may have on investment returns, specifically explaining how they could affect the overall performance of the Stocks and Shares ISA over time."	1	True
+3	What loan-to-value limits apply when a client takes out a lifetime mortgage under an equity release plan?	"- The maximum loan-to-value (LTV) ratio for a lifetime mortgage typically ranges between 20% and 60%, depending on the age of the borrower and the value of the property.  
+- Borrowers aged 55 may receive lower LTV limits compared to those aged 70 or older, reflecting the lender's assessment of the borrower's life expectancy.  
+- Lenders must ensure that the property value is accurately assessed by a qualified surveyor to determine the appropriate LTV ratio applicable.  
+-"	"Based on the provided documents, here is the information regarding the loan-to-value (LTV) limits for a lifetime mortgage:
+
+* The maximum loan-to-value (LTV) ratio typically ranges between 20% and 60%.
+* The exact limit applied depends on the age of the borrower and the value of the property. 
+* Borrowers aged 55 may receive lower LTV limits compared to those aged 70 or older, as this reflects the lender's assessment of the borrower's life expectancy.
+* To determine the appropriate LTV ratio, lenders require the property's value to be accurately assessed by a qualified surveyor.
+* Exceeding the LTV limits can lead to declined applications or higher interest rates."	1	True
+4	What are the regulatory requirements for a financial adviser when recommending a payment protection insurance (PPI) policy?	"- Advisers must provide a clear and comprehensive explanation of the PPI policy, including details on what is covered and any exclusions that apply.
+- It is required for advisers to assess whether the client’s needs align with the specific cover of the PPI policy before making a recommendation.
+- Advisers should disclose the total cost of the PPI, including any potential upfront fees or ongoing premiums that the client is responsible for.
+- Client eligibility criteria must be clearly communicated so that the client understands if they qualify for the insurance offered.
+-"	"Based on the provided documents, the regulatory requirements for a financial adviser when recommending a payment protection insurance (PPI) policy are:
+
+* **Disclose Costs:** Advisers must disclose the total cost of the PPI, including any potential upfront fees or ongoing premiums the client would be responsible for.
+* **Communicate Eligibility:** Client eligibility criteria must be clearly communicated so the client understands if they actually qualify for the insurance offered.
+* **Explain Coverage and Exclusions:** Advisers must provide a clear and comprehensive explanation of the PPI policy, explicitly detailing what is covered and any exclusions that apply.
+* **Assess Client Needs:** Advisers are required to assess whether the client's needs align with the specific cover of the PPI policy before making a recommendation."	1	True
+5	As a small business owner setting up a workplace pension scheme for auto-enrolled staff, what are the minimum employer and employee contribution percentages under the Pensions Act 2008 auto-enrolment regime, and what is the maximum annual default fund charge cap under FCA workplace pension rules for the relevant default arrangement?	"- Under UK auto-enrolment duties in the Pensions Act 2008 framework, the standard minimum total contribution rate is 8% of qualifying earnings.
+- Of that 8% total, the employer must pay at least 3% of qualifying earnings.
+- The remaining minimum contribution can be met by the employee and tax relief, bringing the total to 8%.
+- For the FCA workplace pension default fund rules, the default arrangement charge cap is 0.75% per year of funds under management.
+- The charge cap applies to the default fund used for auto-enrolled members, limiting charges that would otherwise reduce retirement savings."	"Based on the provided documents, here are the details for your workplace pension scheme:
+
+* **Minimum Employer Contribution:** Employers are required to contribute a minimum of 3% of the employee's qualifying earnings.
+* **Minimum Employee Contribution:** Employees must contribute the remaining amount to meet the legal minimum total contribution rate of 8% (meaning the employee contribution is 5%, which can include applicable tax relief).
+* **Maximum Default Fund Charge Cap:** Under FCA rules, the maximum charge cap for the default pension fund arrangement is 0.75% per year of the funds under management."	1	True
+6	What are the disclosure requirements for platform fees when an adviser recommends a Stocks and Shares ISA?	"- Under FCA rules regarding Stocks and Shares ISAs, advisers must clearly disclose all platform fees to clients prior to making recommendations.
+- The disclosure must include both one-off charges and ongoing fees that could impact the client's overall investment return.
+- Advisers are required to provide a breakdown of these fees in a format that is easy for clients to understand and compare.
+- Additionally, the adviser must inform clients about any potential conflicts of interest arising from the platform fees they receive."	"Based on the provided documents, the disclosure requirements for platform fees when an adviser recommends a Stocks and Shares ISA are:
+
+* Advisers must clearly disclose all platform fees to clients prior to making any recommendations.
+* The disclosure must include both one-off charges and ongoing fees that could impact the overall investment return.
+* Advisers must provide a breakdown of these fees in a format that is easy for clients to understand and compare.
+* Advisers must inform clients about any potential conflicts of interest that may arise from the platform fees they receive."	1	True
+7	What are the tax implications for individuals withdrawing funds from an Equity Release plan?	"- Individuals withdrawing funds from an Equity Release plan may incur tax implications depending on their overall income for the tax year.
+- Any withdrawals are typically considered a loan, meaning they are not treated as taxable income at the time of withdrawal.
+- However, the accumulated interest on these loans may affect the individual's estate value and potential inheritance tax liabilities for their heirs.
+- It’s important for individuals to consider that large withdrawals could impact their eligibility for means-tested benefits, as the value of the property may increase their overall financial assessment.
+-"	"Here are the tax implications for individuals withdrawing funds from an Equity Release plan based on the provided documents:
+
+* Withdrawals are typically considered a loan, meaning they are not treated as taxable income at the time of withdrawal.
+* The accumulated interest on these loans may eventually affect your estate value, which could increase potential inheritance tax liabilities for your heirs."	0	"False
+
+The prediction captures two correct ideas: that equity release withdrawals are generally treated as a loan and not taxed as income at the time of withdrawal, and that accumulated interest can affect the estate and inheritance tax for heirs.
+
+However, it misses an important part of the ground truth: tax implications may also depend on the individual’s overall income for the tax year, and large withdrawals can affect eligibility for means-tested benefits because of their impact on financial assessment. Since all main points in the ground truth must be present, the prediction is incomplete."
+8	What are the requirements for a property valuation report when obtaining a residential mortgage?	"- Under mortgage lending practices, a property valuation report must be conducted by a qualified surveyor to assess the market value of the property.
+- The report must adhere to the Royal Institution of Chartered Surveyors (RICS) standards to ensure thoroughness and accuracy.
+- Lenders typically require the valuation to be completed prior to the completion of the mortgage application to assess the risk associated with the loan amount.
+- Borrowers need to ensure that the valuation report is dated and includes clear information regarding any physical or economic conditions that may impact the property's value.
+-"	"Here are the requirements for a property valuation report when obtaining a residential mortgage based on the provided documents:
+
+* It must be conducted by a qualified surveyor to assess the market value of the property.
+* It must adhere to the Royal Institution of Chartered Surveyors (RICS) standards.
+* It typically must be completed prior to the completion of the mortgage application.
+* The valuation report must be dated.
+* It must include clear information regarding any physical or economic conditions that may impact the property's value."	1	True

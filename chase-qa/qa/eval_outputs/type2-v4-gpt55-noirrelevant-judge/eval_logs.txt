@@ -1,0 +1,783 @@
+Question 1: I am a first-time investor arranging advice through a financial adviser. Before I agree to any investment recommendation, what must the adviser tell me about how they communicate with me, what information their financial promotions must not give me, and what my rights are if I complain?
+
+Ground Truth Answer: - I must be told how to make a complaint if I am dissatisfied and that I can refer the complaint to the Financial Ombudsman Service if I remain unhappy after the firm’s process.
+-
+
+Adversarial Answer: - The adviser must clearly outline any platform fees associated with the Stocks and Shares ISA, including ongoing charges that will apply over time.  
+-   
+-   
+-
+- The provider must explain any early repayment charges that may apply if I decide to pay off my equity release plan before the agreed term.  
+- I should be informed of the potential impact on my inheritance if I choose to repay the equity release plan early.  
+- The provider must ensure that I understand my options regarding repayment, including when charges may apply and how they will be calculated.  
+- I must receive clear information on any additional costs associated with early repayment, such as administration fees or penalties.
+- Lenders must evaluate the applicant's income and expenditure to determine how much they can afford to borrow against their home equity.
+- The maximum loan-to-value (LTV) ratio typically varies by lender, but it often remains capped at around 80% for standard residential mortgages.
+- Borrowers should be informed of potential impacts on their credit score when applying for a mortgage, especially if they have multiple applications in a short span of time.
+-
+
+Prediction: - The adviser must explain how to make a complaint if you are dissatisfied with their services.
+
+- If you remain unhappy after the firm’s complaints process, you can refer the complaint to the Financial Ombudsman Service.
+
+- The documents do not provide specific relevant information about what the adviser must tell you regarding communication methods or what financial promotions must not give you.
+
+Result: False
+
+The prediction does include the complaint-handling rights from the ground truth: it says the adviser must explain how to make a complaint, and that if you are still unhappy after the firm’s process you can refer it to the Financial Ombudsman Service.
+
+However, it is not fully correct because it also says that the documents do not provide specific information about the adviser’s communication methods or what financial promotions must not give you. The task asks what must be told about those points as well, so a correct answer would need to include all required main points, not just the complaint right.
+------------------------------------------------------------------
+
+Question 1: What are the disclosure requirements for platform fees when an adviser recommends a Stocks and Shares ISA?
+
+Ground Truth Answer: - The adviser must clearly outline any platform fees associated with the Stocks and Shares ISA, including ongoing charges that will apply over time.  
+-   
+-   
+-
+
+Adversarial Answer: - I must be told how to make a complaint if I am dissatisfied and that I can refer the complaint to the Financial Ombudsman Service if I remain unhappy after the firm’s process.
+-
+- The provider must explain any early repayment charges that may apply if I decide to pay off my equity release plan before the agreed term.  
+- I should be informed of the potential impact on my inheritance if I choose to repay the equity release plan early.  
+- The provider must ensure that I understand my options regarding repayment, including when charges may apply and how they will be calculated.  
+- I must receive clear information on any additional costs associated with early repayment, such as administration fees or penalties.
+- Lenders must evaluate the applicant's income and expenditure to determine how much they can afford to borrow against their home equity.
+- The maximum loan-to-value (LTV) ratio typically varies by lender, but it often remains capped at around 80% for standard residential mortgages.
+- Borrowers should be informed of potential impacts on their credit score when applying for a mortgage, especially if they have multiple applications in a short span of time.
+-
+
+Prediction: - The adviser must clearly disclose any platform fees associated with the recommended Stocks and Shares ISA.
+- The disclosure must include any ongoing charges that will apply over time.
+- The adviser should explain that fees and charges can significantly affect the investor’s net investment returns.
+
+Result: True
+------------------------------------------------------------------
+
+Question 1: What are the limitations on equity release products regarding early repayment charges?
+
+Ground Truth Answer: - The provider must explain any early repayment charges that may apply if I decide to pay off my equity release plan before the agreed term.  
+- I should be informed of the potential impact on my inheritance if I choose to repay the equity release plan early.  
+-   
+-
+
+Adversarial Answer: - I must be told how to make a complaint if I am dissatisfied and that I can refer the complaint to the Financial Ombudsman Service if I remain unhappy after the firm’s process.
+-
+- The adviser must clearly outline any platform fees associated with the Stocks and Shares ISA, including ongoing charges that will apply over time.  
+-   
+-   
+-
+- Lenders must evaluate the applicant's income and expenditure to determine how much they can afford to borrow against their home equity.
+- The maximum loan-to-value (LTV) ratio typically varies by lender, but it often remains capped at around 80% for standard residential mortgages.
+- Borrowers should be informed of potential impacts on their credit score when applying for a mortgage, especially if they have multiple applications in a short span of time.
+-
+
+Prediction: - Equity release plans may have early repayment charges if the plan is paid off before the agreed term.
+- The provider must explain any early repayment charges that may apply.
+- The provider must ensure the client understands repayment options, including:
+  - when early repayment charges may apply;
+  - how those charges will be calculated.
+- The adviser must inform the client of the potential impact on inheritance when considering early repayment or structuring the equity release plan.
+
+Result: True
+------------------------------------------------------------------
+
+Question 1: What are the limitations on borrowing against home equity when applying for a mortgage?
+
+Ground Truth Answer: - Lenders must evaluate the applicant's income and expenditure to determine how much they can afford to borrow against their home equity.
+- The maximum loan-to-value (LTV) ratio typically varies by lender, but it often remains capped at around 80% for standard residential mortgages.
+- Borrowers should be informed of potential impacts on their credit score when applying for a mortgage, especially if they have multiple applications in a short span of time.
+-
+
+Adversarial Answer: - I must be told how to make a complaint if I am dissatisfied and that I can refer the complaint to the Financial Ombudsman Service if I remain unhappy after the firm’s process.
+-
+- The adviser must clearly outline any platform fees associated with the Stocks and Shares ISA, including ongoing charges that will apply over time.  
+-   
+-   
+-
+- The provider must explain any early repayment charges that may apply if I decide to pay off my equity release plan before the agreed term.  
+- I should be informed of the potential impact on my inheritance if I choose to repay the equity release plan early.  
+- The provider must ensure that I understand my options regarding repayment, including when charges may apply and how they will be calculated.  
+- I must receive clear information on any additional costs associated with early repayment, such as administration fees or penalties.
+
+Prediction: - Lenders must assess your income and expenditure to determine how much you can afford to borrow against your home equity.
+- The maximum loan-to-value ratio varies by lender, but for standard residential mortgages it is often capped at around 80%.
+- Applying to multiple lenders in a short period can trigger multiple credit checks/hard inquiries, which may temporarily lower your credit score and negatively affect creditworthiness.
+
+Result: True
+------------------------------------------------------------------
+
+Question 2: I am a first-time homebuyer applying for a residential mortgage with a variable income and an existing personal loan. Under FCA MCOB 11.6, what exactly must the lender assess when deciding whether the mortgage is affordable, what expenditure and commitments must be included, what assumptions can be used, and what records or explanations should I expect the lender to be able to give if it refuses the loan on affordability grounds?
+
+Ground Truth Answer: - The lender must carry out an assessment that considers whether you can make the repayments both now and after the mortgage interest rate is expected to rise, not just at the initial rate.
+- The lender must take reasonable steps to verify your income and expenditure, rather than relying only on what you state in the application.
+- The assessment must include your existing financial commitments and basic essential living expenses, including any secured or unsecured borrowing already in place.
+- Where your income is variable, the lender must use a realistic approach to assess the sustainability of that income and must not assume unusually high future income without supportable evidence.
+- If the lender uses a hypothetical interest-rate rise in its affordability testing, it must apply the rate in a way that is consistent with the relevant responsible lending rules and not use an unrealistic stress assumption.
+- If the application is declined because of affordability, the lender should be able to explain the principal affordability factor that led to the decision and retain enough evidence to show that the assessment was properly carried out.
+
+Adversarial Answer: - When advising a client on a Stocks and Shares ISA, the adviser must clearly disclose all applicable platform fees and charges associated with the investment service, ensuring full transparency.
+- The adviser must inform the client about any ongoing fees related to the management of the ISA, including fund management fees and transaction costs.
+- Any performance-related fees that may apply should also be communicated upfront, alongside an explanation of how these fees could impact the overall investment returns.
+- It is necessary for the adviser to provide a detailed breakdown of fees in a standardized format to enable the client to make an informed comparison with other investment options.
+- A cryptoasset business must carry out customer due diligence (CDD) measures to verify the identity of customers prior to establishing a business relationship.
+- Enhanced due diligence (EDD) must be undertaken for higher risk customers or transactions, including those involving politically exposed persons (PEPs) or countries with high money laundering risk.
+- The business must maintain accurate and up-to-date records of customer information and any identification documents for at least five years following the end of the business relationship.
+- During the onboarding process, a cryptoasset business must assess and mitigate risks related to the type of assets being handled, especially if dealing with privacy-focused cryptocurrencies.
+-   
+- Banks must categorize their credit exposures by risk weight and ensure they hold sufficient capital to cover potential losses as determined by these risk weights.  
+- The assessment should incorporate historical loss data to calculate expected credit losses and incorporate forward-looking indicators to better assess potential defaults.  
+- Banks must ensure that the internal rating systems used for credit risk management are validated regularly to maintain accuracy and effectiveness in risk evaluation.
+
+Prediction: - The lender must assess whether you can afford the mortgage repayments:
+  - at the outset / now; and
+  - after the mortgage interest rate is expected to rise, not only at the initial rate.
+
+- The affordability assessment must include:
+  - your income;
+  - your expenditure;
+  - your existing financial commitments;
+  - basic essential living expenses;
+  - any secured borrowing already in place; and
+  - any unsecured borrowing already in place, including your existing personal loan.
+
+- The lender must take reasonable steps to verify your income and expenditure, rather than relying only on what you state in the application.
+
+- Because your income is variable, the lender must take a realistic approach to assessing whether that income is sustainable.
+
+- The lender must not assume unusually high future income unless there is supportable evidence for doing so.
+
+- If the lender uses a hypothetical interest-rate rise or stress test in its affordability assessment:
+  - it must apply that assumption consistently with responsible lending rules; and
+  - it must not use an unrealistic stress assumption.
+
+- If your application is refused on affordability grounds, the lender should be able to:
+  - explain the principal affordability factor that led to the refusal; and
+  - retain enough evidence to show that the affordability assessment was properly carried out.
+
+Result: True
+------------------------------------------------------------------
+
+Question 2: What are the disclosure requirements for platform fees when an adviser recommends a Stocks and Shares ISA?
+
+Ground Truth Answer: - When advising a client on a Stocks and Shares ISA, the adviser must clearly disclose all applicable platform fees and charges associated with the investment service, ensuring full transparency.
+- The adviser must inform the client about any ongoing fees related to the management of the ISA, including fund management fees and transaction costs.
+- Any performance-related fees that may apply should also be communicated upfront, alongside an explanation of how these fees could impact the overall investment returns.
+-
+
+Adversarial Answer: - The lender must carry out an assessment that considers whether you can make the repayments both now and after the mortgage interest rate is expected to rise, not just at the initial rate.
+- The lender must take reasonable steps to verify your income and expenditure, rather than relying only on what you state in the application.
+- The assessment must include your existing financial commitments and basic essential living expenses, including any secured or unsecured borrowing already in place.
+- Where your income is variable, the lender must use a realistic approach to assess the sustainability of that income and must not assume unusually high future income without supportable evidence.
+- If the lender uses a hypothetical interest-rate rise in its affordability testing, it must apply the rate in a way that is consistent with the relevant responsible lending rules and not use an unrealistic stress assumption.
+- If the application is declined because of affordability, the lender should be able to explain the principal affordability factor that led to the decision and retain enough evidence to show that the assessment was properly carried out.
+- A cryptoasset business must carry out customer due diligence (CDD) measures to verify the identity of customers prior to establishing a business relationship.
+- Enhanced due diligence (EDD) must be undertaken for higher risk customers or transactions, including those involving politically exposed persons (PEPs) or countries with high money laundering risk.
+- The business must maintain accurate and up-to-date records of customer information and any identification documents for at least five years following the end of the business relationship.
+- During the onboarding process, a cryptoasset business must assess and mitigate risks related to the type of assets being handled, especially if dealing with privacy-focused cryptocurrencies.
+-   
+- Banks must categorize their credit exposures by risk weight and ensure they hold sufficient capital to cover potential losses as determined by these risk weights.  
+- The assessment should incorporate historical loss data to calculate expected credit losses and incorporate forward-looking indicators to better assess potential defaults.  
+- Banks must ensure that the internal rating systems used for credit risk management are validated regularly to maintain accuracy and effectiveness in risk evaluation.
+
+Prediction: - Clearly disclose all applicable platform fees and charges associated with the Stocks and Shares ISA investment service.
+- Inform the client about ongoing fees, including fund management fees and transaction costs.
+- Communicate any performance-related fees upfront.
+- Explain how the fees and charges could affect the client’s overall investment returns.
+
+Result: True
+------------------------------------------------------------------
+
+Question 2: What registration and customer due diligence requirements apply to a cryptoasset business under FCA rules?
+
+Ground Truth Answer: - A cryptoasset business must carry out customer due diligence (CDD) measures to verify the identity of customers prior to establishing a business relationship.
+- Enhanced due diligence (EDD) must be undertaken for higher risk customers or transactions, including those involving politically exposed persons (PEPs) or countries with high money laundering risk.
+- The business must maintain accurate and up-to-date records of customer information and any identification documents for at least five years following the end of the business relationship.
+-
+
+Adversarial Answer: - The lender must carry out an assessment that considers whether you can make the repayments both now and after the mortgage interest rate is expected to rise, not just at the initial rate.
+- The lender must take reasonable steps to verify your income and expenditure, rather than relying only on what you state in the application.
+- The assessment must include your existing financial commitments and basic essential living expenses, including any secured or unsecured borrowing already in place.
+- Where your income is variable, the lender must use a realistic approach to assess the sustainability of that income and must not assume unusually high future income without supportable evidence.
+- If the lender uses a hypothetical interest-rate rise in its affordability testing, it must apply the rate in a way that is consistent with the relevant responsible lending rules and not use an unrealistic stress assumption.
+- If the application is declined because of affordability, the lender should be able to explain the principal affordability factor that led to the decision and retain enough evidence to show that the assessment was properly carried out.
+- When advising a client on a Stocks and Shares ISA, the adviser must clearly disclose all applicable platform fees and charges associated with the investment service, ensuring full transparency.
+- The adviser must inform the client about any ongoing fees related to the management of the ISA, including fund management fees and transaction costs.
+- Any performance-related fees that may apply should also be communicated upfront, alongside an explanation of how these fees could impact the overall investment returns.
+- It is necessary for the adviser to provide a detailed breakdown of fees in a standardized format to enable the client to make an informed comparison with other investment options.
+-   
+- Banks must categorize their credit exposures by risk weight and ensure they hold sufficient capital to cover potential losses as determined by these risk weights.  
+- The assessment should incorporate historical loss data to calculate expected credit losses and incorporate forward-looking indicators to better assess potential defaults.  
+- Banks must ensure that the internal rating systems used for credit risk management are validated regularly to maintain accuracy and effectiveness in risk evaluation.
+
+Prediction: - The documents do not specify any detailed FCA registration steps or conditions for cryptoasset businesses.
+- A cryptoasset business must carry out customer due diligence (CDD) before establishing a business relationship.
+- CDD must include verifying the customer’s identity.
+- Enhanced due diligence (EDD) must be performed for higher-risk customers or transactions, including:
+  - Politically exposed persons (PEPs)
+  - Customers or transactions involving high money-laundering-risk countries
+- During onboarding, the business must assess risks linked to the type of cryptoassets being handled, especially privacy-focused cryptocurrencies.
+- The business must keep accurate and up-to-date customer information and identification records for at least five years after the business relationship ends.
+
+Result: False
+
+The prediction captures the main CDD, EDD, and record-keeping requirements from the ground truth, but it also adds an extra major point that is not in the ground truth: it says the business must assess risks linked to the type of cryptoassets being handled, especially privacy-focused cryptocurrencies. That is an additional substantive requirement not mentioned in the answer.
+
+Also, the prediction does not really answer the “registration” part of the question: it only says the documents do not specify detailed FCA registration steps or conditions, which is not the same as stating the relevant registration requirement under FCA rules.
+------------------------------------------------------------------
+
+Question 2: What are the prudential standards for credit risk assessment that a bank must follow under the Basel III framework?
+
+Ground Truth Answer: -   
+- Banks must categorize their credit exposures by risk weight and ensure they hold sufficient capital to cover potential losses as determined by these risk weights.  
+- The assessment should incorporate historical loss data to calculate expected credit losses and incorporate forward-looking indicators to better assess potential defaults.  
+- Banks must ensure that the internal rating systems used for credit risk management are validated regularly to maintain accuracy and effectiveness in risk evaluation.
+
+Adversarial Answer: - The lender must carry out an assessment that considers whether you can make the repayments both now and after the mortgage interest rate is expected to rise, not just at the initial rate.
+- The lender must take reasonable steps to verify your income and expenditure, rather than relying only on what you state in the application.
+- The assessment must include your existing financial commitments and basic essential living expenses, including any secured or unsecured borrowing already in place.
+- Where your income is variable, the lender must use a realistic approach to assess the sustainability of that income and must not assume unusually high future income without supportable evidence.
+- If the lender uses a hypothetical interest-rate rise in its affordability testing, it must apply the rate in a way that is consistent with the relevant responsible lending rules and not use an unrealistic stress assumption.
+- If the application is declined because of affordability, the lender should be able to explain the principal affordability factor that led to the decision and retain enough evidence to show that the assessment was properly carried out.
+- When advising a client on a Stocks and Shares ISA, the adviser must clearly disclose all applicable platform fees and charges associated with the investment service, ensuring full transparency.
+- The adviser must inform the client about any ongoing fees related to the management of the ISA, including fund management fees and transaction costs.
+- Any performance-related fees that may apply should also be communicated upfront, alongside an explanation of how these fees could impact the overall investment returns.
+- It is necessary for the adviser to provide a detailed breakdown of fees in a standardized format to enable the client to make an informed comparison with other investment options.
+- A cryptoasset business must carry out customer due diligence (CDD) measures to verify the identity of customers prior to establishing a business relationship.
+- Enhanced due diligence (EDD) must be undertaken for higher risk customers or transactions, including those involving politically exposed persons (PEPs) or countries with high money laundering risk.
+- The business must maintain accurate and up-to-date records of customer information and any identification documents for at least five years following the end of the business relationship.
+- During the onboarding process, a cryptoasset business must assess and mitigate risks related to the type of assets being handled, especially if dealing with privacy-focused cryptocurrencies.
+
+Prediction: - Banks must categorize credit exposures by risk weight.
+- Banks must hold sufficient capital to cover potential losses based on those risk weights.
+- Credit risk assessments should incorporate historical loss data to calculate expected credit losses.
+- Assessments should include forward-looking indicators to better assess potential defaults.
+- Internal rating systems used for credit risk management must be validated regularly to maintain accuracy and effectiveness.
+
+Result: True
+------------------------------------------------------------------
+
+Question 3: I am a high-net-worth UK domiciled individual with a large estate and I am considering using my unused nil-rate band, residence nil-rate band, and an adviser-led lifetime gifting and trust strategy. What exact inheritance tax thresholds and adviser suitability checks must my financial adviser confirm before recommending the plan, and what must they assess under FCA COBS 9.2 to show the strategy is suitable for me?
+
+Ground Truth Answer: - The standard inheritance tax nil-rate band is £325,000, and it is the amount that can usually be passed on before inheritance tax is charged at the standard rate.
+- The residence nil-rate band is available where a qualifying residence is left to direct descendants, and it can increase the effective tax-free threshold for an estate beyond the standard nil-rate band.
+- The residence nil-rate band is subject to a taper once the estate value exceeds £2 million.
+-
+
+Adversarial Answer: - Advisers must provide clients with clear and accurate information about all charges associated with the platform, including any initial and ongoing fees that may apply.
+- The Total Cost of Ownership (TCO) must be disclosed, which includes platform fees, fund management fees, and any transaction costs incurred within the investment.
+- Advisers should ensure that clients understand how these fees will impact their overall investment returns over time and must present this information in a way that is easily understandable.
+- The maximum loan-to-value (LTV) ratio for a lifetime mortgage is commonly capped at 60% for those aged 55 and older, depending on the property's value and the client's age.
+- Lenders must assess the client's property value through a qualified surveyor before proceeding with the application for a lifetime mortgage.
+- Prospective borrowers should also consider that the LTV can vary significantly based on the type of property, with some lenders offering higher percentages for bungalows or urban properties.
+- Under FCA COBS 9.2, advisers must evaluate the client's knowledge and experience specifically related to structured products, as these can have complex features and risks.
+- Advisers must document how the investment in structured products aligns with the client's financial goals and risk profile.
+- It is essential for the adviser to assess the client’s understanding of the potential returns and risks associated with structured products before making a recommendation.
+
+Prediction: - **Inheritance tax thresholds/caveats to confirm:**
+  - The standard inheritance tax **nil-rate band is £325,000**.
+  - The **residence nil-rate band** may increase the effective tax-free threshold where a **qualifying residence is left to direct descendants**.
+  - The residence nil-rate band is **tapered once the estate value exceeds £2 million**, reducing the relief for estates above that level.
+  - The documents do **not specify the exact monetary amount** of the residence nil-rate band or detailed rules for transferring unused bands.
+
+- **Adviser suitability checks before recommending a lifetime gifting and trust strategy:**
+  - The adviser must conduct a **comprehensive review** to ensure the strategy aligns with your needs.
+  - The adviser must base any personal recommendation on your **specific circumstances**.
+
+- **Under FCA COBS 9.2, the adviser must assess:**
+  - Your **knowledge**.
+  - Your **experience**.
+  - Your **financial situation**.
+  - Your **investment objectives**.
+  - Your **ability to bear investment risk**.
+  - Your overall **capacity for loss**.
+
+Result: False
+
+The prediction matches the ground truth on the inheritance tax points: it includes the £325,000 nil-rate band, the residence nil-rate band for a qualifying residence left to direct descendants, and the taper once the estate exceeds £2 million.
+
+However, it is still wrong because it introduces extra major content that is not supported by the ground-truth answer and goes beyond what the question asks. In particular, it adds adviser suitability checks and a COBS 9.2 assessment list that are not stated in the ground truth provided here. The ground-truth answer does not mention those suitability criteria, so the prediction cannot be accepted as a match.
+------------------------------------------------------------------
+
+Question 3: What are the disclosure requirements for platform fees when an adviser recommends a Stocks and Shares ISA?
+
+Ground Truth Answer: - Advisers must provide clients with clear and accurate information about all charges associated with the platform, including any initial and ongoing fees that may apply.
+- The Total Cost of Ownership (TCO) must be disclosed, which includes platform fees, fund management fees, and any transaction costs incurred within the investment.
+- Advisers should ensure that clients understand how these fees will impact their overall investment returns over time and must present this information in a way that is easily understandable.
+
+Adversarial Answer: - The standard inheritance tax nil-rate band is £325,000, and it is the amount that can usually be passed on before inheritance tax is charged at the standard rate.
+- The residence nil-rate band is available where a qualifying residence is left to direct descendants, and it can increase the effective tax-free threshold for an estate beyond the standard nil-rate band.
+- The residence nil-rate band is subject to a taper once the estate value exceeds £2 million.
+-
+- The maximum loan-to-value (LTV) ratio for a lifetime mortgage is commonly capped at 60% for those aged 55 and older, depending on the property's value and the client's age.
+- Lenders must assess the client's property value through a qualified surveyor before proceeding with the application for a lifetime mortgage.
+- Prospective borrowers should also consider that the LTV can vary significantly based on the type of property, with some lenders offering higher percentages for bungalows or urban properties.
+- Under FCA COBS 9.2, advisers must evaluate the client's knowledge and experience specifically related to structured products, as these can have complex features and risks.
+- Advisers must document how the investment in structured products aligns with the client's financial goals and risk profile.
+- It is essential for the adviser to assess the client’s understanding of the potential returns and risks associated with structured products before making a recommendation.
+
+Prediction: - Advisers must give clients clear and accurate information about all platform charges linked to the Stocks and Shares ISA.
+- This disclosure should include any initial platform fees and ongoing platform fees.
+- Advisers must disclose the Total Cost of Ownership (TCO).
+- TCO should include:
+  - Platform fees
+  - Fund management fees
+  - Transaction costs within the investment
+- Clients should be made aware that these costs can affect overall investment returns over time.
+
+Result: True
+------------------------------------------------------------------
+
+Question 3: What are the loan-to-value limits that apply when a client takes out a lifetime mortgage under an equity release plan?
+
+Ground Truth Answer: - The maximum loan-to-value (LTV) ratio for a lifetime mortgage is commonly capped at 60% for those aged 55 and older, depending on the property's value and the client's age.
+- Lenders must assess the client's property value through a qualified surveyor before proceeding with the application for a lifetime mortgage.
+-
+
+Adversarial Answer: - The standard inheritance tax nil-rate band is £325,000, and it is the amount that can usually be passed on before inheritance tax is charged at the standard rate.
+- The residence nil-rate band is available where a qualifying residence is left to direct descendants, and it can increase the effective tax-free threshold for an estate beyond the standard nil-rate band.
+- The residence nil-rate band is subject to a taper once the estate value exceeds £2 million.
+-
+- Advisers must provide clients with clear and accurate information about all charges associated with the platform, including any initial and ongoing fees that may apply.
+- The Total Cost of Ownership (TCO) must be disclosed, which includes platform fees, fund management fees, and any transaction costs incurred within the investment.
+- Advisers should ensure that clients understand how these fees will impact their overall investment returns over time and must present this information in a way that is easily understandable.
+- Under FCA COBS 9.2, advisers must evaluate the client's knowledge and experience specifically related to structured products, as these can have complex features and risks.
+- Advisers must document how the investment in structured products aligns with the client's financial goals and risk profile.
+- It is essential for the adviser to assess the client’s understanding of the potential returns and risks associated with structured products before making a recommendation.
+
+Prediction: - The maximum loan-to-value (LTV) ratio for a lifetime mortgage is commonly capped at around **60%**.
+- This typically applies to clients aged **55 or older**.
+- The actual LTV depends on factors including:
+  - The client’s age
+  - The property’s value
+  - The type of property
+- The property value must be assessed by a **qualified surveyor** before the lifetime mortgage application proceeds.
+- Example: if the property is valued at **£200,000**, a 60% LTV would allow borrowing of up to **£120,000**.
+
+Result: True
+------------------------------------------------------------------
+
+Question 3: What are the suitability assessments required for advisers when providing recommendations for investment in structured products?
+
+Ground Truth Answer: - Under FCA COBS 9.2, advisers must evaluate the client's knowledge and experience specifically related to structured products, as these can have complex features and risks.
+- Advisers must document how the investment in structured products aligns with the client's financial goals and risk profile.
+-
+
+Adversarial Answer: - The standard inheritance tax nil-rate band is £325,000, and it is the amount that can usually be passed on before inheritance tax is charged at the standard rate.
+- The residence nil-rate band is available where a qualifying residence is left to direct descendants, and it can increase the effective tax-free threshold for an estate beyond the standard nil-rate band.
+- The residence nil-rate band is subject to a taper once the estate value exceeds £2 million.
+-
+- Advisers must provide clients with clear and accurate information about all charges associated with the platform, including any initial and ongoing fees that may apply.
+- The Total Cost of Ownership (TCO) must be disclosed, which includes platform fees, fund management fees, and any transaction costs incurred within the investment.
+- Advisers should ensure that clients understand how these fees will impact their overall investment returns over time and must present this information in a way that is easily understandable.
+- The maximum loan-to-value (LTV) ratio for a lifetime mortgage is commonly capped at 60% for those aged 55 and older, depending on the property's value and the client's age.
+- Lenders must assess the client's property value through a qualified surveyor before proceeding with the application for a lifetime mortgage.
+- Prospective borrowers should also consider that the LTV can vary significantly based on the type of property, with some lenders offering higher percentages for bungalows or urban properties.
+
+Prediction: - Advisers must conduct a suitability assessment under FCA COBS 9.2 before recommending structured products.
+- They must assess the client’s knowledge and experience specifically in relation to structured products, including whether the client understands their complex features and risks.
+- They should consider the client’s previous experience with similarly complex investments, such as derivatives or performance-linked products.
+- They must assess the client’s financial situation, including their ability to bear investment risk and capacity for loss.
+- They must assess the client’s investment objectives and ensure the structured product aligns with the client’s financial goals.
+- They must consider the client’s risk profile/risk tolerance and ensure the recommendation is suitable in light of that profile.
+- Advisers must document how the structured product recommendation relates to the client’s goals, risk profile, and overall circumstances.
+- Recommendations must be justifiable and thoroughly documented.
+
+Result: True
+------------------------------------------------------------------
+
+Question 4: If I am considering equity release on my home, what must the adviser and firm tell me at the point of first contact and before any application is submitted about the advice process, the need for alternatives to be considered, the nature of any recommendation, the key risks and charges, and what I should receive in writing?
+
+Ground Truth Answer: - 
+- The adviser must make clear that alternatives to equity release, including other ways of meeting my needs, should be considered before any recommendation is made.
+-
+
+Adversarial Answer: -   
+- The adviser should explain how these fees will affect overall returns on the investment and any impact on the investment's performance.  
+- It is essential for the adviser to provide a clear summary of all fees involved in accessing and managing the Stocks and Shares ISA before any investment decisions are made.  
+-
+- The adviser must clearly disclose the annual percentage rate (APR) associated with the personal loan to ensure transparency about the total cost of credit.  
+- The adviser is required to explain the impact of variable interest rates if applicable and how they may affect monthly repayments over time.  
+-
+-   
+-   
+- It is necessary to disclose the implications of breaching the mortgage agreement, including potential penalties and risks of repossession.
+
+Prediction: - At first contact, the adviser/firm must clarify whether the equity release service is:
+  - independent; or
+  - restricted.
+
+- They must explain:
+  - what the equity release advice service includes;
+  - how they will assess whether equity release is suitable for your needs and circumstances;
+  - how the status of the service affects the breadth of advice available to you.
+
+- Before any recommendation is made, the adviser must make clear that alternatives to equity release must be considered, including other ways of meeting your financial needs.
+
+- Any recommendation should only follow consideration of those alternatives and an assessment of suitability for your needs and circumstances.
+
+- The documents do not provide specific information on equity-release key risks, product charges, or what must be provided in writing before an application is submitted.
+
+Result: False
+
+The prediction includes the key ground-truth point that alternatives to equity release, including other ways of meeting the person’s needs, must be considered before any recommendation is made.
+
+However, it is not fully correct for two reasons:
+
+1. It adds several extra major points about the service being independent or restricted, what the advice service includes, and how suitability is assessed. These may be related to equity release generally, but they are not what the ground-truth answer asks for.
+2. It leaves out the main required elements from the question: the nature of any recommendation, the key risks and charges, and what must be received in writing at first contact/before application. The prediction explicitly says the documents do not provide this information, which means it does not answer the full question.
+
+Therefore, the prediction does not fully match the ground truth.
+------------------------------------------------------------------
+
+Question 4: What are the disclosure requirements for platform fees when an adviser recommends a Stocks and Shares ISA?
+
+Ground Truth Answer: -   
+- The adviser should explain how these fees will affect overall returns on the investment and any impact on the investment's performance.  
+- It is essential for the adviser to provide a clear summary of all fees involved in accessing and managing the Stocks and Shares ISA before any investment decisions are made.  
+-
+
+Adversarial Answer: - The adviser must explain whether the service is independent or restricted, what the advice will cover, and that the firm will assess whether equity release is suitable for my needs and circumstances.
+- The adviser must make clear that alternatives to equity release, including other ways of meeting my needs, should be considered before any recommendation is made.
+- I must be told the main risks, that the loan will reduce the value of my estate and may affect my entitlement to means-tested benefits, and that interest and charges can roll up over time.
+-
+- The adviser must clearly disclose the annual percentage rate (APR) associated with the personal loan to ensure transparency about the total cost of credit.  
+- The adviser is required to explain the impact of variable interest rates if applicable and how they may affect monthly repayments over time.  
+-
+-   
+-   
+- It is necessary to disclose the implications of breaching the mortgage agreement, including potential penalties and risks of repossession.
+
+Prediction: - The adviser must provide a clear summary of all fees involved in accessing and managing the Stocks and Shares ISA before any investment decision is made.
+- The adviser must explain platform fees clearly, including how they may affect overall investment returns.
+- The adviser must disclose any impact the platform fees may have on the investment’s performance.
+
+Result: True
+------------------------------------------------------------------
+
+Question 4: What are the regulatory requirements for disclosing interest rates when an adviser recommends a personal loan?
+
+Ground Truth Answer: - The adviser must clearly disclose the annual percentage rate (APR) associated with the personal loan to ensure transparency about the total cost of credit.  
+- The adviser is required to explain the impact of variable interest rates if applicable and how they may affect monthly repayments over time.  
+-
+
+Adversarial Answer: - The adviser must explain whether the service is independent or restricted, what the advice will cover, and that the firm will assess whether equity release is suitable for my needs and circumstances.
+- The adviser must make clear that alternatives to equity release, including other ways of meeting my needs, should be considered before any recommendation is made.
+- I must be told the main risks, that the loan will reduce the value of my estate and may affect my entitlement to means-tested benefits, and that interest and charges can roll up over time.
+-
+-   
+- The adviser should explain how these fees will affect overall returns on the investment and any impact on the investment's performance.  
+- It is essential for the adviser to provide a clear summary of all fees involved in accessing and managing the Stocks and Shares ISA before any investment decisions are made.  
+-
+-   
+-   
+- It is necessary to disclose the implications of breaching the mortgage agreement, including potential penalties and risks of repossession.
+
+Prediction: - The adviser must clearly disclose the Annual Percentage Rate (APR) associated with the personal loan.
+- The disclosure should ensure the client understands the total cost of credit.
+- If the loan has a variable interest rate, the adviser must explain how rate changes could affect monthly repayments over time.
+
+Result: True
+------------------------------------------------------------------
+
+Question 4: What are the regulatory requirements for offering fixed-rate mortgages to consumers?
+
+Ground Truth Answer: -   
+-   
+- It is necessary to disclose the implications of breaching the mortgage agreement, including potential penalties and risks of repossession.
+
+Adversarial Answer: - The adviser must explain whether the service is independent or restricted, what the advice will cover, and that the firm will assess whether equity release is suitable for my needs and circumstances.
+- The adviser must make clear that alternatives to equity release, including other ways of meeting my needs, should be considered before any recommendation is made.
+- I must be told the main risks, that the loan will reduce the value of my estate and may affect my entitlement to means-tested benefits, and that interest and charges can roll up over time.
+-
+-   
+- The adviser should explain how these fees will affect overall returns on the investment and any impact on the investment's performance.  
+- It is essential for the adviser to provide a clear summary of all fees involved in accessing and managing the Stocks and Shares ISA before any investment decisions are made.  
+-
+- The adviser must clearly disclose the annual percentage rate (APR) associated with the personal loan to ensure transparency about the total cost of credit.  
+- The adviser is required to explain the impact of variable interest rates if applicable and how they may affect monthly repayments over time.  
+-
+
+Prediction: - Clearly explain the interest rate offered, including whether it is fixed for the full mortgage term or only for an initial period before it may change.
+- Inform the consumer of the total cost of the mortgage, including interest, setup fees, and any other associated charges.
+- Disclose any early repayment charges or fees, including potential penalties for breaking the fixed-rate mortgage agreement early.
+- Explain the implications of breaching the mortgage agreement, including potential penalties.
+- Warn the consumer about the risk of repossession if they fail to meet the mortgage repayment terms.
+
+Result: False
+
+The prediction does include the ground-truth point about explaining the implications of breaching the mortgage agreement, including potential penalties and the risk of repossession. However, it also adds major details about fixed-rate mortgage interest rate disclosure, total cost, and early repayment charges. More importantly, the prediction discusses an “adversarial wrong answer” theme by mentioning variable/fixed rate interest details and break/penalty fees, and it overlaps with mortgage-advice content that is not part of the ground truth. Since the task requires matching the ground truth without bringing in those irrelevant/adversarial points, the prediction is not a clean correct match.
+------------------------------------------------------------------
+
+Question 5: A parent wants to set up a Junior ISA for their child through a financial adviser and is considering whether the adviser must treat the arrangement as suitable advice, what information must be gathered before recommending the Junior ISA, and what disclosure must be made if the adviser is giving a personal recommendation versus only presenting the product information. What does the FCA require under COBS 9 and COBS 4 for this situation?
+
+Ground Truth Answer: - The adviser must ensure any personal recommendation to open or continue a Junior ISA is suitable for the child’s circumstances and the parent’s objectives, taking account of the product’s aims, risks, and the client’s relevant knowledge and experience.
+- The adviser must obtain enough information to assess the child’s and parent’s financial situation, investment objectives, risk tolerance and capacity for loss before recommending a Junior ISA.
+- If the adviser is making a personal recommendation, the adviser must provide a suitability report explaining why the Junior ISA is suitable and how it meets the client’s needs.
+- Any disclosure about the service must make clear the nature of the advice being given, including whether it is independent or restricted and any material limitations that could affect the Junior ISA recommendation.
+
+Adversarial Answer: - Any fee structures must be presented in a straightforward manner to ensure clients understand their obligations and the total cost of investing through the platform.
+-
+- The maximum loan-to-value (LTV) percentage for a lifetime mortgage typically ranges from 20% to 60%, depending on the age of the borrower and property value.  
+- Lenders usually consider the property’s valuation and the applicant's age to determine the specific LTV ratio they can offer.  
+- Clients must be made aware that a higher LTV may lead to increased interest rates and potentially affect their inheritance.  
+-
+- The adviser must assess the client's financial situation, rental income expectations, and the potential risks associated with property investment before recommending a buy-to-let mortgage.
+- The adviser should provide a Brokerage Fee Agreement, outlining the charges applicable for arranging the mortgage and any other associated costs to the client.
+- The adviser must explain the impact of local market conditions on the property investment, ensuring the client understands the implications of vacancy rates and property maintenance costs.
+-
+
+Prediction: - Under **COBS 9**, if the adviser makes a **personal recommendation** to open or continue a Junior ISA, the adviser must treat it as **suitable advice**.
+
+- The adviser must ensure the Junior ISA recommendation is suitable for:
+  - the **child’s circumstances**; and
+  - the **parent’s objectives**.
+
+- Before recommending the Junior ISA, the adviser must gather enough information about:
+  - the child’s and parent’s **financial situation**;
+  - their **investment objectives**;
+  - their **risk tolerance**;
+  - their **capacity for loss**;
+  - their relevant **knowledge and experience**;
+  - the Junior ISA’s **aims and risks**.
+
+- If giving a **personal recommendation**, the adviser must provide a **suitability report** explaining:
+  - why the Junior ISA is suitable; and
+  - how it meets the client’s needs/objectives.
+
+- Under **COBS 4**, disclosures about the service must clearly state:
+  - the **nature of the advice** being provided;
+  - whether the advice is **independent or restricted**;
+  - any **material limitations** that could affect the Junior ISA recommendation.
+
+- If the adviser is **only presenting product information** rather than giving a personal recommendation, the communication should make clear the nature of the service/product information being provided so the parent understands that it is not being presented as suitable personal advice.
+
+Result: False
+
+The prediction includes the main ideas from the ground truth, but it also adds a significant extra point that is not supported by the ground truth: it says that if the adviser is only presenting product information, the communication should make clear that it is not being presented as suitable personal advice. The ground truth only requires that service disclosures clearly state the nature of the advice, including whether it is independent or restricted and any material limitations; it does not add this specific “product information vs personal advice” disclosure requirement.
+
+Also, the prediction mentions the Junior ISA’s “aims and risks” as something to gather before recommending, whereas the ground truth requires gathering information about the child’s and parent’s financial situation, investment objectives, risk tolerance, capacity for loss, and relevant knowledge and experience. The “aims and risks” point is partly aligned with suitability, but the prediction does not precisely match all required elements and introduces extra framing.
+------------------------------------------------------------------
+
+Question 5: What are the disclosure requirements for platform fees when an adviser recommends a Stocks and Shares ISA?
+
+Ground Truth Answer: - Any fee structures must be presented in a straightforward manner to ensure clients understand their obligations and the total cost of investing through the platform.
+-
+
+Adversarial Answer: - The adviser must ensure any personal recommendation to open or continue a Junior ISA is suitable for the child’s circumstances and the parent’s objectives, taking account of the product’s aims, risks, and the client’s relevant knowledge and experience.
+- The adviser must obtain enough information to assess the child’s and parent’s financial situation, investment objectives, risk tolerance and capacity for loss before recommending a Junior ISA.
+- If the adviser is making a personal recommendation, the adviser must provide a suitability report explaining why the Junior ISA is suitable and how it meets the client’s needs.
+- Any disclosure about the service must make clear the nature of the advice being given, including whether it is independent or restricted and any material limitations that could affect the Junior ISA recommendation.
+- The maximum loan-to-value (LTV) percentage for a lifetime mortgage typically ranges from 20% to 60%, depending on the age of the borrower and property value.  
+- Lenders usually consider the property’s valuation and the applicant's age to determine the specific LTV ratio they can offer.  
+- Clients must be made aware that a higher LTV may lead to increased interest rates and potentially affect their inheritance.  
+-
+- The adviser must assess the client's financial situation, rental income expectations, and the potential risks associated with property investment before recommending a buy-to-let mortgage.
+- The adviser should provide a Brokerage Fee Agreement, outlining the charges applicable for arranging the mortgage and any other associated costs to the client.
+- The adviser must explain the impact of local market conditions on the property investment, ensuring the client understands the implications of vacancy rates and property maintenance costs.
+-
+
+Prediction: - Platform fee structures must be disclosed in a clear, straightforward manner.
+- The disclosure must enable the client to understand their obligations and the total cost of investing through the platform.
+- The adviser should explain how charges on the ISA or investment products may affect overall returns.
+- The adviser must clearly disclose the nature of the advice service being provided, including whether it is independent or restricted.
+- Any material limitations affecting the recommendation should be disclosed in the advisory documents in line with FCA requirements.
+
+Result: False
+
+The prediction includes the main ground-truth point that platform fee structures must be disclosed clearly and straightforwardly so the client understands their obligations and the total cost of investing through the platform. However, it also adds extra major points that are not in the ground truth and are unrelated to the specific question, such as explaining the effect of charges on overall returns and disclosing whether the advice is independent or restricted. These additions go beyond the required disclosure requirement for platform fees and make the prediction not a clean match to the ground truth.
+------------------------------------------------------------------
+
+Question 5: What are the loan-to-value limits that apply when a client takes out a lifetime mortgage under an equity release plan?
+
+Ground Truth Answer: - The maximum loan-to-value (LTV) percentage for a lifetime mortgage typically ranges from 20% to 60%, depending on the age of the borrower and property value.  
+- Lenders usually consider the property’s valuation and the applicant's age to determine the specific LTV ratio they can offer.  
+- Clients must be made aware that a higher LTV may lead to increased interest rates and potentially affect their inheritance.  
+-
+
+Adversarial Answer: - The adviser must ensure any personal recommendation to open or continue a Junior ISA is suitable for the child’s circumstances and the parent’s objectives, taking account of the product’s aims, risks, and the client’s relevant knowledge and experience.
+- The adviser must obtain enough information to assess the child’s and parent’s financial situation, investment objectives, risk tolerance and capacity for loss before recommending a Junior ISA.
+- If the adviser is making a personal recommendation, the adviser must provide a suitability report explaining why the Junior ISA is suitable and how it meets the client’s needs.
+- Any disclosure about the service must make clear the nature of the advice being given, including whether it is independent or restricted and any material limitations that could affect the Junior ISA recommendation.
+- Any fee structures must be presented in a straightforward manner to ensure clients understand their obligations and the total cost of investing through the platform.
+-
+- The adviser must assess the client's financial situation, rental income expectations, and the potential risks associated with property investment before recommending a buy-to-let mortgage.
+- The adviser should provide a Brokerage Fee Agreement, outlining the charges applicable for arranging the mortgage and any other associated costs to the client.
+- The adviser must explain the impact of local market conditions on the property investment, ensuring the client understands the implications of vacancy rates and property maintenance costs.
+-
+
+Prediction: - For a lifetime mortgage under an equity release plan, the maximum loan-to-value (LTV) percentage typically ranges from **20% to 60%**.
+- The specific LTV offered depends mainly on:
+  - The client’s **age**
+  - The **market valuation/value of the property**
+- A higher LTV may be associated with **higher interest rates** and could reduce the inheritance left to beneficiaries.
+
+Result: True
+------------------------------------------------------------------
+
+Question 5: What are the regulatory requirements for a financial adviser when recommending a buy-to-let mortgage?
+
+Ground Truth Answer: - The adviser must assess the client's financial situation, rental income expectations, and the potential risks associated with property investment before recommending a buy-to-let mortgage.
+- The adviser should provide a Brokerage Fee Agreement, outlining the charges applicable for arranging the mortgage and any other associated costs to the client.
+- The adviser must explain the impact of local market conditions on the property investment, ensuring the client understands the implications of vacancy rates and property maintenance costs.
+-
+
+Adversarial Answer: - The adviser must ensure any personal recommendation to open or continue a Junior ISA is suitable for the child’s circumstances and the parent’s objectives, taking account of the product’s aims, risks, and the client’s relevant knowledge and experience.
+- The adviser must obtain enough information to assess the child’s and parent’s financial situation, investment objectives, risk tolerance and capacity for loss before recommending a Junior ISA.
+- If the adviser is making a personal recommendation, the adviser must provide a suitability report explaining why the Junior ISA is suitable and how it meets the client’s needs.
+- Any disclosure about the service must make clear the nature of the advice being given, including whether it is independent or restricted and any material limitations that could affect the Junior ISA recommendation.
+- Any fee structures must be presented in a straightforward manner to ensure clients understand their obligations and the total cost of investing through the platform.
+-
+- The maximum loan-to-value (LTV) percentage for a lifetime mortgage typically ranges from 20% to 60%, depending on the age of the borrower and property value.  
+- Lenders usually consider the property’s valuation and the applicant's age to determine the specific LTV ratio they can offer.  
+- Clients must be made aware that a higher LTV may lead to increased interest rates and potentially affect their inheritance.  
+-
+
+Prediction: - Assess the client’s current financial situation before making a recommendation.
+- Assess the client’s rental income expectations and whether they align with affordability.
+- Ensure the client understands the potential risks of property investment before committing.
+- Provide a Brokerage Fee Agreement clearly outlining:
+  - charges for arranging the mortgage;
+  - any other associated costs.
+- Explain how local market conditions may affect the investment.
+- Ensure the client understands the impact of vacancy rates and property maintenance costs on rental income.
+- Explain how fixed and variable interest rates could affect monthly mortgage repayments.
+- Consider wider property-related financial implications, including housing market fluctuations and potential tax issues such as capital gains tax on investment property sales.
+
+Result: False
+
+The prediction captures several key ground-truth points: it says the adviser should assess the client’s financial situation, rental income expectations, and risks; provide a Brokerage Fee Agreement with charges and other costs; and explain the effect of local market conditions, vacancy rates, and maintenance costs.
+
+However, it also adds extra major points that are not in the ground truth, such as fixed vs. variable interest rates, housing market fluctuations, and potential tax issues like capital gains tax. Since the evaluation requires the prediction to match the ground truth without introducing unrelated major points, this makes the prediction incorrect.
+------------------------------------------------------------------
+
+Question 6: As a small business owner who is arranging your first workplace pension scheme, what are the specific auto-enrolment duties you must meet when staging, what worker you must not use your default fund for without checking the fee cap, and what exact charge features of the default arrangement must be kept within the FCA workplace pension default fund charge cap?
+
+Ground Truth Answer: - You must automatically enrol eligible jobholders into a qualifying workplace pension scheme and make the required employer contributions.
+- You must give all workers the required statutory information about their auto-enrolment rights and the scheme’s features within the required timescales.
+- You must assess your workforce to identify which workers are eligible jobholders, non-eligible jobholders, or entitled workers for auto-enrolment purposes.
+- You must not use a default pension fund for auto-enrolled staff unless you have checked that the arrangement complies with the workplace pension charge cap rules.
+- The default arrangement’s charges must be kept within the cap by limiting the total annual charge, excluding transaction costs, to the permitted level.
+- Any member-borne charges that apply to the default arrangement must be assessed so they do not cause the scheme to breach the charge cap.
+
+Adversarial Answer: - Advisers must disclose how the fees will impact the overall returns on the investment, ensuring clients are aware of the effect of fees over time.
+- You must provide a key facts illustration (KFI) that outlines the costs and features of the fixed-rate mortgage to the client.  
+-   
+- You must conduct a thorough affordability assessment to verify that the client can meet the monthly repayments associated with the fixed-rate mortgage.
+- Financial advisers must evaluate the client's financial situation, including income, expenses, and current debt levels, to determine their ability to repay the personal loan.
+-
+
+Prediction: - When staging, you must automatically enrol eligible jobholders into a qualifying workplace pension scheme.
+
+- You must make the required employer contributions for those eligible jobholders.
+
+- You must give all workers the required statutory information about:
+  - their auto-enrolment rights; and
+  - the scheme’s features,
+  within the required timescales.
+
+- You must not use a default pension fund for auto-enrolled staff unless you have checked that the arrangement complies with the workplace pension default fund charge cap rules.
+
+- The default arrangement’s charges must be kept within the cap by limiting the total annual charge, excluding transaction costs, to the permitted level.
+
+- Any member-borne charges applying to the default arrangement must be assessed to ensure they do not cause the scheme to breach the charge cap.
+
+Result: True
+------------------------------------------------------------------
+
+Question 6: What are the disclosure requirements for platform fees when an adviser recommends a Stocks and Shares ISA?
+
+Ground Truth Answer: - Advisers must disclose how the fees will impact the overall returns on the investment, ensuring clients are aware of the effect of fees over time.
+
+Adversarial Answer: - You must automatically enrol eligible jobholders into a qualifying workplace pension scheme and make the required employer contributions.
+- You must give all workers the required statutory information about their auto-enrolment rights and the scheme’s features within the required timescales.
+- You must assess your workforce to identify which workers are eligible jobholders, non-eligible jobholders, or entitled workers for auto-enrolment purposes.
+- You must not use a default pension fund for auto-enrolled staff unless you have checked that the arrangement complies with the workplace pension charge cap rules.
+- The default arrangement’s charges must be kept within the cap by limiting the total annual charge, excluding transaction costs, to the permitted level.
+- Any member-borne charges that apply to the default arrangement must be assessed so they do not cause the scheme to breach the charge cap.
+- You must provide a key facts illustration (KFI) that outlines the costs and features of the fixed-rate mortgage to the client.  
+-   
+- You must conduct a thorough affordability assessment to verify that the client can meet the monthly repayments associated with the fixed-rate mortgage.
+- Financial advisers must evaluate the client's financial situation, including income, expenses, and current debt levels, to determine their ability to repay the personal loan.
+-
+
+Prediction: - Advisers must disclose the platform fees associated with the Stocks and Shares ISA.
+- They must explain how those fees will affect the client’s overall investment returns.
+- They should make clear the long-term impact of fees over time, including how charges can reduce performance through compounding.
+
+Result: True
+------------------------------------------------------------------
+
+Question 6: What regulatory compliance must a financial adviser follow when recommending a fixed-rate mortgage product?
+
+Ground Truth Answer: - You must provide a key facts illustration (KFI) that outlines the costs and features of the fixed-rate mortgage to the client.  
+-   
+- You must conduct a thorough affordability assessment to verify that the client can meet the monthly repayments associated with the fixed-rate mortgage.
+
+Adversarial Answer: - You must automatically enrol eligible jobholders into a qualifying workplace pension scheme and make the required employer contributions.
+- You must give all workers the required statutory information about their auto-enrolment rights and the scheme’s features within the required timescales.
+- You must assess your workforce to identify which workers are eligible jobholders, non-eligible jobholders, or entitled workers for auto-enrolment purposes.
+- You must not use a default pension fund for auto-enrolled staff unless you have checked that the arrangement complies with the workplace pension charge cap rules.
+- The default arrangement’s charges must be kept within the cap by limiting the total annual charge, excluding transaction costs, to the permitted level.
+- Any member-borne charges that apply to the default arrangement must be assessed so they do not cause the scheme to breach the charge cap.
+- Advisers must disclose how the fees will impact the overall returns on the investment, ensuring clients are aware of the effect of fees over time.
+- Financial advisers must evaluate the client's financial situation, including income, expenses, and current debt levels, to determine their ability to repay the personal loan.
+-
+
+Prediction: - Conduct a thorough affordability assessment to verify that the client can meet the monthly repayments on the fixed-rate mortgage.
+- Provide a Key Facts Illustration (KFI) to the client outlining the mortgage’s costs and features.
+- Ensure the KFI clearly details:
+  - The interest rate.
+  - The total amount of interest payable over the mortgage term.
+  - Any associated fees.
+
+Result: True
+------------------------------------------------------------------
+
+Question 6: What are the requirements for a financial adviser when conducting a suitability assessment for a personal loan?
+
+Ground Truth Answer: - Financial advisers must evaluate the client's financial situation, including income, expenses, and current debt levels, to determine their ability to repay the personal loan.
+-
+
+Adversarial Answer: - You must automatically enrol eligible jobholders into a qualifying workplace pension scheme and make the required employer contributions.
+- You must give all workers the required statutory information about their auto-enrolment rights and the scheme’s features within the required timescales.
+- You must assess your workforce to identify which workers are eligible jobholders, non-eligible jobholders, or entitled workers for auto-enrolment purposes.
+- You must not use a default pension fund for auto-enrolled staff unless you have checked that the arrangement complies with the workplace pension charge cap rules.
+- The default arrangement’s charges must be kept within the cap by limiting the total annual charge, excluding transaction costs, to the permitted level.
+- Any member-borne charges that apply to the default arrangement must be assessed so they do not cause the scheme to breach the charge cap.
+- Advisers must disclose how the fees will impact the overall returns on the investment, ensuring clients are aware of the effect of fees over time.
+- You must provide a key facts illustration (KFI) that outlines the costs and features of the fixed-rate mortgage to the client.  
+-   
+- You must conduct a thorough affordability assessment to verify that the client can meet the monthly repayments associated with the fixed-rate mortgage.
+
+Prediction: - Evaluate the client’s full financial situation, including:
+  - Income
+  - Regular expenses
+  - Existing debt levels
+  - Current debt repayments
+
+- Factor in any outstanding debts to determine how much the client can realistically afford to borrow without becoming overextended.
+
+- Assess affordability by ensuring the proposed personal loan repayments fit comfortably within the client’s budget, including other upcoming commitments such as mortgage payments.
+
+- Determine the client’s ability to repay the loan based on their overall financial capacity.
+
+- Consider the impact of interest rates, especially where the loan has a variable rate, as rising rates could increase repayment amounts.
+
+- Review the client’s credit score, since it affects creditworthiness and may influence the loan rates available.
+
+- Inform the client of relevant rights, including the right to withdraw from a personal loan agreement within 14 days under the Consumer Credit Act 1974 without penalty.
+
+Result: False
+
+The prediction includes the core idea from the ground truth: the adviser must assess the client’s financial situation to determine whether they can repay the personal loan, including income, expenses, and debt levels.
+
+However, it also contains several additional major points that are not in the ground-truth answer, such as:
+- considering interest rate changes and variable-rate risk,
+- reviewing the client’s credit score,
+- informing the client about a 14-day withdrawal right.
+
+Those extra points are not part of the required ground-truth answer, so the prediction is not a clean match.
+------------------------------------------------------------------
+
+Accuracy: 0.625% Incorrect: 0.0% Irrelevant: 0.0% Adversarial: 0.0

@@ -1,0 +1,494 @@
+ID	Question	Answer	Prediction	Result	Explanation
+1	As a first-time investor speaking to a financial adviser, if the adviser’s initial explanation of an investment product is made more prominent, clear, and not misleading under FCA Consumer Duty and COBS 4 communication rules, what sequence of effects is expected on my decision-making and any later complaints about the product’s risks and charges?	- \n- Better-balanced disclosure should reduce the chance that the adviser’s message is perceived as one-sided, incomplete, or misleading.\n- Improved understanding at the point of sale should make the investor less likely to say later that they were not given enough information to make an informed choice.\n- If the investor’s expectations are set more accurately from the start, subsequent dissatisfaction about risks, charges, or product suitability should be less likely to develop into a complaint.\n-	"- The adviser’s clearer, more prominent explanation should first improve your understanding of the investment product, including its key risks, limitations, and charges.
+
+- Because charges such as expense ratios or adviser fees are explained upfront, you are less likely to be surprised later by their impact on returns.
+
+- With better understanding, you can make a more informed investment decision that is better aligned with your financial objectives.
+
+- If the communication is fair, clear, and not misleading from the start, the risk of poor consumer understanding is reduced.
+
+- As a result, later complaints about miscommunication, hidden risks, or unexpected charges should be less likely."	0	"False
+
+Coverage fails because the prediction does not fully match all the ground-truth points in a sufficiently precise way. It does capture several ideas: clearer and more prominent disclosure improves understanding, reduces the risk of misleading communication, and makes later complaints about unexpected charges or risks less likely.
+
+However, the ground truth specifically includes the sequence that:
+1) better-balanced disclosure reduces the chance the message is seen as one-sided, incomplete, or misleading;
+2) improved understanding at the point of sale makes the investor less likely to later say they were not given enough information to make an informed choice;
+3) accurate expectations from the start make later dissatisfaction about risks, charges, or suitability less likely to turn into a complaint.
+
+The prediction misses or only weakly implies the second point about later claiming insufficient information to make an informed choice. It also shifts the focus toward general “better aligned with financial objectives” language, which is not one of the stated ground-truth outcomes and is an extra major point relative to the asked sequence. Since Coverage fails, Connection is not evaluated further."
+2	What are the registration and customer due diligence requirements for a mortgage lender under the Money Laundering Regulations?	"- Mortgage lenders must verify the identity of their customers using reliable, independent source documents, data, or information. 
+- Lenders are required to assess the risk of money laundering and terrorist financing inherent in their business relationships and transactions.
+- Enhanced due diligence measures must be applied for higher-risk customers, including obtaining additional information on the source of wealth.
+- Ongoing monitoring of the business relationship is essential to identify any changes in the risk profile of customers throughout the mortgage period."	"- The documents do not specify any particular registration requirement for mortgage lenders under the Money Laundering Regulations.
+
+- Customer due diligence requirements mentioned include:
+  - Verify the customer’s identity using reliable, independent source documents, data, or information.
+  - After initial verification, assess the risk of money laundering and terrorist financing in the business relationship and transactions.
+  - Apply enhanced due diligence for higher-risk customers, including obtaining additional information on their source of wealth or origin of funds.
+  - Conduct ongoing monitoring throughout the mortgage relationship to identify changes in the customer’s risk profile and potential suspicious activity."	0	"False
+
+Coverage fails because the prediction includes all of the ground-truth customer due diligence points, but it also introduces an additional major point that is not supported by the ground truth: the statement that “the documents do not specify any particular registration requirement for mortgage lenders under the Money Laundering Regulations.” The ground-truth answer does not say there is no registration requirement; it only lists the due diligence requirements. Because the prediction adds an extraneous major claim about registration, it does not cleanly match the ground truth.
+
+Even aside from that, the main issue is that the question asks for both registration and CDD requirements, while the ground truth only provides CDD evidence points. The prediction’s registration claim is not grounded in the provided answer, so it cannot be accepted as a correct match. Since Coverage fails, Connection is not evaluated."
+3	What are the capital adequacy requirements for credit institutions under Basel III?	"- Credit institutions must maintain a minimum common equity tier 1 (CET1) capital ratio of 4.5% of risk-weighted assets to ensure financial stability.
+- The total capital ratio requirement, which includes tier 1 and tier 2 capital, must be at least 8% to cover operational, credit, and market risks effectively.
+- Moreover, banks are required to hold a capital conservation buffer of 2.5% on top of the minimum requirements to support lending during periods of economic stress.
+- Liquidity coverage ratio (LCR) is mandated to ensure that banks have sufficient high-quality liquid assets to survive a 30-day stressed funding scenario.
+- Finally, banks must also adhere to the net stable funding ratio (NSFR) to promote stability over a longer-term horizon, assessing the stability of funding in relation to the liquidity of the bank’s assets."	"- Credit institutions must maintain a minimum Common Equity Tier 1 (CET1) capital ratio of 4.5% of risk-weighted assets.
+- They must maintain a total capital ratio of at least 8%.
+- The total capital ratio includes both Tier 1 and Tier 2 capital.
+- These capital requirements are intended to help institutions cover operational, credit, and market risks and support financial stability."	0	"False
+
+Coverage fails because the prediction only mentions three of the five ground-truth points:
+- CET1 minimum ratio of 4.5%
+- total capital ratio of 8% including Tier 1 and Tier 2
+- the purpose of those capital requirements covering operational, credit, and market risks / financial stability
+
+It completely omits:
+- the 2.5% capital conservation buffer
+- the liquidity coverage ratio (LCR) and its 30-day stressed scenario
+- the net stable funding ratio (NSFR)
+
+Since all main ground-truth points must be present, Coverage fails, so the answer is False."
+4	A client aged 59 is considering taking a first flexible drawdown payment from a money purchase pension while still working part-time. If the adviser does not properly assess the client’s retirement objectives and the client then flexibly accesses the pension, what sequence of regulatory events explains why the adviser must warn about both suitability and the possible money purchase annual allowance restriction on future pension saving?	- \n- \n- Once the client takes taxable flexible benefits from a money purchase arrangement, the money purchase annual allowance is triggered, which then restricts future tax-relieved pension contributions.\n- After the restriction applies, subsequent contributions to money purchase pensions may be limited, so the client’s planned ongoing retirement saving can be reduced.\n- The practical link between the two rules is that a drawdown recommendation must consider not only whether the withdrawal is suitable now, but also whether it could cause future saving consequences for the client.	"- The adviser must first gather sufficient information about the client’s:
+  - Knowledge and experience
+  - Financial situation
+  - Ability to bear losses
+  - Retirement objectives and income plans
+
+- The adviser must then assess whether taking a first flexible drawdown payment is suitable for the client’s circumstances, especially because the client is 59 and still working part-time.
+
+- As part of that suitability assessment, the adviser must consider the client’s current and future retirement objectives, including whether the client expects to keep saving into a pension.
+
+- If the client flexibly accesses the money purchase pension, this may trigger the money purchase annual allowance, restricting the amount the client can contribute to money purchase pensions in future without tax consequences.
+
+- Because the client is still working part-time, the MPAA restriction could materially affect future pension saving options.
+
+- Therefore, failing to assess the client’s retirement objectives and failing to warn about the possible future pension-saving restriction would make the advice unsuitable and inconsistent with FCA expectations."	0	"False
+
+Coverage fails because the prediction includes the money purchase annual allowance trigger and future contribution restriction, and it mentions suitability, but it does not clearly include the full required sequence from the ground truth about the practical linkage: that once taxable flexible benefits are taken, the MPAA is triggered, which restricts future tax-relieved contributions, reducing ongoing retirement saving, and that this is specifically why the drawdown recommendation must consider both present suitability and future saving consequences.
+
+The prediction does not merely omit a minor detail; it adds several suitability factors and a part-time work point that are not needed to answer the question. More importantly, it does not explicitly tie the rules together as the question asks about the sequence of regulatory events explaining why both warnings are needed. Since Coverage fails, Connection is not assessed further."
+5	What are the suitability assessment requirements when a client seeks advice on investing in a lifetime ISA?	"- An adviser must understand the client’s personal circumstances, including their financial goals and the timeframe for investment, to make a suitable recommendation regarding a lifetime ISA.
+- A recommendation for a lifetime ISA must also involve a consideration of the client’s long-term savings plan, including any potential impact on future savings strategies.
+- Any advice provided should consider the implications of government bonuses on contributions and how they may influence the overall investment approach."	"- Assess the client’s personal circumstances before recommending a lifetime ISA, including:
+  - Financial goals.
+  - Investment timeframe.
+  - Whether the objective is retirement saving, first-time home purchase, or both.
+
+- Consider the client’s wider long-term savings plan, including:
+  - Existing savings and pensions.
+  - Other savings vehicles, such as ordinary ISAs or pension contributions.
+  - How using a lifetime ISA may affect future savings strategies.
+
+- Evaluate lifetime ISA product suitability against the client’s circumstances, including:
+  - Eligibility and intended use.
+  - Annual contribution limits where relevant.
+  - The 25% government bonus and how it affects contributions and the overall investment approach.
+
+- Assess the client’s risk profile and investment horizon to ensure:
+  - The risk-return profile of the lifetime ISA investments is appropriate.
+  - The portfolio has a suitable mix of assets, such as equities and bonds, for the client’s timeframe and objectives.
+
+- Ensure the recommendation is suitable in the context of the client’s broader retirement and property-purchase plans, not just the lifetime ISA features in isolation."	0	"False
+
+Coverage fails because the prediction adds several major points that are not in the ground truth and are not merely elaborations of it, such as:
+- specific LISA purposes like “retirement saving, first-time home purchase, or both,”
+- eligibility and annual contribution limits,
+- risk profile, asset mix, equities/bonds,
+- broader retirement and property-purchase plan framing.
+
+While it does include the key ground-truth ideas of personal circumstances/goals/timeframe, long-term savings plan, and the government bonus, the extra major points make it fail under the strict Coverage rule.
+
+Connection is not reached because Coverage already failed."
+6	What are the financial promotion regulations that apply when advising clients on alternative investments?	"- Advisers must ensure that any communication regarding alternative investments is clear, fair, and not misleading, as guided by FCA principles on financial promotions.
+- A clear indication of risks associated with alternative investments must be provided, ensuring clients understand the potential for loss and illiquidity.
+-"	"- Communications about alternative investments must be **clear, fair, and not misleading**, in line with FCA financial promotion principles.
+- Advisers must give a **clear indication of risks**, including the potential for **loss**, **illiquidity**, and, for derivatives, the possibility of **total loss**.
+- Advisers must ensure clients have sufficient **knowledge and understanding** before engaging with complex or high-risk products such as derivatives, structured products, or niche investments.
+- Advice must comply with **COBS principles**, including the duty of care to ensure clients understand complex financial products.
+- Advisers must keep **records of client communications**, investment advice, and suitability assessments to demonstrate FCA compliance.
+- Advisers must carry out appropriate **due diligence** on the legitimacy and financial health of firms whose products they recommend, especially for niche or alternative investments.
+- Advisers must consider **AIFMD compliance** when advising on collective investment schemes, including transparency requirements for investors.
+- For collective investment schemes, clients must be informed about their **rights as investors**, including liquidity risks when withdrawing capital.
+- Advisers must comply with **Product Governance Requirements**, ensuring recommended products meet client needs and are monitored appropriately.
+- Advisers must understand and apply the regulations governing the sale of **structured products**.
+- When recommending property investments, advisers must ensure **transparency** in the recommendation.
+- Advisers must maintain robust **conflict-of-interest policies** to avoid biased advice.
+- Advisers must comply with **anti-money laundering regulations** when handling clients’ funds.
+- Advisers must consider relevant **tax implications**, such as whether an investment could trigger immediate capital gains tax liabilities.
+- Advisers must comply with **GDPR** when processing client data, ensuring confidentiality and protection of personal information."	0	"False
+
+Coverage fails because the prediction includes the core ground-truth points about alternative investments being communicated in a clear, fair, and not misleading way, and about clearly indicating risks such as loss and illiquidity. However, it also adds many major points that are not in the ground truth, such as derivatives, COBS duties, record keeping, due diligence, AIFMD, product governance, structured products, property investments, conflicts of interest, AML, tax, and GDPR. These are not mere elaborations of the two ground-truth points; they are additional major topics.
+
+Since Coverage fails, Connection is not assessed further."
+7	When a client is deciding whether to fund long-term care costs from pension drawdown rather than buying a long-term care insurance policy, what sequence of FCA COBS 16.6 communication requirements would explain why an adviser might first emphasise income-risk warnings, then compare sustainable withdrawal levels, and only then discuss care-funding trade-offs and insurer exclusions?	- The adviser must first warn that taking income from drawdown can reduce the fund available later, so the client may face a shortfall when long-term care costs arise.\n- The next step is to check whether the proposed withdrawals are sustainable, because higher or earlier income can increase the chance of the pension being exhausted or reduced.\n- Only after that should the adviser compare drawdown against long-term care insurance, since the client’s choice depends on whether the pension can realistically meet future care needs.\n- If insurance is discussed, the adviser must explain that policy exclusions and qualifying conditions can affect whether the policy will actually pay for the type of care the client may need.\n- The overall communication should show that changes to pension withdrawals can alter later access to care funding, which in turn affects whether insurance, drawdown, or a combination is more suitable.	"- First, the adviser should give income-risk warnings: taking income from a pension drawdown can reduce the total pension fund and may adversely affect later benefit provision or the future affordability of long-term care.
+
+- Next, the adviser should make clear that unsustainable withdrawals could create a future funding gap for long-term care needs.
+
+- The adviser should then assess whether the proposed withdrawals are sustainable by considering projected income needs, current expenses, pension longevity, and whether anticipated pension income is sufficient to support future care costs.
+
+- Only after assessing sustainability should the adviser compare whether pension drawdown can realistically fund future care, or whether long-term care insurance may be more suitable.
+
+- The adviser should then explain the care-funding trade-offs between drawdown, insurance, or a combination of both.
+
+- If insurance is being considered, the adviser should discuss policy exclusions, qualifying conditions, and limitations that may affect whether the policy will cover the type of care needed later.
+
+- The adviser should conclude by explaining that changes to pension withdrawals can alter later access to care funding, which directly affects the suitability of drawdown, insurance, or a blended approach."	1	"True
+
+Coverage passes because the prediction includes all the ground-truth points:
+- it warns that drawdown income reduces the fund and can leave a later shortfall for care costs,
+- it checks sustainability of withdrawals and notes unsustainable withdrawals can create a future funding gap,
+- it says drawdown should be compared with long-term care insurance only after that,
+- it mentions insurance exclusions/conditions affecting whether the policy pays,
+- it states that changes to withdrawals alter later access to care funding and affect suitability of drawdown, insurance, or both.
+
+Connection also passes because the prediction does not just list these items; it explicitly gives the required sequence and overall causal conclusion: warnings first, sustainability next, comparison after that, because withdrawal choices affect future care-funding availability and therefore the best funding route."
+8	What are the disclosure requirements for platform fees when an adviser recommends a Stocks and Shares ISA?	"- Advisers must clearly outline all costs associated with the recommended platform, including any initial setup fees, ongoing management charges, and transaction fees.  
+- The adviser should ensure that clients understand how these fees can impact overall investment returns over time.  
+- Any potential additional charges related to fund switches or account closure must also be disclosed to provide a complete picture of possible costs.  
+- The adviser is required to communicate whether the platform has a tiered fee structure, allowing clients to understand how fees may change as their investment grows."	"- Clearly outline all costs associated with the recommended ISA platform, including:
+  - Initial setup fees
+  - Ongoing management/platform charges
+  - Transaction fees
+- Ensure the client understands how platform fees may affect overall investment returns over time.
+- Disclose any additional charges, such as:
+  - Fund-switching fees
+  - Account closure or transfer-related charges
+- Explain whether the platform uses a tiered fee structure, including how fees may change as the client’s investment grows."	1	"True
+
+The prediction covers all of the ground-truth points:
+
+- It names the key categories of platform costs: initial setup fees, ongoing management/platform charges, and transaction fees.
+- It states that these fees can affect overall investment returns over time.
+- It includes additional charges for fund switching and account closure/transfer-related charges.
+- It explains whether the platform uses a tiered fee structure and how fees may change as the investment grows.
+
+It does not mention any of the adversarial wrong-answer topics. Since it fully matches the required disclosure points and directly answers the question, both Coverage and Connection pass."
+9	What are the taxation implications for clients withdrawing funds from a general investment account?	"- Clients must be informed that capital gains tax may apply when funds are withdrawn from a general investment account, depending on any realized gains.  
+- It is essential to clarify that the tax-free allowance for capital gains varies each tax year, which can affect overall tax liability.  
+- An adviser should detail the specific reporting requirements, including the need to declare any capital gains on the client's annual tax return to HM Revenue & Customs.  
+- The adviser must also explain how accumulated dividends within the account could trigger additional tax implications when distributed or reinvested after a withdrawal.  
+- Clients should be made aware of the difference in tax treatment for income generated from investments compared to capital gains, which is pertinent to their overall financial planning."	"- Capital gains tax may apply when withdrawing funds from a general investment account if the withdrawal realizes investment gains.
+
+- Tax is not necessarily due on every withdrawal; liability depends on whether realized gains exceed the capital gains tax-free allowance.
+
+- The capital gains tax allowance/threshold can vary each tax year, so clients should check the applicable allowance before planning withdrawals.
+
+- Clients must report taxable gains accurately, including declaring relevant capital gains on their annual tax return to HMRC.
+
+- Income generated within the account, such as dividends, may be taxed differently from capital gains.
+
+- Accumulated dividends may create additional tax implications when they are distributed or reinvested after a withdrawal.
+
+- Clients should keep adequate records of transactions, gains, dividends, and withdrawals to support accurate tax reporting and avoid penalties or tax complications."	0	"False
+
+Coverage fails because the prediction includes all the main ground-truth points except it adds an extra major point about keeping records to avoid penalties/tax complications, which is not in the ground truth and is more than a mere elaboration of reporting requirements. 
+
+More importantly, the question asks about tax implications for withdrawals from a general investment account, and the ground truth specifically requires the distinction between income and capital gains as part of overall financial planning. The prediction does mention that income is taxed differently from capital gains, so that point is covered. However, because Coverage must be strict and every main point must be present without extra major irrelevant additions, the added record-keeping/penalties point causes Coverage to fail."
+10	What are the warning requirements related to structured products when an adviser recommends these investment types?	"- Advisers must ensure that clients receive clear warnings about the risks associated with structured products, including potential loss of capital and lack of access to the initial investment during the term. 
+-  
+- Additionally, advisers must inform clients about any relevant costs or fees linked to structured products that could impact their overall investment returns."	"- Advisers must give clients clear warnings about the risks associated with structured products.
+- The warnings should include the possibility of loss of capital.
+- The warnings should explain that clients may not have access to their initial investment during the product term.
+- Advisers must also disclose any relevant costs or fees linked to structured products that could reduce overall investment returns."	1	"True
+
+The prediction covers both main points from the ground truth:
+
+- It states that advisers must warn clients about the risks of structured products.
+- It specifically includes the two required risk elements: potential loss of capital and lack of access to the initial investment during the term.
+- It also includes the requirement to disclose relevant costs or fees that could affect returns.
+
+No adversarial wrong-answer content is mentioned. Since the question is asking for the warning requirements, the prediction directly provides those requirements rather than merely listing unrelated facts, so both Coverage and Connection pass."
+11	A first-time homebuyer is comparing two mortgage offers and wants to know why their broker says borrowing capacity fell after the lender tightened affordability checks. Under FCA MCOB 11.6, what sequence of steps in the responsible lending and affordability assessment process would explain a lower maximum loan amount when the lender switches from using the customer’s stated rent to verified expenditure and stress tests?	- The lender first has to assess affordability using information about the customer’s income and committed expenditure rather than relying on the headline mortgage rate alone.\n- If the lender replaces a stated housing cost with verified actual expenditure, the assessed disposable income can fall, which reduces the amount judged affordable.\n- \n- Where the lender applies a home-loan stress rate, the projected monthly payment rises in the assessment, so the maximum borrowing figure can be pushed down even if the customer’s current payments look manageable.\n- As a result, the broker may present a smaller approved amount because the affordability calculation is driven by a stricter evidential check on expenditure plus a more conservative payment-capacity test.	"- Under FCA MCOB 11.6, the lender must carry out a responsible lending affordability assessment before deciding the maximum mortgage amount.
+
+- The lender should assess the borrower’s overall creditworthiness using sufficient information about:
+  - verified income;
+  - existing financial commitments;
+  - regular expenditure;
+  - likely affordability over the mortgage term.
+
+- The lender should not base the lending decision only on the customer’s stated rent, stated income, or other unverified figures.
+
+- The lender must verify the information provided by the borrower during the application process.
+
+- When the lender switches from using the customer’s stated rent to verified expenditure, the assessment may show higher or more complete outgoings than previously assumed.
+
+- Higher verified expenditure reduces the borrower’s assessed disposable income available to support mortgage repayments.
+
+- The lender should also consider potential changes in the borrower’s circumstances over the mortgage term and use robust reasoning and data to support the lending decision.
+
+- If the affordability checks or stress assumptions show the borrower may not comfortably afford repayments, the lender must reduce the maximum loan amount.
+
+- Therefore, the broker’s explanation is that the tightened affordability process produces a lower maximum borrowing capacity because the lender is using verified commitments and expenditure, rather than less reliable stated rent figures, and is testing whether the loan remains affordable over time."	0	"False
+
+Coverage mostly passes on the core ideas, but it fails overall because the prediction omits a key main point from the ground truth: the effect of a home-loan stress rate specifically increasing the projected monthly payment in the affordability assessment, which is part of the causal sequence explaining the lower borrowing capacity. The prediction mentions “stress assumptions” in a general way, but it does not clearly state that applying a stress rate raises the assessed payment and thereby pushes down the maximum borrowing figure.
+
+Also, while the prediction talks about verified expenditure and reduced disposable income, it does not fully capture the exact sequence from the ground truth: affordability is assessed using income plus committed expenditure, then replacing stated housing cost with verified actual expenditure lowers disposable income, and the stress test further reduces the affordable amount. That missing explicit stress-test mechanism means Coverage fails.
+
+Since Coverage fails, Connection is not evaluated further."
+12	What are the disclosure requirements for platform fees when an adviser recommends a Stocks and Shares ISA?	"- Advisers must clearly disclose any platform fees that may apply to clients when recommending a Stocks and Shares ISA, ensuring that all costs are transparent.  
+- The fee structure should be clearly outlined in the advisory documentation, including any ongoing fees or transaction costs associated with the recommended platform.  
+- Clients must be informed about potential additional charges, such as fund management fees or additional service fees that could impact the overall investment performance.  
+- Advisers are required to provide written confirmation of the fee details prior to executing any transactions, ensuring that clients have adequate information to make informed decisions."	"- Advisers must clearly disclose any platform fees that apply when recommending a Stocks and Shares ISA.
+- The advisory documentation should clearly outline the fee structure, including:
+  - Ongoing platform fees
+  - Transaction costs
+  - Any other costs associated with the recommended platform
+- Clients must also be informed about additional charges that may affect investment performance, such as:
+  - Fund management fees
+  - Additional service fees
+- Advisers must provide written confirmation of fee details before executing any transactions, so clients have enough information to make an informed decision."	1	"True
+
+Coverage passes because the prediction includes all four main points from the ground truth: clear disclosure of any applicable platform fees, outlining the fee structure in advisory documentation including ongoing and transaction costs, informing clients about additional charges like fund management and service fees, and providing written confirmation before executing transactions. It does not mention any of the adversarial wrong-answer topics.
+
+Connection also passes because the prediction directly answers the question by stating what disclosure is required for platform fees when recommending a Stocks and Shares ISA, including the practical result that clients are given enough information to make an informed decision before execution."
+13	What loan-to-value limits apply when a client takes out a lifetime mortgage under an equity release plan?	"- Lifetime mortgages usually allow borrowers to access a percentage of their property value, which is referred to as the loan-to-value (LTV) ratio. 
+- The maximum LTV typically ranges from 20% to 60%, depending on the age of the borrower and the specific lender’s criteria. 
+- Lenders may also consider the property type, with certain properties like flats often subject to stricter LTV limits. 
+- Eligibility for higher LTVs generally increases with the borrower’s age, allowing older applicants to release a larger percentage of their home’s value."	"- Lifetime mortgages normally allow borrowing as a percentage of the property value, known as the loan-to-value (LTV) ratio.
+- The maximum LTV typically ranges from **20% to 60%**.
+- The exact limit depends mainly on:
+  - The borrower’s age, with older borrowers generally eligible for higher LTVs.
+  - The lender’s criteria.
+  - The property type, as some properties such as flats may be subject to stricter LTV limits."	1	"True
+
+Coverage passes because the prediction includes all of the ground-truth points: it says lifetime mortgages use a percentage of property value as LTV, gives the typical 20% to 60% range, mentions borrower age and that older borrowers can get higher LTVs, and notes that property type such as flats can face stricter limits. It does not include any of the adversarial wrong-answer content.
+
+Connection also passes because the question asks what loan-to-value limits apply, and the prediction directly answers that by stating the applicable range and the factors that determine where within that range a client falls."
+14	What are the anti-money laundering (AML) requirements for businesses providing foreign exchange services?	"- Firms are required to conduct a risk assessment to identify and mitigate the risks of money laundering in their operations, which should include an evaluation of clients' backgrounds and transaction histories. 
+- Enhanced due diligence must be taken for high-risk customers or transactions, ensuring that source of funds and wealth are thoroughly verified.
+- Ongoing monitoring of customer transactions is essential to identify suspicious behavior, and firms should implement automated systems for real-time alerts on unusual transactions.
+- Staff training programs must be established to inform employees about their responsibilities under AML laws, raising awareness of potential red flags and reporting requirements."	"- Conduct AML risk assessments to identify and mitigate money-laundering risks in foreign exchange operations.
+- Evaluate clients’ backgrounds, including their financial backgrounds and previous transaction histories.
+- Monitor customer transactions on an ongoing basis to identify suspicious or unusual behaviour.
+- Use automated systems where possible to generate real-time alerts for unusual transactions and enable quick responses.
+- Apply enhanced due diligence for high-risk customers or high-risk transactions.
+- Verify the source of funds and source of wealth for high-risk customers or transactions.
+- Establish staff training programmes so employees understand AML responsibilities, potential red flags, and reporting requirements."	1	"True
+
+The prediction covers all of the ground-truth AML requirements:
+
+- It says firms must conduct AML risk assessments to identify and mitigate money-laundering risks.
+- It includes evaluating clients’ backgrounds and transaction histories.
+- It mentions enhanced due diligence for high-risk customers or transactions, including verifying source of funds and source of wealth.
+- It states ongoing monitoring of transactions, with automated real-time alerts for unusual activity.
+- It includes staff training on AML responsibilities, red flags, and reporting requirements.
+
+There are no major contradictory or irrelevant additions, and it does not mention any of the adversarial wrong-answer content. The prediction also explicitly ties these requirements to foreign exchange operations, which fits the question."
+15	For a high-net-worth client wanting to pass wealth to adult children while still keeping an income from the portfolio, how do HMRC’s nil-rate band rules and an adviser’s FCA COBS 9.2 suitability duties shape the sequence of steps that leads to an inheritance tax-efficient estate plan, and why would failing to review the client’s needs properly before recommending a transfer or trust arrangement increase the risk of an unsuitable outcome?	- HMRC’s nil-rate band structure makes the first £325,000 of a person’s estate potentially charged at 0% for IHT, with unused nil-rate band from a deceased spouse or civil partner potentially transferable, so planners often start by mapping how much of the estate can be sheltered before considering more complex transfers.\n- If the estate is expected to exceed available nil-rate bands, the next planning step is usually to assess whether lifetime gifts, trusts, or other transfers shorten the taxable estate, but only after checking how those steps affect the client’s income needs and access to capital.\n- \n- Because COBS 9.2 also requires advisers to have a reasonable basis for believing a transaction or strategy is suitable, a recommendation to use estate-planning vehicles without assessing dependence on portfolio income, liquidity needs, and time horizon can lead to a mismatch between the tax objective and the client’s cash-flow requirements.\n-	"- Start by identifying the client’s objective: transferring wealth to adult children while maintaining sufficient portfolio income and liquidity for their own standard of living.
+
+- Apply the nil-rate band and transferable nil-rate band first:
+  - The nil-rate band allows part of the estate to fall outside inheritance tax on death.
+  - The transferable nil-rate band may increase the available inheritance tax allowance.
+  - If the estate is expected to exceed the available nil-rate bands, the excess may be exposed to inheritance tax.
+
+- Once the likely inheritance tax exposure is known, consider inheritance tax planning tools:
+  - Lifetime gifts may reduce the taxable estate, depending on the type of transfer and timing.
+  - Trusts may help structure wealth transfer, but they can affect access to capital and income.
+  - Any gifting or trust strategy must be tested against the client’s need to retain portfolio income.
+
+- FCA COBS 9.2 shapes the adviser’s process before any recommendation is made:
+  - The adviser must gather detailed information about the client’s knowledge and experience, financial situation, objectives, risk profile, liquidity needs, and income requirements.
+  - The adviser must have a reasonable basis for believing any recommendation is suitable based on that information.
+  - Recommendations must align both with inheritance tax objectives and the client’s need to maintain income.
+
+- The correct sequence is therefore:
+  - Assess the estate value and available nil-rate bands.
+  - Identify the likely inheritance tax exposure.
+  - Gather full suitability information under FCA COBS 9.2.
+  - Assess income, liquidity, capital access, and long-term financial needs.
+  - Compare suitable options such as lifetime gifts or trusts.
+  - Recommend only arrangements that reduce inheritance tax without undermining the client’s financial security.
+  - Review the plan regularly as tax rules, income needs, and financial circumstances change.
+
+- Failing to review the client’s needs properly before recommending a transfer or trust increases the risk of an unsuitable outcome because:
+  - The arrangement may not match the client’s cash-flow or income requirements.
+  - A trust may restrict access to capital needed later.
+  - A transfer may reduce the portfolio income the client relies on.
+  - The estate planning objective may be achieved at the cost of the client’s own financial stability.
+  - The adviser may lack the reasonable basis required under FCA COBS 9.2 to justify the recommendation."	0	"False
+
+Coverage fails because the prediction includes a major point that is not in the ground truth: it says the adviser must gather the client’s “knowledge and experience, risk profile” and “compare suitable options” in a general suitability-process way. The ground truth is narrower and specifically focuses on assessing dependence on portfolio income, liquidity needs, and time horizon before recommending estate-planning vehicles. The prediction also adds a fuller step-by-step planning framework and regular review, which are not stated in the ground truth. Those additions are not just minor elaborations; they shift the answer beyond the required points.
+
+It does cover the main ideas about:
+- using the nil-rate band and transferable nil-rate band first,
+- then considering lifetime gifts or trusts if the estate exceeds available bands,
+- and checking the effect on income/access to capital before recommending them,
+- plus the COBS 9.2 suitability requirement and the risk of mismatch with cash-flow needs.
+
+However, because of the extra major material, Coverage does not pass under the strict standard.
+
+Since Coverage fails, Connection is not evaluated."
+16	What are the disclosure requirements for platform fees when an adviser recommends a Stocks and Shares ISA?	"- Advisers must clearly inform clients about any fees associated with the investment platform, including management fees, transaction fees, and any other charges that may affect the overall amount invested.  
+- The platform must provide clients with a Key Information Document (KID) that outlines all applicable fees and charges in a transparent manner, helping clients make informed decisions about their investments.  
+- Any performance fees based on the account's investment returns must be disclosed as well, including how they are calculated and when they may be applied, ensuring that clients understand the potential impact on their investment growth.  
+- Advisers are responsible for ensuring that clients are aware of any ongoing service fees for administration and maintenance of the Stocks and Shares ISA, which should be disclosed prior to the recommendation."	"- Advisers must clearly disclose all fees associated with the investment platform used for the Stocks and Shares ISA.
+- The disclosure should include:
+  - Management fees
+  - Transaction fees
+  - Any other charges that may affect the overall amount invested
+- The platform must provide a Key Information Document (KID) that transparently outlines all applicable fees and charges.
+- Costs, fund objectives, and risks must be communicated clearly so the client can make an informed investment decision."	0	"False. The prediction covers several of the ground-truth points: it mentions platform fees generally, management fees, transaction fees, other charges, and the KID.
+
+However, Coverage fails because it misses two required main points:
+- It does not mention **performance fees** based on investment returns, including how they are calculated and when applied.
+- It does not mention **ongoing service fees** for administration and maintenance of the Stocks and Shares ISA, which must be disclosed prior to recommendation.
+
+It also adds an extra point about “fund objectives and risks,” which is not part of the ground truth, though that alone would not necessarily fail Coverage if all required points were present.
+
+Since Coverage fails, Connection does not need to be assessed further."
+17	What are the suitability requirements for an adviser when recommending a lifetime mortgage to a client?	"- Advisers must ensure that the recommendation for a lifetime mortgage aligns with the client's overall financial situation and long-term goals. 
+- It is crucial to conduct a thorough assessment of the client’s existing debt, current and future income, and housing needs to establish whether a lifetime mortgage is a beneficial option. 
+- The adviser should also communicate clearly about the implications of the lifetime mortgage on the client's estate and potential inheritance for beneficiaries, given that this type of product can affect the value of the estate. 
+-"	"- Ensure any lifetime mortgage recommendation aligns with the client’s overall financial situation and long-term goals.
+- Conduct a thorough assessment of the client’s:
+  - Existing debts
+  - Current income
+  - Future income
+  - Housing needs
+  - Expenditure and wider financial circumstances
+- Gather sufficient information before making a personal recommendation, including the client’s:
+  - Knowledge and experience
+  - Financial situation
+  - Objectives
+  - Ongoing income needs and access-to-capital requirements
+- Have a reasonable basis for believing the lifetime mortgage is suitable for the client, based on the information gathered.
+- Consider how the lifetime mortgage could affect the client’s estate planning goals, including wealth transfer to children and potential implications for beneficiaries.
+- Explain the implications and risks of the lifetime mortgage clearly so the client can make an informed decision.
+- Review the recommendation in the context of the client’s broader estate plan and adapt it if circumstances or objectives change."	0	"False
+
+Coverage fails because the prediction includes several major ideas that are not in the ground-truth answer and go beyond mere elaboration: it adds knowledge/experience, ongoing income needs, access-to-capital requirements, reasonable basis language, and broad estate-planning review language. While it does cover the main ground-truth points about overall financial situation, debts/income/housing needs, and estate/inheritance implications, it goes further with additional major suitability criteria that are not present in the answer.
+
+Since Coverage fails, Connection does not need to be assessed."
+18	What are the creditworthiness assessment obligations for lenders when providing bridging finance to clients?	"- Lenders must conduct a thorough creditworthiness assessment to ensure that the client can afford to repay the bridging loan, which involves reviewing income, expenditure, and any outstanding debts.  
+-   
+- Additionally, lenders are required to perform an affordability assessment that takes into consideration the client's current financial situation and the potential for changes, especially given the short-term nature of bridging finance.  
+- Regulatory guidelines also stipulate that lenders must document the rationale for their creditworthiness assessment and how it supports their lending decision to ensure transparency and compliance with financial regulations."	"- Lenders must carry out a thorough creditworthiness/affordability assessment before providing bridging finance.
+- The assessment must consider the client’s current financial situation, including:
+  - Income
+  - Expenditure and ongoing expenses
+  - Outstanding debts
+- Lenders must assess whether the client can afford to repay the bridging loan.
+- Because bridging finance is short-term, lenders must also consider potential changes in the client’s circumstances that could affect repayment ability.
+- The purpose of the assessment is to support responsible lending and avoid granting a loan that the client may be unable to repay."	0	False. The prediction covers the main ideas that lenders must assess creditworthiness/affordability using income, expenditure, debts, and possible changes in circumstances for a short-term bridging loan, and that the goal is to ensure repayment ability. However, it misses a required main point from the ground truth: lenders must document the rationale for their creditworthiness assessment and how it supports the lending decision. Since not all ground-truth points are present, Coverage fails, so the answer is False.
+19	When a homeowner is considering an equity release lifetime mortgage, what sequence of FCA MCOB 8 and MCOB 9 disclosure and advising steps is intended to influence whether the customer proceeds, and how do those steps shape the customer’s understanding of costs, risks, and alternatives before application?	- The adviser must first assess and explain the customer’s equity release needs and circumstances before any recommendation is made, so the client’s decision is based on a suitability assessment rather than a product-led sales discussion.\n- The customer must then receive a Key Facts Illustration that sets out the main features, charges, and key risks of the lifetime mortgage, which changes the customer’s understanding from a general interest in releasing equity to an informed view of the borrowing costs and consequences.\n- \n- \n-	"- The adviser should first take reasonable steps to assess the customer’s circumstances, objectives, and needs before recommending a lifetime mortgage.
+
+- This suitability assessment is intended to determine whether equity release is appropriate for the homeowner, rather than assuming the customer should proceed.
+
+- Before application, the adviser should discuss key issues that may affect the decision to proceed, including:
+  - the costs involved;
+  - how interest is calculated;
+  - the possible impact on the customer’s children’s inheritance;
+  - whether alternative options should be explored.
+
+- The adviser should then provide a customer-specific Key Facts Illustration.
+
+- The Key Facts Illustration should set out:
+  - the main features of the lifetime mortgage;
+  - the amount payable;
+  - charges;
+  - other key information enabling comparison with other products or options.
+
+- These steps shape the customer’s understanding by giving them a clear view of the financial cost, long-term risks, and possible alternatives before they commit to an application.
+
+- The process is also intended to help the customer make an informed decision about whether to proceed with the lifetime mortgage at all."	0	"False
+
+Coverage fails because the prediction includes the same general sequence of assessment and a Key Facts Illustration, but it also adds several major points that are not in the ground truth, such as discussing “how interest is calculated,” “the possible impact on the customer’s children’s inheritance,” and “alternatives.” Those are not merely minor elaborations of the provided evidence points; they introduce additional substantive content beyond the ground-truth answer.
+
+Even aside from that, the question’s ground truth is very specific about the sequence: assess circumstances and explain needs first, then provide a Key Facts Illustration covering main features, charges, and key risks. The prediction does include those core ideas, but because it adds major extra points not supported by the ground truth, Coverage does not pass. Therefore Connection is not evaluated further."
+20	What are the disclosure requirements for platform fees when an adviser recommends a Stocks and Shares ISA?	"- The adviser must provide clear information outlining all platform fees associated with the Stocks and Shares ISA, ensuring that the customer understands the total costs involved.  
+- Platform fees must be disclosed both as a percentage of assets under management and as a flat fee, allowing customers to evaluate the cost-effectiveness of the investment.  
+- Advisers are required to communicate any potential transaction costs incurred when buying and selling assets within the ISA, to present a full picture of the investment's impact on performance.  
+- Customers should be informed about any ongoing charges that may apply for maintaining the ISA account, and how these may affect their overall investment returns over time."	"- The adviser must provide clear information outlining all platform fees associated with the Stocks and Shares ISA.
+- The disclosure must enable the client to understand the total costs involved with the investment.
+- Platform fees must be disclosed both:
+  - as a percentage of assets under management; and
+  - as a flat fee."	0	"False
+
+Coverage fails because the prediction includes only part of the ground-truth answer. It correctly mentions:
+- clear information outlining all platform fees,
+- helping the customer understand the total costs,
+- disclosure as both a percentage of assets under management and as a flat fee.
+
+However, it omits two required main points from the ground truth:
+- disclosure of potential transaction costs when buying and selling assets within the ISA,
+- informing customers about any ongoing charges for maintaining the ISA account and their effect on returns.
+
+Because those points are missing, Coverage fails. Connection is therefore not reached."
+21	Under the FCA’s PS23/6 cryptoasset financial promotion rules, what sequence of regulatory changes would most likely lead a retail investor to see fewer cryptoasset investment ads, more “risk-warning first” promotions, and a higher chance that a promoted product is blocked or only shown after an appropriateness assessment?	- The FCA brought most cryptoasset financial promotions into scope of its financial promotion regime, so firms promoting cryptoassets to UK consumers had to comply with new standards rather than rely on general advertising practices.\n- The rules required clear, prominent risk warnings and banned incentives that encourage investment, which changed the structure of promotions away from attention-grabbing marketing and toward warning-led disclosures.\n- A new requirement applied to first-time investors or clients who had not previously self-certified, meaning a promotion could only proceed after an appropriateness assessment or a similar gating step.\n- The FCA introduced a “24-hour cooling-off” style delay for first-time investors, which added friction between seeing a promotion and being able to complete an initial investment.\n- Firms that could not meet the new requirements had to withdraw or amend promotions, which reduced the volume of available consumer-facing cryptoasset adverts and increased the chance that a product would not be shown to a retail customer at all.	"- The FCA brought most cryptoasset financial promotions into the UK financial promotion regime, so firms promoting cryptoassets to UK retail consumers must meet stricter regulatory standards.
+
+- Promotions must now include clear and prominent risk warnings, making ads more “risk-warning first” rather than primarily attention-grabbing marketing.
+
+- For first-time investors who have not previously self-certified, promotions can only continue after an appropriateness assessment or similar knowledge-check process.
+
+- A 24-hour cooling-off period applies to first-time investors before they can complete an initial cryptoasset investment.
+
+- Firms that cannot meet the new standards may have to withdraw, amend, or stop showing their promotions, meaning retail investors are likely to see fewer cryptoasset ads and some promoted products may be blocked or unavailable."	1	"True
+
+Coverage passes because the prediction includes all of the ground-truth’s main points:  
+- most cryptoasset promotions are brought into the FCA financial promotion regime;  
+- promotions must use clear, prominent risk warnings and shift away from flashy incentives;  
+- first-time / not-previously-self-certified investors face an appropriateness assessment or similar gate;  
+- there is a 24-hour cooling-off period;  
+- firms that cannot comply must withdraw or amend promotions, reducing ads and sometimes blocking display entirely.
+
+It also avoids the adversarial wrong-answer topics about ISA charges, crypto business registration/CDD, and lifetime mortgages.
+
+Connection also passes because the prediction does not just list the regulatory changes—it explicitly ties them to the outcome the question asks about: retail investors see fewer crypto ads, more risk-warning-first promotions, and a higher chance that a product is blocked or only shown after an appropriateness assessment."
+22	What are the disclosure requirements for platform fees when an adviser recommends a Stocks and Shares ISA?	"- Advisers must disclose the annual management charges associated with the Stocks and Shares ISA clearly in writing to clients before making the recommendation.  
+- They are also required to explain any additional charges, such as transaction fees or platform fees, that could affect the overall return of the investment.  
+- The key features of the ISA, along with all relevant cost details, must be provided in a standardized format to facilitate comparison with other investment products.  
+- Advisers should ensure that clients receive a detailed breakdown of how fees will impact performance over time, including a projection of potential investment growth net of fees."	"- Advisers must explain any additional charges, including platform fees, that could affect the overall return of the Stocks and Shares ISA.
+- Relevant cost details, including platform fees, must be provided in a standardized format so the client can compare the ISA with other investment products.
+- Advisers should provide a detailed breakdown showing how fees affect performance over time, including projected investment growth net of fees.
+- Annual management charges must also be disclosed clearly in writing before making the recommendation."	1	"True
+
+Coverage passes because the prediction includes all of the ground-truth points: it says annual management charges must be disclosed clearly in writing before recommendation, mentions additional charges including platform fees that affect returns, states that relevant cost details must be given in a standardized format for comparison, and includes a detailed breakdown of fee impact over time with projected growth net of fees.
+
+Connection also passes because the prediction does not merely list requirements; it directly answers the disclosure question by stating what advisers must disclose and how those disclosures should be presented to inform the client about the effect of fees on returns."
+23	What registration and customer due diligence requirements apply to a cryptoasset business under FCA rules?	"- Cryptoasset businesses are required to register with the FCA and disclose their operational details, including the nature of their services and the jurisdictions in which they operate.
+- All cryptoasset businesses must conduct customer due diligence (CDD) to verify the identity of their clients, ensuring that they understand the purpose and intended nature of the relationship.
+- Enhanced due diligence procedures are mandated for customers who present a higher risk, such as non-face-to-face transactions or those from high-risk jurisdictions.
+- Businesses must maintain comprehensive records of their CDD checks, which must be accessible for review by regulatory authorities upon request."	"- Cryptoasset businesses must register with the FCA.
+- They must disclose operational details, including:
+  - The nature of the services they provide.
+  - The jurisdictions in which they operate.
+- They must conduct customer due diligence (CDD), including:
+  - Verifying the identity of clients.
+  - Understanding the purpose and intended nature of the customer relationship.
+- Enhanced due diligence is required for higher-risk customers, such as:
+  - Customers involved in non-face-to-face transactions.
+  - Customers from high-risk jurisdictions.
+- They must maintain comprehensive records of CDD checks.
+- These CDD records must be accessible to regulatory authorities upon request."	1	"True
+
+Coverage passes because the prediction includes all four main ground-truth points:
+1. registration with the FCA and disclosure of operational details,
+2. basic customer due diligence to verify identity and understand the relationship,
+3. enhanced due diligence for higher-risk cases like non-face-to-face transactions and high-risk jurisdictions,
+4. record-keeping of CDD checks with availability to regulators.
+
+Connection also passes because the prediction explicitly answers the “what requirements apply” question by stating the applicable registration and CDD obligations as a coherent set of requirements, not merely a disconnected list."
+24	What factors determine the suitability of an investment in a lifetime mortgage for elderly clients?	"- Advisers must consider the client's current and projected financial situation, including income sources and expenses, to assess the overall sustainability of a lifetime mortgage.  
+- The age of the client greatly influences the loan terms and the amount that can be borrowed, as lenders typically have different criteria based on age brackets.  
+- Advisers are required to provide clients with a detailed explanation of how interest will accumulate over time, affecting the equity remaining in the property.  
+- A clear assessment of the client's long-term care needs is essential, as this can impact their decision to retain equity for future medical or housing expenses.  
+- Finally, advisers should ensure that clients understand the implications of using a lifetime mortgage on their estate and inheritance planning, emphasizing how it may affect beneficiaries."	"- The client’s current and projected financial situation, including income sources and expenses.
+- Whether the lifetime mortgage is sustainable as expenses change with age.
+- The client’s age, as it affects loan terms and the amount that can be borrowed.
+- The amount of home equity the client wants to retain over time.
+- Future financial needs, such as later-life medical or care expenses.
+- The potential impact on beneficiaries or family members, including inheritance considerations."	1	"True
+
+Coverage passes because the prediction includes all five main ideas from the ground truth:
+- current and projected financial situation, income, and expenses;
+- age affecting loan terms and borrowing amount;
+- understanding how equity is affected over time / retaining equity;
+- long-term or future care/medical needs;
+- impact on beneficiaries and inheritance planning.
+
+It does not mention any of the adversarial wrong-answer topics about cryptoassets or Stocks and Shares ISAs, so there is no contamination from the wrong answer.
+
+Connection also passes because the prediction does not merely list factors in isolation; it explicitly ties them to whether the lifetime mortgage is sustainable and suitable over time for the client, which answers the “what factors determine suitability” question."
