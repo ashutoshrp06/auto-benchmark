@@ -201,7 +201,7 @@ def programmatic_adversarial_process(data):
 							if line[9] != str(doc_no):
 								doc_no += 1
 								doc_ans_points[doc_no] = []
-							if "title" not in line.lower():
+							if "title:" not in line.lower():
 								if len(line.strip().split(":")[1]) > 2:
 									pt_candidate = line.strip().split(":")[1].strip()
 									if pt_candidate[0] == "-":
@@ -265,6 +265,8 @@ def programmatic_adversarial_process(data):
 			docs_info_ls = [new_ls[i]["Documents_Info"]]
 			ans_pts_ls = [json.loads(new_ls[i]["Ans_Points"])]
 			doc_ans_pts_ls = [json.loads(new_ls[i]["Doc_Ans_Points"])]
+			numerics = new_ls[i]["Numerics"]
+			seed_type = new_ls[i]["Seed_Type"]
 
 
 			for j in range(len(adv_questions)):
@@ -274,9 +276,9 @@ def programmatic_adversarial_process(data):
 				ans_pts_ls.append(adv_ans_pts[j])
 				doc_ans_pts_ls.append(adv_doc_ans_pts[j])
 
-			final_ls.append([id1, persona, env, sim, reg_text, questions_ls, answers_ls, docs_info_ls, ans_pts_ls, doc_ans_pts_ls])
+			final_ls.append([id1, persona, env, sim, reg_text, numerics, seed_type, questions_ls, answers_ls, docs_info_ls, ans_pts_ls, doc_ans_pts_ls])
 
-		new_df = pd.DataFrame(final_ls, columns = ['ID', 'Persona', 'Environment', 'Similarity', 'Reg_Text', 'Questions', 'Answers', 'Documents_Info', 'Ans_Points', 'Doc_Ans_Points'])
+		new_df = pd.DataFrame(final_ls, columns = ['ID', 'Persona', 'Environment', 'Similarity', 'Reg_Text', 'Numerics', 'Seed_Type', 'Questions', 'Answers', 'Documents_Info', 'Ans_Points', 'Doc_Ans_Points'])
 		new_df['Questions'] = new_df['Questions'].apply(json.dumps)
 		new_df['Answers'] = new_df['Answers'].apply(json.dumps)
 		new_df['Documents_Info'] = new_df['Documents_Info'].apply(json.dumps)
@@ -289,6 +291,148 @@ def programmatic_adversarial_process(data):
 		exc_df = pd.DataFrame(exceptions_ls)
 		exc_df.to_csv(args.out_dir + "/" + args.folder_name + "/" + args.data + "_exceptions.tsv", sep = '\t', index = None)
 
+def strip_conclusion_from_docs_info(d_info):
+	new_lines = []
+	for line in d_info.split("\n"):
+		stripped = line.strip()
+		if stripped.lower().startswith("conclusion:") or stripped.lower().startswith("- conclusion:"):
+			continue
+		idx = line.lower().find("assigned:")
+		if idx != -1:
+			trailing = line[idx + len("assigned:"):].strip()
+			if trailing.lower().startswith("conclusion:"):
+				line = line[:idx + len("assigned:")]
+		new_lines.append(line)
+	return "\n".join(new_lines)
+
+def programmatic_adversarial_process_type3(data):
+	ls = data.to_dict(orient='records')
+	exceptions_ls = []
+	new_ls = []
+
+	for i in range(len(ls)):
+		try:
+			ls_ans_pts = []
+			ls_doc_ans_pts = []
+			og_answer = json.loads(ls[i]["Adv_Answer"])
+
+			for j in range(len(og_answer)):
+				answer = og_answer[j]
+
+				ans_points_og = answer.split("\n")
+				ans_points = []
+				for ans_pt in ans_points_og:
+					if ans_pt[0] == "-":
+						ans_points.append(ans_pt[1:].strip())
+					else:
+						ans_points.append(ans_pt.strip())
+
+				ans_points_copy = [x for x in ans_points.copy() if not x.strip().lower().startswith("conclusion:")]
+
+				if args.verbose:
+					print(f"  [debug] index={i}, j={j}, ans_points={ans_points}")
+
+				docs_info = json.loads(ls[i]["Adv_Documents_Info"])[j]
+
+				doc_ans_points = {1: []}
+				doc_no = 1
+				for line in docs_info.split("\n"):
+					if len(line) > 2:
+						if line[:8] == "Document":
+							if line[9] != str(doc_no):
+								doc_no += 1
+								doc_ans_points[doc_no] = []
+							if "title:" not in line.lower():
+								if len(line.strip().split(":")[1]) > 2:
+									pt_candidate = line.strip().split(":")[1].strip()
+									if pt_candidate[0] == "-":
+										doc_ans_points[doc_no].append(pt_candidate[1:].strip())
+										matches = [x for x in ans_points_copy if x.strip() == pt_candidate[1:].strip()]
+										if matches: ans_points_copy.remove(matches[0])
+									else:
+										doc_ans_points[doc_no].append(pt_candidate)
+										matches = [x for x in ans_points_copy if x.strip() == pt_candidate.strip()]
+										if matches: ans_points_copy.remove(matches[0])
+						else:
+							if line.strip()[0] == "-":
+								doc_ans_points[doc_no].append(line.strip()[1:].strip())
+								matches = [x for x in ans_points_copy if x.strip() == line.strip()[1:].strip()]
+								if matches: ans_points_copy.remove(matches[0])
+							else:
+								doc_ans_points[doc_no].append(line.strip())
+								matches = [x for x in ans_points_copy if x.strip() == line.strip().strip()]
+								if matches: ans_points_copy.remove(matches[0])
+
+				for dn in doc_ans_points:
+					doc_ans_points[dn] = [pt for pt in doc_ans_points[dn] if not pt.strip().lower().startswith("conclusion:")]
+
+				if len(ans_points_copy) > 0.5:
+					if args.verbose:
+						print(f"  [debug] index={i}, j={j} FAILED -- unmatched points: {ans_points_copy}")
+					raise Exception("Some points did not match!")
+
+				ls_ans_pts.append(ans_points)
+				ls_doc_ans_pts.append(doc_ans_points)
+
+			ls[i]["Adv_Ans_Points"] = ls_ans_pts
+			ls[i]["Adv_Doc_Ans_Points"] = ls_doc_ans_pts
+
+			new_ls.append(ls[i])
+		except Exception as e:
+			if args.verbose:
+				print("At index: ", str(i))
+				print("Adv Question: ", ls[i]["Adv_Question"])
+				print("Adv Answer:\n", ls[i]["Adv_Answer"])
+				print("Adv Documents Info:\n", ls[i]["Adv_Documents_Info"])
+				print("Exception: ", str(e))
+				print()
+			exceptions_ls.append(ls[i])
+			continue
+
+	if len(new_ls) > 0:
+		final_ls = []
+
+		for i in range(len(new_ls)):
+			id1 = new_ls[i]["ID"]
+			persona = new_ls[i]["Persona"]
+			env = new_ls[i]["Environment"]
+			sim = new_ls[i]["Similarity"]
+			reg_text = new_ls[i]["Reg_Text"]
+			adv_questions = json.loads(new_ls[i]["Adv_Question"])
+			adv_answers = json.loads(new_ls[i]["Adv_Answer"])
+			adv_docs_info = json.loads(new_ls[i]["Adv_Documents_Info"])
+			adv_ans_pts = new_ls[i]["Adv_Ans_Points"]
+			adv_doc_ans_pts = new_ls[i]["Adv_Doc_Ans_Points"]
+
+			questions_ls = [new_ls[i]["Question"]]
+			answers_ls = [new_ls[i]["Answer"]]
+			docs_info_ls = [strip_conclusion_from_docs_info(new_ls[i]["Documents_Info"])]
+			ans_pts_ls = [json.loads(new_ls[i]["Ans_Points"])]
+			doc_ans_pts_ls = [json.loads(new_ls[i]["Doc_Ans_Points"])]
+			numerics = new_ls[i]["Numerics"]
+			seed_type = new_ls[i]["Seed_Type"]
+
+			for j in range(len(adv_questions)):
+				questions_ls.append(adv_questions[j])
+				answers_ls.append(adv_answers[j])
+				docs_info_ls.append(strip_conclusion_from_docs_info(adv_docs_info[j]))
+				ans_pts_ls.append(adv_ans_pts[j])
+				doc_ans_pts_ls.append(adv_doc_ans_pts[j])
+
+			final_ls.append([id1, persona, env, sim, reg_text, numerics, seed_type, questions_ls, answers_ls, docs_info_ls, ans_pts_ls, doc_ans_pts_ls])
+
+		new_df = pd.DataFrame(final_ls, columns = ['ID', 'Persona', 'Environment', 'Similarity', 'Reg_Text', 'Numerics', 'Seed_Type', 'Questions', 'Answers', 'Documents_Info', 'Ans_Points', 'Doc_Ans_Points'])
+		new_df['Questions'] = new_df['Questions'].apply(json.dumps)
+		new_df['Answers'] = new_df['Answers'].apply(json.dumps)
+		new_df['Documents_Info'] = new_df['Documents_Info'].apply(json.dumps)
+		new_df['Ans_Points'] = new_df['Ans_Points'].apply(json.dumps)
+		new_df['Doc_Ans_Points'] = new_df['Doc_Ans_Points'].apply(json.dumps)
+		new_df.to_csv(args.out_dir + "/" + args.folder_name + "/" + args.data + "_modified.tsv", sep = '\t', index = None, quoting=1)
+		print("Length of Final Data: ", str(len(new_df)))
+
+	if len(exceptions_ls) > 0:
+		exc_df = pd.DataFrame(exceptions_ls)
+		exc_df.to_csv(args.out_dir + "/" + args.folder_name + "/" + args.data + "_exceptions.tsv", sep = '\t', index = None)
 
 def programmatic_docs_process(data):
 	ls = data.to_dict(orient='records')
@@ -307,6 +451,8 @@ def programmatic_docs_process(data):
 		doc_ans_pts = json.loads(ls[i]["Doc_Ans_Points"])
 		docs_list = json.loads(ls[i]["Docs_List"])
 		reg_text = ls[i]["Reg_Text"]
+		numerics = ls[i]["Numerics"]
+		seed_type = ls[i]["Seed_Type"]
 
 		modified_docs_list = []
 		for doc_ls in docs_list:
@@ -338,11 +484,11 @@ def programmatic_docs_process(data):
 			adv_docs_list = modified_docs_list.copy()
 			adv_docs_list.remove(cur_docs)
 
-			new_ls.append([id1, tot_cnt, persona, env, cur_ques, cur_ans, cur_ans_pts, cur_doc_ans_pts, cur_docs, adv_ques, adv_ans, adv_ans_pts, adv_doc_ans_pts, adv_docs_list, reg_text])
+			new_ls.append([id1, tot_cnt, persona, env, cur_ques, cur_ans, cur_ans_pts, cur_doc_ans_pts, cur_docs, adv_ques, adv_ans, adv_ans_pts, adv_doc_ans_pts, adv_docs_list, reg_text, numerics, seed_type])
 			
 			tot_cnt += 1
 	
-	new_df = pd.DataFrame(new_ls, columns = ['Root_ID', 'Question_No', 'Persona', 'Environment', 'Question', 'Answer', 'Ans_Points', 'Doc_Ans_Points', 'Rel_Docs_List', 'Adv_Question', 'Adv_Answer', 'Adv_Ans_Pts', 'Adv_Doc_Ans_Pts', 'Adv_Docs_List', 'Reg_Text'])
+	new_df = pd.DataFrame(new_ls, columns = ['Root_ID', 'Question_No', 'Persona', 'Environment', 'Question', 'Answer', 'Ans_Points', 'Doc_Ans_Points', 'Rel_Docs_List', 'Adv_Question', 'Adv_Answer', 'Adv_Ans_Pts', 'Adv_Doc_Ans_Pts', 'Adv_Docs_List', 'Reg_Text', 'Numerics', 'Seed_Type'])
 	new_df['Ans_Points'] = new_df['Ans_Points'].apply(json.dumps)
 	new_df['Doc_Ans_Points'] = new_df['Doc_Ans_Points'].apply(json.dumps)
 	new_df['Rel_Docs_List'] = new_df['Rel_Docs_List'].apply(json.dumps)
@@ -368,6 +514,9 @@ def main(args):
 	elif args.exp_type == "programmatic_qa_type3":
 		data = pd.read_csv(args.out_dir + "/" + args.folder_name + "/" + args.data + ".tsv", sep='\t')
 		programmatic_qa_process_type3(data)
+	elif args.exp_type == "programmatic_adversarial_type3":
+		data = pd.read_csv(args.out_dir + "/" + args.folder_name + "/" + args.data + ".tsv", sep='\t')
+		programmatic_adversarial_process_type3(data)
 	
 if __name__ == "__main__":
 	parser = build_parser()

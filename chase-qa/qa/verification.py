@@ -21,7 +21,7 @@ def build_parser():
 
 
 	parser.add_argument('-stop', type=list, default=[], help='When to stop generation')
-	parser.add_argument('-model_type', type=str, default='vllm', choices=['completion', 'chat', 'vllm', 'gemini', 'peft', 'anthropic'], help='Which type of model to use')
+	parser.add_argument('-model_type', type=str, default='vllm', choices=['completion', 'chat', 'vllm', 'gemini', 'peft', 'anthropic', 'elm'], help='Which type of model to use')
 	parser.add_argument('-model', type=str, default='meta-llama/Meta-Llama-3.1-70B-Instruct', help='Which model to use')
 	parser.add_argument('-max_tokens', type=int, default=8000, help='Maximum number of tokens')
 	parser.add_argument('-temperature', type=float, default=0.5, help='Sampling temperature')
@@ -643,7 +643,7 @@ def programmatic_adversarial_verify(args, data):
 		for j in range(len(ans_pts)):
 			og_answer = ans[j]
 			ques_to_check = [ques[z] for z in range(len(ques)) if z != j]
-			ans_pts_to_check = ans_pts[j].copy()
+			ans_pts_to_check = [x for x in ans_pts[j].copy() if not x.strip().lower().startswith("conclusion:")]
 			for k in range(len(ans_pts_to_check)):
 				cur_ans_pt = ans_pts_to_check[k]
 				valid = True

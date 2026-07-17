@@ -1,0 +1,63 @@
+{
+  "11": {
+    "persona": "Higher-rate taxpayer deciding where additional monthly savings should go, workplace pension top-up or a stocks & shares ISA",
+    "environment": "Adviser computing net effective return after tax relief on the pension side vs tax-free growth on the ISA side",
+    "seed_type": "generic",
+    "variables": {
+      "monthly_contribution": {"type": "float", "range": [100, 1000]},
+      "marginal_tax_rate": {"type": "float", "range": [0.40, 0.45]},
+      "annual_growth_rate": {"type": "float", "range": [0.03, 0.07]},
+      "years_invested": {"type": "int", "range": [5, 30]},
+      "withdrawal_tax_rate": {"type": "float", "range": [0.20, 0.40]}
+    },
+    "formula": "monthly_rate = (1 + annual_growth_rate) ** (1/12) - 1; n_months = years_invested * 12; gross_monthly_contribution = monthly_contribution / (1 - marginal_tax_rate); pension_fv = gross_monthly_contribution * (((1 + monthly_rate) ** n_months - 1) / monthly_rate); pension_tax_free_lump_sum = pension_fv * 0.25; pension_taxable_portion = pension_fv * 0.75; pension_net_after_tax = pension_tax_free_lump_sum + pension_taxable_portion * (1 - withdrawal_tax_rate); isa_fv = monthly_contribution * (((1 + monthly_rate) ** n_months - 1) / monthly_rate); isa_net_after_tax = isa_fv; net_advantage = pension_net_after_tax - isa_net_after_tax; better_option = 'pension' if pension_net_after_tax > isa_net_after_tax else 'ISA'"
+  },
+  "12": {
+    "persona": "Retiree comparing guaranteed annuity quotes against remaining pot value",
+    "environment": "Adviser computing guaranteed income for life across provider quotes with different escalation/guarantee terms",
+    "seed_type": "generic",
+    "variables": {
+      "pot_value": {"type": "float", "range": [50000, 400000]},
+      "annuity_rate_provider_a": {"type": "float", "range": [0.045, 0.065]},
+      "annuity_rate_provider_b": {"type": "float", "range": [0.045, 0.065]},
+      "guarantee_period_years": {"type": "int", "range": [5, 10]}
+    },
+    "formula": "annual_income_a = pot_value * annuity_rate_provider_a; annual_income_b = pot_value * annuity_rate_provider_b; income_difference = abs(annual_income_a - annual_income_b); better_provider = 'A' if annual_income_a > annual_income_b else 'B'; guaranteed_minimum_payout_a = annual_income_a * guarantee_period_years; guaranteed_minimum_payout_b = annual_income_b * guarantee_period_years"
+  },
+  "13": {
+    "persona": "Mid-career client with a stated moderate risk tolerance, existing multi-asset portfolio",
+    "environment": "Adviser reviewing whether current asset allocation matches the client's risk profile",
+    "seed_type": "generic",
+    "variables": {
+      "portfolio_annual_return": {"type": "float", "range": [0.03, 0.10]},
+      "portfolio_volatility": {"type": "float", "range": [0.05, 0.20]},
+      "risk_free_rate": {"type": "float", "range": [0.03, 0.05]},
+      "client_risk_band": {"type": "int", "range": [1, 5]}
+    },
+    "formula": "sharpe_ratio = (portfolio_annual_return - risk_free_rate) / portfolio_volatility; target_volatility_for_band = 0.04 + (client_risk_band - 1) * 0.04; volatility_mismatch = portfolio_volatility - target_volatility_for_band; is_overexposed = portfolio_volatility > target_volatility_for_band"
+  },
+  "14": {
+    "persona": "Client holding an onshore investment bond, wants a lump sum without triggering a chargeable event",
+    "environment": "Adviser calculating the 5% cumulative tax-deferred withdrawal allowance and unused allowance carry-forward",
+    "seed_type": "generic",
+    "variables": {
+      "original_investment": {"type": "float", "range": [50000, 300000]},
+      "policy_years_elapsed": {"type": "int", "range": [1, 15]},
+      "cumulative_withdrawals_to_date": {"type": "float", "range": [0, 50000]},
+      "requested_withdrawal": {"type": "float", "range": [1000, 30000]}
+    },
+    "formula": "annual_allowance = original_investment * 0.05; cumulative_allowance_available = min(annual_allowance * policy_years_elapsed, original_investment) - cumulative_withdrawals_to_date; chargeable_event_gain = max(0, requested_withdrawal - cumulative_allowance_available); within_allowance = requested_withdrawal <= cumulative_allowance_available"
+  },
+  "15": {
+    "persona": "Client with a young family, existing life cover from a previous employer scheme, new mortgage",
+    "environment": "Adviser assessing whether existing cover meets income-replacement and mortgage-payoff need",
+    "seed_type": "generic",
+    "variables": {
+      "annual_income": {"type": "float", "range": [25000, 90000]},
+      "income_replacement_years": {"type": "int", "range": [10, 20]},
+      "existing_life_cover": {"type": "float", "range": [50000, 400000]},
+      "outstanding_mortgage_balance": {"type": "float", "range": [100000, 400000]}
+    },
+    "formula": "required_cover = (annual_income * income_replacement_years) + outstanding_mortgage_balance; shortfall = max(0, required_cover - existing_life_cover); adequately_covered = existing_life_cover >= required_cover"
+  }
+}

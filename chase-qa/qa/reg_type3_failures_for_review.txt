@@ -1,0 +1,462 @@
+=== FAILURE 1 (Root_ID: 1) ===
+
+QUESTION:
+A client aged 59 is approaching retirement and wants to move part of their pension into drawdown while also taking an early taxable cash withdrawal. If the adviser does not carry out a proper COBS 9.2 suitability assessment before recommending the drawdown arrangement, and the client then accesses taxable income from their money purchase pension, what sequence of regulatory events is triggered, and how does that affect the client’s ability to continue making money purchase pension contributions under the MPAA rules?
+
+GROUND TRUTH:
+- FCA COBS 9.2 requires a suitability assessment before a firm makes a personal recommendation about a pension transfer, pension conversion, or a drawdown arrangement.\n- FCA COBS 9.2 requires the adviser to obtain sufficient information about the client’s knowledge and experience, financial situation, and investment objectives before giving a personal recommendation.\n- HMRC PTM056510 states that taking taxable income from flexible drawdown or flexi-access drawdown is one of the trigger events for the money purchase annual allowance.\n- HMRC PTM056510 states that once the money purchase annual allowance is triggered, the individual has a specific money purchase annual allowance of £10,000 (for tax year 2023-24 onwards), and any unused money purchase annual allowance cannot be carried forward to later tax years.\n- HMRC PTM056510 states that the MPAA applies to future money purchase contributions made by the individual after the trigger event.\n- Conclusion: If the adviser fails to complete the required suitability assessment before recommending drawdown and the client then takes taxable income, the client enters an MPAA-triggered position that restricts future money purchase pension contributions.
+
+PREDICTION:
+Based on the provided documents, here is the sequence of regulatory events and the effect on the client's contribution limits:
+
+*   A firm making a personal recommendation about a drawdown arrangement must carry out a suitability assessment.
+*   As part of this assessment, the adviser must obtain sufficient information about the client’s knowledge and experience, financial situation, and investment objectives before giving a personal recommendation.
+*   Even if the proper suitability assessment is missing, the tax allowance consequence follows regardless: taking taxable income from flexi-access drawdown is a trigger event for the money purchase annual allowance (MPAA).
+*   After the MPAA is triggered, the client's annual allowance for future money purchase contributions is reduced from £60,000 to the MPAA limit.
+
+JUDGE EXPLANATION:
+False
+
+Coverage fails because the prediction does not include all of the ground-truth evidence points in the required way.
+
+What it does cover:
+- It says a suitability assessment is required before a recommendation about drawdown.
+- It says the adviser must obtain sufficient information about the client’s knowledge/experience, financial situation, and investment objectives.
+- It says taking taxable income from flexi-access drawdown triggers the MPAA.
+
+What is missing or insufficient:
+- It does **not** state that once triggered, the MPAA is specifically **£10,000 for tax year 2023-24 onwards**.
+- It does **not** state that **unused MPAA cannot be carried forward** to later tax years.
+- It does **not** clearly state that the MPAA applies to **future money purchase contributions made after the trigger event**.
+- Its statement that the allowance is reduced “from £60,000 to the MPAA limit” is not the ground-truth point and introduces an irrelevant/incorrect major detail.
+
+Because Coverage fails, we do not reach Connection.
+
+TAG (fill in: missing_coverage / phrasing_strictness / off_topic / other):
+
+================================================================================
+
+=== FAILURE 2 (Root_ID: 1) ===
+
+QUESTION:
+A client is buying a first home and asks whether a Help to Buy ISA bonus can still be claimed if the property value and deposit timing change. If the conveyancer submits the government bonus request after completion, and the client has already exchanged contracts on a property above the scheme’s price cap, what sequence of scheme rules determines whether the bonus is payable and what happens to the claim?
+
+GROUND TRUTH:
+- The Help to Buy ISA bonus is only available when the buyer is purchasing a qualifying first home under the scheme rules.
+- The scheme sets a maximum property value cap for the home being bought.
+- The bonus claim must be made by the conveyancer before completion of the purchase and within the scheme timing rules.
+- A claim submitted after completion does not meet the scheme process for paying the bonus.
+- A property above the price cap is outside the qualifying conditions for the bonus.
+- Conclusion: If the conveyancer claims the bonus after completion and the buyer has exchanged on a property above the cap, the claim fails under the scheme rules and the bonus is not payable.
+
+PREDICTION:
+Based on the provided documents, here is the sequence of scheme rules and the outcome for the claim:
+
+* **Qualifying First Home:** The Help to Buy ISA bonus is only available when the buyer is purchasing a qualifying first home under the scheme rules.
+* **Maximum Property Value Cap:** The scheme sets a maximum property value cap for the home being bought. A property above this price cap is outside the qualifying conditions for the bonus.
+* **Timing of the Claim:** The bonus claim must be made by the conveyancer before completion of the purchase and within the scheme timing rules. 
+* **Outcome of the Claim:** Because the claim was submitted after completion, it does not meet the scheme process for paying the bonus (and the property being above the price cap also means it fails the qualifying conditions).
+
+JUDGE EXPLANATION:
+False
+
+Coverage fails because the prediction includes all of the ground-truth evidence points, but it does not cleanly preserve the required causal conclusion in the specific form asked for. The ground truth’s conclusion is that when the conveyancer claims after completion and the buyer has exchanged on a property above the cap, the claim fails under the scheme rules and the bonus is not payable. The prediction says the claim “does not meet the scheme process for paying the bonus” and that the property being above the cap means it fails the qualifying conditions, but it stops short of explicitly stating the combined causal conclusion that the claim fails and the bonus is not payable in that scenario.
+
+Since Coverage is not fully satisfied to the required strictness, Connection is not reached.
+
+TAG (fill in: missing_coverage / phrasing_strictness / off_topic / other):
+
+================================================================================
+
+=== FAILURE 3 (Root_ID: 1) ===
+
+QUESTION:
+A tenant is moving into a new rental property and asks whether the tenancy deposit can be protected after the landlord has already taken the money, if the landlord later serves the prescribed information late. If the deposit is not protected within the statutory deadline and the court is asked to deal with the breach, what sequence of housing law events is triggered and what remedies become available to the tenant?
+
+GROUND TRUTH:
+- The deposit must be protected in an authorised tenancy deposit scheme within the statutory time limit after it is received.
+- The landlord must give the tenant the prescribed information within the same statutory period.
+- A failure to comply with the deposit protection requirements prevents a valid section 21 possession notice until the deposit issue is remedied.
+- The tenant can apply to the court for a financial penalty for the non-compliance.
+- Conclusion: If the landlord misses the deposit protection deadline and gives the prescribed information late, the tenancy falls into a deposit-protection breach position that can block a section 21 eviction route and expose the landlord to a penalty claim.
+
+PREDICTION:
+Based on the provided documents, here is the sequence of events and available remedies:
+
+*   **Statutory Deadline & Sequence:** The deposit must be protected in an authorised tenancy deposit scheme within the statutory time limit after it is received (receipt of the money starts the clock). 
+*   **Prescribed Information:** The landlord is also required to provide the tenant with the prescribed information within this
+
+JUDGE EXPLANATION:
+False
+
+Coverage fails because the prediction only includes two evidence points: that the deposit must be protected within the statutory time limit after receipt, and that prescribed information must be given within the same period. It does not mention the key legal consequence of non-compliance: that a valid section 21 possession notice is prevented until the breach is remedied, nor does it mention the tenant’s ability to apply for a financial penalty. Those are required main points from the ground truth.
+
+Since Coverage fails, Connection is not reached.
+
+TAG (fill in: missing_coverage / phrasing_strictness / off_topic / other):
+
+================================================================================
+
+=== FAILURE 4 (Root_ID: 2) ===
+
+QUESTION:
+Under the FCA MCOB 11.6 responsible lending and affordability rules, if a lender changes from treating the mortgage term as repayment-only with a standard income stress test to re-running affordability using the borrower’s verified committed expenditure and likely changes in income over the term, what sequence of regulatory steps and assessment outcomes would explain a decline in the number of borrowers receiving maximum loan offers?
+
+GROUND TRUTH:
+- The lender must carry out a reasonable assessment of whether the customer can meet the mortgage repayments in a sustainable manner.\n- The affordability assessment must take account of the customer’s income, committed expenditure, and basic essential living expenses.\n- \n- The rules require the lender to consider likely changes to income over the duration of the mortgage term.\n- The lender must not rely solely on the value of the property or on the customer’s current financial position without considering the full affordability assessment.\n- Conclusion: Replacing a simpler repayment stress test with a full MCOB 11.6 affordability assessment that includes verified expenditure and expected income changes reduces the number of borrowers who qualify for the maximum available loan amount.
+
+PREDICTION:
+Based on the provided documents, the sequence of regulatory steps and assessment outcomes that explains the decline in maximum loan offers is as follows:
+
+*   **Conduct a Reasonable Assessment:** The lender must conduct a reasonable assessment of the customer’s ability to repay the mortgage in a sustainable way, rather than just relying on a simplified calculator or blunt rule of thumb.
+*   **Assess Complete Expenditure:** Under MCOB rules, the affordability assessment must take account of the customer’s income, committed expenditure, and basic essential living expenses to capture the true shape of the budget.
+*   **Account for Future Changes:** The lender must use sufficient information and take account of likely changes to income over the mortgage term, rather than basing the lending decision only on the property value or the customer’s present financial situation.
+*   **Impact of Living Expenses:** Once real expenses are included, if a borrower's essential living expenses are high, the disposable income available for the mortgage goes down.
+*   **Impact of Future Obligations:** Factoring in future obligations and likely changes in income prevents the assessment from overstating what the customer can sustainably borrow.
+*   **Final Outcome (Decline in Offers):** This more robust and realistic affordability analysis narrows the pool of borrowers who can comfortably support the highest loan amounts, directly resulting in fewer borrowers receiving maximum loan offers.
+
+JUDGE EXPLANATION:
+False
+
+Coverage fails because the prediction includes the main regulatory steps from the ground truth, but it also adds extra major points that are not in the ground truth and are not merely elaborations: specifically, the discussion of “high essential living expenses” reducing disposable income and “future obligations” preventing overstatement of borrowing capacity. Those are new substantive points beyond the required evidence list. The ground truth also requires the lender not to rely solely on property value or current financial position; the prediction does mention this. However, because Coverage must be strict and all major points must match without adding irrelevant major points, Coverage fails.
+
+Since Coverage fails, Connection is not reached.
+
+TAG (fill in: missing_coverage / phrasing_strictness / off_topic / other):
+
+================================================================================
+
+=== FAILURE 5 (Root_ID: 2) ===
+
+QUESTION:
+Under FCA ICOBS rules on non-investment insurance product disclosures, if a firm switches from giving a brief summary at sale to checking the customer’s demands and needs, comparing the policy’s main exclusions and excesses against those needs, and using pre-contract information to flag situations where cover may be unsuitable, what sequence of regulatory steps and assessment outcomes would explain a fall in the number of customers taking the highest-priced policy package?
+
+GROUND TRUTH:
+- The disclosure must include the main features, significant exclusions, and excesses of the insurance policy.
+- The firm must provide pre-contract information that is clear, fair, and not misleading.
+- The assessment must compare the policy’s benefits and limitations with the customer’s stated protections and budget.
+- Policies that do not match the customer’s requirements must be highlighted as unsuitable before the sale proceeds.
+- Conclusion: Replacing a simple summary with a full demands-and-needs and disclosure review reduces the number of customers accepting the highest-priced policy package.
+
+PREDICTION:
+Based on the provided documents, the sequence of regulatory steps and assessment outcomes that explains a fall in the number of customers taking the highest-priced policy package is as follows:
+
+*   **Providing Clear Pre-Contract Information:** The firm must provide pre-contract information that is clear, fair, and not misleading, ensuring the customer understands the actual terms rather than just an attractive marketing headline (Document 5).
+*   **Disclosing Key Details:** The disclosure must explicitly include the main features, significant exclusions, and excesses of the insurance policy, which a brief summary would typically leave out (Document 3).
+*   **Comparing Against Customer Needs:** The firm's assessment must actively compare the policy’s benefits and limitations with the customer’s stated protections and budget (Document 13).
+*   **Flagging Unsuitable Policies:** Policies that do not match the customer’s requirements (e.g., if the highest-priced package includes extras the customer does not want) must be highlighted as unsuitable before the sale proceeds (Document 10).
+*   **Assessment Outcome:** By making the limitations and exclusions visible and directly comparing them to the customer's actual priorities, the firm often reveals that a lower-cost policy is a more effective fit. This informed, selective process naturally steers customers away from mismatches, reducing the uptake of the highest-priced package (Documents 3, 5, 10, and 13).
+
+JUDGE EXPLANATION:
+False
+
+Coverage fails because the prediction does include all four required evidence points from the ground truth in substance:
+
+- clear, fair, not misleading pre-contract information,
+- disclosure of main features, significant exclusions, and excesses,
+- comparison of benefits and limitations against the customer’s stated protections and budget,
+- highlighting policies that do not match requirements as unsuitable.
+
+However, the prediction adds a major extra point that is not in the ground truth: it says the process “often reveals that a lower-cost policy is a more effective fit” and “naturally steers customers away from mismatches.” That is an additional substantive outcome not stated in the ground truth evidence, which only says unsuitable policies are highlighted before sale.
+
+Even if Coverage were accepted, Connection would still fail because the prediction does not state the specific causal conclusion from the ground truth in the required form: that replacing a simple summary with a full demands-and-needs and disclosure review reduces the number of customers accepting the highest-priced policy package. It gestures at reduced uptake, but it does not cleanly state the exact causal conclusion as the answer to the regulatory question.
+
+TAG (fill in: missing_coverage / phrasing_strictness / off_topic / other):
+
+================================================================================
+
+=== FAILURE 6 (Root_ID: 3) ===
+
+QUESTION:
+For a high-net-worth client who wants to reduce the inheritance tax exposure of a taxable estate while keeping the advice compliant, how does the interaction between the HMRC nil-rate band rules, the residence nil-rate band taper, and FCA COBS 9.2 suitability requirements affect the sequence of an adviser’s recommendations when the client considers gifting part of a property portfolio to descendants and retaining other assets for income?
+
+GROUND TRUTH:
+- HMRC inheritance tax legislation provides a nil-rate band of £325,000 for an individual estate.\n- The residence nil-rate band is available where a qualifying residential interest passes on death to direct descendants.\n- The residence nil-rate band is tapered where the net estate exceeds £2 million.\n- \n- \n- FCA COBS 9.2 requires the adviser to consider whether the client can financially bear the related investment risks and losses before making the recommendation.\n- Conclusion: The evidence supports that an adviser must first establish the client’s full financial position and objectives, then assess how the nil-rate band and the tapered residence nil-rate band affect the estate, and only then recommend a gifting or retention strategy that is suitable under FCA rules.
+
+PREDICTION:
+Based on the provided documents, here is how the interaction between the rules affects the sequence of the adviser's recommendations:
+
+*   **Initial Fact-Finding (FCA COBS 9.2):** The sequence must begin by gathering the client's essential facts to understand their actual position, including their financial situation, investment objectives, knowledge, experience, and ongoing income requirements.
+*   **Estate Valuation:** The adviser must establish the full net value of the estate before any gifting strategy is recommended to accurately measure the initial inheritance tax exposure.
+*   **Applying the Standard Nil-Rate Band:** The adviser must assess how the standard £325,000 inheritance tax nil-rate band applies to the individual's estate.
+*   **Applying the Residence Nil-Rate Band and Taper:** The adviser must determine if the residence nil-rate band applies (which requires a qualifying residence to pass to direct descendants) and calculate the taper, as the relief is reduced for estates with a net value exceeding £2 million.
+*   **Suitability and Risk Assessment for Retained Income:** Before recommending the gift, the adviser must evaluate whether the client can financially bear the investment risks and losses (such as property value fluctuations, voids, and liquidity issues) associated with the assets retained for income.
+*   **Final Recommendation Sequence:** To remain compliant, the strict order of advice must be: complete the fact-find -> evaluate the estate value and test the impact of the nil-rate band and tapered residence nil-rate band -> conduct the suitability test for risk tolerance on retained assets -> finally, recommend whether the strategy of gifting part of the property and retaining the rest is suitable.
+
+JUDGE EXPLANATION:
+False
+
+Coverage fails because the prediction does not fully match the ground-truth evidence points and adds some extra framing that is not in the answer.
+
+What the ground truth requires:
+- The standard HMRC nil-rate band of £325,000.
+- The residence nil-rate band applies only if a qualifying residence passes to direct descendants.
+- The residence nil-rate band is tapered when the net estate exceeds £2 million.
+- FCA COBS 9.2 requires assessing whether the client can financially bear the related investment risks and losses before recommending.
+- Then the adviser should recommend a gifting/retention strategy.
+
+What the prediction includes:
+- It does mention the £325,000 nil-rate band.
+- It does mention the residence nil-rate band and the direct-descendants condition.
+- It does mention the taper above £2 million.
+- It does mention FCA COBS 9.2-style suitability and ability to bear risks/losses.
+- It does give a final sequence leading to a gifting/retention recommendation.
+
+Why Coverage still fails:
+- The prediction introduces extra major content about “investment objectives, knowledge, experience,” “ongoing income requirements,” and specific property-related risks like “voids” and “liquidity issues.” These are not in the ground-truth answer and go beyond mere elaboration of the listed points.
+- More importantly, the ground truth’s conclusion is specifically about first establishing the client’s full financial position and objectives, then assessing how the nil-rate band and tapered residence nil-rate band affect the estate, and only then recommending a suitable gifting or retention strategy. The prediction’s sequence is close, but it is framed more broadly and does not cleanly preserve the exact causal emphasis without adding unrelated suitability concepts.
+
+Because Coverage fails, Connection is not reached.
+
+TAG (fill in: missing_coverage / phrasing_strictness / off_topic / other):
+
+================================================================================
+
+=== FAILURE 7 (Root_ID: 3) ===
+
+QUESTION:
+When a small business customer is considering card payment acceptance and a chargeback reserve, how do PCI DSS controls, PSD2 strong customer authentication, and FCA payment services conduct requirements affect the sequence of a provider’s recommendations about whether to enable tokenised recurring payments or keep transactions manual?
+
+GROUND TRUTH:
+- PCI DSS requires cardholder data to be protected through technical and operational controls before payment card processing is configured.
+- PSD2 strong customer authentication applies to many electronic payment transactions and sets an authentication step for the payment flow.
+- FCA payment services conduct rules require the provider to give information that is clear, fair, and not misleading.
+- FCA conduct and due diligence requirements call for the provider to understand the customer’s business model, transaction profile, and operational risks before recommending a payment setup.
+- Conclusion: The evidence supports that the provider should first gather the business and transaction facts, then assess the PCI DSS and PSD2 control implications, and only then recommend tokenised recurring payments or manual processing in a way that is compliant and suitable.
+
+PREDICTION:
+Based on the provided documents, the sequence of a provider's recommendations regarding tokenised recurring payments versus manual transactions is shaped by these requirements in the following ways:
+
+*   **PCI DSS Controls:** The provider must establish the protection of cardholder data as a prior condition. Technical and operational controls (such as access, encryption, network segmentation, logging, vulnerability management, and staff procedures) must be in place and understood before the provider can recommend whether to enable tokenised recurring payments or retain manual processing. 
+*   **PSD2 Strong Customer Authentication:** Because PSD2 applies an authentication step to many electronic payment flows, the provider must first map how strong customer authentication will operate across the transactions. The provider must design around this regulated authentication requirement first, and only then compare the merits of tokenised recurring payments with manual processing.
+*   **FCA Payment Services Conduct Requirements:** The provider must first conduct due diligence to understand the customer’s specific business model, transaction profile, and operational risks (such as billing frequency and chargeback levels). 
+*   **FCA Clear, Fair, and Not Misleading Communication:** After understanding the business profile, the provider must explain the features, limitations, and implications of the payment options in a clear, fair, and not misleading way. Only after this analysis and explanation can the provider make a suitable recommendation between tokenised recurring automation and manual handling.
+
+JUDGE EXPLANATION:
+False
+
+Coverage fails because the prediction does not fully match the ground-truth evidence points and conclusion.
+
+What matches:
+- It mentions PCI DSS requiring protection of cardholder data through technical and operational controls before configuration.
+- It mentions PSD2 strong customer authentication applying to many electronic payment flows and needing to be accounted for.
+- It mentions FCA conduct requirements to understand the customer’s business model, transaction profile, and operational risks before recommending a setup.
+- It mentions clear, fair, and not misleading communication.
+
+What is missing or only partially covered:
+- The ground truth specifically says FCA payment services conduct rules require the provider to give information that is clear, fair, and not misleading. The prediction mentions this, but it frames it as a separate “FCA Clear, Fair, and Not Misleading Communication” point rather than clearly tying it to the payment services conduct rules. That is acceptable as paraphrase.
+- However, the required causal conclusion is not stated in the same form as the ground truth: the provider should first gather the business and transaction facts, then assess the PCI DSS and PSD2 control implications, and only then recommend tokenised recurring payments or manual processing in a compliant and suitable way. The prediction gives a similar sequence, but it does not explicitly state the final recommendation must be about choosing tokenised recurring payments or manual processing in a compliant and suitable way as the causal conclusion. It is close, but not sufficiently explicit for the required conclusion standard.
+
+Because Coverage is not fully satisfied to the strict standard requested, the overall verdict is False.
+
+TAG (fill in: missing_coverage / phrasing_strictness / off_topic / other):
+
+================================================================================
+
+=== FAILURE 8 (Root_ID: 4) ===
+
+QUESTION:
+Under the FCA MCOB 8 and MCOB 9 equity release rules, what sequence of adviser disclosures and suitability/illustration steps is intended to prevent a customer from proceeding after they first learn that the lifetime mortgage could be repaid early only with a substantial early repayment charge, and how do those rules interact to affect the customer’s decision process?
+
+GROUND TRUTH:
+- MCOB 9 requires a firm to provide a KFI or other illustration before mortgage completion, with prescribed information about the mortgage and its costs.\n- MCOB 8 requires the adviser to give the customer a suitability assessment and, where appropriate, a suitability letter or record setting out the recommendation and the reasons for it.\n- The equity release disclosure rules require the adviser to explain that taking out a lifetime mortgage may affect entitlement to means-tested benefits and the value of the customer’s estate.\n- \n- \n- Conclusion: The FCA MCOB 8 and MCOB 9 equity release disclosure and suitability steps are designed to ensure the customer receives the key risks and cost information before commitment, reducing the chance that the customer proceeds without understanding the consequences of early repayment and long-term estate impact.
+
+PREDICTION:
+No relevant information found in the documents.
+
+JUDGE EXPLANATION:
+False
+
+Coverage fails because the prediction says only “No relevant information found in the documents,” so it does not mention any of the required ground-truth evidence points:
+
+- no KFI/illustration before completion with prescribed mortgage/cost information,
+- no suitability assessment or suitability letter/record with recommendation and reasons,
+- no disclosure about means-tested benefits or the effect on the customer’s estate.
+
+Since none of the evidence points are present, there is no need to assess Connection.
+
+TAG (fill in: missing_coverage / phrasing_strictness / off_topic / other):
+
+================================================================================
+
+=== FAILURE 9 (Root_ID: 4) ===
+
+QUESTION:
+Under FCA COBS and PROD rules for packaged retail investment products, what sequence of risk warnings, product-governance checks, and pre-sale disclosure steps is intended to stop a retail customer from buying a structured product after first learning that the return depends on an equity index and may be lost if barriers are breached, and how do those rules interact to shape the customer’s decision process?
+
+GROUND TRUTH:
+- Firms must identify the target market for a structured product before it is marketed to retail customers.
+- The product information must explain the payoff structure, including dependence on the underlying equity index and any barrier conditions.
+- Risk warnings must be given before the customer commits to the purchase, with prominent disclosure of the chance of capital loss.
+- The distributor must check that the product is appropriate for the intended customer segment before sale.
+- The sales process must provide enough information for the customer to compare the product with simpler investments before proceeding.
+- Conclusion: The FCA product-governance and pre-sale disclosure steps are designed to place the key structure and risk information before commitment, preventing a retail customer from buying without understanding the barrier risk and possible capital loss.
+
+PREDICTION:
+Based on the provided documents, the sequence of rules and steps intended to guide and protect a retail customer considering a structured product is as follows:
+
+*   **Target Market Identification:** Firms must identify the target market for a structured product before it is ever marketed to retail customers.
+*   **Appropriateness Checks:** During distribution, the distributor must check that the product is appropriate for the intended customer segment before any sale goes through.
+*   **Payoff and Barrier Disclosure:** The pre-sale product information must explicitly explain the payoff structure, including its dependence on the underlying equity index and any barrier conditions, so the customer understands how the return emerges and what happens if barriers are breached.
+*   **Comparison with Simpler Alternatives:** The sales process must provide enough information for the customer to compare the structured product with simpler investments before proceeding, ensuring the product is judged against alternatives rather than accepted on first impression.
+*   **Prominent Risk Warnings:** Risk warnings must be given before the customer commits to the purchase, including a prominent disclosure of the chance of capital loss. 
+*   **Best Interests Rule (COBS 2.1.1R):** Firms must act honestly, fairly, and professionally in accordance with the best interests of their client when giving a personal recommendation.
+*   **Interaction and Decision Shaping:** Together, these rules interact to slow the process down just enough so that the customer sees the core risks and mechanics. By placing target market checks, comparisons, and prominent warnings *before* the point of commitment, the rules ensure the disclosures actively influence the decision-making process, resulting in an informed choice rather than a rushed decision based on headline features.
+
+JUDGE EXPLANATION:
+False
+
+Coverage fails because the prediction includes all of the ground-truth evidence points, but it also adds a major extra point not present in the ground truth: the “Best Interests Rule (COBS 2.1.1R).” That is not merely an elaboration of the listed product-governance/pre-sale disclosure steps; it is an additional rule and therefore a major irrelevant point under the strict coverage standard.
+
+Since Coverage fails, Connection is not reached.
+
+TAG (fill in: missing_coverage / phrasing_strictness / off_topic / other):
+
+================================================================================
+
+=== FAILURE 10 (Root_ID: 4) ===
+
+QUESTION:
+Under FCA ICOBS insurance distribution rules, what sequence of pre-sale demands-and-needs questioning, product information disclosure, and disclosure of exclusions is intended to prevent a customer from purchasing travel insurance after first learning that a pre-existing medical condition is excluded, and how do those rules interact to shape the customer’s decision process?
+
+GROUND TRUTH:
+- Key exclusions and limitations must be set out in the policy information.
+- Conclusion: The ICOBS disclosure and demands-and-needs steps are designed to put the medical-condition exclusion and other key terms in front of the customer before commitment, reducing the chance that the customer proceeds without understanding the cover gap.
+
+PREDICTION:
+Based on the provided documents, the sequence and interaction of these pre-sale steps are as follows:
+
+*   **Demands-and-Needs Questioning:** The process starts with demands-and-needs questions to identify the customer's specific circumstances and requirements (such as relevant pre-existing medical conditions) so the product can be matched to their trip before any decision is made
+
+JUDGE EXPLANATION:
+False
+
+Coverage fails because the prediction only mentions the demands-and-needs questioning step. The ground truth also requires that **key exclusions and limitations must be set out in the policy information**, and that point is missing. The prediction does not mention disclosure of exclusions or limitations before purchase.
+
+Since Coverage fails, Connection is not reached. Even so, the prediction also does not state the required causal conclusion that the ICOBS steps are designed to put the medical-condition exclusion and other key terms in front of the customer before commitment, reducing the chance of purchase without understanding the cover gap.
+
+TAG (fill in: missing_coverage / phrasing_strictness / off_topic / other):
+
+================================================================================
+
+=== FAILURE 11 (Root_ID: 4) ===
+
+QUESTION:
+Under FCA CASS and client money safeguarding rules for investment firms, what sequence of segregation, reconciliation, and disclosure steps is intended to stop a client from continuing to transact after first learning that their cash is being held in a client money account with a shortfall risk, and how do those rules interact to shape the client’s understanding of custody risk?
+
+GROUND TRUTH:
+- Client money must be segregated from the firm’s own money in a designated client money account.
+- Firms must perform regular client money reconciliations and identify any shortfall between ledger records and bank balances.
+- Where a shortfall is found, the firm must take prompt steps to restore the client money position and notify the appropriate internal control functions.
+- Client disclosures explain that money held under the client money rules is protected by segregation, but that operational failures can still affect the timing and amount returned.
+- Conclusion: The CASS safeguarding, reconciliation, and disclosure requirements are designed to inform the client about custody risk before further transactions proceed, so the client understands that protection depends on segregation controls and the firm’s ability to correct any shortfall.
+
+PREDICTION:
+No relevant information found in the documents.
+
+JUDGE EXPLANATION:
+False
+
+Coverage fails because the prediction does not mention any of the required CASS/client money safeguarding points: segregation into a designated client money account, regular reconciliations and shortfall identification, prompt restoration/notification when a shortfall is found, or the client disclosure about protection with residual operational risk. It also does not discuss the required causal conclusion about informing the client of custody risk before further transactions proceed. Instead, it simply says “No relevant information found,” which is unrelated and omits all main points.
+
+TAG (fill in: missing_coverage / phrasing_strictness / off_topic / other):
+
+================================================================================
+
+=== FAILURE 12 (Root_ID: 5) ===
+
+QUESTION:
+For a parent saving for a child’s university costs through a Junior ISA, what sequence of FCA COBS 9 suitability checks and COBS 4 disclosure requirements would have to occur when the adviser recommends the investment after assessing the child’s long-term education goal, and how would those rules shape the advice and warning process?
+
+GROUND TRUTH:
+- COBS 9.2.1R requires a firm to obtain the necessary information to understand the client’s investment objectives, including the intended purpose of the investment and the time horizon.\n- \n- \n- \n- \n- Conclusion: The FCA rules support a sequence in which the adviser first gathers the parent’s and child’s relevant facts for suitability, then gives any Junior ISA promotion and recommendation in a way that is clear, fair, not misleading, and consistent with the suitability findings.
+
+PREDICTION:
+Based on the provided documents, here is the sequence of checks and disclosure requirements, and how they shape the advice and warning process for a Junior ISA:
+
+*   **Initial Suitability Check (COBS 9.2.1R):** The adviser must first obtain the necessary information to understand the client’s investment objectives, specifically the intended purpose of the investment (university costs) and the time
+
+JUDGE EXPLANATION:
+False
+
+Coverage fails because the prediction only mentions the first suitability point from the ground truth: obtaining information to understand the client’s investment objectives, including intended purpose and time horizon. It does not include the ground-truth conclusion’s required sequence and effect: that the adviser first gathers the parent’s and child’s relevant facts for suitability, then gives any Junior ISA promotion and recommendation in a way that is clear, fair, not misleading, and consistent with the suitability findings.
+
+Even more importantly, the prediction is incomplete and cuts off before stating the full causal conclusion. Since all main ground-truth points must be present and the conclusion must be explicitly stated if Coverage passes, this prediction does not satisfy the required match.
+
+TAG (fill in: missing_coverage / phrasing_strictness / off_topic / other):
+
+================================================================================
+
+=== FAILURE 13 (Root_ID: 5) ===
+
+QUESTION:
+What sequence of FCA COBS 10 appropriateness checks and COBS 4 disclosure rules applies when a firm markets contracts for difference to a retail client, and how do those rules shape the warning and execution process?
+
+GROUND TRUTH:
+- COBS 4.12A.21R requires retail clients to receive a risk warning before they trade contracts for differences.
+- Conclusion: The FCA rules support a sequence in which the firm first checks whether the retail client understands and can bear the CFD risks, then presents the promotion and execution steps with clear, fair and not misleading warnings that match the appropriateness findings.
+
+PREDICTION:
+No relevant information found in the documents.
+
+JUDGE EXPLANATION:
+False
+
+Coverage fails because the prediction says only “No relevant information found in the documents,” which does not mention either required ground-truth point:  
+- that retail clients must receive a CFD risk warning before they trade, and  
+- that the firm first checks whether the retail client understands and can bear CFD risks.
+
+Since Coverage fails, Connection is not reached.
+
+TAG (fill in: missing_coverage / phrasing_strictness / off_topic / other):
+
+================================================================================
+
+=== FAILURE 14 (Root_ID: 5) ===
+
+QUESTION:
+What sequence of FCA mortgage disclosure checks and affordability assessments applies when a firm recommends a residential home loan to a first-time buyer, and how do those rules shape the advice and warning process?
+
+GROUND TRUTH:
+- MCOB 11.6.3R requires the affordability assessment to take account of the customer’s income, committed expenditure and future changes in payments.
+- MCOB 12.4.1R requires disclosure of arrears and repossession risks where relevant to the mortgage being recommended.
+- Conclusion: The FCA rules support a sequence in which the adviser first gathers affordability information, then gives pre-contract disclosures and risk warnings that are clear, fair and not misleading, and finally recommends only a mortgage consistent with the affordability assessment and the client’s borrowing needs.
+
+PREDICTION:
+Based on the provided documents, the sequence of FCA checks and assessments for a first-time buyer, and how they shape the advice and warning process, is as follows:
+
+*   **Product Explanation and Fair Comparison:** The sequence begins with explaining the product. If comparing the mortgage to rival products with different repayment structures, MCOB 5.6.11R requires the firm to ensure the promotion is fair, balanced, and not misleading. 
+*   **Affordability Assessment:** Before a recommendation is finalised, MCOB 11.6.3R requires the firm to test affordability by taking into account the first-time buyer’s income, committed expenditure, and future changes in payments. This ensures the loan is realistic in the real world, not just in a best-case scenario.
+*   **Standardised Disclosure:** The firm must provide the correct key facts and assumptions using a European Standardised Information Sheet (ESIS), as required by MCOB 10.3.2R.
+*   **Arrears and Repossession Warnings:** Integrated into the recommendation, MCOB 12.4.1R requires the clear disclosure of arrears and repossession risks. The adviser must explain the downside of missing payments, how quickly arrears can build, and that possession action can occur if the debt is unaddressed.
+*   **Shaping the Advice Process:** These rules shape the process by ensuring the recommendation is supportable from the start and transparent. The advice process is not considered complete until the risk warning is properly given. 
+*   **Shaping the Warning Process:** The rules dictate that warnings cannot be buried or merely boilerplate; they must be clear, neutral, proportional, and presented in a durable form. This guarantees the buyer is fully informed of the hazards before committing to the mortgage, rather than discovering them after completion.
+
+JUDGE EXPLANATION:
+False
+
+Coverage fails because the prediction does not match all of the ground-truth evidence points and adds several major points that are not in the ground truth.
+
+What the ground truth requires:
+1. **Affordability assessment** must consider the customer’s **income, committed expenditure, and future changes in payments**.
+2. **Arrears and repossession risks** must be disclosed where relevant to the mortgage being recommended.
+3. The conclusion is that the adviser should **first gather affordability information, then give pre-contract disclosures and risk warnings that are clear, fair and not misleading, and finally recommend only a mortgage consistent with the affordability assessment and the client’s borrowing needs**.
+
+What the prediction contains:
+- It does include the affordability assessment point with income, committed expenditure, and future payment changes.
+- It does include arrears and repossession warnings.
+
+But Coverage still fails because:
+- It introduces several **extra major points** not in the ground truth, such as:
+  - **Product explanation and fair comparison**
+  - **ESIS / standardised disclosure**
+  - claims about warnings not being “buried” or needing to be in a “durable form”
+- These are not merely elaborations of the ground-truth points; they are additional major regulatory steps not supported by the provided answer.
+- The prediction also does not cleanly match the required causal conclusion from the ground truth. It talks generally about shaping the advice and warning process, but it does not state the specific sequence that the adviser **first gathers affordability information, then gives pre-contract disclosures and risk warnings, and finally recommends only a mortgage consistent with affordability and borrowing needs**.
+
+Since Coverage fails, Connection is not reached.
+
+TAG (fill in: missing_coverage / phrasing_strictness / off_topic / other):
+
+================================================================================
+

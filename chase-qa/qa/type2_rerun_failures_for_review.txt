@@ -1,0 +1,747 @@
+=== FAILURE 1 (Root_ID: 2) ===
+
+QUESTION:
+I’m a first-time investor speaking to a financial adviser about a potential recommendation for a diversified stocks-and-shares ISA. What exact communication and fair-presentation standards must the adviser follow when describing the product, its fees, and any comparison with other investments under the FCA Consumer Duty and COBS 4?
+
+GROUND TRUTH:
+- Any benefits of the ISA must be presented in a way that is balanced by the main risks, charges, and limitations.
+- The adviser must not omit important information that would affect the first-time investor’s decision, including costs and likely implications of the investment.
+-
+
+PREDICTION:
+Based on the provided documents, the adviser must adhere to the following communication and fair-presentation standards:
+
+*   **General Communication Standard:** The communication must be "fair, clear, and not misleading." The wording used must make sense to a retail customer who may not understand the tax consequences of different wrappers or the differences between platform fees, fund costs, and dealing costs. 
+*   **No Material Omissions:** The adviser must not omit important information that would affect the first-time investor’s decision. This means clearly disclosing the likely implications of the investment, the costs, and the practical consequences, rather than selectively focusing on attractive parts like tax efficiency or growth potential.
+*   **Balancing Benefits and Risks:** Any benefits of the ISA must be presented in a way that is balanced by the main risks, charges, and limitations. The benefits must not be overstated or made "louder" than the downsides. 
+*   **Clear Explanation of Risks:** The adviser must explicitly explain that returns are not guaranteed, that investment values can go down as well as up, and that the product can be volatile depending on what it holds. They must note that while a diversified portfolio reduces single-company risk, diversification does not eliminate losses.
+*   **Transparency on Fees and Charges:** The adviser must clearly spell out the different layers of costs (such as trading activity, fund charges, and platform fees) so the expected net effect is understood. They must explicitly state that charges will reduce the growth potential. If charges or platform terms can vary over time, this must also be clearly set out so the client understands the likely future effect.
+*   **Wrapper vs. Underlying Assets:** The tax wrapper cannot be described in isolation from its underlying risk-return profile. Features like wrapper flexibility or tax sheltering must be described alongside the investment risk and fee structure of the chosen funds.
+*   **Standards for Comparisons:** 
+    *   When comparing the ISA to other investments (e.g., structured products, corporate bonds, or cash ISAs), the adviser must compare "like with like" and explain the specific trade-offs, rather than using a simplistic headline number or a generic comparison.
+    *   The structure, conditions, tax mechanics, and downside risks of compared products must be described alongside any stated benefits.
+*   **Presentation Format:** The overall impression of the recommendation must be balanced. The adviser cannot hide limitations in a footnote or split information across too many different documents if doing so creates a distorted or unbalanced impression for the investor.
+
+JUDGE EXPLANATION:
+False
+
+The prediction includes the required idea that the ISA’s benefits must be balanced against risks, charges, and limitations, and that important information should not be omitted. However, it goes well beyond the ground truth by adding many extra claims that are not present in the answer, such as detailed requirements about “fair, clear, and not misleading,” layer-by-layer fee disclosure, wrapper explanations, and comparison rules. Since the task asks to match the ground truth, the prediction is not correct because it does not stay limited to the two main points in the ground-truth answer and introduces additional material not supported there.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 2 (Root_ID: 2) ===
+
+QUESTION:
+What customer due diligence and anti-money laundering controls must a cryptoasset exchange apply before allowing a retail customer to open an account and trade?
+
+GROUND TRUTH:
+- The firm must identify and verify the customer’s identity before establishing the business relationship or carrying out transactions where required.
+- The firm must understand the purpose and intended nature of the customer’s relationship with the cryptoasset business.
+- The firm must apply ongoing monitoring of the relationship and transactions to detect activity that is inconsistent with the firm’s knowledge of the customer.
+- The firm must carry out enhanced due diligence where the customer, transaction, or source of funds presents a higher risk of money laundering or terrorist financing.
+-
+
+PREDICTION:
+Based on the provided documents, a cryptoasset exchange must apply the following customer due diligence and anti-money laundering controls before allowing a retail customer to open an account and trade:
+
+* **Identify and verify the customer's identity:** This must be completed before establishing a business relationship or carrying out any transactions. 
+* **Understand the account's purpose:** The firm must establish and understand the purpose and intended nature of the customer’s relationship with the cryptoasset business (such as whether they intend to make an occasional purchase, trade frequently, or hold/transfer assets).
+* **Apply enhanced due diligence:** If the customer, the transaction, or the source of funds presents a higher risk of money laundering or terrorist financing, the exchange must carry out enhanced due diligence before the account is allowed to operate normally.
+
+JUDGE EXPLANATION:
+False
+
+The prediction includes most of the ground-truth points, but it omits one required control: **ongoing monitoring of the customer relationship and transactions** to detect activity inconsistent with the firm’s knowledge of the customer.
+
+The prediction also adds examples about “occasional purchase, trade frequently, or hold/transfer assets,” which are not problematic, but the missing ongoing monitoring point means it does not fully match the ground truth.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 3 (Root_ID: 2) ===
+
+QUESTION:
+What disclosure, quotation, and client protection rules must a lifetime mortgage adviser follow when explaining an equity release plan and its costs to an older homeowner?
+
+GROUND TRUTH:
+- The adviser must give the client a clear SDLT-style illustration of the lifetime mortgage total cost of credit.
+-
+
+PREDICTION:
+Based on the provided documents, a lifetime mortgage adviser must follow these rules when explaining an equity release plan:
+
+*   **Explain the effect of roll-up interest:** The adviser must explain how roll-up interest affects the amount owed over time using ordinary language and specific examples.
+*   **Highlight compounding risks and equity reduction:** The client must be made to understand that interest compounds on the existing loan and prior interest, meaning the balance can grow quickly over time and materially reduce the remaining equity left in the property.
+*   **Provide a clear illustration of costs:** Figures must be presented in a clear, SDLT-style illustration of the lifetime mortgage's total cost of credit. 
+*   **Detail the total cost of the credit:** The illustration and paperwork must visibly show the initial borrowing amount, how the interest rolls up over the assumed term, and the full eventual amount repayable, rather than just highlighting the initial cash advance.
+*   **State all key projection assumptions:** Any quotation or regulated financial promotion must explicitly include the key assumptions used to calculate the projection (such as realistic rates, specific terms, and property value assumptions) so the client can assess whether the estimate is appropriate for their circumstances.
+
+JUDGE EXPLANATION:
+False. The prediction does include the ground-truth point that the adviser must give a clear SDLT-style illustration of the lifetime mortgage total cost of credit. However, it also adds several extra major points that are not in the ground truth, such as explanations about roll-up interest, compounding risks, equity reduction, detailed repayment figures, and projection assumptions. Since the ground truth only requires the SDLT-style illustration of total cost of credit, the additional content makes the prediction not an exact match to the required answer.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 4 (Root_ID: 3) ===
+
+QUESTION:
+I am a homebuyer applying for a regulated residential mortgage. Under FCA MCOB 11.6 responsible lending and affordability assessment rules, what exactly must the lender take into account when assessing whether I can afford the mortgage, and what specific features of my borrowing and finances must be tested before they can approve it?
+
+GROUND TRUTH:
+- The lender must take reasonable steps to determine whether the customer will be able to pay the mortgage payments not only on the day of the assessment but also over the expected life of the mortgage.
+- The lender must factor in the effect of interest rate changes on the mortgage payments where the interest rate is variable or may change over time.
+-
+
+PREDICTION:
+Based on the provided documents, here is what the lender must take into account and test:
+
+*   **Forward-looking assessment over the mortgage term:** Under MCOB 11.6, the lender must take reasonable steps to determine if you can afford the mortgage payments not just on the day of the application, but over the expected life of the mortgage to ensure payments remain sustainable. 
+*   **Effect of interest rate changes:** Under FCA rules, the lender must factor in how interest rate changes will affect your mortgage payments if the rate is variable or may change over time.
+*   **Testing rate increases:** The affordability assessment must explicitly model what happens if the interest rate goes up, testing whether the payments would remain manageable under those changes.
+*   **Reversionary rates:** The affordability review must reflect the risk of your payments changing materially, including what happens when the product moves to a reversionary rate later on.
+
+JUDGE EXPLANATION:
+False
+
+The prediction includes the two main points from the ground truth:
+1. the lender must assess affordability over the expected life of the mortgage, not just on the day of assessment; and
+2. the lender must take into account the effect of interest rate changes on payments for variable or changeable-rate mortgages.
+
+However, the prediction also adds extra major points not present in the ground truth, such as explicitly testing rate increases and reversionary rates. More importantly, the response does not stay tightly matched to the ground truth’s exact scope and includes additional lending-assessment specifics beyond what was asked. Because the evaluation requires all ground-truth points and no irrelevant added major points, this prediction should be marked incorrect.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 5 (Root_ID: 3) ===
+
+QUESTION:
+I am using a regulated peer-to-peer lending platform as a retail lender. Under FCA lending and disclosure rules for peer-to-peer loans, what information must the operator give me before I lend, what limits or cautionary rules apply to my participation, and what warnings must be in place about the risks and protections available?
+
+GROUND TRUTH:
+- The operator must provide clear information about the nature and risks of peer-to-peer lending before I commit any money.
+- The operator must explain how my money will be matched, how the loan process works, and what role the platform has as operator rather than lender.
+-
+
+PREDICTION:
+Based on the provided documents, here is the information, limits, and warnings required for participating in a regulated peer-to-peer lending platform:
+
+*   **Pre-Commitment Information:** Before you commit any money, the operator must provide clear pre-commitment disclosure about the nature and risks of peer-to-peer lending.
+*   **Mechanics of the Platform:** The operator must explain exactly how the loan process works and how your money will be matched with borrowers.
+*   **Role of the Operator:** It must be made clear that the platform acts only as an operator and facilitator, not as a direct lender or underwriter of the credit. 
+*   **Default and Failure Risks:** The operator must provide explicit default and failure information, detailing what happens if borrowers miss payments or default.
+*   **Platform Risk and Protections:** You must be informed of the operational consequences if the platform itself encounters distress or fails, which should include an explanation of any servicer arrangements and wind-down processes.
+*   **Delay or Loss Warnings:** The disclosures must clearly explain the consequences of borrowers failing to repay on time, including that your capital could be delayed or reduced.
+*   **Limits on Promotions:** The operator must put controls in place for higher-risk promotions aimed at retail customers.
+*   **No Guarantees:** The platform and its materials must contain no suggestion that the return is safe or guaranteed.
+
+JUDGE EXPLANATION:
+False. The prediction includes the core ground-truth points about pre-commitment disclosure of the nature and risks of peer-to-peer lending, how the money is matched and the loan process works, and the operator’s role as operator rather than lender.
+
+However, it is still wrong because it adds several major points that are not in the ground truth and are irrelevant here, such as default/failure risk details, operational distress and wind-down processes, delay/loss warnings, higher-risk promotion controls, and “no guarantees” language. The ground-truth answer is much narrower and does not mention those additional requirements.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 6 (Root_ID: 4) ===
+
+QUESTION:
+What disclosures and testing must a firm complete before recommending a lifetime mortgage under FCA mortgage conduct rules?
+
+GROUND TRUTH:
+- Before recommending a lifetime mortgage, the firm must assess whether the recommendation is suitable for the client, taking into account the client’s knowledge and experience of lifetime mortgages and equity release.
+-
+
+PREDICTION:
+Based on the provided documents, before recommending a lifetime mortgage or equity release, a firm must complete the following assessments and disclosures:
+
+* **Suitability Assessment:** The firm must assess whether the lifetime mortgage recommendation is suitable for the client. 
+* **Knowledge and Experience Testing:** The firm must take into account and evaluate whether the client’s knowledge and experience of lifetime mortgages and equity release are sufficient for the recommendation to be suitable.
+* **Appropriateness Review:** The firm must determine if this specific borrowing route is appropriate for the client's circumstances, understanding it cannot be treated as a standard, routine residential loan.
+* **Wider Financial Assessment:** The recommendation should be documented to show how it sits with the client's broader financial position, utilizing cash-flow forecasts and checking other impacts (e
+
+JUDGE EXPLANATION:
+False
+
+The prediction does include the core idea that the firm must assess suitability before recommending a lifetime mortgage, and it mentions the client’s knowledge and experience. However, it is not fully correct because:
+
+- It adds extra major points not present in the ground truth, such as an “appropriateness review,” broader financial assessment, cash-flow forecasts, and comments about it not being a standard residential loan.
+- The question asks specifically for the required disclosure/testing under FCA mortgage conduct rules, and the ground truth only states that suitability must be assessed taking into account the client’s knowledge and experience of lifetime mortgages and equity release.
+- The prediction is also incomplete/overly expanded in a way that goes beyond the ground-truth answer rather than matching it cleanly.
+
+So the prediction does not match the ground truth precisely enough to be considered correct.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 7 (Root_ID: 4) ===
+
+QUESTION:
+What registration and due diligence steps must a firm complete before accepting a client for a UK cryptoasset exchange registration under the Money Laundering Regulations?
+
+GROUND TRUTH:
+- Before registering, the firm must identify and verify the applicant’s beneficial owners and any senior managing officers.
+-
+
+PREDICTION:
+No relevant information found in the documents.
+
+JUDGE EXPLANATION:
+False. The prediction does not mention the required registration and due diligence step from the ground truth: identifying and verifying the applicant’s beneficial owners and any senior managing officers before registration. Instead, it says no relevant information was found, which fails to include the main required point.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 8 (Root_ID: 5) ===
+
+QUESTION:
+If I am considering a lifetime mortgage equity release product, what must the lender or adviser tell me about the nature of the arrangement, the costs and charges I may face, the effect on my ability to move or influence my home, and how the key illustrations and summaries must be presented before I take the decision?
+
+GROUND TRUTH:
+- The firm must explain that a lifetime mortgage is a loan secured on your home that normally runs until a “life event” such as death or moving into long-term care, and that the loan plus interest is usually repaid from the sale of the property.
+- The firm must provide the required pre-sale illustration and summary in the prescribed order and form, so that you can compare the product with other equity release options before deciding.
+-
+
+PREDICTION:
+Based on the provided documents, here is what the lender or adviser must tell you regarding a lifetime mortgage:
+
+*   **Nature of the arrangement:** They must explain that a lifetime mortgage is a loan secured on your home that normally runs until a "life event" (such as death or moving into long-term care). They must also explain that the loan plus interest is usually repaid from the sale of the property when this event occurs. 
+*   **Costs and charges:** The firm must inform you, in a clear and prominent way, of the exact cash amount you will receive, the total amount you will owe over time, and any fees or charges that will be added to the loan.
+*   **Presentation of illustrations and summaries:** The lender or adviser must provide a pre-sale illustration and summary in a prescribed order and form. This structured format is required so that you can meaningfully compare the product with other equity release options before making a final decision.
+*   **Effect on ability to move or influence the home:** The provided documents do not contain specific information explaining how the product affects your ability to move or influence your home (though they do note that "housing and inheritance implications need careful attention").
+
+JUDGE EXPLANATION:
+False
+
+The prediction includes the first main ground-truth point about the nature of a lifetime mortgage, and it also mentions the required pre-sale illustration and summary in prescribed order/form for comparison.
+
+However, it is not fully correct because it adds a major point about “the exact cash amount you will receive, the total amount you will owe over time, and any fees or charges,” which is not stated in the ground truth. The ground truth only says the firm must explain the product’s nature and that the loan plus interest is usually repaid from the sale of the property; it does not mention those extra specifics.
+
+Also, the prediction explicitly says the documents do not contain specific information about the effect on your ability to move or influence your home. The question asks for that effect to be explained, so omitting it makes the answer incomplete.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 9 (Root_ID: 5) ===
+
+QUESTION:
+What disclosure and execution requirements apply when a firm markets, executes, and reports a derivative transaction in wholesale markets under FCA conduct rules, including how it must classify the client, handle best execution, and report the trade?
+
+GROUND TRUTH:
+- The firm must tell you whether you are being treated as a retail, professional, or eligible counterparty client, and what that classification means for the level of protection you will receive.
+- The firm must provide the required trade confirmation and post-trade report, including the key details of the derivative, the price, timing, and any venue or benchmark used.
+-
+
+PREDICTION:
+Based on the provided documents, the specific requirements are:
+
+* **Client Classification:** Under FCA conduct rules, the firm must inform the client whether they are being treated as a retail, professional, or eligible counterparty client, and explain what this classification means for the level of protection they will receive.
+* **Trade Confirmation:** The firm must provide a required trade confirmation that contains the core trade terms. 
+* **Post-Trade Reporting:** The firm must provide a post-trade report showing the transaction in a way that preserves the relevant execution information for the client and, where applicable, for the market record.
+* **Key Details to Disclose:** Both the required trade confirmation and post-trade report must include the key details of the derivative, the price, the timing of the trade, and any venue or benchmark that was used. 
+
+*(Note: The provided documents do not explicitly mention specific rules regarding "best execution handling" or "wholesale markets" beyond the requirement to preserve execution information and classify clients.)*
+
+JUDGE EXPLANATION:
+False
+
+The prediction mostly matches the ground truth on client classification and the requirement to provide trade confirmation/post-trade reporting with key trade details. However, it adds extra discussion about “best execution handling” and “wholesale markets” in a way that is not supported by the ground truth. The ground truth only requires classification as retail/professional/eligible counterparty and the need for trade confirmation and post-trade report containing the derivative details, price, timing, and venue/benchmark. The prediction’s extra notes about preserving execution information and mentioning wholesale markets/best execution go beyond what is stated and make it an imperfect match.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 10 (Root_ID: 5) ===
+
+QUESTION:
+What must a firm tell me before I apply for a regulated mortgage contract that is not equity release, including how the mortgage works, what arrears and fees could mean for me, and what information or documents I should receive before I decide?
+
+GROUND TRUTH:
+- The firm must explain the consequences of falling into arrears, including the possibility of recovery action, additional charges, and the risk of losing your home if the debt is not repaid.
+-
+
+PREDICTION:
+- Before you look at any application forms, the adviser must clear up the structure of the mortgage you are considering, as this affects your monthly commitments and future balance.
+- The firm must explain the consequences of falling into arrears, which includes the possibility of recovery action, additional charges, and the risk of losing your home if the debt is not repaid. 
+- You need to be informed about upfront costs, such as valuation costs (a basic mortgage valuation for the lender’s use), completion fees, and solicitor's fees that form part of the total cost of entry.
+- A mortgage adviser could also note the effect of a fixed-rate period ending, the possible move onto the standard variable rate, and whether early repayment charges may apply.
+- Before you decide whether to apply,
+
+JUDGE EXPLANATION:
+False. The prediction does include the ground-truth point about arrears, recovery action, additional charges, and the risk of losing your home. However, it also introduces several extra major points and topics that are not in the ground truth and are outside the asked-for comparison, such as upfront costs, fixed-rate periods, standard variable rates, and early repayment charges. The ground truth only requires the arrears consequences, so the prediction is not a clean match.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 11 (Root_ID: 6) ===
+
+QUESTION:
+If a parent is arranging a Junior ISA for a child through an FCA-regulated firm that provides advice, what specific suitability and disclosure steps must the firm take under COBS 9 and COBS 4 before recommending the product, including any required warnings about risks, charges, and the fact that the child owns the account?
+
+GROUND TRUTH:
+- The firm must obtain sufficient information about the child’s and parent’s circumstances, investment objectives, time horizon, and attitude to risk to ensure the Junior ISA recommendation is suitable.
+- The firm must assess whether the recommended Junior ISA is suitable for the child, taking account of the child’s needs, the long-term nature of the savings goal, and any relevant financial constraints.
+- The firm must tell the parent about all relevant charges, fees, and costs associated with the Junior ISA and the advice service, in a way that is clear, fair, and not misleading.
+- The firm must make clear that the Junior ISA will be owned by the child, not the parent, and that access to the money is restricted until the child reaches the age at which the account matures.
+- The firm must explain the material risks of the recommended investment approach, including the possibility that returns are not guaranteed and the value of investments may fall as well as rise.
+
+PREDICTION:
+Based on the provided documents, an FCA-regulated firm must take the following suitability and disclosure steps before recommending a Junior ISA:
+
+*   **Assess Suitability Information:** Under COBS 9, the firm must obtain sufficient information about both the child’s and the parent’s circumstances, investment objectives, time horizon, and attitude to risk to ensure the recommendation is suitable.
+*   **Evaluate Child's Needs:** The firm must assess whether the Junior ISA fits the child's needs, taking into account the long-term nature of the savings goal and any relevant financial constraints of the household.
+*   **Disclose Ownership and Access Restrictions:** The firm must explicitly state that the Junior ISA will be legally owned by the child, not the parent, and that access to the money is restricted until the child reaches the age of maturity.
+*   **Disclose Service Nature:** The firm must establish the nature of the service it is providing before making a recommendation, specifying whether the advice given is independent or restricted.
+*   **Explain Costs and Charges:** The firm must inform the parent about all relevant charges, fees, and costs associated with both the Junior ISA and the advice service in a manner that is clear, fair, and not misleading. 
+*   **Warn About Investment Risks:** The firm must explain the material risks of the recommended investment approach, including the specific warning that returns are not guaranteed and that the value of investments may fall as well as rise.
+
+JUDGE EXPLANATION:
+False
+
+The prediction covers most of the ground-truth points, but it includes an additional major point that is not part of the answer: it says the firm must “establish the nature of the service… whether the advice given is independent or restricted.” That is not in the ground truth and is irrelevant to the question as posed.
+
+The ground-truth answer requires:
+- obtaining sufficient information to assess suitability,
+- assessing suitability for the child’s needs and long-term goal,
+- disclosing all relevant charges/fees/costs clearly,
+- making clear the account is owned by the child and access is restricted until maturity,
+- explaining the material risks, including that returns are not guaranteed and value can fall as well as rise.
+
+All of those are present in the prediction, but the extra independent/restricted advice point makes it incorrect under the evaluation rules.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 12 (Root_ID: 6) ===
+
+QUESTION:
+What are the FCA disclosure requirements for a firm advising a client on a lifetime mortgage, including the warning, cost, and repayment information that must be given before the client decides whether to proceed?
+
+GROUND TRUTH:
+- The firm must give the client a clear explanation of how the lifetime mortgage works, including the effect of interest roll-up and the fact that the debt will usually increase over time.
+- The firm must provide a prominent warning that taking out a lifetime mortgage may reduce the value of the estate left on death and may affect entitlement to means-tested benefits.
+-
+
+PREDICTION:
+No relevant information found in the documents.
+
+JUDGE EXPLANATION:
+False
+
+The prediction is wrong because it does not mention either of the required FCA disclosure points from the ground truth:
+
+1. A clear explanation of how a lifetime mortgage works, including interest roll-up and that the debt usually increases over time.
+2. A prominent warning that a lifetime mortgage may reduce the estate left on death and may affect means-tested benefits.
+
+Instead, the prediction says “No relevant information found,” which omits all required content.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 13 (Root_ID: 6) ===
+
+QUESTION:
+What pre-trade disclosures and execution-quality safeguards must an FCA-authorised firm give to a retail client before executing a share dealing order on an execution-only basis, including information on the firm’s order execution policy, total costs, and any limits on the order?
+
+GROUND TRUTH:
+- The firm must provide the client with its order execution policy before carrying out the order, including a clear explanation of how it will seek to achieve best execution and the execution venues it may use.
+- The firm must explain any material limitations on the order, such as minimum or maximum order sizes, market hours, settlement constraints, or circumstances in which the order may not be executed in full.
+- The firm must make clear how client orders may be aggregated or split and the impact this may have on execution outcomes.
+- The firm must provide the relevant terms on how the client can obtain information about execution quality and how the firm monitors compliance with its execution arrangements.
+
+PREDICTION:
+Based on the provided documents, before executing a share dealing order on an execution-only basis, the firm must provide the following pre-trade disclosures and execution-quality safeguards to the retail client:
+
+* **Order Execution Policy:** The firm must provide its order execution policy, which must include a clear explanation of how it will seek to achieve best execution and specify the execution venues it may use.
+* **Execution Quality and Monitoring:** The firm must provide the relevant terms detailing how the client can obtain information about execution quality and how the firm monitors compliance with its execution arrangements.
+* **Order Limitations:** The firm must explicitly explain any material limitations on the order prior to submission. This includes constraints such as minimum or maximum order sizes, market hours, settlement constraints, or general circumstances where the order may not be executed in full (e.g., if the market is closed or the security is illiquid).
+* **Order Aggregation and Splitting:** The firm must clarify how client orders might be aggregated or split, and explain the potential impact this may have on execution outcomes (such as price improvement, partial fill risk, or how the trade is allocated among clients). 
+
+*(Note: The provided documents do not contain information regarding pre-trade disclosures for the total costs specifically associated with execution-only share dealing orders.)*
+
+JUDGE EXPLANATION:
+False
+
+The prediction is mostly aligned with the ground truth, but it is **not fully correct** because it fails the question’s requirement to address **total costs**. The question explicitly asks for pre-trade disclosures including information on **the firm’s order execution policy, total costs, and any limits on the order**.  
+
+While the prediction covers:
+- the order execution policy,
+- order limitations,
+- aggregation/splitting,
+- and execution-quality monitoring,
+
+it **explicitly says the documents do not contain information regarding pre-trade disclosures for the total costs**, rather than stating the required cost disclosure. Since the ground truth is about this FCA disclosure framework, omitting total costs means the answer is incomplete.
+
+Also, the prediction includes extra detail about price improvement and partial fill risk that is not in the ground truth, though that alone would not necessarily be fatal. The main issue is the missing total-cost disclosure.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 14 (Root_ID: 7) ===
+
+QUESTION:
+What disclosure and affordability checks must a lender carry out before agreeing to a regulated mortgage contract, and what key interest-rate stress test rule must the lender apply so the loan remains compliant?
+
+GROUND TRUTH:
+- I must provide the borrower with an ESIS or other required pre-contract disclosure setting out the main features, costs, and risks of the mortgage.
+-
+
+PREDICTION:
+Based on the provided documents, here are the disclosure checks, affordability checks, and interest-rate stress test rules a lender must apply for a regulated mortgage contract:
+
+*   **Pre-contract Disclosure:** The lender must provide the borrower with an ESIS (European Standardised Information Sheet) or other required pre-contract disclosure that sets out the main features, costs, and risks of the mortgage before agreement.
+*   **Affordability Assessment:** The lender must verify the borrower's incoming and outgoing funds to ensure the mortgage is only advanced where the affordability assessment supports a sustainable repayment strategy. 
+*   **Interest-Rate Stress Test:** The lender must apply an interest-rate stress test to ensure the borrower could still afford their mortgage payments if interest rates rise.
+*   **Regulatory Minimum Rule:** When applying the stress test, the lender must not rely on a stressed rate that falls below the regulatory minimum if the rules require a higher assumed rate for testing affordability.
+
+JUDGE EXPLANATION:
+False. The prediction includes the required pre-contract disclosure point, but it misses the ground-truth answer’s specific content that the ESIS or other disclosure must set out the **main features, costs, and risks of the mortgage**. It also adds extra claims about affordability checks and stress testing that are not in the ground-truth answer, and those added stress-test details go beyond what was provided.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 15 (Root_ID: 7) ===
+
+QUESTION:
+When a consumer buys a regulated insurance-based investment product, what disclosures must the firm provide before and after the sale, and what ongoing cancellation-right information must be included so the contract remains compliant?
+
+GROUND TRUTH:
+- I must provide the customer with the required policy or contract documentation after the sale.
+-
+
+PREDICTION:
+Based on the provided documents, here are the requirements for a regulated insurance-based investment product:
+
+*   **After the sale:** The firm must provide the customer with the required policy or contract documentation (which includes the issued contract paperwork, terms, and governing documents), as opposed to just a pre-sale summary or sales illustration.
+*   **Cancellation rights:** The firm must explicitly tell the customer about any cancellation rights they hold, as well as the specific time limit for exercising those rights. 
+*   **Communication standard (Before, During, and After):** Throughout the entire process, all communications—including the initial discussion before the sale, the follow-up policy/contract documents, and the cancellation notices—must meet the standard of being clear, fair, and not misleading.
+
+JUDGE EXPLANATION:
+False
+
+The prediction only fully matches one part of the ground-truth answer: that **after the sale, the firm must provide the required policy or contract documentation**.
+
+However, the prediction does **not** match the full ground-truth requirement because the ground truth also includes the ongoing need to provide **cancellation-right information so the contract remains compliant**, and the prediction only mentions cancellation rights in a general way. It adds extra detail about a “clear, fair, and not misleading” communications standard, but it does not clearly identify the compliance requirement as stated in the ground truth.
+
+Also, the prediction includes additional material not in the ground truth, but the main issue is that it does not precisely and fully capture the ground-truth disclosure requirement.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 16 (Root_ID: 8) ===
+
+QUESTION:
+Under FCA consumer credit rules for entering a regulated buy-now-pay-later agreement, what must a lender assess before granting the credit, what information must be provided about repayment timing and charges, and what restrictions apply to promotional statements about interest-free periods or guaranteed approval?
+
+GROUND TRUTH:
+- The promotion must not imply guaranteed approval, and any statements about interest-free periods must be accurate, prominent, and not misleading.
+
+PREDICTION:
+No relevant information found in the documents.
+
+JUDGE EXPLANATION:
+False
+
+The ground truth says the promotion must **not imply guaranteed approval** and that any statements about **interest-free periods** must be **accurate, prominent, and not misleading**. The prediction says only that there is “no relevant information,” so it fails to mention either of these required points.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 17 (Root_ID: 8) ===
+
+QUESTION:
+Under FCA rules for pension transfer advice, what must a firm establish before recommending a client transfer safeguarded benefits, what must be explained if the transfer is judged suitable, and what restrictions apply to contingent charging and transfer incentives?
+
+GROUND TRUTH:
+- The firm must obtain and assess the client’s transfer value analysis and confirm that the client has safeguarded benefits that would be lost or reduced by the transfer.
+- If the recommendation is to proceed, the firm must explain the key consequences of giving up safeguarded benefits, including the loss of future guarantees and any death benefits attached to the existing arrangement.
+- The firm must not rely on contingent charging unless the rules allow it in the relevant circumstances and the client meets the required vulnerability or financial need conditions.
+-
+
+PREDICTION:
+Based on the provided documents, here are the rules regarding pension transfer advice:
+
+*   **Before recommending a transfer:** The firm must obtain and assess the client’s transfer value analysis and confirm that the client has safeguarded benefits that would be lost or reduced by the transfer. (Document 5)
+*   **If the transfer is judged suitable (recommended to proceed):** The firm must explain the key consequences of giving up the safeguarded benefits, which includes the loss of future guarantees and any death benefits attached to the existing arrangement. (Document 10)
+*   **Restrictions on contingent charging:** The firm must not rely on contingent charging arrangements for pension transfer work unless the permitted rules allow it in the relevant circumstances, and only if the client meets the required vulnerability or financial need conditions. (Document 3)
+*   **Restrictions on transfer incentives:** The provided documents do not contain information regarding restrictions specifically applied to pension transfer incentives.
+
+JUDGE EXPLANATION:
+False
+
+The prediction correctly matches the ground truth on the first three main points:
+
+- It says the firm must obtain and assess the transfer value analysis and confirm safeguarded benefits would be lost or reduced.
+- It says that if the transfer is suitable, the firm must explain the consequences of giving up safeguarded benefits, including loss of guarantees and death benefits.
+- It says contingent charging is only allowed where rules permit and the required vulnerability or financial need conditions are met.
+
+However, the prediction is still wrong because it fails to answer the full question: the question also asks about **restrictions on transfer incentives**, and the prediction explicitly says the provided documents do not contain information about that. That is an omission of a required point. Also, the adversarial wrong answers concern unrelated crypto/mortgage issues; the prediction does not mention those, so that is fine. But because it does not provide the required transfer-incentive restriction, it does not fully match the ground truth.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 18 (Root_ID: 9) ===
+
+QUESTION:
+If a client wants to buy a lifetime mortgage under an equity release plan rather than add to a pension or ISA, what maximum loan-to-value limits and advice steps apply, and what option gives them the largest initial cash release if the property is worth £400,000?
+
+GROUND TRUTH:
+- Under the plan rules, the amount available is capped by the property's value and age-based lending limits, so the maximum initial loan depends on the client’s age and the provider’s LTV table.
+- Where the client is younger than the provider’s preferred age band, the initial cash release is reduced because the applicable loan-to-value percentage is lower.
+- Before recommendation, the adviser must carry out an equity release suitability assessment, consider alternatives, and ensure the client understands the impact on inheritance and future interest roll-up.
+- Based on the documents’ assumptions, the lifetime mortgage delivers the largest immediate cash release if the property value is £400,000, because the initial advance can exceed the amount the client could access from a standard savings contribution.
+- If the client needs flexibility and may want to move or repay early, the equity release route is highlighted as less flexible than retaining liquid savings.
+
+PREDICTION:
+Based on the provided documents, here is the information regarding a lifetime mortgage under an equity release plan:
+
+**Maximum Loan-to-Value (LTV) Limits**
+*   The maximum initial loan is capped by the property's value and age-based lending limits, depending on the client’s age and the specific provider’s LTV table.
+*   If a client is younger than the provider’s preferred age band, the initial cash release is reduced because the applicable LTV percentage is lower. 
+
+**Advice Steps**
+*   Before making a recommendation, the adviser must carry out an equity release suitability assessment.
+*   The adviser must consider alternatives to ensure the recommendation suits the client's circumstances.
+*   The adviser must ensure the client fully understands the impacts on their inheritance and future interest roll-up.
+*   The adviser must explicitly highlight that equity release is less flexible than retaining liquid savings, which is a key consideration if the client may want to move home or repay the loan early.
+
+**Largest Initial Cash Release for a £400,000 Property**
+*   Based on the documents' assumptions, the **lifetime mortgage** delivers the largest immediate cash release. 
+*   This is because the initial advance offered on the £400,000 property can exceed the amount the client would be able to access from taking a standard regular savings contribution route.
+
+JUDGE EXPLANATION:
+False
+
+The prediction contains the main points from the ground truth, but it also includes a detail that is not supported by the ground-truth answer and is too specific/extra: it says the adviser must “explicitly highlight that equity release is less flexible than retaining liquid savings” and frames this as a key consideration. The ground truth only says equity release is less flexible than retaining liquid savings if the client may want to move or repay early. That part is close, but the prediction’s wording adds an unsupported emphasis and is tied to a saving-contribution comparison that is not in the ground truth.
+
+More importantly, the prediction does not clearly address the full requirement about the “maximum loan-to-value limits” beyond the generic age/provider-table statement. The ground truth specifies that the cap depends on the client’s age and the provider’s LTV table, and that younger clients get a lower LTV. The prediction does mention both, so that part is fine.
+
+However, the answer should also state the largest initial cash release option for a £400,000 property in the context of the documents’ assumptions, and the ground truth compares it against a standard savings contribution route only as a general point. The prediction’s phrasing drifts into an unrelated savings comparison and does not cleanly preserve the intended meaning.
+
+Overall, because the prediction introduces extra/irrelevant framing and does not exactly preserve the ground-truth comparison, I mark it incorrect.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 19 (Root_ID: 9) ===
+
+QUESTION:
+A first-time buyer is considering a 95% mortgage on a £280,000 home and wants to know the specific affordability and disclosure rules for an FCA-regulated mortgage illustration. Using the documents’ stated rules, what largest loan amount could be advanced under the 95% limit, what key warning must be shown on the mortgage illustration, and which option gives the larger upfront cash need
+
+GROUND TRUTH:
+- Under a 95% loan-to-value mortgage rule, the maximum loan on a £280,000 property is £266,000, leaving a minimum deposit of £14,000.
+- The mortgage illustration must make clear that the borrowing is secured on the property and that the customer could lose their home if repayments are not maintained.
+- A standard 5% deposit on £280,000 requires £14,000 upfront.
+-
+
+PREDICTION:
+Based on the provided documents, here are the answers to your questions:
+
+* **Largest loan amount under the 95% limit:** The maximum loan that can be advanced on a £280,000 property is £266,000 (leaving a minimum deposit of £14,000). 
+* **Key warning on the mortgage illustration:** The illustration must clearly state that the borrowing is secured on the property and that the customer could lose their home if repayments are not maintained.
+* **Option giving the larger upfront cash need:** There is no difference between the options; the upfront cash requirement is exactly the same (£14,000) whether calculated as a standard 5% deposit or as the remaining required funds under the 95% maximum loan limit.
+
+JUDGE EXPLANATION:
+False
+
+The prediction correctly matches the first two ground-truth points:
+- 95% of £280,000 is £266,000, leaving a £14,000 deposit.
+- The mortgage illustration warning about the loan being secured on the property and the risk of losing the home if repayments are not maintained is also correct.
+
+However, it fails on the third point. The ground truth says a standard 5% deposit on £280,000 requires £14,000 upfront, which is the same as the amount left after a 95% mortgage. The prediction instead says there is “no difference” between the options, but the question asks which option gives the larger upfront cash need. Since both require the same upfront cash need, the prediction should explicitly reflect that equivalence rather than implying a different comparison.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 20 (Root_ID: 10) ===
+
+QUESTION:
+A homeowner is comparing three equity release lifetime mortgage offers against keeping the property unencumbered. Which lender gives the highest maximum cash advance from a £250,000 home, and how do the offers differ in interest rate, early repayment charges, and voluntary payment flexibility so the adviser can explain why one product is better value than the others?
+
+GROUND TRUTH:
+- Lender Orion offers the highest maximum cash advance at £82,500 from a £250,000 home.
+- Lender Meridian offers a lower cash advance of £78,750, but includes fixed-rate interest and allows annual voluntary payments without penalty.
+- Lender Solstice offers £80,000, with a lower initial rate than Meridian, but applies an early repayment charge during the first 8 years.
+- On a straightforward drawdown basis, Orion is the best offer because it releases the most cash upfront before fees and product features are considered.
+- Meridian is the better option if the homeowner values flexibility to make voluntary repayments and reduce roll-up interest.
+- Solstice is the most suitable where the homeowner expects to keep the plan for the long term and wants a lower starting rate, despite the early repayment charge.
+
+PREDICTION:
+Based on the provided documents, here is the comparison of the equity release lifetime mortgage offers:
+
+*   **Highest Cash Advance (Lender Orion):** Lender Orion gives the highest maximum cash advance of £82,500 from a £250,000 home. It is the best deal if the homeowner's priority is maximizing the immediate upfront cash proceeds before considering other product features. 
+*   **Lower Rate with Early Repayment Charge (Lender Solstice):** Lender Solstice offers £80,000 with a lower initial interest rate than Meridian, but it applies an early repayment charge during the first 8 years. It is the better value for someone taking a long-term view who wants a lower starting rate and is unlikely to repay or switch early.
+*   **Fixed Rate and Voluntary Payment Flexibility (Lender Meridian):** Lender Meridian offers the lowest cash advance at £78,750, but it features fixed-rate interest and allows annual voluntary payments without penalty. It is the most suitable option for a homeowner who values flexibility to make voluntary payments and reduce roll-up interest over time.
+
+JUDGE EXPLANATION:
+False
+
+The prediction matches the ground truth on the main comparison points:
+- Orion has the highest cash advance from a £250,000 home.
+- Meridian offers a lower advance, fixed-rate interest, and allows annual voluntary payments without penalty.
+- Solstice offers £80,000, a lower starting rate than Meridian, but has an early repayment charge for the first 8 years.
+
+However, it is not fully correct because it subtly changes the framing in a way that adds unsupported interpretation. The ground truth says:
+- Orion is best on a straightforward drawdown basis.
+- Meridian is better if the homeowner values flexibility to make voluntary repayments and reduce roll-up interest.
+- Solstice is most suitable for someone who wants a lower starting rate despite the ERC.
+
+The prediction’s added wording about being “unlikely to repay or switch early” and “taking a long-term view” is not a contradiction, but it is extra interpretive detail not present in the ground truth. Since the task requires matching the ground truth precisely and avoiding additional major points, this makes the prediction not an exact match.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 21 (Root_ID: 11) ===
+
+QUESTION:
+What disclosure, appropriateness, and record-keeping steps must an adviser follow when recommending a cryptoasset investment service to a retail client?
+
+GROUND TRUTH:
+- The adviser says the recommendation is only suitable if the client passes the appropriateness assessment for the cryptoasset service.
+- The client must be given a clear risk warning that cryptoassets are high-risk and the value can fall sharply.
+-
+
+PREDICTION:
+Based on the provided documents, here are the steps an adviser must follow when recommending a cryptoasset investment service to a retail client:
+
+*   **Disclosure Steps:**
+    *   The adviser must give the client a clear, prominent risk warning stating explicitly that cryptoassets are high-risk and that their value can fall sharply.
+    *   This warning must not be diluted or disguised, and it must be delivered *before* any recommendation is finalised or presented.
+
+*   **Appropriateness Steps:**
+    *   The recommendation can only be made if the client passes an appropriateness assessment specifically designed for the cryptoasset investment service.
+    *   The adviser must ensure the client has the necessary knowledge and understanding of how the service operates; they must not assume awareness based on the client's general investment experience. 
+    *   If the client fails the assessment (a negative result), the service must not be recommended, and the reasons why must be made clear.
+
+*   **Record-Keeping Steps:**
+    *   The advice file must document that the explicit risk warning was delivered, exactly when and in what form it was delivered, and prove that the client received and understood it.
+    *   The documentation must show the details of the appropriateness assessment, including what was assessed, when it was assessed, and how the final suitability conclusion was reached.
+    *   The records must specifically identify the exact cryptoasset investment service (including service version, terms, execution route, and client journey) that was assessed and considered.
+
+JUDGE EXPLANATION:
+False
+
+The prediction includes the two main ground-truth points, but it also introduces extra major claims that are not supported by the ground truth and go beyond what was asked:
+
+- It adds several detailed record-keeping requirements.
+- It claims the adviser must document exactly when and how the warning was delivered, prove understanding, record assessment reasons, and identify service version/terms/execution route/client journey.
+- It also adds that if the client fails the assessment, the adviser must explain the reasons why.
+
+The ground truth only says:
+1. the recommendation is only suitable if the client passes the appropriateness assessment, and
+2. the client must receive a clear high-risk warning that cryptoassets can fall sharply in value.
+
+Because the prediction contains additional major points not present in the ground truth, it should not be marked correct.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 22 (Root_ID: 12) ===
+
+QUESTION:
+A client holds an onshore investment bond and wants to withdraw a lump sum in the current policy year without triggering a chargeable event. Based on the adviser’s calculation, what is the maximum tax-deferred amount available now, how much of the annual 5% allowance remains unused after the planned withdrawal, and how much cumulative allowance will still be available for future withdrawals after using this year’s allowance?
+
+GROUND TRUTH:
+- The annual 5% allowance for the current policy year is £25,000.
+-
+
+PREDICTION:
+No relevant information found in the documents.
+
+JUDGE EXPLANATION:
+False
+
+The prediction is incorrect because it does not include the key ground-truth point: the annual 5% allowance for the current policy year is £25,000. It also fails to answer the question about the maximum tax-deferred amount available now, the unused portion of the 5% allowance after withdrawal, and the cumulative allowance remaining for future withdrawals. It only says no relevant information was found, which does not match the required answer.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 23 (Root_ID: 13) ===
+
+QUESTION:
+A client is thinking about getting a lifetime mortgage on their home later this year, and their adviser has checked the plan against FCA equity-release rules. Does the proposed arrangement meet the key loan-to-value and no-negative-equity requirements, and if not, what extra protections or changes would be needed?
+
+GROUND TRUTH:
+- The proposed lifetime mortgage does not meet the adviser’s target borrowing position because the initial advance is £187,500 on a property valued at £250,000, which is a 75% loan-to-value ratio and exceeds the adviser’s recommended maximum.
+- The no-negative-equity guarantee is required, so the client must only proceed with a plan that includes this safeguard; without it, the arrangement would not be suitable under the adviser’s assessment.
+-
+
+PREDICTION:
+Based on the provided documents, the proposed lifetime mortgage arrangement does not meet the key requirements. Here are the details and the necessary changes:
+
+*   **Fails the Loan-to-Value (LTV) Test:** The proposed initial advance of £187,500 on a property valued at £250,000 creates a 75% loan-to-value ratio, which is too high and exceeds the adviser’s recommended maximum. 
+*   **Missing Safeguards:** The current proposal is not suitable because a "no-negative-equity guarantee" is an essential requirement and is not optional for this type of borrowing.
+*   **Reduced Borrowing Needed:** To make the plan acceptable, the client must switch to a different product with a lower borrowing amount that fits within the adviser’s recommended range.
+*   **Mandatory Guarantee:** The new arrangement must explicitly include the no-negative-equity guarantee to meet safeguard assessments.
+*   **Fixed Early Repayment Structure:** The recommended package must also include a fixed early repayment charge structure, which provides clarity on early repayment costs and utilizes a cap to ensure borrowing stays at an appropriate level.
+
+JUDGE EXPLANATION:
+False. The prediction correctly mentions the 75% loan-to-value ratio being too high and the need for a no-negative-equity guarantee, but it adds an extra requirement not in the ground truth: a fixed early repayment charge structure. The ground truth only says the plan is unsuitable without the no-negative-equity safeguard and would need that safeguard (and a borrowing level within the adviser’s maximum). The added fixed ERC structure is a new major point not supported by the answer, so the prediction is not an exact match.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 24 (Root_ID: 13) ===
+
+QUESTION:
+A client wants to move some money from a traditional investment account into a junior ISA for their child, and the adviser has reviewed the proposed transfer against FCA requirements. Does the plan satisfy the rules on eligible subscriptions, annual limits, and who can open and manage the account, and if not, what adjustments would be needed?
+
+GROUND TRUTH:
+- A junior ISA can only be opened for a child under 18 who is resident in the UK, so the client cannot open it for an adult family member.
+- The account must be opened and managed by a person with parental responsibility, or by the child once they reach the relevant age for control under the scheme rules.
+- The annual subscription limit is £9,000, so any amount above that would need to remain outside the junior ISA wrapper.
+- Transfers from a traditional investment account do not count as new junior ISA subscriptions unless the money is actually contributed into the junior ISA within the annual limit.
+- If the client wants to invest more than the permitted annual limit for the child, the excess would need to be placed in a different account, such as a general investment account, rather than in the junior ISA.
+
+PREDICTION:
+Based on the provided documents, here is the evaluation of the client's plan and the necessary adjustments:
+
+*   **Eligibility and Control Rules:** The plan satisfies these rules only if the intended recipient is a child under 18 who is resident in the UK, and the account is opened and managed by a person with parental responsibility (or by the child once they reach the relevant age). An adult family member without parental responsibility does not qualify. 
+*   **Eligible Subscriptions Rules:** Moving money from a traditional investment account counts as a new junior ISA subscription. To satisfy the rules, the existing investments must be sold first and the cash proceeds actually contributed into the junior ISA.
+*   **Annual Limits Rules:** The plan is subject to a strict annual subscription limit of £9,000 for a junior ISA.
+*   **Adjustments Needed:**
+    *   The client must ensure they hold the correct parental responsibility for the minor and that the child meets the age and UK residency eligibility framework. 
+    *   The transfer must be executed by selling the traditional investments and moving the cash proceeds into the wrapper.
+    *   The contribution into the junior ISA must be capped at the £9,000 annual limit.
+    *   Any excess funds beyond the £9,000 limit cannot be forced into the junior ISA wrapper; this excess must be held in a different arrangement, such as a general investment account.
+
+JUDGE EXPLANATION:
+False
+
+The prediction is partly aligned with the ground truth, but it misses and distorts key points:
+
+- It correctly mentions the child must be under 18, resident in the UK, and that the account is opened/managed by someone with parental responsibility.
+- It correctly states the £9,000 annual limit and that excess funds must go elsewhere, such as a general investment account.
+
+However, it adds an incorrect major point: it says moving money from a traditional investment account “counts as a new junior ISA subscription” as long as the investments are sold and cash is contributed. The ground truth says the opposite nuance: transfers from a traditional investment account do **not** count as new junior ISA subscriptions unless the money is actually contributed into the junior ISA within the annual limit. The prediction’s wording suggests a transfer itself is enough, which is not the same idea.
+
+It also fails to clearly capture the ground-truth rule that the client cannot open a junior ISA for an adult family member, and it does not clearly distinguish that only the child can be the beneficiary.
+
+Because of these issues, the prediction is not fully correct.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+

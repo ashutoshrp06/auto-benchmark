@@ -16,6 +16,8 @@ from utils import sample_scenarios, process_naive
 from models import LargeLanguageModel
 from prompts import get_generator_prompt, get_verification_prompt
 
+from sample_generic_seeds import get_sampled_generic_rows
+
 import datetime
 
 def build_parser():
@@ -37,6 +39,7 @@ def build_parser():
 	parser.add_argument('-n', type=int, default=1, help='number of completions to generate for each prompt')
 	parser.add_argument('-presence_penalty', type=float, default=0.0, help='positive values increases model\'s likelihood to talk about new topics')
 	parser.add_argument('-frequency_penalty', type=float, default=0.0, help='positive values decreases model\'s likelihood to repeat same line verbatim')
+	parser.add_argument('-reg_pregen_max_attempts', type=int, default=3, help='Max correction attempts in reg_pregen_retry before discard')
 
 	parser.add_argument('-num_iters', type=int, default=5, help='number of iterations to run')
 
@@ -76,14 +79,21 @@ def programmatic_scenario_generation(model, prompt_type, num_iters, max_tokens, 
 
 	for row in pred_ls:
 		row.append(reg_clauses.get(str(row[0]), ""))
+		row.append("")  # Numerics, empty for reg-grounded seeds
+		row.append("reg")  # Seed_Type
+
+	generic_rows = get_sampled_generic_rows("generic_seeds.json")
+	for gr in generic_rows:
+		pred_ls.append([gr["id"], gr["persona"], gr["environment"], 0, "", gr["numerics"], gr["seed_type"]])
+
 
 	tot_ip_tokens = 0
 	tot_op_tokens = 0
 
-	pred_id = len(pred_ls)
+	pred_id = max(row[0] for row in pred_ls)
 
 	# Write seeded scenarios immediately so num_iters=0 still produces a valid scenarios.tsv
-	pred_df = pd.DataFrame(pred_ls, columns = ['ID', 'Persona', 'Environment', 'Similarity', 'Reg_Text'])
+	pred_df = pd.DataFrame(pred_ls, columns = ['ID', 'Persona', 'Environment', 'Similarity', 'Reg_Text', 'Numerics', 'Seed_Type'])
 	pred_df.to_csv(args.out_dir + "/scenarios.tsv", sep = '\t', index = None)
 
 	for i in range(num_iters):
@@ -123,10 +133,10 @@ def programmatic_scenario_generation(model, prompt_type, num_iters, max_tokens, 
 					if cur_sim > avg_sim:
 						avg_sim = cur_sim
 				if avg_sim < 60:
-					pred_ls.append([pred_id+1, persona, env, avg_sim, ""])
+					pred_ls.append([pred_id+1, persona, env, avg_sim, "", "", "dynamic"])
 					pred_id += 1
 
-		pred_df = pd.DataFrame(pred_ls, columns = ['ID', 'Persona', 'Environment', 'Similarity', 'Reg_Text'])
+		pred_df = pd.DataFrame(pred_ls, columns = ['ID', 'Persona', 'Environment', 'Similarity', 'Reg_Text', 'Numerics', 'Seed_Type'])
 		pred_df.to_csv(args.out_dir + "/scenarios.tsv", sep = '\t', index = None)
 
 		i += 1
@@ -169,37 +179,48 @@ def reg_pregen_grounding_check(args, model, ques, reg_text, answer):
 	return False, flagged_point, corrected_point
 
 
-def reg_pregen_retry(args, model, ques, reg_text, answer):
+def reg_pregen_retry(args, model, ques, reg_text, answer, docs_info, max_attempts=3):
 	if str(reg_text).strip() == "" or str(reg_text).strip().lower() == "nan":
-		return answer, False
+		return answer, docs_info, False
 
-	grounded, flagged_point, corrected_point = reg_pregen_grounding_check(args, model, ques, reg_text, answer)
+	cur_answer = answer
+	cur_docs_info = docs_info
 
-	if grounded:
-		return answer, False
+	for attempt in range(1, max_attempts + 1):
+		grounded, flagged_point, corrected_point = reg_pregen_grounding_check(args, model, ques, reg_text, cur_answer)
 
-	if flagged_point in answer:
-		new_answer = answer.replace(flagged_point, corrected_point)
-	else:
-		with open(args.out_dir + "/reg_pregen_logs.txt", "a") as f:
-			f.write("WARNING: flagged point not found verbatim in answer, leaving unmodified before recheck.\nFlagged Point: " + flagged_point + "\n")
-			f.write("---------------------------------------------------------\n")
-		with open(args.out_dir + "/reg_pregen_logs.txt", "a") as f:
-			f.write("DISCARD: splice failed, no correction made, skipping recheck.\n")
-			f.write("---------------------------------------------------------\n")
-		return answer, True
-	regrounded, _, _ = reg_pregen_grounding_check(args, model, ques, reg_text, new_answer)
+		if grounded:
+			if attempt > 1:
+				with open(args.out_dir + "/reg_pregen_logs.txt", "a") as f:
+					f.write("CORRECTED IN PLACE after " + str(attempt - 1) + " attempt(s)\n")
+					f.write("---------------------------------------------------------\n")
+			return cur_answer, cur_docs_info, False
 
-	if regrounded:
-		with open(args.out_dir + "/reg_pregen_logs.txt", "a") as f:
-			f.write("CORRECTED IN PLACE\nFlagged Point: " + flagged_point + "\nCorrected Point: " + corrected_point + "\n")
-			f.write("---------------------------------------------------------\n")
-		return new_answer, False
+		if flagged_point in cur_answer:
+			cur_answer = cur_answer.replace(flagged_point, corrected_point)
+
+			if flagged_point in cur_docs_info:
+				cur_docs_info = cur_docs_info.replace(flagged_point, corrected_point)
+			else:
+				with open(args.out_dir + "/reg_pregen_logs.txt", "a") as f:
+					f.write("WARNING: flagged point corrected in Answer but not found verbatim in Documents_Info, doc assignment left stale.\nFlagged Point: " + flagged_point + "\n")
+					f.write("---------------------------------------------------------\n")
+
+			with open(args.out_dir + "/reg_pregen_logs.txt", "a") as f:
+				f.write("CORRECTION ATTEMPT " + str(attempt) + "\nFlagged Point: " + flagged_point + "\nCorrected Point: " + corrected_point + "\n")
+				f.write("---------------------------------------------------------\n")
+		else:
+			with open(args.out_dir + "/reg_pregen_logs.txt", "a") as f:
+				f.write("WARNING: flagged point not found verbatim in answer, leaving unmodified before recheck.\nFlagged Point: " + flagged_point + "\n")
+				f.write("---------------------------------------------------------\n")
+				f.write("DISCARD: splice failed on attempt " + str(attempt) + ", no correction made.\n")
+				f.write("---------------------------------------------------------\n")
+			return cur_answer, cur_docs_info, True
 
 	with open(args.out_dir + "/reg_pregen_logs.txt", "a") as f:
-		f.write("DISCARD: still ungrounded after one correction attempt.\n")
+		f.write("DISCARD: still ungrounded after " + str(max_attempts) + " correction attempt(s).\n")
 		f.write("---------------------------------------------------------\n")
-	return new_answer, True
+	return cur_answer, cur_docs_info, True
 
 def programmatic_qa_generation(scenarios_data, model, prompt_type, num_iters, max_tokens, temperature, stop, tik_encoding):
 	pred_ls = []
@@ -213,6 +234,8 @@ def programmatic_qa_generation(scenarios_data, model, prompt_type, num_iters, ma
 		persona = scenarios_data.loc[i]["Persona"]
 		env = scenarios_data.loc[i]["Environment"]
 		reg_text = scenarios_data.loc[i]["Reg_Text"]
+		numerics = scenarios_data.loc[i]["Numerics"]
+		seed_type = scenarios_data.loc[i]["Seed_Type"]
 		with open(args.out_dir + "/logs.txt", "a") as f:
 			f.write("Scenario " + str(i+1) + ":\n\n")
 			f.write("Persona: " + persona + "\n")
@@ -223,7 +246,8 @@ def programmatic_qa_generation(scenarios_data, model, prompt_type, num_iters, ma
 
 		for xy in range(num_iters):
 		
-			prompt, sys_prompt = get_generator_prompt(prompt_type, question=(persona, env, reg_text	))
+			context_text = reg_text if str(reg_text).strip() not in ("", "nan") else numerics
+			prompt, sys_prompt = get_generator_prompt(prompt_type, question=(persona, env, context_text))
 
 			og_pred = model.predict(prompt, sys_prompt, max_tokens, temperature, 1, stop)
 
@@ -264,14 +288,14 @@ def programmatic_qa_generation(scenarios_data, model, prompt_type, num_iters, ma
 
 			if main_sim < 60:
 				group.append(question)
-				answer, discard_row = reg_pregen_retry(args, model, question, reg_text, answer)
+				answer, docs_info, discard_row = reg_pregen_retry(args, model, question, reg_text, answer, docs_info, max_attempts=args.reg_pregen_max_attempts)
 				if discard_row:
 					print("Completed {} / {}... (discarded)".format(i+1, len(scenarios_data)), end = '\r', flush = True)
 					continue
-				pred_ls.append([i+1, persona, env, question, answer, docs_info, main_sim, reg_text])
+				pred_ls.append([i+1, persona, env, question, answer, docs_info, main_sim, reg_text, numerics, seed_type])
 				cnt += 1
 
-				pred_df = pd.DataFrame(pred_ls, columns = ['ID', 'Persona', 'Environment', 'Question', 'Answer', 'Documents_Info', 'Similarity', 'Reg_Text'])
+				pred_df = pd.DataFrame(pred_ls, columns = ['ID', 'Persona', 'Environment', 'Question', 'Answer', 'Documents_Info', 'Similarity', 'Reg_Text', 'Numerics', 'Seed_Type'])
 				pred_df['Answer'] = pred_df['Answer'].str.replace('\n', '\\n')
 				pred_df['Documents_Info'] = pred_df['Documents_Info'].str.replace('\n', '\\n')
 				pred_df.to_csv(args.out_dir + "/prog_qa.tsv", sep = '\t', index = None, quoting=1)
@@ -301,6 +325,8 @@ def programmatic_adversarial_generation(questions_data, model, prompt_type, num_
 		ans_pts = questions_data.loc[i]["Ans_Points"]
 		doc_ans_pts = questions_data.loc[i]["Doc_Ans_Points"]
 		reg_text = questions_data.loc[i]["Reg_Text"]
+		numerics = questions_data.loc[i]["Numerics"]
+		seed_type = questions_data.loc[i]["Seed_Type"]
 
 		if str(ans) == "nan":
 			continue
@@ -359,10 +385,10 @@ def programmatic_adversarial_generation(questions_data, model, prompt_type, num_
 
 			num_loops += 1
 
-		pred_ls.append([id1, persona, env, ques, ans, docs_info, adv_ques_ls, adv_ans_ls, adv_docs_info_ls, main_sim, ans_pts, doc_ans_pts, reg_text])
+		pred_ls.append([id1, persona, env, ques, ans, docs_info, adv_ques_ls, adv_ans_ls, adv_docs_info_ls, main_sim, ans_pts, doc_ans_pts, reg_text, numerics, seed_type])
 		cnt += 1
 
-		pred_df = pd.DataFrame(pred_ls, columns = ['ID', 'Persona', 'Environment', 'Question', 'Answer', 'Documents_Info', 'Adv_Question', 'Adv_Answer', 'Adv_Documents_Info', 'Similarity', 'Ans_Points', 'Doc_Ans_Points', 'Reg_Text'])
+		pred_df = pd.DataFrame(pred_ls, columns = ['ID', 'Persona', 'Environment', 'Question', 'Answer', 'Documents_Info', 'Adv_Question', 'Adv_Answer', 'Adv_Documents_Info', 'Similarity', 'Ans_Points', 'Doc_Ans_Points', 'Reg_Text', 'Numerics', 'Seed_Type'])
 		pred_df['Adv_Question'] = pred_df['Adv_Question'].apply(json.dumps)
 		pred_df['Adv_Answer'] = pred_df['Adv_Answer'].apply(json.dumps)
 		pred_df['Adv_Documents_Info'] = pred_df['Adv_Documents_Info'].apply(json.dumps)
@@ -380,6 +406,15 @@ def strip_titles(d_info):
 		if "title" not in docline.lower():
 			new_docs_info = new_docs_info + docline + "\n"
 	return new_docs_info.strip()
+
+def strip_conclusion(ans):
+	new_lines = []
+	for line in ans.split("\n"):
+		stripped = line.strip()
+		if stripped.lower().startswith("- conclusion:") or stripped.lower().startswith("conclusion:"):
+			continue
+		new_lines.append(line)
+	return "\n".join(new_lines).strip()
 
 def programmatic_doc_generation(questions_data, model, prompt_type, max_tokens, temperature, stop, tik_encoding):
 	pred_ls = []
@@ -399,6 +434,8 @@ def programmatic_doc_generation(questions_data, model, prompt_type, max_tokens, 
 		ans_pts = questions_data.loc[i]["Ans_Points"]
 		doc_ans_pts = json.loads(questions_data.loc[i]["Doc_Ans_Points"])
 		reg_text = questions_data.loc[i]["Reg_Text"]
+		numerics = questions_data.loc[i]["Numerics"]
+		seed_type = questions_data.loc[i]["Seed_Type"]
 
 		if len(ques) != len(docs_info):
 			with open(args.out_dir + "/logs.txt", "a") as f:
@@ -414,13 +451,16 @@ def programmatic_doc_generation(questions_data, model, prompt_type, max_tokens, 
 
 		for idx in range(len(ques)):
 			cur_ques = ques[idx]
-			cur_ans = ans[idx]
+			cur_ans_original = ans[idx]
 			cur_docs_info = strip_titles(docs_info[idx])
 			
 			adv_ques_ls = ques.copy()
 			adv_ques_ls.remove(cur_ques)
 			adv_ans_ls = ans.copy()
-			adv_ans_ls.remove(cur_ans)
+			adv_ans_ls.remove(cur_ans_original)
+			adv_ans_ls = [strip_conclusion(a) for a in adv_ans_ls]
+
+			cur_ans = strip_conclusion(cur_ans_original)
 
 			adv_info = ""
 			for jdx in range(len(adv_ques_ls)):
@@ -478,10 +518,10 @@ def programmatic_doc_generation(questions_data, model, prompt_type, max_tokens, 
 			f.write("=======================================================================================\n")
 			f.write("=======================================================================================\n\n")
 
-		pred_ls.append([i+1, persona, env, ques, ans, docs_info, ans_pts, doc_ans_pts, documents_list, reg_text])
+		pred_ls.append([i+1, persona, env, ques, ans, docs_info, ans_pts, doc_ans_pts, documents_list, reg_text, numerics, seed_type])
 		cnt += 1
 
-		pred_df = pd.DataFrame(pred_ls, columns = ['ID', 'Persona', 'Environment', 'Questions', 'Answers', 'Documents_Info', 'Ans_Points', 'Doc_Ans_Points', 'Docs_List', 'Reg_Text'])
+		pred_df = pd.DataFrame(pred_ls, columns = ['ID', 'Persona', 'Environment', 'Questions', 'Answers', 'Documents_Info', 'Ans_Points', 'Doc_Ans_Points', 'Docs_List', 'Reg_Text', 'Numerics', 'Seed_Type'])
 
 		pred_df['Questions'] = pred_df['Questions'].apply(json.dumps)
 		pred_df['Answers'] = pred_df['Answers'].apply(json.dumps)

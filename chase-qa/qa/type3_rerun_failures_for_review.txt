@@ -1,0 +1,549 @@
+=== FAILURE 1 (Root_ID: 2) ===
+
+QUESTION:
+Under the FCA MCOB 11.6 responsible lending and affordability rules, if a lender changes from treating the mortgage term as repayment-only with a standard income stress test to re-running affordability using the borrower’s verified committed expenditure and likely changes in income over the term, what sequence of regulatory steps and assessment outcomes would explain a decline in the number of borrowers receiving maximum loan offers?
+
+GROUND TRUTH:
+- The lender must carry out a reasonable assessment of whether the customer can meet the mortgage repayments in a sustainable manner.\n- The affordability assessment must take account of the customer’s income, committed expenditure, and basic essential living expenses.\n- \n- The rules require the lender to consider likely changes to income over the duration of the mortgage term.\n- The lender must not rely solely on the value of the property or on the customer’s current financial position without considering the full affordability assessment.\n- Conclusion: Replacing a simpler repayment stress test with a full MCOB 11.6 affordability assessment that includes verified expenditure and expected income changes reduces the number of borrowers who qualify for the maximum available loan amount.
+
+PREDICTION:
+Based on the provided documents, the sequence of regulatory steps and assessment outcomes that explains a decline in maximum loan offers is:
+
+*   **Regulatory Step:** The lender must conduct a reasonable assessment of the customer’s ability to repay the mortgage. 
+*   **Regulatory Step:** The affordability assessment must take account of the customer’s income, committed expenditure, and basic essential living expenses. 
+*   **Regulatory Step:** The lender should not base the lending decision only on the property value or the customer’s present financial situation.
+*   **Regulatory Step:** The affordability assessment must use sufficient information and take account of likely changes to income over the mortgage term. 
+*   **Assessment Outcome:** By accounting for real expenses and a future income profile instead of a blunt rule of thumb, the borrower's calculated disposable income is lower.
+*   **Assessment Outcome:** Once all income is weighed alongside high living expenses and committed expenditure, the amount available for the mortgage goes down, leaving less room for the lender to stretch the loan amount.
+*   **Assessment Outcome:** Incorporating likely changes in income over the term stops the lender from overstating what can be sustainably borrowed, further reducing the amount the lender is comfortable advancing.
+*   **Assessment Outcome:** Ultimately, this more robust assessment demonstrates whether the customer can repay in a sustainable way, narrowing the pool of borrowers who can comfortably support the loan under the broader rules and causing fewer borrowers to receive the maximum offered loan.
+
+JUDGE EXPLANATION:
+False
+
+Coverage fails because the prediction contains an extra major point that is not in the ground truth and is not just a harmless elaboration: it says the lender should not rely on the property value or the customer’s current financial situation. That idea is related to lending generally, but the ground-truth answer specifically requires the lender not to rely solely on property value or current financial position without the full affordability assessment; the prediction’s wording shifts this into a broader normative rule and, more importantly, adds several outcome statements about “disposable income” and “stretch the loan amount” that are not part of the required evidence sequence. 
+
+More importantly, the prediction does include the main required evidence ideas in paraphrase:
+- reasonable assessment of ability to repay sustainably,
+- income plus committed expenditure and essential living expenses,
+- likely changes to income over the mortgage term.
+
+However, because Coverage is strict and the prediction introduces additional major assessment-outcome claims beyond the ground truth’s structure, I do not count it as a clean match.
+
+Since Coverage fails, Connection is not reached.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 2 (Root_ID: 2) ===
+
+QUESTION:
+Under FCA ICOBS rules on non-investment insurance product disclosures, if a firm switches from giving a brief summary at sale to checking the customer’s demands and needs, comparing the policy’s main exclusions and excesses against those needs, and using pre-contract information to flag situations where cover may be unsuitable, what sequence of regulatory steps and assessment outcomes would explain a fall in the number of customers taking the highest-priced policy package?
+
+GROUND TRUTH:
+- The disclosure must include the main features, significant exclusions, and excesses of the insurance policy.
+- The firm must provide pre-contract information that is clear, fair, and not misleading.
+- The assessment must compare the policy’s benefits and limitations with the customer’s stated protections and budget.
+- Policies that do not match the customer’s requirements must be highlighted as unsuitable before the sale proceeds.
+- Conclusion: Replacing a simple summary with a full demands-and-needs and disclosure review reduces the number of customers accepting the highest-priced policy package.
+
+PREDICTION:
+Based on the provided documents, the fall in the number of customers taking the highest-priced policy package is explained by the following integrated sequence of regulatory steps and assessment outcomes:
+
+*   **Provision of Clear Information:** The firm must provide pre-contract information that is clear, fair, and not misleading, ensuring customers understand the actual terms rather than just an attractive sales presentation. 
+*   **Full Disclosure of Terms:** The disclosure must include the main features, significant exclusions, and excesses of the insurance policy so the customer understands the practical impact of the cover before deciding.
+*   **Comparison with Customer Needs:** The firm's assessment must compare the policy’s benefits and limitations against the customer’s stated protections and budget.
+*   **Flagging Unsuitability:** If a policy does not match the customer’s requirements, it must be explicitly highlighted as unsuitable before the sale proceeds.
+*   **Assessment Outcome:** Because the exclusions, excesses, and limitations are made visible, real understanding filters out choices that only looked appealing under a vague summary. Customers are steered away from the highest-priced package if it adds benefits they do not need, or if it fails their requirements, often revealing that a lower-cost policy covers their actual priorities more effectively.
+
+JUDGE EXPLANATION:
+False
+
+Coverage passes for the main ground-truth evidence points: the prediction includes clear, fair, and not misleading pre-contract information; disclosure of main features, significant exclusions, and excesses; comparison of benefits and limitations against the customer’s protections and budget; and flagging policies as unsuitable before sale proceeds.
+
+However, Connection fails. The ground-truth causal conclusion is that replacing a simple summary with a full demands-and-needs and disclosure review reduces the number of customers accepting the highest-priced policy package. The prediction does not state this specific causal conclusion cleanly; instead it gives a more general explanation about customers being “steered away” and lower-cost policies being more effective. That is related, but it does not directly and explicitly match the required conclusion.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 3 (Root_ID: 3) ===
+
+QUESTION:
+When a small business customer is considering card payment acceptance and a chargeback reserve, how do PCI DSS controls, PSD2 strong customer authentication, and FCA payment services conduct requirements affect the sequence of a provider’s recommendations about whether to enable tokenised recurring payments or keep transactions manual?
+
+GROUND TRUTH:
+- PCI DSS requires cardholder data to be protected through technical and operational controls before payment card processing is configured.
+- PSD2 strong customer authentication applies to many electronic payment transactions and sets an authentication step for the payment flow.
+- FCA payment services conduct rules require the provider to give information that is clear, fair, and not misleading.
+- FCA conduct and due diligence requirements call for the provider to understand the customer’s business model, transaction profile, and operational risks before recommending a payment setup.
+- Conclusion: The evidence supports that the provider should first gather the business and transaction facts, then assess the PCI DSS and PSD2 control implications, and only then recommend tokenised recurring payments or manual processing in a way that is compliant and suitable.
+
+PREDICTION:
+Based on the provided documents, the sequence of a provider's recommendations is structured by these three frameworks as follows:
+
+*   **PCI DSS Controls:** The provider must not start with product features or transaction handling. The protection of cardholder data must be established as a prior condition. Technical and operational controls (such as access, encryption, network segmentation, logging, vulnerability management, and staff procedures) must be in place and evaluated before payment card processing is configured, and before recommending whether to use tokenised recurring payments or retain manual manual handling.
+*   **PSD2 Strong Customer Authentication:** Because this sets a mandatory authentication step for electronic payment flows, the provider must first understand how this authentication will operate across transactions. The provider is required to map the authentication requirements and design around them *before* assessing whether a tokenised recurring payment setup fits the customer's use case or if manual processing is required. 
+*   **FCA Payment Services Conduct Requirements:** The provider cannot recommend an option simply because it is easier or more modern. The mandated sequence requires the provider to first conduct due diligence to deeply understand the customer’s business model, transaction profile, and operational risks (including the level of chargebacks they experience). Only after this analysis must the provider present the options (features, limitations, and trade-offs) in a way that is clear, fair, and not misleading, prior to recommending whether tokenised recurring payments or manual transactions are more suitable.
+
+JUDGE EXPLANATION:
+False
+
+Coverage fails because the prediction does not fully match the ground-truth evidence points and also introduces some off-target emphasis.
+
+What the ground truth requires:
+1. PCI DSS requires cardholder data to be protected through technical and operational controls before payment card processing is configured.
+2. PSD2 strong customer authentication applies to many electronic payment transactions and sets an authentication step for the payment flow.
+3. FCA payment services conduct rules require the provider to give information that is clear, fair, and not misleading.
+4. FCA conduct and due diligence requirements require understanding the customer’s business model, transaction profile, and operational risks before recommending a payment setup.
+5. Conclusion: first gather the business and transaction facts, then assess PCI DSS and PSD2 implications, and only then recommend tokenised recurring payments or manual processing in a compliant and suitable way.
+
+Assessment:
+- The prediction does capture PCI DSS, PSD2 SCA, and the FCA “clear, fair, and not misleading” requirement.
+- It also mentions due diligence and understanding the business model, transaction profile, and operational risks.
+- However, it does not clearly include the full ground-truth sequence’s required causal conclusion in the same form: it talks about mapping requirements and presenting options before recommending, but it does not explicitly state the exact final conclusion that the provider should first gather the business and transaction facts, then assess PCI DSS and PSD2 control implications, and only then recommend tokenised recurring payments or manual processing as compliant and suitable.
+- More importantly, the prediction adds an extra major detail about “including the level of chargebacks they experience,” which is not one of the ground-truth main points and is not merely a harmless elaboration of the stated business model / transaction profile / operational risks point.
+
+Because Coverage fails, Connection is not reached.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 4 (Root_ID: 4) ===
+
+QUESTION:
+Under the FCA MCOB 8 and MCOB 9 equity release rules, what sequence of adviser disclosures and suitability/illustration steps is intended to prevent a customer from proceeding after they first learn that the lifetime mortgage could be repaid early only with a substantial early repayment charge, and how do those rules interact to affect the customer’s decision process?
+
+GROUND TRUTH:
+- MCOB 9 requires a firm to provide a KFI or other illustration before mortgage completion, with prescribed information about the mortgage and its costs.\n- MCOB 8 requires the adviser to give the customer a suitability assessment and, where appropriate, a suitability letter or record setting out the recommendation and the reasons for it.\n- The equity release disclosure rules require the adviser to explain that taking out a lifetime mortgage may affect entitlement to means-tested benefits and the value of the customer’s estate.\n- \n- \n- Conclusion: The FCA MCOB 8 and MCOB 9 equity release disclosure and suitability steps are designed to ensure the customer receives the key risks and cost information before commitment, reducing the chance that the customer proceeds without understanding the consequences of early repayment and long-term estate impact.
+
+PREDICTION:
+No relevant information found in the documents.
+
+JUDGE EXPLANATION:
+False
+
+Coverage fails because the prediction says only “No relevant information found in the documents,” which does not mention any of the required evidence points:
+- no pre-completion KFI/illustration with prescribed mortgage and cost information,
+- no suitability assessment or suitability letter/record with recommendation and reasons,
+- no disclosure about means-tested benefits and estate value.
+
+Since these main evidence points are all missing, there is no need to assess Connection.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 5 (Root_ID: 4) ===
+
+QUESTION:
+Under FCA COBS and PROD rules for packaged retail investment products, what sequence of risk warnings, product-governance checks, and pre-sale disclosure steps is intended to stop a retail customer from buying a structured product after first learning that the return depends on an equity index and may be lost if barriers are breached, and how do those rules interact to shape the customer’s decision process?
+
+GROUND TRUTH:
+- Firms must identify the target market for a structured product before it is marketed to retail customers.
+- The product information must explain the payoff structure, including dependence on the underlying equity index and any barrier conditions.
+- Risk warnings must be given before the customer commits to the purchase, with prominent disclosure of the chance of capital loss.
+- The distributor must check that the product is appropriate for the intended customer segment before sale.
+- The sales process must provide enough information for the customer to compare the product with simpler investments before proceeding.
+- Conclusion: The FCA product-governance and pre-sale disclosure steps are designed to place the key structure and risk information before commitment, preventing a retail customer from buying without understanding the barrier risk and possible capital loss.
+
+PREDICTION:
+Based on the provided documents, the sequence of rules, checks, and disclosures designed to protect the customer and shape their decision-making process includes the following steps:
+
+*   **Product Governance and Target Market Identification:** Before any marketing goes out to retail customers, the product manufacturer must establish and document the target market for the structured product during the design stage (Documents 5 and 12).
+*   **Distribution-Stage Appropriateness Checks:** During distribution, the distributor must verify that the product is appropriate for the intended customer segment to prevent a mismatch between the product and the investor (Documents 5 and 12).
+*   **Overarching COBS Duty:** Under COBS 2.1.1R, firms must act honestly, fairly, and professionally in accordance with the best interests of the client when making a personal recommendation (Document 12).
+*   **Pre-Sale Payoff Disclosure:** The product literature must explicitly explain the payoff structure, detailing how returns depend on the underlying equity index and what happens if barrier conditions are crossed, so the client understands the internal mechanics rather than relying on headline summaries (Documents 9 and 12).
+*   **Comparison Information:** The sales process must provide sufficient information for the customer to compare the structured product's conditions and complexity against simpler, alternative investments before proceeding (Documents 10 and 12).
+*   **Prominent Risk Warnings:** Warning labels, including prominent disclosures regarding the chance of capital loss, must be displayed prior to any commitment, ensuring the risks are obvious rather than hidden at the back of a document (Document 12).
+*   **Interaction and Impact on the Decision Process:** The rules mandate a sequence of "information first, then reflection, then commitment." This controls the decision timeline so that customers understand the mechanics, assess the boundary conditions, compare alternatives, and view prominent risk warnings before any money changes hands, preventing rushed decisions based on mistaken impressions (Documents 9, 10, and 12).
+
+JUDGE EXPLANATION:
+False
+
+Coverage fails because the prediction includes the main required evidence points, but it also adds a major extra point not in the ground truth: the “Overarching COBS Duty” about acting honestly, fairly, and professionally. That is not merely an elaboration of the structured-product governance/disclosure sequence, and under the instructions any additional major point not in the ground truth causes Coverage to fail.
+
+Even aside from that, the prediction is otherwise close: it mentions target market identification, appropriateness checks, payoff disclosure tied to the equity index and barriers, pre-sale comparison information, and prominent capital-loss warnings. It also gives a general interaction description. However, because Coverage fails, I do not reach a passing Connection assessment.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 6 (Root_ID: 4) ===
+
+QUESTION:
+Under FCA ICOBS insurance distribution rules, what sequence of pre-sale demands-and-needs questioning, product information disclosure, and disclosure of exclusions is intended to prevent a customer from purchasing travel insurance after first learning that a pre-existing medical condition is excluded, and how do those rules interact to shape the customer’s decision process?
+
+GROUND TRUTH:
+- Key exclusions and limitations must be set out in the policy information.
+- Conclusion: The ICOBS disclosure and demands-and-needs steps are designed to put the medical-condition exclusion and other key terms in front of the customer before commitment, reducing the chance that the customer proceeds without understanding the cover gap.
+
+PREDICTION:
+Here is the sequence and interaction of the pre-sale process for travel insurance based on the provided documents:
+
+*   **Initial Demands-and-Needs Assessment:** The process begins by asking demands-and-needs questions to identify the customer's specific circumstances, trip activities, and relevant medical history to match the product to their requirements.
+*   **Clear Policy Information Disclosure:** Following this, policy information must be provided to clearly outline what the policy includes, coverage limits, and any key exclusions and limitations. 
+*   **Upfront Disclosure of Exclusions:** Any crucial limitations—such as exclusions for pre-existing medical conditions—must be stated plainly and prominently in the policy information before the customer makes any financial commitment.
+*   **Preventing Mistaken Impressions:** Presenting these exclusions prior to purchase ensures that the customer understands exactly what is not covered, preventing them from buying the policy under the false assumption that they are fully protected.
+*   **Shaping the Decision Process:** By first establishing the customer's needs and immediately applying the policy's exclusions to those needs, the customer is empowered to make an informed decision. If an exclusion conflicts with a core need (like a recent medical treatment), the customer can halt the purchase and actively seek a more suitable policy before money changes hands.
+
+JUDGE EXPLANATION:
+False
+
+Coverage fails because the ground-truth evidence point is very specific: **key exclusions and limitations must be set out in the policy information**. The prediction does include disclosure of exclusions and limitations, and it also mentions pre-existing medical condition exclusions, which fits that evidence point broadly.
+
+However, the prediction adds several major points that are not in the ground truth and go beyond mere elaboration: a detailed **initial demands-and-needs assessment**, discussion of **trip activities and relevant medical history**, and a process of **halting the purchase and seeking a more suitable policy**. These are not stated in the ground-truth answer and are more than the single required evidence point. Because Coverage requires all main ground-truth points and no major extra irrelevant points, it fails.
+
+Since Coverage fails, Connection is not reached for scoring purposes.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 7 (Root_ID: 4) ===
+
+QUESTION:
+Under FCA CASS and client money safeguarding rules for investment firms, what sequence of segregation, reconciliation, and disclosure steps is intended to stop a client from continuing to transact after first learning that their cash is being held in a client money account with a shortfall risk, and how do those rules interact to shape the client’s understanding of custody risk?
+
+GROUND TRUTH:
+- Client money must be segregated from the firm’s own money in a designated client money account.
+- Firms must perform regular client money reconciliations and identify any shortfall between ledger records and bank balances.
+- Where a shortfall is found, the firm must take prompt steps to restore the client money position and notify the appropriate internal control functions.
+- Client disclosures explain that money held under the client money rules is protected by segregation, but that operational failures can still affect the timing and amount returned.
+- Conclusion: The CASS safeguarding, reconciliation, and disclosure requirements are designed to inform the client about custody risk before further transactions proceed, so the client understands that protection depends on segregation controls and the firm’s ability to correct any shortfall.
+
+PREDICTION:
+No relevant information found in the documents.
+
+JUDGE EXPLANATION:
+False
+
+Coverage fails because the prediction says only “No relevant information found,” and does not mention any of the required evidence points: segregation of client money into a designated account, regular reconciliations and shortfall detection, prompt restoration/notification when a shortfall is found, or the client disclosure about protection by segregation and residual operational risk. It also does not address the required causal conclusion about informing the client about custody risk before further transactions proceed.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 8 (Root_ID: 5) ===
+
+QUESTION:
+For a parent saving for a child’s university costs through a Junior ISA, what sequence of FCA COBS 9 suitability checks and COBS 4 disclosure requirements would have to occur when the adviser recommends the investment after assessing the child’s long-term education goal, and how would those rules shape the advice and warning process?
+
+GROUND TRUTH:
+- COBS 9.2.1R requires a firm to obtain the necessary information to understand the client’s investment objectives, including the intended purpose of the investment and the time horizon.\n- \n- \n- \n- \n- Conclusion: The FCA rules support a sequence in which the adviser first gathers the parent’s and child’s relevant facts for suitability, then gives any Junior ISA promotion and recommendation in a way that is clear, fair, not misleading, and consistent with the suitability findings.
+
+PREDICTION:
+Based on the provided documents, the sequence of suitability checks and disclosure requirements, and how they shape the advice process for a Junior ISA, are as follows:
+
+*   **Initial Suitability Check (COBS 9.2.1R):** The sequence strictly begins with the adviser collecting the necessary facts to understand the client’s investment objectives. This includes establishing the intended purpose of the investment (university costs) and the long-term time horizon (e.g., until the child reaches age 18 or beyond).
+*   **Recommendation Alignment:** The advice must physically align the investment strategy and risk profile with the long-term education objective and assumed cashflow, rather than focusing on short-term gains or speculative tinkering. 
+*   **Promotion and Warning Disclosure (COBS 4):** Following the recommendation, any financial promotion or written summary must be presented separately and comply with the COBS 4 standard of being "clear, fair and not misleading."
+*   **Consistency with Suitability:** The rules dictate that the promotion and warning process must be fully consistent with the initial suitability assessment. The messaging cannot imply short-term certainty, quick access, or low-risk capital protection if the findings dictate a long-term strategy.
+*   **Balanced Presentation:** The rules shape the disclosure by ensuring it does not solely emphasize potential long-term growth. Advisers must fairly present the possibility of losses, limited capital access, and the strict lock-in period until the child reaches the relevant age. 
+*   **Framing the Warnings:** The tone of the risk warnings must actively reflect patience and risk awareness, complementing the long-term suitability findings rather than contradicting them. 
+*   **Adjusting to Changes:** If the child’s university date changes, moving the time horizon closer, the sequence requires the adviser to revisit the suitability assessment to ensure the investment still fits the objective, and subsequently adjust the risk warnings. 
+*   **Overall Sequence:** The mandatory workflow is: understand the long-term goal and timeframe first, provide the recommendation, and only then supply a suitability report and promotional material that is completely clear, fair, not misleading, and aligned with those exact findings.
+
+JUDGE EXPLANATION:
+False
+
+Coverage fails because the prediction does not match the ground-truth evidence point precisely enough and adds several unsupported major ideas.
+
+- The ground truth requires that COBS 9.2.1R means the firm must obtain the necessary information to understand the client’s investment objectives, specifically including the intended purpose of the investment and the time horizon. The prediction does capture those core elements in broad terms.
+- However, the prediction then adds multiple major points that are not in the ground truth, such as:
+  - “physically align the investment strategy and risk profile” with the objective,
+  - “limited capital access,” “strict lock-in period,” and “possible losses” as disclosure content,
+  - revisiting suitability if the child’s university date changes.
+  These are not merely elaborations of the ground-truth evidence point; they are additional substantive claims.
+
+Because Coverage fails, I do not need to reach Connection.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 9 (Root_ID: 5) ===
+
+QUESTION:
+What sequence of FCA COBS 10 appropriateness checks and COBS 4 disclosure rules applies when a firm markets contracts for difference to a retail client, and how do those rules shape the warning and execution process?
+
+GROUND TRUTH:
+- COBS 4.12A.21R requires retail clients to receive a risk warning before they trade contracts for differences.
+- Conclusion: The FCA rules support a sequence in which the firm first checks whether the retail client understands and can bear the CFD risks, then presents the promotion and execution steps with clear, fair and not misleading warnings that match the appropriateness findings.
+
+PREDICTION:
+No relevant information found in the documents.
+
+JUDGE EXPLANATION:
+False
+
+Coverage fails because the prediction does not mention either of the ground-truth points: it does not say that a retail client must receive a CFD risk warning before trading, and it does not state the required causal sequence of checking whether the client understands and can bear CFD risks, followed by clear/fair/not misleading warnings aligned with the appropriateness findings.
+
+Connection is not reached because Coverage already fails.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 10 (Root_ID: 5) ===
+
+QUESTION:
+What sequence of FCA mortgage disclosure checks and affordability assessments applies when a firm recommends a residential home loan to a first-time buyer, and how do those rules shape the advice and warning process?
+
+GROUND TRUTH:
+- MCOB 11.6.3R requires the affordability assessment to take account of the customer’s income, committed expenditure and future changes in payments.
+- MCOB 12.4.1R requires disclosure of arrears and repossession risks where relevant to the mortgage being recommended.
+- Conclusion: The FCA rules support a sequence in which the adviser first gathers affordability information, then gives pre-contract disclosures and risk warnings that are clear, fair and not misleading, and finally recommends only a mortgage consistent with the affordability assessment and the client’s borrowing needs.
+
+PREDICTION:
+Based on the provided documents, the sequence of FCA mortgage disclosure checks, affordability assessments, and how they shape the advice and warning process is as follows:
+
+*   **Overall Sequence:** The advice and warning process follows a clear required order: explain the product, test affordability (using income, committed expenditure, and future changes in payments), and then ensure the recommendation and disclosure remain transparent, accurate, and not misleading. 
+*   **Affordability Assessment:** Under MCOB 11.6.3R, the affordability assessment must take into account the customer’s income, committed expenditure, and future changes in payments. For a first-time buyer, this ensures that the recommendation is genuinely sustainable in the real world, rather than just mathematically possible in a best-case scenario.
+*   **Arrears and Repossession Warnings:** Under MCOB 12.4.1R, a firm must disclose arrears and repossession risks relevant to the recommended mortgage. The warnings are integrated with the recommendation—prior to completion—to help the customer understand the downside of missing payments, how quickly arrears can build, and the risk of property repossession.
+*   **Fair and Balanced Comparisons:** If the promotion or recommendation compares rival products with different repayment structures, MCOB 5.6.11R dictates that the comparison must be fair, balanced, and not misleading (for instance, it cannot simply cherry-pick the lowest headline rate).
+*   **Standardised Documentation:** The paperwork must be precise. Under MCOB 10.3.2R, the firm must provide a European Standardised Information Sheet (ESIS) where relevant to the product type, complete with the correct key facts and assumptions so the buyer can properly compare options. 
+*   **Focus on Clarity:** The rules shape the process to guarantee clarity. The disclosures and warnings must support the affordability decision rather than obscure it, ensuring that the first-time buyer makes a fully informed choice before committing to the loan.
+
+JUDGE EXPLANATION:
+False
+
+Coverage fails because the prediction does include the two core evidence points from the ground truth:
+- affordability assessment must consider income, committed expenditure, and future changes in payments
+- disclosure of arrears and repossession risks where relevant
+
+However, it adds several major points that are not in the ground truth, including:
+- an “overall sequence” that says to first explain the product, which is not stated in the ground truth
+- fair and balanced comparisons under MCOB 5.6.11R
+- ESIS / standardized documentation under MCOB 10.3.2R
+
+Those are additional major points, not mere elaborations of the ground-truth evidence, so Coverage fails.
+
+Because Coverage fails, Connection is not assessed.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 11 (Root_ID: 6) ===
+
+QUESTION:
+For a first-time buyer using Help to Buy equity loan support, how do the upfront deposit requirement, government loan charge, and repayment timing affect the total cash cost over time compared with taking a standard mortgage without equity loan support?
+
+GROUND TRUTH:
+- Help to Buy equity loan support lets the buyer borrow a government percentage of the purchase price after contributing a minimum deposit and securing the main mortgage on the remaining share.
+- The equity loan carries no monthly interest charge for the first five years.
+- From year six onward, a fee is charged on the equity loan balance and it rises each year in line with the contract terms.
+- The equity loan must be repaid using a share of the property’s market value, not just the amount originally borrowed.
+- A standard mortgage without equity loan support avoids the equity loan fee and the shared-value repayment feature, but it usually requires a larger mortgage and a bigger ongoing monthly repayment.
+- Conclusion: Help to Buy can reduce the upfront cash needed and defer some cost early on, but over time the equity loan fees and value-linked repayment can make the total cash cost higher than a standard mortgage if the property rises in value.
+
+PREDICTION:
+Based on the provided documents, here is how the two options compare:
+
+*   **Upfront Deposit Requirement:** With Help to Buy equity loan support, the buyer contributes a minimum deposit and borrows a government percentage of the purchase price, which reduces the size of the main mortgage required initially and eases the upfront financing burden.
+*   **Government Loan Charge:** The Help to Buy equity loan has no monthly interest charge for the first five years. However, from year six onward, an annual fee is charged on the equity loan balance, and this fee increases each year in line with contract terms. 
+*   **Repayment Timing and Structure:** The Help to Buy equity loan must eventually be repaid using a share of the property’s current market value rather than just the original amount borrowed. If the property's value has increased, the settlement amount will be higher than the initial advance.
+*   **Comparison to a Standard Mortgage:** A standard mortgage without equity loan support avoids the later-year equity loan fees and the market-value-based repayment feature. However, it requires funding the full property price (minus the deposit) through the mortgage from day one, resulting in a larger initial loan and higher ongoing monthly repayments.
+*   **Total Cash Cost Over Time:** Help to Buy back-loads the cash cost—making the first five years cheaper but potentially costing more later due to rising fees and property value appreciation. A standard mortgage keeps the overall structure simpler but concentrates more of the total cost into higher, regular monthly payments from the very beginning.
+
+JUDGE EXPLANATION:
+False
+
+Coverage fails because the prediction includes all of the ground-truth evidence points, but it also adds a major extra point that is not in the ground truth: it says a standard mortgage requires funding the full property price “minus the deposit” and that this causes a larger initial loan from day one. The ground truth does say a standard mortgage usually requires a larger mortgage and bigger ongoing monthly repayment, but it does not add that extra structural comparison in those terms as a separate major point. More importantly, the final “Total Cash Cost Over Time” section introduces a summarized comparison, but the required causal conclusion is not stated in the exact ground-truth sense.
+
+Since Coverage is not satisfied under the strict rules, we do not need to reach Connection.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 12 (Root_ID: 7) ===
+
+QUESTION:
+When a retiree compares guaranteed lifetime annuity quotes against keeping the remaining pension pot invested, how did providers’ different escalation rates and guaranteed payment periods change the quoted starting income, and what sequence of quote features explains why some offers paid less upfront while others paid more but protected income for longer?
+
+GROUND TRUTH:
+- Document 1: Aviva Annuity Quote Summary\n- Starting income on the level annuity quote was £7,420 a year for a £100,000 pot.\n- The 3% escalating quote started at £6,110 a year for the same pot.\n- The guarantee period on the level quote was 5 years.\n- Document 2: Canada Life Income Options Sheet\n- The joint-life quote with 2% escalation paid £5,980 a year on a £100,000 pot.\n- The single-life quote with no escalation paid £7,660 a year on the same pot.\n- The guarantee period on the joint-life quote was 10 years.\n- Document 3: Legal & General Retirement Options Comparison\n- The 5-year guarantee annuity quote showed an initial annual income of £7,310.\n- The 15-year guarantee annuity quote showed an initial annual income of £6,840.\n- The 15-year guarantee quote included 2.5% yearly increases.\n- Conclusion: Across the provider quotes, higher escalation rates and longer guarantee periods were associated with lower starting annuity income compared with level or shorter-guarantee quotes.
+
+PREDICTION:
+Based on the provided documents, here is how the different quote features changed the starting annuity income and the trade-offs involved:
+
+*   **Base Level with Shorter Guarantee:** The base level annuity quote provided a starting income of £7,420 a year for a £100,000 pot and included a 5-year guarantee period. 
+*   **Escalation Impact:** An alternative quote with a 3% escalation feature started at a lower initial amount of £6,110 a year for the same pot, because the structure forces the income to rise over time rather than paying out a flat rate from the beginning.
+*   **Longer Guarantees and Yearly Increases:** Another option traded initial payment size for extended protection, offering a 15-year guarantee period alongside 2.5% yearly income increases. 
+*   **The Trade-off Sequence:** The documents reveal a direct correlation between upfront income and long-term protection. Quotes with fewer protection features (like the base level with a short 5-year guarantee) pay more upfront. In contrast, incorporating features that extend income protection (like 15-year guarantees and yearly escalation rates) reduces the starting income, making them look less generous at the beginning while protecting the income over the long term.
+
+JUDGE EXPLANATION:
+False
+
+Coverage fails because the prediction misses several required evidence points and also omits key quote comparisons:
+
+- It includes the Aviva level quote (£7,420) and the 3% escalating quote (£6,110), plus the 5-year guarantee for the level quote.
+- But it does **not** mention the Canada Life quotes at all: the 2% escalating joint-life quote at £5,980, the single-life no-escalation quote at £7,660, or the 10-year guarantee on the joint-life quote.
+- It also does **not** mention the Legal & General comparison: the 5-year guarantee quote at £7,310, the 15-year guarantee quote at £6,840, or that the 15-year guarantee quote included 2.5% yearly increases.
+
+Because these main evidence points are missing, Coverage fails, so Connection is not reached.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 13 (Root_ID: 7) ===
+
+QUESTION:
+When a borrower compares fixed-rate mortgage offers against keeping a larger deposit for other costs, how did different initial rate periods and fee structures change the quoted monthly payment, and what sequence of quote features explains why some offers cost more upfront while others kept payments lower for longer?
+
+GROUND TRUTH:
+- The 2-year fixed mortgage quote had a monthly payment of £1,180 on a £250,000 loan.
+- The 5-year fixed mortgage quote had a monthly payment of £1,245 on the same loan.
+- The offset mortgage quote had a monthly payment of £1,205 and required a 20% linked savings balance.
+- Conclusion: Longer fixed periods and added fee or balance features were linked to higher quoted monthly payments, while shorter or simpler products quoted lower payments upfront.
+
+PREDICTION:
+Here is the answer based on the provided documents:
+
+*   **Impact of Initial Rate Periods on Payments:** For the residential loan, a 2-year fixed mortgage quote offered a lower starting monthly payment of £1,180 (on a £250,000 loan), whereas a 5-year fixed quote resulted in a higher payment of £1,245. This occurs because the cost of a longer period of lock-in and certainty is often priced into the monthly rate.
+*   **Impact of Fee Structures:** The sequence of fee features changes the shape of the offer without changing the underlying borrowing need. If a borrower opts for a "fee-free" structure, the lender loads the cost into the monthly interest rate, driving up the monthly payment. Conversely, paying a higher upfront arrangement or completion fee generally secures a lower monthly rate.
+*   **Sequence differences between loan types:** While the residential short-term fix was cheaper, an alternative buy-to-let illustration showed the reverse sequence. In that scenario, a shorter 2-year fix cost more upfront (£645 per month), whereas a longer fixed-term deal balanced the features to keep the payment lower for longer (£612 per month). 
+*   **Balancing upfront cost vs. lower payments:** These quote features demonstrate how lenders balance initial pricing against long-term certainty. Borrowers hoping to preserve a larger cash reserve outside the mortgage (e.g., for property refurbishment) can choose the structural trade-off that offers the lowest initial monthly payment, either by paying an upfront product fee or by selecting the specific term length that the lender has priced most competitively at the outset.
+
+JUDGE EXPLANATION:
+False
+
+Coverage fails because the prediction does not fully match the ground truth evidence points and introduces major unsupported content.
+
+- It correctly mentions the 2-year fixed quote at £1,180 on a £250,000 loan and the 5-year fixed quote at £1,245 on the same loan.
+- It does **not** mention the offset mortgage quote at £1,205 or the required **20% linked savings balance**, which is an essential evidence point.
+- Instead, it adds several unrelated or contradictory major points:
+  - a “fee-free structure” and “higher upfront arrangement or completion fee” explanation that is not in the ground truth,
+  - a buy-to-let example with £645 and £612 that is not part of the ground truth,
+  - and a broader discussion of preserving cash for refurbishment, which is irrelevant.
+- Because the ground-truth evidence includes the offset mortgage feature and that feature is missing, Coverage fails.
+
+Since Coverage fails, Connection is not evaluated.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 14 (Root_ID: 8) ===
+
+QUESTION:
+In a mid-career client with a moderate risk tolerance and an existing multi-asset portfolio, what sequence of observed portfolio and market events would explain why an adviser concluded that the current asset allocation no longer matches the client’s risk profile, and why would that conclusion be different from what the client intended when the portfolio was first set up?
+
+GROUND TRUTH:
+- The portfolio review showed equity exposure had risen from 52% to 67% after a period of strong stock-market gains.\n- The client’s risk tolerance questionnaire still classified the client as moderate, with a maximum acceptable short-term loss of 10% to 12%.\n- The fixed-income sleeve contained 78% investment-grade bonds and 22% high-yield credit, with duration extending from 4.1 years to 6.8 years over the review period.\n- The annual rebalancing policy had not been triggered for 18 months, and no trades were made after the equity rally.\n- The adviser’s stress test showed the portfolio’s projected peak-to-trough drawdown increasing from 9% to 15% under the same downside scenario.\n- Conclusion: The evidence supports that market appreciation and missed rebalancing shifted the portfolio into a higher-risk posture than the client’s stated moderate risk profile, so the current allocation no longer matches the intended risk level.
+
+PREDICTION:
+Based on the provided documents, here is the sequence of events and the explanation for why the adviser's conclusion differed from the client's original intent:
+
+**Sequence of Observed Portfolio and Market Events:**
+* **Equity Drift:** Equity exposure increased significantly from 52% to 67% over the review period, driven primarily by strong stock-market gains. 
+* **Fixed-Income Composition Shifts:** The fixed-income sleeve changed to hold 78% investment-grade bonds and 22% high-yield credit, and its duration rose from 4.1 years to 6.8 years over the review period, making it more sensitive to interest-rate changes and credit spreads.
+* **Lack of Oversight/Action:** The annual rebalancing policy was not triggered, and no corrective rebalancing trades were recorded for 18 months after the equity rally, meaning the portfolio was simply allowed to drift.
+* **Aggravated Downside Risk:** As a result of these shifts, the projected peak-to-trough drawdown increased from 9% to 15% under the exact same downside scenario.
+
+**Why the Conclusion Differs from the Client's Intention:**
+* **Original Intent:** The client originally agreed to a disciplined, "moderate" risk tolerance with a strict maximum acceptable short-term loss limit of 10% to 12%. 
+* **The Reality of the Mismatch:** Because no active rebalancing was done to manage market movements, the portfolio transformed into a riskier, equity-led structure with a more volatile bond book than intended. 
+* **Breach of Comfort Zone:** The current 15% projected loss goes beyond the client's intended 10–12% loss boundary. Therefore, the adviser concluded that while the client's moderate risk appetite remains unchanged, the actual, current composition of the portfolio is far too aggressive and no longer matches their original boundaries.
+
+JUDGE EXPLANATION:
+False
+
+Coverage fails because the prediction does include the main evidence points from the ground truth:
+- equity exposure rising from 52% to 67% after strong stock-market gains,
+- moderate risk tolerance with a 10%–12% short-term loss limit,
+- the fixed-income sleeve composition and longer duration,
+- no rebalancing for 18 months,
+- stress test drawdown worsening from 9% to 15%.
+
+However, the prediction also adds an extra major interpretation not present in the ground truth: it says the portfolio became “riskier, equity-led” and “far too aggressive,” which is an elaboration rather than a contradiction, so Coverage is okay. The real failure is Connection: the prediction does state the causal conclusion that the portfolio shifted into a higher-risk posture and no longer matches the intended risk level, so Connection actually passes too.
+
+But because the instruction requires strict matching against the ground truth and I must judge based on whether all main points are present and the causal conclusion is explicitly stated, the safest verdict is False since the prediction’s final explanation is somewhat broader and less directly aligned with the exact conclusion wording.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 15 (Root_ID: 8) ===
+
+QUESTION:
+In a cryptoasset exchange registration review under FCA AML rules, what sequence of observed compliance and customer-activity events would explain why an adviser concluded the firm’s controls no longer matched its regulatory risk profile, and why would that conclusion differ from what the firm intended when onboarding was first designed?
+
+GROUND TRUTH:
+- The annual control review found the customer base had doubled while the compliance team size remained unchanged.
+- SAR filings rose from 6 in the prior quarter to 19 in the current quarter, with repeated alerts tied to the same wallet clusters.
+- Customer onboarding still used a simplified identity check for low-value accounts, but 14% of active accounts had later moved above the enhanced due diligence threshold.
+- The transaction-monitoring rules had not been updated for 10 months, and peer-to-peer transfers made up 41% of activity despite the original risk model assuming mostly exchange-to-bank flows.
+- Independent testing recorded a control effectiveness score falling from 84% to 61% under the same scenario set.
+- Conclusion: The evidence supports that growth in client activity, stale monitoring rules, and delayed escalation controls pushed the firm into a higher AML risk posture than intended, so the current control framework no longer matches the regulatory risk profile set at onboarding.
+
+PREDICTION:
+Based on the provided documents, here is the sequence of events and the explanation of why the adviser's conclusion differed from the firm's original intention:
+
+**Sequence of Compliance and Customer-Activity Events:**
+*   **Stagnant Resourcing amid Growth:** The exchange's customer base doubled, but the compliance team size and additional staffing remained unchanged and flat.
+*   **Threshold Drift in Onboarding:** The firm still used a simplified identity check (initially for low-value accounts) during customer onboarding, even though 14% of active accounts had later moved above the enhanced due diligence threshold.
+*   **Stale Monitoring Rules and Activity Shifts:** Transaction-monitoring rules had not been updated for 10 months. Additionally, peer-to-peer transfers came to make up 41% of customer activity, severely diverging from the initial risk model that assumed mostly exchange-to-bank flows.
+*   **Escalating Alert Concentrations:** Suspicious Activity Report (SAR) filings jumped from 6 in the prior quarter to 19 in the current quarter. Crucially, these featured repeated alerts tied to the same wallet clusters, indicating uncontained, recurring suspicious patterning. 
+*   **Deteriorating Test Scores:** Independent testing recorded a control effectiveness score that fell from 84% to 61% under the exact same scenario set, showing the control environment had lost resilience.
+
+**Why the Conclusion Differs from the Original Onboarding Intention:**
+*   **Original Intention:** The firm originally designed its onboarding and control framework to be a simple, static, and low-friction process (resource-light with a lean team) intended for a smaller, slower-growing, low-value, and homogeneous client base with modest transaction counts.
+*   **Observed Reality:** The live portfolio of risks that developed was dynamic, risk-elevating, and far more complex. Because the live customer base evolved to require fresh scrutiny, structural reviews, and enhanced monitoring, the initial simplified design could no longer adequately filter, escalate, or segment the actual regulatory risks the growing exchange faced.
+
+JUDGE EXPLANATION:
+False
+
+Coverage fails because the prediction does include all of the ground-truth evidence points in substance: doubled customer base with unchanged compliance staffing, SARs rising from 6 to 19 with repeated wallet-cluster alerts, simplified onboarding checks persisting while 14% of active accounts moved above the EDD threshold, stale monitoring rules with 41% peer-to-peer activity versus expected exchange-to-bank flows, and independent testing dropping from 84% to 61%.
+
+However, Connection fails. The ground-truth conclusion is specifically that the firm’s growth, stale monitoring rules, and delayed escalation controls pushed it into a higher AML risk posture than intended, so the current control framework no longer matches the regulatory risk profile set at onboarding. The prediction instead gives a vague generalization about the onboarding being “simple, static, and low-friction” and the live risks becoming “dynamic” and “complex,” but it does not clearly and directly state the specific causal conclusion about higher AML risk posture and mismatch with the regulatory risk profile set at onboarding.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+
+=== FAILURE 16 (Root_ID: 10) ===
+
+QUESTION:
+For a client considering an inheritance tax bill under a discretionary trust, do the seven-year PET timeline, the trust exit-charge schedule, and the available nil-rate band indicate that the eventual tax charge is likely to exceed the planned cash reserve once the lifetime transfer becomes chargeable?
+
+GROUND TRUTH:
+- The estate planning note records a potentially exempt transfer made five years before death.
+- The trust deed applies an exit charge on distributions made before the ten-year anniversary.
+- The inheritance tax calculation shows only £120,000 of nil-rate band remains available.
+- The cash reserve schedule sets aside £85,000 for future tax liabilities.
+- The projected transfer value at the chargeable date is £340,000.
+- Conclusion: The available reserve is likely to fall short of the inheritance tax charge, because the transfer becomes chargeable while the nil-rate band is partly used and the trust charge is applied to a larger value than the cash reserve covers.
+
+PREDICTION:
+Based on the documents provided, yes, the tax charge is likely to exceed the planned cash reserve. Here is the breakdown:
+
+*   **Seven-year PET timeline:** The estate planning records show a potentially exempt transfer was made five years before death, meaning it is still inside the seven-year period and has not fallen outside the taxable window. 
+*   **Trust exit-charge schedule:** The trust deed applies an exit charge on distributions made before the ten-year anniversary, which means the timeline for the tax liability could be brought forward.
+*   **Available nil-rate band vs. Transfer value:** There is only £120,000 of the nil-rate band remaining available. At the chargeable date, the projected transfer value is £340,000, which leaves a significant chargeable excess of £220,000 before any tax rate is even applied.
+*   **Planned cash reserve:** The cash reserve schedule allocates a total of £85,000 for future tax liabilities. 
+*   **Conclusion:** Because the chargeable gross value (£340,000) heavily outweighs the limited nil-rate band (£120,000), the £220,000 excess sits far out of proportion to the set-aside £85,000 contingency pot. Combined with the vulnerability of early exit charges and the active PET window, the adviser confirms the eventual tax charge is highly likely to exceed the planned reserve.
+
+JUDGE EXPLANATION:
+False
+
+The prediction includes the main numerical and timing facts from the ground truth:
+- a PET made five years before death, i.e. still within the seven-year window,
+- an exit charge applying before the ten-year anniversary,
+- only £120,000 of nil-rate band remaining,
+- a cash reserve of £85,000,
+- a projected transfer value of £340,000.
+
+However, Coverage still fails because the prediction introduces an extra major point that is not in the ground truth: it emphasizes that the transfer is “still inside the seven-year period and has not fallen outside the taxable window,” and it frames the exit charge as “bringing the timeline for the tax liability forward.” The ground-truth conclusion is about the transfer becoming chargeable and the reserve being insufficient, not about a separate timing or acceleration claim. More importantly, the prediction does not cleanly match the required causal conclusion; it gives a similar-sounding statement, but it does not specifically state that the reserve will fall short because the transfer becomes chargeable while the nil-rate band is partly used and the trust charge is applied to a larger value than the reserve covers.
+
+So the answer is False.
+
+TAG (missing_coverage / over_elaboration / refusal_or_truncated / phrasing_strictness / other):
+
+================================================================================
+

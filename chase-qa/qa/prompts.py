@@ -276,9 +276,11 @@ Result:
 		sys_prompt = "You are an expert evaluator."
 		prompt = f"""You are given a question, an adversarial wrong answer, the ground-truth answer, and a prediction. You need to evaluate whether the prediction is correct by matching against the ground truth answer. Do not look for exact phrases or words since the prediction can have points that are a paraphrase of the same information. Based on the question, check for the presence of the same ideas or main points in the prediction as in the ground-truth answer. All the main points in the ground-truth answer must be mentioned in the prediction. The order of points mentioned is irrelevant. It is allowed for the prediction to elaborate or provide more specifics or details over the major points in the ground-truth answer. However, the prediction should not contain additional major points that are contradictory or irrelevant for answering the question. Importantly, the prediction must not discuss any of the points mentioned in the "adversarial wrong answer".
 
-Apply the paragraph above as Coverage, using the exact same strictness you would use for a normal factual question. If any main point from the ground-truth answer is missing or only vaguely implied, or if the prediction adds any major point that is not in the ground-truth answer and not merely an elaboration of an existing point, Coverage fails.
+The ground-truth answer's final bullet, starting with "Conclusion:", states the specific causal conclusion the evidence points support. Treat every other bullet as an evidence point and the final "Conclusion:" bullet as the required causal conclusion.
 
-If, and only if, Coverage passes, then separately check Connection: the question asks about a causal relationship, trend, or sequence of events. Does the prediction explicitly state the overall causal conclusion that ties the covered evidence points together into an answer to the "why" or "how" the question asks? Merely listing applicable rules, requirements, or facts does NOT satisfy Connection, even if the prediction uses words like "because", "therefore", or "as a result" while doing so. A prediction that lists what a regulation requires, or restates the evidence points as a flat list, has NOT satisfied Connection unless it also states the specific outcome or conclusion that follows from combining those points, in a way that directly answers the causal question asked.
+Apply the paragraph above as Coverage, using the exact same strictness you would use for a normal factual question, checking that all evidence points (excluding the Conclusion bullet) are present. If any main evidence point from the ground-truth answer is missing or only vaguely implied, or if the prediction adds any major point that is not in the ground-truth answer and not merely an elaboration of an existing point, Coverage fails.
+
+If, and only if, Coverage passes, then separately check Connection: does the prediction explicitly state a causal conclusion that matches the ground truth's "Conclusion:" bullet, allowing for paraphrasing? Merely listing applicable rules, requirements, or facts does NOT satisfy Connection, even if the prediction uses words like "because", "therefore", or "as a result" while doing so. A prediction that lists what a regulation requires, or restates the evidence points as a flat list, has NOT satisfied Connection unless it also states the specific conclusion given in the ground truth's "Conclusion:" bullet, in a way that directly answers the causal question asked.
 
 Output the single word "True" or "False" as the first word of your response, based on: False if Coverage fails, False if Coverage passes but Connection fails, True only if both pass. After that first word, always explain your reasoning in detail, covering both your Coverage assessment and, if reached, your Connection assessment, regardless of whether the verdict is True or False.
 
@@ -397,7 +399,7 @@ Adversarial Question: What loan-to-value limits apply when a client takes out a 
 Original Question: What disclosure obligations apply when an adviser recommends a specific investment platform?
 Adversarial Question: What registration and customer due diligence requirements apply to a cryptoasset business under FCA rules?
 
-Also provide an answer to the adversarial question, which is similar in style to the original answer, but differs significantly in information or specifics. The answer points for the adversarial question should be written in context of that adversarial question, so that they cannot be confused with the original question. Note that none of the points appearing in the original answer should be present in the answer to the adversarial question.
+Also provide an answer to the adversarial question, which is similar in style to the original answer, but differs significantly in information or specifics. The answer points for the adversarial question should be written in context of that adversarial question, so that they cannot be confused with the original question. Note that none of the points appearing in the original answer should be present in the answer to the adversarial question. Every point in the adversarial answer must be a substantive answer point -- never a document title, document name, or document reference stated as its own point (for example, never write a point like "Document 1: Halifax Drawdown Factsheet"). Document titles belong only in the "Document N Title:" lines further below, never inside the Answer itself.
 
 The answer to the adversarial question you craft must be scattered across different documents (at least 3) separate from the original answer documents. Assign each point of the adversarial answer to a specific document in which that point will be discussed. You may assign multiple points to the same adversarial document, but each point must only be assigned to a single adversarial document. You must state the title and adversarial answer points assigned for each of the adversarial documents. Each adversarial answer point assigned to a document must be repeated verbatim, exactly as written in the adversarial answer above -- do not paraphrase, merge multiple points into one line, or split a single point across multiple lines. These adversarial documents should not have any overlapping information with the original answer documents."""
 		if len(question[5]) > 0:
@@ -418,6 +420,60 @@ Document 1 Answer points assigned: <Points>
 
 Document 2 Title: <Title>
 Document 2 Answer points assigned: <Points>
+
+and so on...
+"""
+
+	elif prompt_type == "programmatic_adversarial_type3":
+		sys_prompt = "You are an expert generator of data. Do not use ** to start lines or denote points."
+		prompt = f"""You are a research scientist. You want to make hard data to test an advanced question answering system. You are given a question that a {question[0]} might want answered, along with the corresponding answer, and information of documents from {question[1]} that are important for answering that question. 
+
+Original Question: {question[2]}
+
+Original Answer:
+{question[3]}
+
+Original Documents:
+{question[4]}
+
+You must generate an adversarial question, adversarial answer, and corresponding adversarial documents that ask for something different but on similar topics or type so that it is difficult to answer the original question. The adversarial question must come from a genuinely different regulatory area than the original question, not a different angle on the same area. For example, if the original question is about pension transfers, the adversarial question must not be about any other aspect of pensions (drawdown, contributions, MPAA, pension sharing) -- it must come from an entirely separate domain such as mortgages, ISAs, equity release, inheritance tax, or cryptoassets. Pick the regulatory area for the adversarial question first, ensure it shares no underlying subject matter with the original question's domain, and only then construct the question and answer. Never include the literal characters backslash-n in your response. Use only genuine line breaks between points. Examples of how adversarial questions should look like are provided below:
+
+Original Question: What must an adviser verify before recommending a pension transfer?
+Adversarial Question: What are the disclosure requirements for platform fees when an adviser recommends a Stocks and Shares ISA?
+
+Original Question: How does triggering the MPAA affect a client's contribution capacity?
+Adversarial Question: What loan-to-value limits apply when a client takes out a lifetime mortgage under an equity release plan?
+
+Original Question: What disclosure obligations apply when an adviser recommends a specific investment platform?
+Adversarial Question: What registration and customer due diligence requirements apply to a cryptoasset business under FCA rules?
+
+The adversarial question must ask about a causal relationship, trend, or sequence of events, matching the style of the original question. The adversarial answer must consist of 3-6 evidence bullet points followed by exactly one final bullet starting with "- Conclusion: " that states the causal conclusion the evidence supports. Each evidence bullet must state a plain fact, cause, effect, or connecting mechanism only -- do NOT use causal connective language such as "which means", "as a result", "so that", "which leads to", "this results in", or similar phrasing. The Conclusion bullet must state the causal conclusion explicitly and must be the final bullet in the adversarial answer. Every bullet in the Adv_Answer must be a substantive evidence point or the final Conclusion bullet -- never a document title, document name, or document reference stated as its own bullet (for example, never write a bullet like "- Document 1: Halifax Drawdown Factsheet"). Document titles belong only in the "Document N Title:" lines further below, never inside the Answer section.
+
+Also provide an answer to the adversarial question, which is similar in style to the original answer, but differs significantly in information or specifics. The answer points for the adversarial question should be written in context of that adversarial question, so that they cannot be confused with the original question. Note that none of the points appearing in the original answer should be present in the answer to the adversarial question.
+
+The evidence bullets of the adversarial answer must be scattered across different documents (at least 3), separate from the original answer documents. Assign each evidence bullet to a specific document in which that point will be discussed. You may assign multiple evidence bullets to the same document, but each evidence bullet must only be assigned to a single document. You must state the title and evidence bullets assigned for each of the adversarial documents. Each evidence bullet assigned to a document must be repeated verbatim, exactly as written in the adversarial answer above -- do not paraphrase, merge multiple points into one line, or split a single point across multiple lines. The final "- Conclusion: " bullet must NEVER be assigned to any document and must NEVER appear in any document's text or answer points assigned. These adversarial documents should not have any overlapping information with the original answer documents."""
+		if len(question[5]) > 0:
+			prev_adv_questions = "\n\n".join(question[5])
+			prompt = prompt + f"""
+
+The following are adversarial questions I have already generated. Make a very different adversarial question.
+{prev_adv_questions}"""
+		prompt = prompt + f"""
+
+Answer in the following format:
+
+Question: <Question>
+Answer:
+- <evidence point 1>
+- <evidence point 2>
+...
+- Conclusion: <the causal conclusion the evidence points support>
+
+Document 1 Title: <Title>
+Document 1 Answer points assigned: <evidence points, never the Conclusion bullet>
+
+Document 2 Title: <Title>
+Document 2 Answer points assigned: <evidence points, never the Conclusion bullet>
 
 and so on...
 """
@@ -471,9 +527,11 @@ Do not use numbers, letters, or any other shorthand (e.g. "1, 2" or "A, B") to r
 	elif prompt_type == "programmatic_qa_type3":
 		sys_prompt = "You are an expert generator of data specialising in personal financial advice. Do not use ** to start lines or denote points."
 		prompt = f"""You are a research scientist. You want to make data to test an advanced question answering system focused on personal financial advice.
-Give me an example question and corresponding answer that a {question[0]} may ask that compulsorily requires searching a {question[1]}. The question must ask about a causal relationship, trend, or sequence of events in a personal financial advisory context -- for example, how one regulatory change caused a shift in client behaviour, or what sequence of events leads to a specific financial outcome. The question must not be answerable from general knowledge but must require specific causal evidence spread across multiple documents. The answer must be very specific and written in bullet points. Depending on the question, the answer can have anything between 3-6 bullet points without any sub-points. Each bullet point must describe either a cause, an effect, or a connecting mechanism.
+Give me an example question and corresponding answer that a {question[0]} may ask that compulsorily requires searching a {question[1]}. The question must ask about a causal relationship, trend, or sequence of events in a personal financial advisory context -- for example, how one regulatory change caused a shift in client behaviour, or what sequence of events leads to a specific financial outcome. The question must not be answerable from general knowledge but must require specific causal evidence spread across multiple documents. The answer must be very specific and written in bullet points. Depending on the question, the answer can have anything between 3-6 evidence bullet points without any sub-points, plus exactly one final Conclusion bullet as described below. Each evidence bullet point must describe either a cause, an effect, or a connecting mechanism, stated as a plain factual observation only -- do NOT use causal connective language such as "which means", "as a result", "so that", "which leads to", "this results in", or similar phrasing that pre-states how the point relates to the overall conclusion. State only the isolated fact or observation itself.
 
-The answer to the question you create must be scattered across different documents (at least 3). Assign each point of the answer to a specific document in which that point will be discussed. You may assign multiple points to the same document, but each point must only be assigned to a single document. You must state the title and one evidence component per document. The evidence component must be on its own line starting with "- ". The causal conclusion must never be stated explicitly in any document -- only the supporting evidence.
+The evidence points in the answer must be scattered across different documents (at least 3). Assign each evidence point to a specific document in which that point will be discussed. You may assign multiple evidence points to the same document, but each evidence point must only be assigned to a single document. You must state the title and one evidence component per document. The evidence component must be on its own line starting with "- ", worded as a plain fact with no causal connective language. The causal conclusion must never be stated, implied, or hinted at in any document -- only the isolated supporting evidence, with no connective phrasing suggesting how it relates to the outcome.
+
+After the evidence bullets in the Answer section, add exactly one final bullet starting with "- Conclusion: " that explicitly states the causal conclusion the evidence supports. This Conclusion bullet must NOT be assigned to any document and must NOT appear in any document's text.
 
 Answer in the following format:
 
@@ -482,6 +540,7 @@ Answer:
 - <point 1>
 - <point 2>
 ...
+- Conclusion: <the causal conclusion the evidence points support>
 
 Document 1 Title: <Title>
 Document 1 Evidence component:

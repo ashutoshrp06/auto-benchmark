@@ -6,8 +6,8 @@ from typing import List
 import pdb
 import sys
 
-import openai
-import anthropic
+import openai # type: ignore
+import anthropic # type: ignore
 from openai import OpenAI
 #import google.api_core.exceptions as gemini_exceptions
 #import google.generativeai as genai
