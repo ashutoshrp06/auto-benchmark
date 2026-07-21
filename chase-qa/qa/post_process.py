@@ -167,69 +167,105 @@ def programmatic_qa_process_type3(data):
 def programmatic_adversarial_process(data):
 	ls = data.to_dict(orient='records')
 	exceptions_ls = []
+	partial_drops_ls = []
 	new_ls = []
 
 	for i in range(len(ls)):
 		try:
+			og_answer = json.loads(ls[i]["Adv_Answer"])
+			og_question = json.loads(ls[i]["Adv_Question"])
+			og_docs_info = json.loads(ls[i]["Adv_Documents_Info"])
+
 			ls_ans_pts = []
 			ls_doc_ans_pts = []
-			og_answer = json.loads(ls[i]["Adv_Answer"])
+			kept_indices = []
 
 			for j in range(len(og_answer)):
-				answer = og_answer[j]
+				try:
+					answer = og_answer[j]
+					if not isinstance(answer, str) or answer.strip() == "":
+						raise Exception("Empty adversarial answer")
 
-				ans_points_og = answer.split("\n")
-				ans_points = []
-				for ans_pt in ans_points_og:
-					if ans_pt[0] == "-":
-						ans_points.append(ans_pt[1:].strip())
-					else:
-						ans_points.append(ans_pt.strip())
-
-				ans_points_copy = ans_points.copy()
-
-				if args.verbose:
-					print(f"  [debug] index={i}, j={j}, ans_points={ans_points}")
-
-				docs_info = json.loads(ls[i]["Adv_Documents_Info"])[j]
-
-				doc_ans_points = {1: []}
-				doc_no = 1
-				for line in docs_info.split("\n"):
-					if len(line) > 2:
-						if line[:8] == "Document":
-							if line[9] != str(doc_no):
-								doc_no += 1
-								doc_ans_points[doc_no] = []
-							if "title:" not in line.lower():
-								if len(line.strip().split(":")[1]) > 2:
-									pt_candidate = line.strip().split(":")[1].strip()
-									if pt_candidate[0] == "-":
-										doc_ans_points[doc_no].append(pt_candidate[1:].strip())
-										matches = [x for x in ans_points_copy if x.strip() == pt_candidate[1:].strip()]
-										if matches: ans_points_copy.remove(matches[0])
-									else:
-										doc_ans_points[doc_no].append(pt_candidate)
-										matches = [x for x in ans_points_copy if x.strip() == pt_candidate.strip()]
-										if matches: ans_points_copy.remove(matches[0])
+					ans_points_og = answer.split("\n")
+					ans_points = []
+					for ans_pt in ans_points_og:
+						ans_pt = ans_pt.strip()
+						if ans_pt == "":
+							continue
+						if ans_pt[0] == "-":
+							ans_points.append(ans_pt[1:].strip())
 						else:
-							if line.strip()[0] == "-":
-								doc_ans_points[doc_no].append(line.strip()[1:].strip())
-								matches = [x for x in ans_points_copy if x.strip() == line.strip()[1:].strip()]
-								if matches: ans_points_copy.remove(matches[0])
+							ans_points.append(ans_pt.strip())
+
+					if len(ans_points) == 0:
+						raise Exception("No answer points parsed")
+
+					ans_points_copy = ans_points.copy()
+
+					docs_info = og_docs_info[j]
+					if not isinstance(docs_info, str) or docs_info.strip() == "":
+						raise Exception("Empty adversarial documents info")
+
+					doc_ans_points = {1: []}
+					doc_no = 1
+					for line in docs_info.split("\n"):
+						if len(line) > 2:
+							if line[:8] == "Document":
+								if line[9] != str(doc_no):
+									doc_no += 1
+									doc_ans_points[doc_no] = []
+								if "title:" not in line.lower():
+									if len(line.strip().split(":")[1]) > 2:
+										pt_candidate = line.strip().split(":")[1].strip()
+										if pt_candidate[0] == "-":
+											doc_ans_points[doc_no].append(pt_candidate[1:].strip())
+											matches = [x for x in ans_points_copy if x.strip() == pt_candidate[1:].strip()]
+											if matches: ans_points_copy.remove(matches[0])
+										else:
+											doc_ans_points[doc_no].append(pt_candidate)
+											matches = [x for x in ans_points_copy if x.strip() == pt_candidate.strip()]
+											if matches: ans_points_copy.remove(matches[0])
 							else:
-								doc_ans_points[doc_no].append(line.strip())
-								matches = [x for x in ans_points_copy if x.strip() == line.strip().strip()]
-								if matches: ans_points_copy.remove(matches[0])
+								stripped_line = line.strip()
+								if stripped_line == "":
+									continue
+								if stripped_line[0] == "-":
+									pt = stripped_line[1:].strip()
+									doc_ans_points[doc_no].append(pt)
+									matches = [x for x in ans_points_copy if x.strip() == pt.strip()]
+									if matches:
+										ans_points_copy.remove(matches[0])
+								else:
+									pt = stripped_line
+									doc_ans_points[doc_no].append(pt)
+									matches = [x for x in ans_points_copy if x.strip() == pt.strip()]
+									if matches:
+										ans_points_copy.remove(matches[0])
 
-				if len(ans_points_copy) > 0.5:
+					if len(ans_points_copy) > 0.5:
+						raise Exception("Some points did not match!")
+
+					ls_ans_pts.append(ans_points)
+					ls_doc_ans_pts.append(doc_ans_points)
+					kept_indices.append(j)
+
+				except Exception as inner_e:
 					if args.verbose:
-						print(f"  [debug] index={i}, j={j} FAILED -- unmatched points: {ans_points_copy}")
-					raise Exception("Some points did not match!")
+						print("Row", i, "adversarial question", j, "dropped:", str(inner_e))
+					partial_drops_ls.append({
+						"Row_Index": i,
+						"Adv_Question_Index": j,
+						"Adv_Question": og_question[j] if j < len(og_question) else None,
+						"Reason": str(inner_e),
+					})
+					continue
 
-				ls_ans_pts.append(ans_points)
-				ls_doc_ans_pts.append(doc_ans_points)
+			if len(kept_indices) == 0:
+				raise Exception("All adversarial questions failed to match, dropping row")
 
+			ls[i]["Adv_Question"] = json.dumps([og_question[j] for j in kept_indices])
+			ls[i]["Adv_Answer"] = json.dumps([og_answer[j] for j in kept_indices])
+			ls[i]["Adv_Documents_Info"] = json.dumps([og_docs_info[j] for j in kept_indices])
 			ls[i]["Adv_Ans_Points"] = ls_ans_pts
 			ls[i]["Adv_Doc_Ans_Points"] = ls_doc_ans_pts
 
@@ -268,7 +304,6 @@ def programmatic_adversarial_process(data):
 			numerics = new_ls[i]["Numerics"]
 			seed_type = new_ls[i]["Seed_Type"]
 
-
 			for j in range(len(adv_questions)):
 				questions_ls.append(adv_questions[j])
 				answers_ls.append(adv_answers[j])
@@ -286,6 +321,10 @@ def programmatic_adversarial_process(data):
 		new_df['Doc_Ans_Points'] = new_df['Doc_Ans_Points'].apply(json.dumps)
 		new_df.to_csv(args.out_dir + "/" + args.folder_name + "/" + args.data + "_modified.tsv", sep = '\t', index = None, quoting=1)
 		print("Length of Final Data: ", str(len(new_df)))
+
+	if len(partial_drops_ls) > 0:
+		pd.DataFrame(partial_drops_ls).to_csv(args.out_dir + "/" + args.folder_name + "/" + args.data + "_partial_drops.tsv", sep = '\t', index = None)
+		print("Individually dropped adversarial questions (row survived): ", len(partial_drops_ls))
 
 	if len(exceptions_ls) > 0:
 		exc_df = pd.DataFrame(exceptions_ls)

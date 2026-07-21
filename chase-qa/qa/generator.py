@@ -5,6 +5,8 @@ import argparse
 import random
 import json
 import re
+import ast
+import operator
 import tiktoken # type: ignore
 import pdb
 
@@ -40,6 +42,7 @@ def build_parser():
 	parser.add_argument('-presence_penalty', type=float, default=0.0, help='positive values increases model\'s likelihood to talk about new topics')
 	parser.add_argument('-frequency_penalty', type=float, default=0.0, help='positive values decreases model\'s likelihood to repeat same line verbatim')
 	parser.add_argument('-reg_pregen_max_attempts', type=int, default=3, help='Max correction attempts in reg_pregen_retry before discard')
+	parser.add_argument('-numeric_pregen_max_attempts', type=int, default=3, help='Max regeneration attempts in numeric_pregen_retry before discard')
 
 	parser.add_argument('-num_iters', type=int, default=5, help='number of iterations to run')
 
@@ -222,6 +225,178 @@ def reg_pregen_retry(args, model, ques, reg_text, answer, docs_info, max_attempt
 		f.write("---------------------------------------------------------\n")
 	return cur_answer, cur_docs_info, True
 
+_ALLOWED_OPS = {
+	ast.Add: operator.add,
+	ast.Sub: operator.sub,
+	ast.Mult: operator.mul,
+	ast.Div: operator.truediv,
+	ast.Pow: operator.pow,
+	ast.USub: operator.neg,
+	ast.UAdd: operator.pos,
+	ast.Mod: operator.mod,
+}
+
+def safe_eval_arithmetic(expr):
+	node = ast.parse(expr, mode="eval").body
+	return _safe_eval_node(node)
+
+def _safe_eval_node(node):
+	if isinstance(node, ast.Constant):
+		if isinstance(node.value, (int, float)):
+			return node.value
+		raise ValueError("Non-numeric constant")
+	if isinstance(node, ast.BinOp) and type(node.op) in _ALLOWED_OPS:
+		return _ALLOWED_OPS[type(node.op)](_safe_eval_node(node.left), _safe_eval_node(node.right))
+	if isinstance(node, ast.UnaryOp) and type(node.op) in _ALLOWED_OPS:
+		return _ALLOWED_OPS[type(node.op)](_safe_eval_node(node.operand))
+	raise ValueError("Disallowed expression element: " + str(type(node)))
+
+def extract_calculation_block(og_pred):
+	if "Calculation:" not in og_pred:
+		return None
+	block = og_pred.split("Calculation:", 1)[1]
+	if "Question:" in block:
+		block = block.split("Question:", 1)[0]
+	return block.strip()
+
+_STEP_PATTERN = re.compile(r"^Step\s+\d+\s*:\s*(.*)$", re.IGNORECASE)
+
+def _extract_literals(expr):
+	try:
+		tree = ast.parse(expr, mode="eval")
+	except Exception:
+		return []
+	nums = []
+	for node in ast.walk(tree):
+		if isinstance(node, ast.Constant) and isinstance(node.value, (int, float)):
+			nums.append(node.value)
+	return nums
+
+def numeric_pregen_grounding_check(og_pred, min_steps=3, rel_tol=1e-3):
+	calc_block = extract_calculation_block(og_pred)
+	if calc_block is None:
+		return False, "No Calculation section found."
+
+	step_lines = [l.strip() for l in calc_block.split("\n") if l.strip().lower().startswith("step")]
+
+	if len(step_lines) < min_steps:
+		return False, "Fewer than {} steps found ({}).".format(min_steps, len(step_lines))
+
+	parsed_steps = []
+	for step_line in step_lines:
+		m = _STEP_PATTERN.match(step_line)
+		if not m:
+			return False, "Could not parse step line: " + step_line
+		body = m.group(1)
+		eq_parts = body.split("=")
+		if len(eq_parts) != 3:
+			return False, "Expected exactly two '=' signs in step line: " + step_line
+		desc, expr, stated_value_str = [p.strip() for p in eq_parts]
+
+		try:
+			stated_value = float(stated_value_str)
+			computed_value = safe_eval_arithmetic(expr)
+		except Exception as e:
+			return False, "Failed to evaluate step '" + step_line + "': " + str(e)
+
+		tol = max(1e-6, abs(stated_value) * rel_tol)
+		if abs(computed_value - stated_value) > tol:
+			return False, "Arithmetic mismatch in step '{}': expression evaluates to {}, stated value is {}.".format(step_line, computed_value, stated_value)
+
+		parsed_steps.append({"expr": expr, "stated_value": stated_value})
+
+	dependent_found = False
+	for j in range(1, len(parsed_steps)):
+		literals_j = _extract_literals(parsed_steps[j]["expr"])
+		for k in range(0, j):
+			prior_val = parsed_steps[k]["stated_value"]
+			tol = max(1e-6, abs(prior_val) * rel_tol)
+			if any(abs(lv - prior_val) <= tol for lv in literals_j):
+				dependent_found = True
+				break
+		if dependent_found:
+			break
+
+	if not dependent_found:
+		return False, "No step reuses an earlier step's stated value; calculation is not genuinely dependent/multi-step."
+
+	return True, None
+
+def parse_qa_response(og_pred):
+	resp = og_pred.strip().split("\n")
+	question = None
+	answer = None
+	docs_info = None
+	for j in range(len(resp)):
+		if resp[j][:8] == "Question":
+			try:
+				question = resp[j].split(":")[1].strip()
+				if question == "" and j + 1 < len(resp):
+					question = resp[j+1]
+			except IndexError:
+				question = None
+		if resp[j][:6] == "Answer":
+			lno = None
+			for zj in range(len(resp)):
+				if resp[zj][:16] == "Document 1 Title":
+					lno = zj
+					break
+			if lno is not None:
+				try:
+					answer = "\n".join(resp[j:lno]).split("Answer:")[1].strip()
+				except IndexError:
+					answer = None
+		if resp[j][:10] == "Document 1":
+			docs_info = "\n".join(resp[j:])
+			break
+	return question, answer, docs_info
+
+def numeric_pregen_retry(args, model, prompt_type, persona, env, context_text, seed_type, max_tokens, temperature, stop, tik_encoding, max_attempts=3):
+	tot_ip = 0
+	tot_op = 0
+
+	for attempt in range(1, max_attempts + 1):
+		prompt, sys_prompt = get_generator_prompt(prompt_type, question=(persona, env, context_text, seed_type))
+
+		og_pred = model.predict(prompt, sys_prompt, max_tokens, temperature, 1, stop)
+
+		tot_ip += len(tik_encoding.encode(prompt))
+		tot_op += len(tik_encoding.encode(og_pred))
+
+		with open(args.out_dir + "/logs.txt", "a") as f:
+			f.write(og_pred + "\n\n")
+
+		question, answer, docs_info = parse_qa_response(og_pred)
+
+		question, answer, docs_info = parse_qa_response(og_pred)
+
+		if question is None or answer is None or docs_info is None:
+			with open(args.out_dir + "/numeric_pregen_logs.txt", "a") as f:
+				f.write("Persona: " + persona + "\nAttempt: " + str(attempt) + "\nGrounded: False\n")
+				f.write("Reason: Malformed response, could not parse Question/Answer/Documents section (likely truncation, raise -max_tokens if this recurs).\n")
+				f.write("---------------------------------------------------------\n")
+			continue
+
+		if seed_type != "generic":
+			return question, answer, docs_info, False, tot_ip, tot_op
+
+		grounded, reason = numeric_pregen_grounding_check(og_pred)
+
+		with open(args.out_dir + "/numeric_pregen_logs.txt", "a") as f:
+			f.write("Persona: " + persona + "\nAttempt: " + str(attempt) + "\nGrounded: " + str(grounded) + "\n")
+			if not grounded:
+				f.write("Reason: " + str(reason) + "\n")
+			f.write("---------------------------------------------------------\n")
+
+		if grounded:
+			return question, answer, docs_info, False, tot_ip, tot_op
+
+	with open(args.out_dir + "/numeric_pregen_logs.txt", "a") as f:
+		f.write("DISCARD: still unusable after " + str(max_attempts) + " regeneration attempt(s) (parse failure and/or ungrounded).\n")
+		f.write("---------------------------------------------------------\n")
+
+	return None, None, None, True, tot_ip, tot_op
+
 def programmatic_qa_generation(scenarios_data, model, prompt_type, num_iters, max_tokens, temperature, stop, tik_encoding):
 	pred_ls = []
 
@@ -247,34 +422,14 @@ def programmatic_qa_generation(scenarios_data, model, prompt_type, num_iters, ma
 		for xy in range(num_iters):
 		
 			context_text = reg_text if str(reg_text).strip() not in ("", "nan") else numerics
-			prompt, sys_prompt = get_generator_prompt(prompt_type, question=(persona, env, context_text))
-
-			og_pred = model.predict(prompt, sys_prompt, max_tokens, temperature, 1, stop)
-
-			ip_tokens = len(tik_encoding.encode(prompt))
-			op_tokens = len(tik_encoding.encode(og_pred))
+			question, answer, docs_info, discard_numeric, ip_tokens, op_tokens = numeric_pregen_retry(args, model, prompt_type, persona, env, context_text, seed_type, max_tokens, temperature, stop, tik_encoding, max_attempts=args.numeric_pregen_max_attempts)
 
 			tot_ip_tokens += ip_tokens
 			tot_op_tokens += op_tokens
 
-			with open(args.out_dir + "/logs.txt", "a") as f:
-				f.write(og_pred + "\n\n")
-
-			resp = og_pred.strip().split("\n")
-			for j in range(len(resp)):
-				if resp[j][:8] == "Question":
-					question = resp[j].split(":")[1].strip()
-					if question == "":
-						question = resp[j+1]
-				if resp[j][:6] == "Answer":
-					for zj in range(len(resp)):
-						if resp[zj][:16] == "Document 1 Title":
-							lno = zj
-							break
-					answer = "\n".join(resp[j:lno]).split("Answer:")[1].strip()
-				if resp[j][:10] == "Document 1":
-					docs_info = "\n".join(resp[j:])
-					break
+			if discard_numeric:
+				print("Completed {} / {}... (discarded, numeric grounding failed)".format(i+1, len(scenarios_data)), end = '\r', flush = True)
+				continue
 
 			main_sim = 0
 			for prev_q in group:

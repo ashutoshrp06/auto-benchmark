@@ -673,7 +673,7 @@ def programmatic_adversarial_verify(args, data):
 					ans[j] = ans[j].replace(cur_ans_pt, "").strip()
 					ans[j] = ans[j].replace("- \n", "").strip()
 
-			if len(ans_pts[j]) == 0:
+			if len(ans_pts[j]) == 0 or str(ans[j]).strip() == "":
 				idx_to_remove.append(j)
 				num_pairs += 1
 				with open(args.verification_dir + "/logs.txt", "a") as f:
@@ -681,6 +681,8 @@ def programmatic_adversarial_verify(args, data):
 					for t_q in ques_to_check:
 						f.write("Question: " + str(t_q) + "\n")
 					f.write("\nAnswer:\n" + str(og_answer) + "\n")
+					if len(ans_pts[j]) != 0:
+						f.write("(Removed: Ans_Points list non-empty but resulting Answer string was empty)\n")
 					f.write("======================================================================================\n\n\n")
 			else:
 				doc_ans_pts[j] = dict(sorted(doc_ans_pts[j].items(), key=lambda x: int(x[0])))

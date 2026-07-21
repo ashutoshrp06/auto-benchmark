@@ -1,3 +1,15 @@
+GENERIC_NUMERIC_INSTRUCTION = """
+
+This scenario requires you to invent realistic, plausible figures appropriate to the environment described (e.g. contribution amounts, interest rates, fund values, mortgage balances, ages, terms) and perform a genuine multi-step calculation using them. The calculation must involve at least 3 dependent steps, where later steps use the numeric result of earlier steps; do not use a single-step or plug-and-chug calculation. Before the Question and Answer, output a Calculation section showing your full working. Each step must be on its own line in the exact format below, using plain decimal numbers only (no currency symbols, percent signs, or thousands separators), where later steps must literally re-state the numeric value produced by an earlier step wherever that earlier result is used:
+
+Calculation:
+Step 1: <short description> = <arithmetic expression using literal numbers only> = <resulting value>
+Step 2: <short description> = <arithmetic expression using literal numbers only, re-stating any prior step's value literally> = <resulting value>
+Step 3: <short description> = <arithmetic expression using literal numbers only, re-stating any prior step's value literally> = <resulting value>
+(add further steps if needed)
+
+The Question and Answer you generate afterwards must be grounded in exactly these calculated figures. The Answer's bullet points must state the specific numeric results from the Calculation section (rounded naturally as a human adviser would state them), not the raw calculation steps themselves. The calculation must be non-trivial: it must require genuine multi-step reasoning to answer, not something solvable by reading a single number off a table."""
+
 def get_verification_prompt(prompt_type, params=None):
 	sys_prompt = ""
 	prompt = ""
@@ -498,6 +510,8 @@ Document 1 Answer points assigned:
 - <point 1>
 - <point 2>
 - <point 3>"""
+		if len(question) > 3 and question[3] == "generic":
+			prompt = prompt + GENERIC_NUMERIC_INSTRUCTION
 
 	elif prompt_type == "programmatic_qa_type2":
 		sys_prompt = "You are an expert generator of data specialising in personal financial advice. Do not use ** to start lines or denote points."
@@ -523,6 +537,8 @@ Document 2 Answer points assigned: <Points>
 and so on...
 
 Do not use numbers, letters, or any other shorthand (e.g. "1, 2" or "A, B") to refer to answer points under each document. You must repeat the full text of each assigned answer point under its document, exactly as written in the Answer section above."""
+		if len(question) > 3 and question[3] == "generic":
+			prompt = prompt + GENERIC_NUMERIC_INSTRUCTION
 		
 	elif prompt_type == "programmatic_qa_type3":
 		sys_prompt = "You are an expert generator of data specialising in personal financial advice. Do not use ** to start lines or denote points."
@@ -551,6 +567,8 @@ Document 2 Evidence component:
 - <evidence that supports the causal conclusion without stating it explicitly>
 
 and so on..."""
+		if len(question) > 3 and question[3] == "generic":
+			prompt = prompt + GENERIC_NUMERIC_INSTRUCTION
 
 	elif prompt_type == "programmatic_scenarios":
 		sys_prompt = "You are an expert generator of data."
