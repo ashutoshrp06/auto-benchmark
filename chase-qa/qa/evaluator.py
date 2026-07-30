@@ -47,7 +47,24 @@ def evaluator(pred_data, model, prompt_type, max_tokens, temperature, stop, tik_
 	irr = 0.0
 	adv = 0.0
 
-	for i in range(len(pred_data)):
+	start_idx = 0
+	out_path = args.out_dir + "/result.tsv"
+	if os.path.exists(out_path):
+		prev = pd.read_csv(out_path, sep='\t')
+		if len(prev) > len(pred_data):
+			raise SystemExit("ERROR: existing result.tsv has more rows than -predictions_tsv. Wrong -run_name?")
+		if len(prev) > 0:
+			a = str(prev.iloc[len(prev)-1]["Question"]).strip()
+			b = str(pred_data.loc[len(prev)-1]["Question"]).strip()
+			if a != b:
+				raise SystemExit("ERROR: existing result.tsv does not match -predictions_tsv. Delete it or use a different -run_name.")
+		pred_ls = prev.values.tolist()
+		cnt = len(prev)
+		score = float(prev["Result"].sum())
+		start_idx = len(prev)
+		print("Resuming from row", start_idx, "of", len(pred_data), "| score so far", score)
+
+	for i in range(start_idx, len(pred_data)):		
 		id1 = pred_data.loc[i]["Root_ID"]
 		ques = pred_data.loc[i]["Question"]
 		ans = pred_data.loc[i]["Answer"]
@@ -75,7 +92,7 @@ def evaluator(pred_data, model, prompt_type, max_tokens, temperature, stop, tik_
 		
 		prompt, sys_prompt = get_evaluator_prompt(prompt_type, question=(ques, ans, pred, adv_ans_str))
 		
-		if pred.strip() == "error":
+		if pd.isna(pred) or str(pred).strip() in ("", "error"):
 			og_pred = "False. Error in prediction."
 		else:
 			og_pred = model.predict(prompt, sys_prompt, max_tokens, temperature, 1, stop)
@@ -90,12 +107,18 @@ def evaluator(pred_data, model, prompt_type, max_tokens, temperature, stop, tik_
 			f.write("Result: " + og_pred + "\n")
 			f.write("------------------------------------------------------------------\n\n")
 
-		res = og_pred.strip().split()[0]
+		tokens = og_pred.strip().split()
+		res = tokens[0] if tokens else ""
 
 		if "score" in args.prompt_type:
 			if "." in res or "," in res:
 				res = res[:-1]
-			corr = int(res)
+			try:
+				corr = int(res)
+			except ValueError:
+				corr = 0
+				with open(args.out_dir + "/eval_logs.txt", "a") as f:
+					f.write("UNPARSED score response at row " + str(i+1) + ", counted 0\n")
 		elif "step-by-step" in args.prompt_type:
 			corr = 0
 			if "FINAL VERDICT: Correct" in og_pred:
@@ -126,7 +149,7 @@ def evaluator(pred_data, model, prompt_type, max_tokens, temperature, stop, tik_
 		adv_score = adv/(cnt-score)
 
 	with open(args.out_dir + "/eval_logs.txt", "a") as f:
-		f.write("Accuracy: " + str(score/cnt))
+		f.write("Accuracy: " + (str(score/cnt) if cnt else "n/a (0 rows)"))
 		f.write("% Incorrect: " + str(inc_score))
 		f.write("% Irrelevant: " + str(irr_score))
 		f.write("% Adversarial: " + str(adv_score))

@@ -1,0 +1,39 @@
+{
+  "mode": "measured",
+  "threshold": 0.75,
+  "shift": 5.0,
+  "floor": 5.0,
+  "accuracy": {
+    "type1": {
+      "dir": "outputs/type1-gpt55-v7-basic-eval",
+      "correct": 76,
+      "n": 134,
+      "accuracy": 0.5672
+    },
+    "type2": {
+      "dir": "outputs/type2-gpt55-v7-basic-eval",
+      "correct": 96,
+      "n": 198,
+      "accuracy": 0.4848
+    },
+    "type3": {
+      "dir": "outputs/type3-gpt55-v7-basic-eval",
+      "correct": 88,
+      "n": 172,
+      "accuracy": 0.5116
+    }
+  },
+  "weights_in": {
+    "type1": 33.3,
+    "type2": 33.3,
+    "type3": 33.4
+  },
+  "weights_out": {
+    "type1": 33.3,
+    "type2": 33.3,
+    "type3": 33.4
+  },
+  "log": [
+    "no type at or above threshold 0.750; weights unchanged"
+  ]
+}

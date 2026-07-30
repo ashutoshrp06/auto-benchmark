@@ -2,6 +2,11 @@ import argparse
 import pandas as pd # type: ignore
 import pdb
 import json
+import re
+
+# line[9] compares a single character against str(doc_no), so it is wrong for
+# every document numbered 10 or above. Compare the parsed number instead.
+DOC_NUM_RE = re.compile(r'^Document\s+(\d+)')
 
 def build_parser():
 	parser = argparse.ArgumentParser(description='Post Process')
@@ -31,10 +36,13 @@ def programmatic_qa_process(data):
 			ans_points_og = answer.split("\n")
 			ans_points = []
 			for ans_pt in ans_points_og:
+				ans_pt = ans_pt.strip()
+				if ans_pt == "":
+					continue
 				if ans_pt[0] == "-":
 					ans_points.append(ans_pt[1:].strip())
 				else:
-					ans_points.append(ans_pt.strip())
+					ans_points.append(ans_pt)
 
 			ans_points_copy = ans_points.copy()
 
@@ -42,15 +50,19 @@ def programmatic_qa_process(data):
 
 			doc_ans_points = {1: []}
 			doc_no = 1
+			cur_doc_label = "1"
 			for line in docs_info.split("\n"):
 				if len(line) > 2:
 					if line[:8] == "Document":
-						if line[9] != str(doc_no):
+						m = DOC_NUM_RE.match(line)
+						if m and m.group(1) != cur_doc_label:
+							cur_doc_label = m.group(1)
 							doc_no += 1
 							doc_ans_points[doc_no] = []
 						if "title:" not in line.lower():
-							if len(line.strip().split(":")[1]) > 2:
-								pt_candidate = line.strip().split(":")[1].strip()
+							parts = line.strip().split(":", 1)
+							if len(parts) > 1 and len(parts[1]) > 2:
+								pt_candidate = parts[1].strip()
 								if pt_candidate[0] == "-":
 									doc_ans_points[doc_no].append(pt_candidate[1:].strip())
 									matches = [x for x in ans_points_copy if x.strip() == pt_candidate[1:].strip()]
@@ -60,18 +72,17 @@ def programmatic_qa_process(data):
 									matches = [x for x in ans_points_copy if x.strip() == pt_candidate.strip()]
 									if matches: ans_points_copy.remove(matches[0])
 					else:
-						if line.strip()[0] == "-":
-							pt = line.strip()[1:].strip()
-							doc_ans_points[doc_no].append(pt)
-							matches = [x for x in ans_points_copy if x.strip() == pt.strip()]
-							if matches:
-								ans_points_copy.remove(matches[0])
+						stripped_line = line.strip()
+						if stripped_line == "":
+							continue
+						if stripped_line[0] == "-":
+							pt = stripped_line[1:].strip()
 						else:
-							pt = line.strip()
-							doc_ans_points[doc_no].append(pt)
-							matches = [x for x in ans_points_copy if x.strip() == pt.strip()]
-							if matches:
-								ans_points_copy.remove(matches[0])
+							pt = stripped_line
+						doc_ans_points[doc_no].append(pt)
+						matches = [x for x in ans_points_copy if x.strip() == pt]
+						if matches:
+							ans_points_copy.remove(matches[0])
 
 			if len(ans_points_copy) > 0.5:
 				raise Exception("Some points did not match!")
@@ -130,10 +141,13 @@ def programmatic_qa_process_type3(data):
 
             doc_evidence = {1: []}
             doc_no = 1
+            cur_doc_label = "1"
             for line in docs_info.split("\n"):
                 if len(line) > 2:
                     if line[:8] == "Document":
-                        if line[9] != str(doc_no):
+                        m = DOC_NUM_RE.match(line)
+                        if m and m.group(1) != cur_doc_label:
+                            cur_doc_label = m.group(1)
                             doc_no += 1
                             doc_evidence[doc_no] = []
                     else:
@@ -208,15 +222,19 @@ def programmatic_adversarial_process(data):
 
 					doc_ans_points = {1: []}
 					doc_no = 1
+					cur_doc_label = "1"
 					for line in docs_info.split("\n"):
 						if len(line) > 2:
 							if line[:8] == "Document":
-								if line[9] != str(doc_no):
+								m = DOC_NUM_RE.match(line)
+								if m and m.group(1) != cur_doc_label:
+									cur_doc_label = m.group(1)
 									doc_no += 1
 									doc_ans_points[doc_no] = []
 								if "title:" not in line.lower():
-									if len(line.strip().split(":")[1]) > 2:
-										pt_candidate = line.strip().split(":")[1].strip()
+									parts = line.strip().split(":", 1)
+									if len(parts) > 1 and len(parts[1]) > 2:
+										pt_candidate = parts[1].strip()
 										if pt_candidate[0] == "-":
 											doc_ans_points[doc_no].append(pt_candidate[1:].strip())
 											matches = [x for x in ans_points_copy if x.strip() == pt_candidate[1:].strip()]
@@ -347,72 +365,111 @@ def strip_conclusion_from_docs_info(d_info):
 def programmatic_adversarial_process_type3(data):
 	ls = data.to_dict(orient='records')
 	exceptions_ls = []
+	partial_drops_ls = []
 	new_ls = []
 
 	for i in range(len(ls)):
 		try:
 			ls_ans_pts = []
 			ls_doc_ans_pts = []
+			kept_indices = []
 			og_answer = json.loads(ls[i]["Adv_Answer"])
+			og_question = json.loads(ls[i]["Adv_Question"])
+			og_docs_info = json.loads(ls[i]["Adv_Documents_Info"])
 
 			for j in range(len(og_answer)):
-				answer = og_answer[j]
+				try:
+					answer = og_answer[j]
+					if not isinstance(answer, str) or answer.strip() == "":
+						raise Exception("Empty adversarial answer")
 
-				ans_points_og = answer.split("\n")
-				ans_points = []
-				for ans_pt in ans_points_og:
-					if ans_pt[0] == "-":
-						ans_points.append(ans_pt[1:].strip())
-					else:
-						ans_points.append(ans_pt.strip())
-
-				ans_points_copy = [x for x in ans_points.copy() if not x.strip().lower().startswith("conclusion:")]
-
-				if args.verbose:
-					print(f"  [debug] index={i}, j={j}, ans_points={ans_points}")
-
-				docs_info = json.loads(ls[i]["Adv_Documents_Info"])[j]
-
-				doc_ans_points = {1: []}
-				doc_no = 1
-				for line in docs_info.split("\n"):
-					if len(line) > 2:
-						if line[:8] == "Document":
-							if line[9] != str(doc_no):
-								doc_no += 1
-								doc_ans_points[doc_no] = []
-							if "title:" not in line.lower():
-								if len(line.strip().split(":")[1]) > 2:
-									pt_candidate = line.strip().split(":")[1].strip()
-									if pt_candidate[0] == "-":
-										doc_ans_points[doc_no].append(pt_candidate[1:].strip())
-										matches = [x for x in ans_points_copy if x.strip() == pt_candidate[1:].strip()]
-										if matches: ans_points_copy.remove(matches[0])
-									else:
-										doc_ans_points[doc_no].append(pt_candidate)
-										matches = [x for x in ans_points_copy if x.strip() == pt_candidate.strip()]
-										if matches: ans_points_copy.remove(matches[0])
+					ans_points_og = answer.split("\n")
+					ans_points = []
+					for ans_pt in ans_points_og:
+						ans_pt = ans_pt.strip()
+						if ans_pt == "":
+							continue
+						if ans_pt[0] == "-":
+							ans_points.append(ans_pt[1:].strip())
 						else:
-							if line.strip()[0] == "-":
-								doc_ans_points[doc_no].append(line.strip()[1:].strip())
-								matches = [x for x in ans_points_copy if x.strip() == line.strip()[1:].strip()]
-								if matches: ans_points_copy.remove(matches[0])
-							else:
-								doc_ans_points[doc_no].append(line.strip())
-								matches = [x for x in ans_points_copy if x.strip() == line.strip().strip()]
-								if matches: ans_points_copy.remove(matches[0])
+							ans_points.append(ans_pt)
 
-				for dn in doc_ans_points:
-					doc_ans_points[dn] = [pt for pt in doc_ans_points[dn] if not pt.strip().lower().startswith("conclusion:")]
+					if len(ans_points) == 0:
+						raise Exception("No answer points parsed")
 
-				if len(ans_points_copy) > 0.5:
+					ans_points_copy = [x for x in ans_points.copy() if not x.strip().lower().startswith("conclusion:")]
+
 					if args.verbose:
-						print(f"  [debug] index={i}, j={j} FAILED -- unmatched points: {ans_points_copy}")
-					raise Exception("Some points did not match!")
+						print(f"  [debug] index={i}, j={j}, ans_points={ans_points}")
 
-				ls_ans_pts.append(ans_points)
-				ls_doc_ans_pts.append(doc_ans_points)
+					docs_info = og_docs_info[j]
+					if not isinstance(docs_info, str) or docs_info.strip() == "":
+						raise Exception("Empty adversarial documents info")
 
+					doc_ans_points = {1: []}
+					doc_no = 1
+					cur_doc_label = "1"
+					for line in docs_info.split("\n"):
+						if len(line) > 2:
+							if line[:8] == "Document":
+								m = DOC_NUM_RE.match(line)
+								if m and m.group(1) != cur_doc_label:
+									cur_doc_label = m.group(1)
+									doc_no += 1
+									doc_ans_points[doc_no] = []
+								if "title:" not in line.lower():
+									parts = line.strip().split(":", 1)
+									if len(parts) > 1 and len(parts[1]) > 2:
+										pt_candidate = parts[1].strip()
+										if pt_candidate[0] == "-":
+											doc_ans_points[doc_no].append(pt_candidate[1:].strip())
+											matches = [x for x in ans_points_copy if x.strip() == pt_candidate[1:].strip()]
+											if matches: ans_points_copy.remove(matches[0])
+										else:
+											doc_ans_points[doc_no].append(pt_candidate)
+											matches = [x for x in ans_points_copy if x.strip() == pt_candidate.strip()]
+											if matches: ans_points_copy.remove(matches[0])
+							else:
+								stripped_line = line.strip()
+								if stripped_line == "":
+									continue
+								if stripped_line[0] == "-":
+									pt = stripped_line[1:].strip()
+								else:
+									pt = stripped_line
+								doc_ans_points[doc_no].append(pt)
+								matches = [x for x in ans_points_copy if x.strip() == pt]
+								if matches: ans_points_copy.remove(matches[0])
+
+					for dn in doc_ans_points:
+						doc_ans_points[dn] = [pt for pt in doc_ans_points[dn] if not pt.strip().lower().startswith("conclusion:")]
+
+					if len(ans_points_copy) > 0.5:
+						if args.verbose:
+							print(f"  [debug] index={i}, j={j} FAILED -- unmatched points: {ans_points_copy}")
+						raise Exception("Some points did not match!")
+
+					ls_ans_pts.append(ans_points)
+					ls_doc_ans_pts.append(doc_ans_points)
+					kept_indices.append(j)
+
+				except Exception as inner_e:
+					if args.verbose:
+						print("Row", i, "adversarial question", j, "dropped:", str(inner_e))
+					partial_drops_ls.append({
+						"Row_Index": i,
+						"Adv_Question_Index": j,
+						"Adv_Question": og_question[j] if j < len(og_question) else None,
+						"Reason": str(inner_e),
+					})
+					continue
+
+			if len(kept_indices) == 0:
+				raise Exception("All adversarial questions failed to match, dropping row")
+
+			ls[i]["Adv_Question"] = json.dumps([og_question[j] for j in kept_indices])
+			ls[i]["Adv_Answer"] = json.dumps([og_answer[j] for j in kept_indices])
+			ls[i]["Adv_Documents_Info"] = json.dumps([og_docs_info[j] for j in kept_indices])
 			ls[i]["Adv_Ans_Points"] = ls_ans_pts
 			ls[i]["Adv_Doc_Ans_Points"] = ls_doc_ans_pts
 
@@ -420,9 +477,9 @@ def programmatic_adversarial_process_type3(data):
 		except Exception as e:
 			if args.verbose:
 				print("At index: ", str(i))
-				print("Adv Question: ", ls[i]["Adv_Question"])
-				print("Adv Answer:\n", ls[i]["Adv_Answer"])
-				print("Adv Documents Info:\n", ls[i]["Adv_Documents_Info"])
+				print("Adv Question: ", ls[i].get("Adv_Question"))
+				print("Adv Answer:\n", ls[i].get("Adv_Answer"))
+				print("Adv Documents Info:\n", ls[i].get("Adv_Documents_Info"))
 				print("Exception: ", str(e))
 				print()
 			exceptions_ls.append(ls[i])
@@ -469,6 +526,10 @@ def programmatic_adversarial_process_type3(data):
 		new_df.to_csv(args.out_dir + "/" + args.folder_name + "/" + args.data + "_modified.tsv", sep = '\t', index = None, quoting=1)
 		print("Length of Final Data: ", str(len(new_df)))
 
+	if len(partial_drops_ls) > 0:
+		pd.DataFrame(partial_drops_ls).to_csv(args.out_dir + "/" + args.folder_name + "/" + args.data + "_partial_drops.tsv", sep = '\t', index = None)
+		print("Individually dropped adversarial questions (row survived): ", len(partial_drops_ls))
+
 	if len(exceptions_ls) > 0:
 		exc_df = pd.DataFrame(exceptions_ls)
 		exc_df.to_csv(args.out_dir + "/" + args.folder_name + "/" + args.data + "_exceptions.tsv", sep = '\t', index = None)
@@ -476,6 +537,7 @@ def programmatic_adversarial_process_type3(data):
 def programmatic_docs_process(data):
 	ls = data.to_dict(orient='records')
 	new_ls = []
+	skipped_rows = []
 	
 	tot_cnt = 1
 
@@ -493,12 +555,37 @@ def programmatic_docs_process(data):
 		numerics = ls[i]["Numerics"]
 		seed_type = ls[i]["Seed_Type"]
 
+		# Stage 7 does `continue` on a doc-split failure, so Docs_List can be
+		# shorter than Questions. Indexing past the end kills the whole shard.
+		# json.loads can return a str when a field is double-encoded, and len()
+		# of a str is its character count, so type is checked before length.
+		fields = {"Questions": questions, "Answers": answers, "Docs_List": docs_list,
+		          "Ans_Points": ans_pts, "Doc_Ans_Points": doc_ans_pts}
+		bad_type = [k for k, v in fields.items() if not isinstance(v, list)]
+		if bad_type:
+			print("SKIP row index {} (ID {}): not a list after decode: {}".format(i, id1, bad_type))
+			skipped_rows.append({"Row_Index": i, "ID": id1, "Reason": "non_list:" + ",".join(bad_type)})
+			continue
+		n_q = len(questions)
+		short = {k: len(v) for k, v in fields.items() if len(v) < n_q}
+		if short:
+			print("SKIP row index {} (ID {}): shorter than Questions ({}): {}".format(i, id1, n_q, short))
+			rec = {"Row_Index": i, "ID": id1, "Reason": "short_field", "N_Questions": n_q}
+			rec.update(short)
+			skipped_rows.append(rec)
+			continue
+
 		modified_docs_list = []
 		for doc_ls in docs_list:
 			new_doc_ls = []
 			for doc in doc_ls:
 				if "Title:" in doc:
 					mod_doc = "Title: " + doc.split("Title:")[1].strip()
+				else:
+					# mod_doc has function scope. Without this branch a document
+					# lacking "Title:" re-emits the previous document and loses
+					# its own, silently, or raises NameError on the first one.
+					mod_doc = doc
 				mod_doc = mod_doc.split("In conclusion,")[0].strip()
 				mod_doc = mod_doc.split("In summary,")[0].strip()
 				mod_doc = mod_doc.split("To summarize")[0].strip()
@@ -512,21 +599,24 @@ def programmatic_docs_process(data):
 			cur_doc_ans_pts = doc_ans_pts[j]
 			cur_docs = modified_docs_list[j]
 
-			adv_ques = questions.copy()
-			adv_ques.remove(cur_ques)
-			adv_ans = answers.copy()
-			adv_ans.remove(cur_ans)
-			adv_ans_pts = ans_pts.copy()
-			adv_ans_pts.remove(cur_ans_pts)
-			adv_doc_ans_pts = doc_ans_pts.copy()
-			adv_doc_ans_pts.remove(cur_doc_ans_pts)
-			adv_docs_list = modified_docs_list.copy()
-			adv_docs_list.remove(cur_docs)
+			# list.remove() deletes the first *equal* element, not this one. Two
+			# identical siblings, which nothing prevents, would leave Adv_*
+			# describing the wrong sibling. Index-based is exact.
+			others = [k for k in range(len(questions)) if k != j]
+			adv_ques = [questions[k] for k in others]
+			adv_ans = [answers[k] for k in others]
+			adv_ans_pts = [ans_pts[k] for k in others]
+			adv_doc_ans_pts = [doc_ans_pts[k] for k in others]
+			adv_docs_list = [modified_docs_list[k] for k in others]
 
 			new_ls.append([id1, tot_cnt, persona, env, cur_ques, cur_ans, cur_ans_pts, cur_doc_ans_pts, cur_docs, adv_ques, adv_ans, adv_ans_pts, adv_doc_ans_pts, adv_docs_list, reg_text, numerics, seed_type])
 			
 			tot_cnt += 1
 	
+	if skipped_rows:
+		print("Rows skipped on length mismatch: ", len(skipped_rows))
+		pd.DataFrame(skipped_rows).to_csv(args.out_dir + "/" + args.folder_name + "/" + args.data + "_skipped.tsv", sep = '\t', index = None)
+
 	new_df = pd.DataFrame(new_ls, columns = ['Root_ID', 'Question_No', 'Persona', 'Environment', 'Question', 'Answer', 'Ans_Points', 'Doc_Ans_Points', 'Rel_Docs_List', 'Adv_Question', 'Adv_Answer', 'Adv_Ans_Pts', 'Adv_Doc_Ans_Pts', 'Adv_Docs_List', 'Reg_Text', 'Numerics', 'Seed_Type'])
 	new_df['Ans_Points'] = new_df['Ans_Points'].apply(json.dumps)
 	new_df['Doc_Ans_Points'] = new_df['Doc_Ans_Points'].apply(json.dumps)

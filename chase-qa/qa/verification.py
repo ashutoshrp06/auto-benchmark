@@ -609,12 +609,20 @@ def create_docs_info(doc_ans_pts):
 def programmatic_adversarial_verify(args, data):
 	ls = data.to_dict(orient='records')
 	new_ls = []
+	removed_ls = []
 
-	if os.path.exists(args.out_dir + "/" + args.folder_name + "/" + args.data + "_verified.tsv"):
-		temp_new_df = pd.read_csv(args.out_dir + "/" + args.folder_name + "/" + args.data + "_verified.tsv", sep="\t")
+	verified_path = args.out_dir + "/" + args.folder_name + "/" + args.data + "_verified.tsv"
+	removed_path = args.out_dir + "/" + args.folder_name + "/" + args.data + "_removed.tsv"
+
+	if os.path.exists(verified_path):
+		temp_new_df = pd.read_csv(verified_path, sep="\t")
 		new_ls = temp_new_df.to_dict(orient='records')
-	
-	start_idx = len(new_ls)
+
+	if os.path.exists(removed_path):
+		temp_removed_df = pd.read_csv(removed_path, sep="\t", dtype=str, keep_default_na=False)
+		removed_ls = temp_removed_df.to_dict(orient='records')
+
+	start_idx = len(new_ls) + len(removed_ls)
 	new_df = pd.DataFrame(new_ls)
 
 	_, sys_prompt = get_verification_prompt("presence", params=("", "", ""))
@@ -629,6 +637,7 @@ def programmatic_adversarial_verify(args, data):
 
 	num_pairs = 0
 	num_examples = 0
+	num_conclusion_only = 0
 
 	for i in range(start_idx, len(ls)):
 		ques = json.loads(ls[i]["Questions"])
@@ -673,15 +682,22 @@ def programmatic_adversarial_verify(args, data):
 					ans[j] = ans[j].replace(cur_ans_pt, "").strip()
 					ans[j] = ans[j].replace("- \n", "").strip()
 
-			if len(ans_pts[j]) == 0 or str(ans[j]).strip() == "":
+			evidence_left = [x for x in ans_pts[j] if not str(x).strip().lower().startswith("conclusion:")]
+			conclusion_only = len(ans_pts[j]) > 0 and len(evidence_left) == 0
+
+			if len(ans_pts[j]) == 0 or str(ans[j]).strip() == "" or conclusion_only:
 				idx_to_remove.append(j)
 				num_pairs += 1
+				if conclusion_only:
+					num_conclusion_only += 1
 				with open(args.verification_dir + "/logs.txt", "a") as f:
 					f.write("\n\n----------------------------------REMOVAL OF PAIR----------------------------\n")
 					for t_q in ques_to_check:
 						f.write("Question: " + str(t_q) + "\n")
 					f.write("\nAnswer:\n" + str(og_answer) + "\n")
-					if len(ans_pts[j]) != 0:
+					if conclusion_only:
+						f.write("(Removed: only the Conclusion survived cross-check, no groundable evidence points left)\n")
+					elif len(ans_pts[j]) != 0:
 						f.write("(Removed: Ans_Points list non-empty but resulting Answer string was empty)\n")
 					f.write("======================================================================================\n\n\n")
 			else:
@@ -714,6 +730,10 @@ def programmatic_adversarial_verify(args, data):
 			new_df.to_csv(args.out_dir + "/" + args.folder_name + "/" + args.data + "_verified.tsv", sep = '\t', index = None)
 		else:
 			num_examples += 1
+			rec = dict(ls[i])
+			rec["_Removed_Reason"] = "all_pairs_removed"
+			removed_ls.append(rec)
+			pd.DataFrame(removed_ls).to_csv(removed_path, sep = '\t', index = None)
 			with open(args.verification_dir + "/logs.txt", "a") as f:
 				f.write("\n\n----------------------------------REMOVAL OF DATA POINT!----------------------------\n")
 				for t_q in ques:
@@ -722,7 +742,7 @@ def programmatic_adversarial_verify(args, data):
 
 		print("Completed {} / {}...".format(i+1, len(ls)), end = '\r', flush = True)
 
-	print("Removed {} pairs and {} examples...".format(num_pairs, num_examples))
+	print("Removed {} pairs ({} Conclusion-only) and {} examples...".format(num_pairs, num_conclusion_only, num_examples))
 	
 	print("\nVerified Data: ", len(new_df))
 

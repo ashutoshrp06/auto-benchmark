@@ -43,7 +43,23 @@ def solver(data, model, prompt_type, max_tokens, temperature, stop, tik_encoding
 
 	cnt = 0
 
-	for i in range(len(data)):
+	start_idx = 0
+	out_path = args.out_dir + "/predictions.tsv"
+	if os.path.exists(out_path):
+		prev = pd.read_csv(out_path, sep='\t')
+		if len(prev) > len(data):
+			raise SystemExit("ERROR: existing predictions.tsv has more rows than -input_tsv. Wrong -run_name?")
+		if len(prev) > 0:
+			a = str(prev.iloc[len(prev)-1]["Question"]).strip()
+			b = str(data.loc[len(prev)-1]["Question"]).strip()
+			if a != b:
+				raise SystemExit("ERROR: existing predictions.tsv does not match -input_tsv. Delete it or use a different -run_name.")
+		pred_ls = prev.values.tolist()
+		cnt = len(prev)
+		start_idx = len(prev)
+		print("Resuming from row", start_idx, "of", len(data))
+
+	for i in range(start_idx, len(data)):		
 		root_id = data.loc[i]["Root_ID"]
 		docs = strip_titles(data.loc[i]["Documents"])
 		ques = data.loc[i]["Question"]

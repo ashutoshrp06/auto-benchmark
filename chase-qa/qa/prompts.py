@@ -10,6 +10,31 @@ Step 3: <short description> = <arithmetic expression using literal numbers only,
 
 The Question and Answer you generate afterwards must be grounded in exactly these calculated figures. The Answer's bullet points must state the specific numeric results from the Calculation section (rounded naturally as a human adviser would state them), not the raw calculation steps themselves. The calculation must be non-trivial: it must require genuine multi-step reasoning to answer, not something solvable by reading a single number off a table."""
 
+QUESTION_LEAKAGE_INSTRUCTION = """
+
+The question must not contain its own answer. Do not state, list, paraphrase, or enumerate any answer point inside the question text. The question may name the situation, the product, and what is being asked for, but must not name the specific requirements, figures, rules, warnings, or disclosures that make up the answer. Someone reading only the question must not be able to reconstruct any answer point from it.
+
+Bad: "What must the adviser disclose about interest roll-up, early repayment charges, and the effect on inheritance before recommending a lifetime mortgage?"
+Good: "What must the adviser disclose to the client before recommending a lifetime mortgage?"
+"""
+
+DOCUMENT_LEAKAGE_INSTRUCTION = """
+
+The document text must not restate the question. No line of dialogue may pose the question, paraphrase it, or announce the topic in the question's own terms, and the "Meeting:" header must not do so either. The client must never ask what the question asks. Each assigned answer point must arrive as something already under discussion, raised incidentally, or volunteered by the adviser, never as a direct reply to the question being asked. A reader given only the document text must not be able to recover the question from it.
+
+Bad: "Client: What do you need to tell me before recommending a lifetime mortgage?"
+Good: "Adviser: Before we go any further, there are a few things I have to set out."
+"""
+
+def build_topic_instruction(prior_questions):
+	instr = "\n\nThe question you generate must stay on the exact same regulatory area, financial product, or topic as the persona and environment described above. Do not switch to a different regulatory area or product."
+	if prior_questions:
+		listed = "\n".join("- " + q for q in prior_questions)
+		instr += " The following questions have already been generated for this exact persona and environment; your new question must explore a different angle of the SAME topic, not a switch to a different topic:\n" + listed
+	return instr
+
+GENERIC_SEED_TYPES = ("generic", "dynamic_generic")
+
 def get_verification_prompt(prompt_type, params=None):
 	sys_prompt = ""
 	prompt = ""
@@ -218,6 +243,20 @@ Grounded: True/False
 Flagged Point (if False): <exact bullet point as written in the answer>
 Corrected Point (if False): <corrected bullet point>
 """
+	elif prompt_type == "topic_adherence":
+		sys_prompt = "You are an expert at verifying data."
+		reg_line = ""
+		if params[3] is not None and str(params[3]).strip() not in ("", "nan"):
+			reg_line = "Regulatory Source Text:\n" + str(params[3]) + "\n"
+		prompt = f"""You are given a persona, an environment, and a question that was supposedly generated for that persona and environment. You must check whether the question stays on the same regulatory area, financial product, or topic described below, rather than switching to a different regulatory area or product.
+Persona: {params[1]}
+Environment: {params[2]}
+{reg_line}Question: {params[0]}
+If the question asks about the same regulatory area, financial product, or topic as the persona and environment (and the regulatory text, if given), output "True" to "On_Topic" without giving any explanation. Otherwise, if the question has switched to a different regulatory area, financial product, or topic, output "False" and briefly state what topic the question switched to instead.
+Give output in the following format:
+On_Topic: True/False
+Reason (if False):
+"""
 
 	return prompt, sys_prompt
 
@@ -387,6 +426,7 @@ Text:
 
 and so on...
 """
+		prompt = prompt + DOCUMENT_LEAKAGE_INSTRUCTION
 
 	elif prompt_type == "programmatic_adversarial":
 		sys_prompt = "You are an expert generator of data. Do not use ** to start lines or denote points."
@@ -417,6 +457,7 @@ The answer to the adversarial question you craft must be scattered across differ
 		if len(question[5]) > 0:
 			prev_adv_questions = "\n\n".join(question[5])
 			prompt = prompt + f"""
+			
 
 The following are adversarial questions I have already generated. Make a very different adversarial question.
 {prev_adv_questions}"""
@@ -510,8 +551,11 @@ Document 1 Answer points assigned:
 - <point 1>
 - <point 2>
 - <point 3>"""
-		if len(question) > 3 and question[3] == "generic":
+		prompt = prompt + QUESTION_LEAKAGE_INSTRUCTION
+		if len(question) > 3 and question[3] in GENERIC_SEED_TYPES:
 			prompt = prompt + GENERIC_NUMERIC_INSTRUCTION
+		if len(question) > 4:
+			prompt = prompt + build_topic_instruction(question[4])
 
 	elif prompt_type == "programmatic_qa_type2":
 		sys_prompt = "You are an expert generator of data specialising in personal financial advice. Do not use ** to start lines or denote points."
@@ -537,8 +581,11 @@ Document 2 Answer points assigned: <Points>
 and so on...
 
 Do not use numbers, letters, or any other shorthand (e.g. "1, 2" or "A, B") to refer to answer points under each document. You must repeat the full text of each assigned answer point under its document, exactly as written in the Answer section above."""
-		if len(question) > 3 and question[3] == "generic":
+		prompt = prompt + QUESTION_LEAKAGE_INSTRUCTION
+		if len(question) > 3 and question[3] in GENERIC_SEED_TYPES:
 			prompt = prompt + GENERIC_NUMERIC_INSTRUCTION
+		if len(question) > 4:
+			prompt = prompt + build_topic_instruction(question[4])
 		
 	elif prompt_type == "programmatic_qa_type3":
 		sys_prompt = "You are an expert generator of data specialising in personal financial advice. Do not use ** to start lines or denote points."
@@ -567,20 +614,33 @@ Document 2 Evidence component:
 - <evidence that supports the causal conclusion without stating it explicitly>
 
 and so on..."""
-		if len(question) > 3 and question[3] == "generic":
+		prompt = prompt + QUESTION_LEAKAGE_INSTRUCTION
+		if len(question) > 3 and question[3] in GENERIC_SEED_TYPES:
 			prompt = prompt + GENERIC_NUMERIC_INSTRUCTION
+		if len(question) > 4:
+			prompt = prompt + build_topic_instruction(question[4])
 
 	elif prompt_type == "programmatic_scenarios":
 		sys_prompt = "You are an expert generator of data."
 		prompt = f"""You are a research scientist. You want to make data to test an advanced question answering system focused on UK personal financial advice.
 Give me 5 examples of real-life scenarios where a USER_PERSONA may seek information in a COLLECTION_OF_DOCS. All scenarios must involve a client seeking personal financial advice in the UK, governed by FCA regulations. Do not consider educational, historical, or non-financial scenarios.
 
+Each scenario must be grounded in one of the following:
+(a) One of these existing regulatory areas -- do not invent a new regulatory topic:
+{question[1]}
+(b) A quantitative scenario requiring the client to compare or calculate figures (e.g. comparing pension contributions vs ISA growth, comparing annuity quotes, assessing portfolio risk-adjusted returns), not tied to a specific named regulation.
+
+Vary the structure across the 5 scenarios. Do not give every scenario the shape "client doing X seeking Y advice". Vary who the persona is (an individual, a couple, an executor, a trustee, a business owner, someone acting under a power of attorney), what stage they are at (before a decision, part-way through a process, reviewing something already done, correcting an earlier mistake), and what the collection of documents holds (regulator handbook text, provider illustrations, adviser correspondence, account statements, suitability reports).
+
+Do not reproduce any scenario shown in the examples below. They show the required format, not the content you should generate.
+
 Some examples are:
-{question}
+{question[0]}
 
 Answer in the following format:
 USER_PERSONA:
 COLLECTION_OF_DOCS:
+REGULATORY_AREA_ID: <a number from the list above if grounded in (a), or GENERIC if grounded in (b)>
 """
 	
 	elif prompt_type == "naive_baseline":

@@ -15,6 +15,7 @@ from openai import OpenAI
 from tenacity import retry
 from tenacity.retry import retry_if_exception_type
 from tenacity.wait import wait_random_exponential
+from tenacity.stop import stop_after_attempt
 import tiktoken
 from google import genai
 from google.genai import types as genai_types
@@ -55,9 +56,11 @@ def load_model(model_name, peft_model=None, pp_size=1, tp_size=4):
 			)
 		),
 		wait=wait_random_exponential(
-			multiplier=0.1,
-			max=0.5,
+			multiplier=1,
+			max=30,
 		),
+		stop=stop_after_attempt(6),
+		reraise=True,
 	)
 def _get_completion_response(client, engine, prompt, sys_prompt, max_tokens, temperature, top_p, n, stop, presence_penalty, frequency_penalty, best_of, logprobs=1, echo=False):
 	fin_prompt = sys_prompt + "\n\n" + prompt
@@ -86,9 +89,11 @@ def _get_completion_response(client, engine, prompt, sys_prompt, max_tokens, tem
 			)
 		),
 		wait=wait_random_exponential(
-			multiplier=0.1,
-			max=0.5,
+			multiplier=1,
+			max=30,
 		),
+		stop=stop_after_attempt(6),
+		reraise=True,
 	)
 def _get_chat_response(client, engine, prompt, sys_prompt, max_tokens, temperature, top_p, n, stop, presence_penalty, frequency_penalty):
 	if "Mixtral-8x22B" in engine or "gemma" in engine:
@@ -142,9 +147,11 @@ def _get_chat_response(client, engine, prompt, sys_prompt, max_tokens, temperatu
 			)
 		),
 		wait=wait_random_exponential(
-			multiplier=0.1,
-			max=0.5,
+			multiplier=1,
+			max=30,
 		),
+		stop=stop_after_attempt(6),
+		reraise=True,
 	)
 def _get_gemini_response(client, engine, sys_prompt, prompt, max_tokens, temperature, top_p, n, stop):
 	return client.models.generate_content(
@@ -176,9 +183,11 @@ def _get_gemini_response(client, engine, sys_prompt, prompt, max_tokens, tempera
 			)
 		),
 		wait=wait_random_exponential(
-			multiplier=0.1,
-			max=0.5,
+			multiplier=1,
+			max=30,
 		),
+		stop=stop_after_attempt(6),
+		reraise=True,
 	)
 def _get_anthropic_response(client, engine, prompt, sys_prompt, max_tokens, temperature, top_p, stop):
 	return client.messages.create(

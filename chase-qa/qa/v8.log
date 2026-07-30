@@ -1,0 +1,240 @@
+Stem:       v8
+Model:      gpt-5.4-mini (elm)
+Target:     900 on track 'reg'
+Batches:    up to 6, scenario-iters 20, qa-iters 1
+Types:      1 2 3
+
+##################################################################
+  BATCH 1 of at most 6   run=v8-b1
+##################################################################
+-- cleaned corpora already present for every type, skipping generation
+-- type1 already judged, skipping
+-- type2 already judged, skipping
+-- type3 already judged, skipping
+
+-- dedup across: v8-b1
+Loaded 992 rows from 3 folder(s)
+Batch  QA_Type
+v8-b1  type1      299
+       type2      326
+       type3      367
+Exact QID duplicates: 0
+Near-duplicate question pairs, cumulative at each threshold:
+  >=   50%:      86 total,       0 cross-batch,      11 cross-type
+  >=   60%:      17 total,       0 cross-batch,       0 cross-type
+  >=   70%:       2 total,       0 cross-batch,       0 cross-type
+  >=   80%:       0 total,       0 cross-batch,       0 cross-type
+  >=   90%:       0 total,       0 cross-batch,       0 cross-type
+Near-duplicates dropped at >= 60% (scope cross_batch, cross_type False): 0
+FINAL: 992 rows in, 992 rows out
+Batch  QA_Type
+v8-b1  type1      299
+       type2      326
+       type3      367
+Wrote generation_outputs/combined_corpus.tsv (992 rows, round-trip verified)
+
+-- cumulative count
+combined corpus: 992 rows, all QIDs distinct
+  v8-b1 type1                  133 counted of   299 cleaned
+  v8-b1 type2                  163 counted of   326 cleaned
+  v8-b1 type3                  181 counted of   367 cleaned
+track=reg  pass_frac=0.75  TOTAL=477
+
+  BATCH 1 DONE.  cumulative reg = 477 / 900
+
+##################################################################
+  BATCH 2 of at most 6   run=v8-b2
+##################################################################
+-- cleaned corpora already present for every type, skipping generation
+-- type1 already judged, skipping
+-- type2 already judged, skipping
+-- type3 already judged, skipping
+
+-- dedup across: v8-b1,v8-b2
+Loaded 1754 rows from 6 folder(s)
+Batch  QA_Type
+v8-b1  type1      299
+       type2      326
+       type3      367
+v8-b2  type1      226
+       type2      258
+       type3      278
+Exact QID duplicates: 0
+Near-duplicate question pairs, cumulative at each threshold:
+  >=   50%:     161 total,       5 cross-batch,      17 cross-type
+  >=   60%:      39 total,       1 cross-batch,       2 cross-type
+  >=   70%:       4 total,       0 cross-batch,       0 cross-type
+  >=   80%:       1 total,       0 cross-batch,       0 cross-type
+  >=   90%:       1 total,       0 cross-batch,       0 cross-type
+Near-duplicates dropped at >= 60% (scope cross_batch, cross_type False): 0
+FINAL: 1754 rows in, 1754 rows out
+Batch  QA_Type
+v8-b1  type1      299
+       type2      326
+       type3      367
+v8-b2  type1      226
+       type2      258
+       type3      278
+Wrote generation_outputs/combined_corpus.tsv (1754 rows, round-trip verified)
+
+-- cumulative count
+combined corpus: 1754 rows, all QIDs distinct
+  v8-b1 type1                  133 counted of   299 cleaned
+  v8-b1 type2                  163 counted of   326 cleaned
+  v8-b1 type3                  181 counted of   367 cleaned
+  v8-b2 type1                  124 counted of   226 cleaned
+  v8-b2 type2                  128 counted of   258 cleaned
+  v8-b2 type3                  125 counted of   278 cleaned
+track=reg  pass_frac=0.75  TOTAL=854
+
+  BATCH 2 DONE.  cumulative reg = 854 / 900
+
+##################################################################
+  BATCH 3 of at most 6   run=v8-b3
+##################################################################
+-- cleaned corpora already present for every type, skipping generation
+-- RocketEval type1 across 16 shard(s)
+  -r01: 15 rows -> generation_outputs/elm-docs-type1-v8-b3-r01
+  -r02: 14 rows -> generation_outputs/elm-docs-type1-v8-b3-r02
+  -r03: 14 rows -> generation_outputs/elm-docs-type1-v8-b3-r03
+  -r04: 14 rows -> generation_outputs/elm-docs-type1-v8-b3-r04
+  -r05: 14 rows -> generation_outputs/elm-docs-type1-v8-b3-r05
+  -r06: 14 rows -> generation_outputs/elm-docs-type1-v8-b3-r06
+  -r07: 14 rows -> generation_outputs/elm-docs-type1-v8-b3-r07
+  -r08: 14 rows -> generation_outputs/elm-docs-type1-v8-b3-r08
+  -r09: 14 rows -> generation_outputs/elm-docs-type1-v8-b3-r09
+  -r10: 14 rows -> generation_outputs/elm-docs-type1-v8-b3-r10
+  -r11: 14 rows -> generation_outputs/elm-docs-type1-v8-b3-r11
+  -r12: 14 rows -> generation_outputs/elm-docs-type1-v8-b3-r12
+  -r13: 14 rows -> generation_outputs/elm-docs-type1-v8-b3-r13
+  -r14: 14 rows -> generation_outputs/elm-docs-type1-v8-b3-r14
+  -r15: 14 rows -> generation_outputs/elm-docs-type1-v8-b3-r15
+  -r16: 14 rows -> generation_outputs/elm-docs-type1-v8-b3-r16
+  round-trip verified: 225 rows, 19 columns, order preserved
+Merged 16 shards -> generation_outputs/elm-docs-type1-v8-b3/rocketeval/judgments.tsv
+  judgement rows: 3556  questions: 225  judges: 2
+INFO: judges per criterion: {2: 1778}
+Config: unsure=exclude  pass_frac=0.75  disagree_frac=0.34
+Questions: 225
+Overall: PASS=113 FAIL=31 DISAGREE=81  mean_pass_frac=0.6072
+Seed_Type=dynamic_generic: PASS=1 FAIL=2 DISAGREE=1  mean_pass_frac=0.5938
+Seed_Type=dynamic_reg: PASS=112 FAIL=29 DISAGREE=80  mean_pass_frac=0.6075
+QA_Type=type1: PASS=113 FAIL=31 DISAGREE=81  mean_pass_frac=0.6072
+-- RocketEval type2 across 16 shard(s)
+  -r01: 17 rows -> generation_outputs/elm-docs-type2-v8-b3-r01
+  -r02: 17 rows -> generation_outputs/elm-docs-type2-v8-b3-r02
+  -r03: 17 rows -> generation_outputs/elm-docs-type2-v8-b3-r03
+  -r04: 16 rows -> generation_outputs/elm-docs-type2-v8-b3-r04
+  -r05: 16 rows -> generation_outputs/elm-docs-type2-v8-b3-r05
+  -r06: 16 rows -> generation_outputs/elm-docs-type2-v8-b3-r06
+  -r07: 16 rows -> generation_outputs/elm-docs-type2-v8-b3-r07
+  -r08: 16 rows -> generation_outputs/elm-docs-type2-v8-b3-r08
+  -r09: 16 rows -> generation_outputs/elm-docs-type2-v8-b3-r09
+  -r10: 16 rows -> generation_outputs/elm-docs-type2-v8-b3-r10
+  -r11: 16 rows -> generation_outputs/elm-docs-type2-v8-b3-r11
+  -r12: 16 rows -> generation_outputs/elm-docs-type2-v8-b3-r12
+  -r13: 16 rows -> generation_outputs/elm-docs-type2-v8-b3-r13
+  -r14: 16 rows -> generation_outputs/elm-docs-type2-v8-b3-r14
+  -r15: 16 rows -> generation_outputs/elm-docs-type2-v8-b3-r15
+  -r16: 16 rows -> generation_outputs/elm-docs-type2-v8-b3-r16
+  round-trip verified: 259 rows, 19 columns, order preserved
+Merged 16 shards -> generation_outputs/elm-docs-type2-v8-b3/rocketeval/judgments.tsv
+  judgement rows: 4480  questions: 259  judges: 2
+INFO: judges per criterion: {2: 2240}
+Config: unsure=exclude  pass_frac=0.75  disagree_frac=0.34
+Questions: 259
+Overall: PASS=133 FAIL=56 DISAGREE=70  mean_pass_frac=0.6539
+Seed_Type=dynamic_generic: PASS=0 FAIL=3 DISAGREE=1  mean_pass_frac=0.3333
+Seed_Type=dynamic_reg: PASS=133 FAIL=53 DISAGREE=69  mean_pass_frac=0.6589
+QA_Type=type2: PASS=133 FAIL=56 DISAGREE=70  mean_pass_frac=0.6539
+-- RocketEval type3 across 16 shard(s)
+  -r01: 19 rows -> generation_outputs/elm-docs-type3-v8-b3-r01
+  -r02: 19 rows -> generation_outputs/elm-docs-type3-v8-b3-r02
+  -r03: 19 rows -> generation_outputs/elm-docs-type3-v8-b3-r03
+  -r04: 19 rows -> generation_outputs/elm-docs-type3-v8-b3-r04
+  -r05: 18 rows -> generation_outputs/elm-docs-type3-v8-b3-r05
+  -r06: 18 rows -> generation_outputs/elm-docs-type3-v8-b3-r06
+  -r07: 18 rows -> generation_outputs/elm-docs-type3-v8-b3-r07
+  -r08: 18 rows -> generation_outputs/elm-docs-type3-v8-b3-r08
+  -r09: 18 rows -> generation_outputs/elm-docs-type3-v8-b3-r09
+  -r10: 18 rows -> generation_outputs/elm-docs-type3-v8-b3-r10
+  -r11: 18 rows -> generation_outputs/elm-docs-type3-v8-b3-r11
+  -r12: 18 rows -> generation_outputs/elm-docs-type3-v8-b3-r12
+  -r13: 18 rows -> generation_outputs/elm-docs-type3-v8-b3-r13
+  -r14: 18 rows -> generation_outputs/elm-docs-type3-v8-b3-r14
+  -r15: 18 rows -> generation_outputs/elm-docs-type3-v8-b3-r15
+  -r16: 18 rows -> generation_outputs/elm-docs-type3-v8-b3-r16
+  round-trip verified: 292 rows, 19 columns, order preserved
+Merged 16 shards -> generation_outputs/elm-docs-type3-v8-b3/rocketeval/judgments.tsv
+  judgement rows: 5436  questions: 292  judges: 2
+INFO: judges per criterion: {2: 2718}
+Config: unsure=exclude  pass_frac=0.75  disagree_frac=0.34
+Questions: 292
+Overall: PASS=139 FAIL=91 DISAGREE=62  mean_pass_frac=0.6611
+Seed_Type=dynamic_generic: PASS=1 FAIL=2 DISAGREE=1  mean_pass_frac=0.5278
+Seed_Type=dynamic_reg: PASS=138 FAIL=89 DISAGREE=61  mean_pass_frac=0.6630
+QA_Type=type3: PASS=139 FAIL=91 DISAGREE=62  mean_pass_frac=0.6611
+
+-- dedup across: v8-b1,v8-b2,v8-b3
+Loaded 2530 rows from 9 folder(s)
+Batch  QA_Type
+v8-b1  type1      299
+       type2      326
+       type3      367
+v8-b2  type1      226
+       type2      258
+       type3      278
+v8-b3  type1      225
+       type2      259
+       type3      292
+Exact QID duplicates: 0
+Near-duplicate question pairs, cumulative at each threshold:
+  >=   50%:     215 total,       9 cross-batch,      24 cross-type
+  >=   60%:      52 total,       1 cross-batch,       4 cross-type
+  >=   70%:       8 total,       0 cross-batch,       1 cross-type
+  >=   80%:       2 total,       0 cross-batch,       0 cross-type
+  >=   90%:       1 total,       0 cross-batch,       0 cross-type
+Near-duplicates dropped at >= 60% (scope cross_batch, cross_type False): 0
+FINAL: 2530 rows in, 2530 rows out
+Batch  QA_Type
+v8-b1  type1      299
+       type2      326
+       type3      367
+v8-b2  type1      226
+       type2      258
+       type3      278
+v8-b3  type1      225
+       type2      259
+       type3      292
+Wrote generation_outputs/combined_corpus.tsv (2530 rows, round-trip verified)
+
+-- cumulative count
+combined corpus: 2530 rows, all QIDs distinct
+  v8-b1 type1                  133 counted of   299 cleaned
+  v8-b1 type2                  163 counted of   326 cleaned
+  v8-b1 type3                  181 counted of   367 cleaned
+  v8-b2 type1                  124 counted of   226 cleaned
+  v8-b2 type2                  128 counted of   258 cleaned
+  v8-b2 type3                  125 counted of   278 cleaned
+  v8-b3 type1                  112 counted of   225 cleaned
+  v8-b3 type2                  133 counted of   259 cleaned
+  v8-b3 type3                  138 counted of   292 cleaned
+track=reg  pass_frac=0.75  TOTAL=1237
+
+  BATCH 3 DONE.  cumulative reg = 1237 / 900
+
+TARGET REACHED after 3 batch(es).
+
+==================================================================
+  batches run: v8-b1 v8-b2 v8-b3
+  cumulative reg = 1237, target 900
+  combined corpus: generation_outputs/combined_corpus.tsv
+==================================================================
+
+wrote generation_outputs/combined_type1.tsv  750 rows, 3 batch(es), round-trip verified
+wrote generation_outputs/combined_type2.tsv  843 rows, 3 batch(es), round-trip verified
+wrote generation_outputs/combined_type3.tsv  937 rows, 3 batch(es), round-trip verified
+
+Next, one run_eval.sh per (type, model, solver prompt) over those files.
+Type 3 needs -e type3-causal-check. Results join back positionally, so the
+split files carry QID and Batch for the analysis frame.

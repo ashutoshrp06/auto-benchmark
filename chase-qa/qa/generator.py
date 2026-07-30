@@ -9,6 +9,8 @@ import ast
 import operator
 import tiktoken # type: ignore
 import pdb
+from utils import sample_scenarios, process_naive
+import sys
 
 import openai # type: ignore
 import anthropic # type: ignore
@@ -43,8 +45,17 @@ def build_parser():
 	parser.add_argument('-frequency_penalty', type=float, default=0.0, help='positive values decreases model\'s likelihood to repeat same line verbatim')
 	parser.add_argument('-reg_pregen_max_attempts', type=int, default=3, help='Max correction attempts in reg_pregen_retry before discard')
 	parser.add_argument('-numeric_pregen_max_attempts', type=int, default=3, help='Max regeneration attempts in numeric_pregen_retry before discard')
-
+	parser.add_argument('-topic_pregen_max_attempts', type=int, default=3, help='Max regeneration attempts in topic_pregen_retry before discard')
 	parser.add_argument('-num_iters', type=int, default=5, help='number of iterations to run')
+	parser.add_argument('-prior_scenarios', type=str, default='',
+	                    help='Comma-separated scenarios.tsv paths from earlier batches. '
+	                         'Their Persona/Environment pairs join the similarity '
+	                         'comparison but are never emitted, so a later batch does '
+	                         'not regenerate an earlier one.')
+	parser.add_argument('-emit_scope', type=str, default='all', choices=['all', 'new'],
+	                    help="Which scenarios to write. 'all' writes seeds plus "
+	                         "expansions, the v7 behaviour. 'new' writes only rows "
+	                         "added by expansion, for batches after the first.")
 
 	return parser
 
@@ -66,6 +77,19 @@ def jaccard_similarity(set1, set2):
 def programmatic_scenario_generation(model, prompt_type, num_iters, max_tokens, temperature, stop, tik_encoding):
 	with open("reg_clauses.json", "r") as f:
 		reg_clauses = json.load(f)
+
+	# Clause text back to area id, for exemplars. dynamic_reg rows keep the text
+	# but not the id. Built once here rather than per call.
+	reg_index = {}
+	for _k, _v in reg_clauses.items():
+		_v = str(_v).strip()
+		if not _v:
+			continue
+		if _v in reg_index:
+			print("WARNING: reg_clauses.json entries {} and {} have identical "
+			      "text; exemplar area id is ambiguous".format(reg_index[_v], _k))
+			continue
+		reg_index[_v] = _k
 
 	pred_ls = [
 		[1, "Retail client seeking pension consolidation advice", "FCA COBS 19 pension transfer rules", 0],
@@ -89,24 +113,70 @@ def programmatic_scenario_generation(model, prompt_type, num_iters, max_tokens, 
 	for gr in generic_rows:
 		pred_ls.append([gr["id"], gr["persona"], gr["environment"], 0, "", gr["numerics"], gr["seed_type"]])
 
+	# Fail before any spend if the exemplar file cannot survive the parser.
+	_lines = open("annotated_scenarios.txt").read().strip().split("\n")
+	_n = _g = 0
+	_bad = []
+	for _l in range(len(_lines)):
+		if _lines[_l][:12] != "USER_PERSONA":
+			continue
+		_n += 1
+		_who = _lines[_l][:60]
+		if not (_l + 1 < len(_lines) and _lines[_l + 1][:13] == "COLLECTION_OF"):
+			_bad.append("no COLLECTION_OF_DOCS after: " + _who); continue
+		if not (_l + 2 < len(_lines) and _lines[_l + 2][:18] == "REGULATORY_AREA_ID"):
+			_bad.append("no REGULATORY_AREA_ID after: " + _who); continue
+		_raw = _lines[_l + 2].split(":")[1].strip()
+		if _raw.upper() == "GENERIC":
+			_g += 1
+		elif _raw not in reg_clauses:
+			_bad.append("REGULATORY_AREA_ID {} absent from reg_clauses.json, after: {}".format(_raw, _who))
+	for _l in _lines:
+		if _l[:12] in ("USER_PERSONA", "COLLECTION_O") and ":" not in _l:
+			_bad.append("no colon on: " + _l[:60])
+	if _n == 0:
+		_bad.append("no USER_PERSONA entries")
+	if _g == 0:
+		_bad.append("no GENERIC entry, so the model has no template for a generic scenario")
+	if _bad:
+		sys.exit("ERROR: annotated_scenarios.txt is unusable:\n  " + "\n  ".join(_bad))
+	print("exemplars: {} entries, {} generic, all parseable".format(_n, _g))
+
+	# Persona/Environment from earlier batches. Compared against, never emitted.
+	prior_pairs = []
+	for _p in [x.strip() for x in args.prior_scenarios.split(",") if x.strip()]:
+		_pdf = pd.read_csv(_p, sep='\t', dtype=str, keep_default_na=False)
+		for _c in ('Persona', 'Environment'):
+			if _c not in _pdf.columns:
+				sys.exit("ERROR: {} has no {} column".format(_p, _c))
+		prior_pairs.extend(zip(_pdf['Persona'], _pdf['Environment']))
+	if prior_pairs:
+		print("comparing against {} prior scenario(s)".format(len(prior_pairs)))
+
+	n_seeded = len(pred_ls)
 
 	tot_ip_tokens = 0
 	tot_op_tokens = 0
 
 	pred_id = max(row[0] for row in pred_ls)
 
-	# Write seeded scenarios immediately so num_iters=0 still produces a valid scenarios.tsv
-	pred_df = pd.DataFrame(pred_ls, columns = ['ID', 'Persona', 'Environment', 'Similarity', 'Reg_Text', 'Numerics', 'Seed_Type'])
-	pred_df.to_csv(args.out_dir + "/scenarios.tsv", sep = '\t', index = None)
+	_cols = ['ID', 'Persona', 'Environment', 'Similarity', 'Reg_Text', 'Numerics', 'Seed_Type']
+
+	def write_scenarios():
+		_rows = pred_ls if args.emit_scope == 'all' else pred_ls[n_seeded:]
+		pd.DataFrame(_rows, columns=_cols).to_csv(args.out_dir + "/scenarios.tsv", sep='\t', index=None)
+
+	write_scenarios()
 
 	for i in range(num_iters):
 		if i < 20:
 			with open("annotated_scenarios.txt", "r") as f:
 				sampled_scenarios = f.read()
 		else:
-			sampled_scenarios = sample_scenarios(pred_ls)
+			sampled_scenarios = sample_scenarios(pred_ls, reg_index=reg_index)
 
-		prompt, sys_prompt = get_generator_prompt(prompt_type, question=sampled_scenarios)
+		area_list_text = "\n".join(f"{row[0]}. {row[2]}" for row in pred_ls[:10])
+		prompt, sys_prompt = get_generator_prompt(prompt_type, question=(sampled_scenarios, area_list_text))
 
 		og_pred = model.predict(prompt, sys_prompt, max_tokens, temperature, 1, stop)
 
@@ -123,24 +193,41 @@ def programmatic_scenario_generation(model, prompt_type, num_iters, max_tokens, 
 		lines = og_pred.strip().split("\n")
 		for l in range(len(lines)):
 			if lines[l][:12] == "USER_PERSONA":
-				persona = lines[l].split(":")[1].strip()
-				if lines[l+1][:13] == "COLLECTION_OF":
-					env = lines[l+1].split(":")[1].strip()
+				persona = lines[l].split(":", 1)[1].strip()
+				env = None
+				area_id = None
+				if l+1 < len(lines) and lines[l+1][:13] == "COLLECTION_OF":
+					env = lines[l+1].split(":", 1)[1].strip()
+				if l+2 < len(lines) and lines[l+2][:18] == "REGULATORY_AREA_ID":
+					raw_id = lines[l+2].split(":")[1].strip()
+					if raw_id.upper() == "GENERIC":
+						area_id = "GENERIC"
+					else:
+						try:
+							int(raw_id)
+							area_id = raw_id
+						except ValueError:
+							area_id = None
+
+				if env is None or area_id is None:
+					continue
+
 				avg_sim = 0
-				for j in range(len(pred_ls)):
-					prev_per = pred_ls[j][1]
-					prev_env = pred_ls[j][2]
+				for prev_per, prev_env in [(r[1], r[2]) for r in pred_ls] + prior_pairs:
 					sim1 = jaccard_similarity(set(persona.lower().split()), set(prev_per.lower().split()))
 					sim2 = jaccard_similarity(set(env.lower().split()), set(prev_env.lower().split()))
 					cur_sim = (sim1 + sim2)/2
 					if cur_sim > avg_sim:
 						avg_sim = cur_sim
 				if avg_sim < 60:
-					pred_ls.append([pred_id+1, persona, env, avg_sim, "", "", "dynamic"])
-					pred_id += 1
+					if area_id == "GENERIC":
+						pred_ls.append([pred_id+1, persona, env, avg_sim, "", "", "dynamic_generic"])
+						pred_id += 1
+					elif area_id in reg_clauses:
+						pred_ls.append([pred_id+1, persona, env, avg_sim, reg_clauses[area_id], "", "dynamic_reg"])
+						pred_id += 1
 
-		pred_df = pd.DataFrame(pred_ls, columns = ['ID', 'Persona', 'Environment', 'Similarity', 'Reg_Text', 'Numerics', 'Seed_Type'])
-		pred_df.to_csv(args.out_dir + "/scenarios.tsv", sep = '\t', index = None)
+		write_scenarios()
 
 		i += 1
 		print("Completed {} / {}...".format(i, num_iters), end = '\r', flush = True)
@@ -180,6 +267,21 @@ def reg_pregen_grounding_check(args, model, ques, reg_text, answer):
 	corrected_point = strip_quotes(corrected_point)
 
 	return False, flagged_point, corrected_point
+
+def topic_adherence_check(args, model, question, persona, env, reg_text):
+	prompt, sys_prompt = get_verification_prompt("topic_adherence", params=(question, persona, env, reg_text))
+	og_pred = model.predict(prompt, sys_prompt, args.max_tokens, args.temperature, 1, args.stop)
+	on_topic = False
+	if "true" in og_pred.split("Reason")[0].split("On_Topic:")[1].lower():
+		on_topic = True
+	with open(args.out_dir + "/topic_pregen_logs.txt", "a") as f:
+		f.write("Persona: " + str(persona) + "\n")
+		f.write("Environment: " + str(env) + "\n")
+		f.write("Question: " + str(question) + "\n\n")
+		f.write("Prediction:\n" + og_pred + "\n")
+		f.write("On_Topic: " + str(on_topic) + "\n")
+		f.write("---------------------------------------------------------\n")
+	return on_topic
 
 
 def reg_pregen_retry(args, model, ques, reg_text, answer, docs_info, max_attempts=3):
@@ -330,7 +432,7 @@ def parse_qa_response(og_pred):
 	for j in range(len(resp)):
 		if resp[j][:8] == "Question":
 			try:
-				question = resp[j].split(":")[1].strip()
+				question = resp[j].split(":", 1)[1].strip()
 				if question == "" and j + 1 < len(resp):
 					question = resp[j+1]
 			except IndexError:
@@ -351,12 +453,13 @@ def parse_qa_response(og_pred):
 			break
 	return question, answer, docs_info
 
-def numeric_pregen_retry(args, model, prompt_type, persona, env, context_text, seed_type, max_tokens, temperature, stop, tik_encoding, max_attempts=3):
+def numeric_pregen_retry(args, model, prompt_type, persona, env, context_text, seed_type, max_tokens, temperature, stop, tik_encoding, max_attempts=3, prior_questions=None):
+	if prior_questions is None:
+		prior_questions = []
 	tot_ip = 0
 	tot_op = 0
-
 	for attempt in range(1, max_attempts + 1):
-		prompt, sys_prompt = get_generator_prompt(prompt_type, question=(persona, env, context_text, seed_type))
+		prompt, sys_prompt = get_generator_prompt(prompt_type, question=(persona, env, context_text, seed_type, prior_questions))
 
 		og_pred = model.predict(prompt, sys_prompt, max_tokens, temperature, 1, stop)
 
@@ -377,7 +480,7 @@ def numeric_pregen_retry(args, model, prompt_type, persona, env, context_text, s
 				f.write("---------------------------------------------------------\n")
 			continue
 
-		if seed_type != "generic":
+		if seed_type not in ("generic", "dynamic_generic"):
 			return question, answer, docs_info, False, tot_ip, tot_op
 
 		grounded, reason = numeric_pregen_grounding_check(og_pred)
@@ -420,17 +523,24 @@ def programmatic_qa_generation(scenarios_data, model, prompt_type, num_iters, ma
 		group = []
 
 		for xy in range(num_iters):
-		
 			context_text = reg_text if str(reg_text).strip() not in ("", "nan") else numerics
-			question, answer, docs_info, discard_numeric, ip_tokens, op_tokens = numeric_pregen_retry(args, model, prompt_type, persona, env, context_text, seed_type, max_tokens, temperature, stop, tik_encoding, max_attempts=args.numeric_pregen_max_attempts)
-
-			tot_ip_tokens += ip_tokens
-			tot_op_tokens += op_tokens
-
-			if discard_numeric:
-				print("Completed {} / {}... (discarded, numeric grounding failed)".format(i+1, len(scenarios_data)), end = '\r', flush = True)
+			accepted = False
+			for topic_attempt in range(1, args.topic_pregen_max_attempts + 1):
+				question, answer, docs_info, discard_numeric, ip_tokens, op_tokens = numeric_pregen_retry(args, model, prompt_type, persona, env, context_text, seed_type, max_tokens, temperature, stop, tik_encoding, max_attempts=args.numeric_pregen_max_attempts, prior_questions=group)
+				tot_ip_tokens += ip_tokens
+				tot_op_tokens += op_tokens
+				if discard_numeric:
+					break
+				if topic_adherence_check(args, model, question, persona, env, reg_text):
+					accepted = True
+					break
+				with open(args.out_dir + "/topic_pregen_logs.txt", "a") as f:
+					f.write("RETRY " + str(topic_attempt) + "/" + str(args.topic_pregen_max_attempts) + ": question off-topic, regenerating.\n")
+					f.write("---------------------------------------------------------\n")
+			if discard_numeric or not accepted:
+				reason = "numeric grounding failed" if discard_numeric else "topic adherence failed after retries"
+				print("Completed {} / {}... (discarded, {})".format(i+1, len(scenarios_data), reason), end = '\r', flush = True)
 				continue
-
 			main_sim = 0
 			for prev_q in group:
 				sim = jaccard_similarity(set(prev_q.lower().split()), set(question.lower().split()))
@@ -518,21 +628,44 @@ def programmatic_adversarial_generation(questions_data, model, prompt_type, num_
 				f.write(og_pred + "\n\n")
 				f.write("------------------------------------------------------------------\n\n")
 
+			# All four persist across iterations. Without the reset a malformed
+			# response silently reuses the previous iteration's parse and the row
+			# gets a duplicated adversarial question with no error anywhere.
+			# lno alone is not enough: resp[j:None] slices to the end rather than
+			# failing, so the explicit None guards below are what force a drop.
+			adv_question = None
+			adv_answer = None
+			adv_docs_info = None
+			lno = None
+
 			resp = og_pred.strip().split("\n")
 			for j in range(len(resp)):
 				if resp[j][:8] == "Question":
-					adv_question = resp[j].split(":")[1].strip()
-					if adv_question == "":
-						adv_question = resp[j+1]
+					parts = resp[j].split(":", 1)
+					cand = parts[1].strip() if len(parts) > 1 else ""
+					if cand == "" and j + 1 < len(resp):
+						cand = resp[j+1].strip()
+					adv_question = cand if cand != "" else None
 				if resp[j][:6] == "Answer":
 					for zj in range(len(resp)):
 						if resp[zj][:16] == "Document 1 Title":
 							lno = zj
 							break
-					adv_answer = "\n".join(resp[j:lno]).split("Answer:")[1].strip()
+					if lno is not None:
+						seg = "\n".join(resp[j:lno]).split("Answer:")
+						if len(seg) > 1:
+							adv_answer = seg[1].strip()
 				if resp[j][:10] == "Document 1":
 					adv_docs_info = "\n".join(resp[j:])
 					break
+
+			if adv_question is None or adv_answer is None or adv_docs_info is None:
+				with open(args.out_dir + "/logs.txt", "a") as f:
+					f.write("DROPPED adversarial iteration {} for ID {}: unparsable response (question={}, answer={}, docs={}).\n".format(
+						num_loops, id1, adv_question is not None, adv_answer is not None, adv_docs_info is not None))
+					f.write("------------------------------------------------------------------\n\n")
+				num_loops += 1
+				continue
 
 			adv_ques_ls.append(adv_question)
 			adv_ans_ls.append(adv_answer)
@@ -609,11 +742,9 @@ def programmatic_doc_generation(questions_data, model, prompt_type, max_tokens, 
 			cur_ans_original = ans[idx]
 			cur_docs_info = strip_titles(docs_info[idx])
 			
-			adv_ques_ls = ques.copy()
-			adv_ques_ls.remove(cur_ques)
-			adv_ans_ls = ans.copy()
-			adv_ans_ls.remove(cur_ans_original)
-			adv_ans_ls = [strip_conclusion(a) for a in adv_ans_ls]
+			others = [k for k in range(len(ques)) if k != idx]
+			adv_ques_ls = [ques[k] for k in others]
+			adv_ans_ls = [strip_conclusion(ans[k]) for k in others]
 
 			cur_ans = strip_conclusion(cur_ans_original)
 

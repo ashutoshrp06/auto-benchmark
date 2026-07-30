@@ -1,0 +1,85 @@
+{
+  "mode": "measured",
+  "threshold": 0.75,
+  "shift": 5.0,
+  "floor": 5.0,
+  "track": "reg",
+  "pass_frac": 0.75,
+  "aggregation": "max across solver models",
+  "shift_provisional": true,
+  "accuracy": {
+    "type1": {
+      "per_model": {
+        "outputs/type1-gpt55-v7-noirrelevant-eval": {
+          "correct": 30,
+          "n": 58,
+          "accuracy": 0.5172
+        },
+        "outputs/type1-gemini31pro-v7-noirrelevant-eval": {
+          "correct": 32,
+          "n": 58,
+          "accuracy": 0.5517
+        }
+      },
+      "driver": "outputs/type1-gemini31pro-v7-noirrelevant-eval",
+      "accuracy": 0.5517,
+      "n_after_filters": 58,
+      "corpus_n": 134,
+      "n_disagree_in_mask": 0,
+      "disagree_frac": 0.34
+    },
+    "type2": {
+      "per_model": {
+        "outputs/type2-gpt55-v7-noirrelevant-eval": {
+          "correct": 44,
+          "n": 87,
+          "accuracy": 0.5057
+        },
+        "outputs/type2-gemini31pro-v7-noirrelevant-eval": {
+          "correct": 54,
+          "n": 87,
+          "accuracy": 0.6207
+        }
+      },
+      "driver": "outputs/type2-gemini31pro-v7-noirrelevant-eval",
+      "accuracy": 0.6207,
+      "n_after_filters": 87,
+      "corpus_n": 198,
+      "n_disagree_in_mask": 0,
+      "disagree_frac": 0.34
+    },
+    "type3": {
+      "per_model": {
+        "outputs/type3-gpt55-v7-noirrelevant-eval": {
+          "correct": 49,
+          "n": 97,
+          "accuracy": 0.5052
+        },
+        "outputs/type3-gemini31pro-v7-noirrelevant-eval": {
+          "correct": 45,
+          "n": 97,
+          "accuracy": 0.4639
+        }
+      },
+      "driver": "outputs/type3-gpt55-v7-noirrelevant-eval",
+      "accuracy": 0.5052,
+      "n_after_filters": 97,
+      "corpus_n": 172,
+      "n_disagree_in_mask": 0,
+      "disagree_frac": 0.34
+    }
+  },
+  "weights_in": {
+    "type1": 33.3,
+    "type2": 33.3,
+    "type3": 33.4
+  },
+  "weights_out": {
+    "type1": 33.3,
+    "type2": 33.3,
+    "type3": 33.4
+  },
+  "log": [
+    "no type at or above threshold 0.750; weights unchanged"
+  ]
+}

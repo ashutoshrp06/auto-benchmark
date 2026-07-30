@@ -1,29 +1,59 @@
 USER_PERSONA: Retail client seeking pension consolidation advice
 COLLECTION_OF_DOCS: FCA COBS 19 pension transfer rules
+REGULATORY_AREA_ID: 1
 
 USER_PERSONA: First-time investor consulting a financial adviser
 COLLECTION_OF_DOCS: FCA Consumer Duty (PRIN 2A) and COBS 4 communication rules
+REGULATORY_AREA_ID: 2
+
+USER_PERSONA: Higher-rate taxpayer deciding where additional monthly savings should go, workplace pension top-up or a stocks & shares ISA
+COLLECTION_OF_DOCS: Adviser computing net effective return after tax relief on the pension side vs tax-free growth on the ISA side
+REGULATORY_AREA_ID: GENERIC
 
 USER_PERSONA: Client approaching retirement reviewing drawdown options
 COLLECTION_OF_DOCS: FCA COBS 9.2 suitability requirements and HMRC PTM056510 money purchase annual allowance rules
+REGULATORY_AREA_ID: 3
 
 USER_PERSONA: Client weighing long-term care funding options against their pension
 COLLECTION_OF_DOCS: FCA COBS 16.6 communications on long-term care insurance and drawdown pensions
+REGULATORY_AREA_ID: 4
+
+USER_PERSONA: Retiree comparing guaranteed annuity quotes against remaining pot value
+COLLECTION_OF_DOCS: Adviser computing guaranteed income for life across provider quotes with different escalation/guarantee terms
+REGULATORY_AREA_ID: GENERIC
 
 USER_PERSONA: Homebuyer seeking mortgage affordability advice
 COLLECTION_OF_DOCS: FCA MCOB 11.6 responsible lending and affordability assessment rules
+REGULATORY_AREA_ID: 5
 
 USER_PERSONA: High-net-worth individual seeking estate planning strategies
 COLLECTION_OF_DOCS: HMRC inheritance tax nil-rate band rules (gov.uk) and FCA COBS 9.2 suitability requirements for advisers
+REGULATORY_AREA_ID: 6
+
+USER_PERSONA: Mid-career client with a stated moderate risk tolerance, existing multi-asset portfolio
+COLLECTION_OF_DOCS: Adviser reviewing whether current asset allocation matches the client's risk profile
+REGULATORY_AREA_ID: GENERIC
 
 USER_PERSONA: Individual considering equity release on their property
 COLLECTION_OF_DOCS: FCA MCOB 8 and MCOB 9 equity release advising and disclosure rules
+REGULATORY_AREA_ID: 7
 
 USER_PERSONA: Parent planning children's education savings
 COLLECTION_OF_DOCS: FCA COBS 9 suitability and COBS 4 disclosure rules for Junior ISAs
+REGULATORY_AREA_ID: 8
+
+USER_PERSONA: Client holding an onshore investment bond, wants a lump sum without triggering a chargeable event
+COLLECTION_OF_DOCS: Adviser calculating the 5% cumulative tax-deferred withdrawal allowance and unused allowance carry-forward
+REGULATORY_AREA_ID: GENERIC
 
 USER_PERSONA: Small business owner setting up workplace pension schemes
 COLLECTION_OF_DOCS: Pensions Act 2008 auto-enrolment duties and FCA workplace pension default fund charge cap rules
+REGULATORY_AREA_ID: 9
 
 USER_PERSONA: Investor evaluating cryptoasset investment products
 COLLECTION_OF_DOCS: FCA PS23/6 cryptoasset financial promotion rules
+REGULATORY_AREA_ID: 10
+
+USER_PERSONA: Client with a young family, existing life cover from a previous employer scheme, new mortgage
+COLLECTION_OF_DOCS: Adviser assessing whether existing cover meets income-replacement and mortgage-payoff need
+REGULATORY_AREA_ID: GENERIC
