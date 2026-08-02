@@ -1,0 +1,208 @@
+cleaned/poll columns: ['Root_ID', 'Question_No', 'Persona', 'Environment', 'Question', 'Answer', 'Ans_Points', 'Doc_Ans_Points', 'Rel_Docs_List', 'Adv_Question', 'Adv_Answer', 'Adv_Ans_Pts', 'Adv_Doc_Ans_Pts', 'Adv_Docs_List', 'Reg_Text', 'Numerics', 'Seed_Type', 'QID', 'Documents', 'Pass_Frac', 'No_Majority_Frac', 'N_Criteria']
+criterion columns: ['Root_ID', 'Question_No', 'QA_Type', 'Seed_Type', 'Criterion_No', 'Consensus', 'Mean_Score', 'N_Judges', 'Non_Unanimous', 'Criterion']
+======================================================================
+SECTION 1+2: core join, PASS/NOCON/FAIL x model x type, + FAIL cell size control
+======================================================================
+
+--- type1 n=714 reg=600 verdicts={'PASS': 369, 'NOCON': 241, 'FAIL': 104} ---
+  gpt55   all  PASS  62.3% (n= 369)  NOCON  54.4% (n= 241)  FAIL  46.2% (n= 104)
+  gpt55   reg  PASS  58.5% (n= 306)  NOCON  51.4% (n= 210)  FAIL  46.4% (n=  84)
+  gemini  all  PASS  65.3% (n= 369)  NOCON  55.2% (n= 241)  FAIL  33.7% (n= 104)
+  gemini  reg  PASS  62.1% (n= 306)  NOCON  54.3% (n= 210)  FAIL  34.5% (n=  84)
+
+--- type2 n=770 reg=664 verdicts={'PASS': 422, 'NOCON': 179, 'FAIL': 169} ---
+  gpt55   all  PASS  58.8% (n= 422)  NOCON  52.5% (n= 179)  FAIL  57.4% (n= 169)
+  gpt55   reg  PASS  53.2% (n= 363)  NOCON  51.6% (n= 161)  FAIL  54.3% (n= 140)
+  gemini  all  PASS  63.3% (n= 422)  NOCON  50.8% (n= 179)  FAIL  51.5% (n= 169)
+  gemini  reg  PASS  59.2% (n= 363)  NOCON  50.3% (n= 161)  FAIL  49.3% (n= 140)
+
+--- type3 n=812 reg=709 verdicts={'PASS': 370, 'FAIL': 244, 'NOCON': 198} ---
+  gpt55   all  PASS  55.1% (n= 370)  NOCON  43.4% (n= 198)  FAIL  42.6% (n= 244)
+  gpt55   reg  PASS  55.4% (n= 332)  NOCON  44.7% (n= 179)  FAIL  41.9% (n= 198)
+  gemini  all  PASS  46.2% (n= 370)  NOCON  36.4% (n= 198)  FAIL  31.1% (n= 244)
+  gemini  reg  PASS  45.5% (n= 332)  NOCON  36.9% (n= 179)  FAIL  29.3% (n= 198)
+
+======================================================================
+SECTION 2b: gradient significance, PASS-vs-NOCON and NOCON-vs-FAIL, reg track
+======================================================================
+comparison                        n1      p1     n2      p2      diff     raw p
+type1_gpt55_PASSvNOCON           306   58.5%    210   51.4%     +7.1pp    0.1124
+type1_gpt55_NOCONvFAIL           210   51.4%     84   46.4%     +5.0pp    0.4386
+type1_gemini_PASSvNOCON          306   62.1%    210   54.3%     +7.8pp    0.0766
+type1_gemini_NOCONvFAIL          210   54.3%     84   34.5%    +19.8pp    0.0022
+type2_gpt55_PASSvNOCON           363   53.2%    161   51.6%     +1.6pp    0.7326
+type2_gpt55_NOCONvFAIL           161   51.6%    140   54.3%     -2.7pp    0.6357
+type2_gemini_PASSvNOCON          363   59.2%    161   50.3%     +8.9pp    0.0575
+type2_gemini_NOCONvFAIL          161   50.3%    140   49.3%     +1.0pp    0.8592
+type3_gpt55_PASSvNOCON           332   55.4%    179   44.7%    +10.7pp    0.0206
+type3_gpt55_NOCONvFAIL           179   44.7%    198   41.9%     +2.8pp    0.5872
+type3_gemini_PASSvNOCON          332   45.5%    179   36.9%     +8.6pp    0.0603
+type3_gemini_NOCONvFAIL          179   36.9%    198   29.3%     +7.6pp    0.1178
+
+-- Holm correction across these 12 tests --
+type1_gemini_NOCONvFAIL        p=0.0022  needs <0.0042  REJECT (significant)
+type3_gpt55_PASSvNOCON         p=0.0206  needs <0.0045  fail to reject
+type2_gemini_PASSvNOCON        p=0.0575  needs <0.0050  fail to reject
+type3_gemini_PASSvNOCON        p=0.0603  needs <0.0056  fail to reject
+type1_gemini_PASSvNOCON        p=0.0766  needs <0.0063  fail to reject
+type1_gpt55_PASSvNOCON         p=0.1124  needs <0.0071  fail to reject
+type3_gemini_NOCONvFAIL        p=0.1178  needs <0.0083  fail to reject
+type1_gpt55_NOCONvFAIL         p=0.4386  needs <0.0100  fail to reject
+type3_gpt55_NOCONvFAIL         p=0.5872  needs <0.0125  fail to reject
+type2_gpt55_NOCONvFAIL         p=0.6357  needs <0.0167  fail to reject
+type2_gpt55_PASSvNOCON         p=0.7326  needs <0.0250  fail to reject
+type2_gemini_NOCONvFAIL        p=0.8592  needs <0.0500  fail to reject
+
+======================================================================
+SECTION 3: control 1, type3 PASS/FAIL breakdown under BOTH evaluators
+======================================================================
+  gpt55   all  causal-check: PASS  55.1% (n=370)  FAIL  42.6% (n=244)
+  gpt55   all  zero-shot-basic: PASS  67.6% (n=370)  FAIL  59.8% (n=244)
+  gpt55   all  PASS-FAIL gap: causal-check=+12.5pp  zero-shot-basic=+7.7pp
+  gpt55   reg  causal-check: PASS  55.4% (n=332)  FAIL  41.9% (n=198)
+  gpt55   reg  zero-shot-basic: PASS  68.7% (n=332)  FAIL  62.1% (n=198)
+  gpt55   reg  PASS-FAIL gap: causal-check=+13.5pp  zero-shot-basic=+6.6pp
+  gemini  all  causal-check: PASS  46.2% (n=370)  FAIL  31.1% (n=244)
+  gemini  all  zero-shot-basic: PASS  61.6% (n=370)  FAIL  47.1% (n=244)
+  gemini  all  PASS-FAIL gap: causal-check=+15.1pp  zero-shot-basic=+14.5pp
+  gemini  reg  causal-check: PASS  45.5% (n=332)  FAIL  29.3% (n=198)
+  gemini  reg  zero-shot-basic: PASS  61.4% (n=332)  FAIL  48.5% (n=198)
+  gemini  reg  PASS-FAIL gap: causal-check=+16.2pp  zero-shot-basic=+13.0pp
+
+======================================================================
+SECTION 4: discriminative signal, unfiltered vs reg+PASS gap (gemini - gpt55)
+======================================================================
+
+type1: unfiltered gap=+0.00pp (n=714)   reg+PASS gap=+3.59pp (n=306)   widened_by=+3.59pp
+  reg+PASS McNemar: discordant b=57 c=46  p=0.3245
+
+type2: unfiltered gap=+0.78pp (n=770)   reg+PASS gap=+6.06pp (n=363)   widened_by=+5.28pp
+  reg+PASS McNemar: discordant b=72 c=50  p=0.0568
+
+type3: unfiltered gap=-9.24pp (n=812)   reg+PASS gap=-9.94pp (n=332)   widened_by=-0.70pp
+  reg+PASS McNemar: discordant b=45 c=78  p=0.0037
+
+======================================================================
+SECTION 5: structural correlates by verdict, reg track
+======================================================================
+
+===== TYPE 1 =====
+  N_Criteria                   PASS  mean=7.95  n=306
+  N_Criteria                   NOCON mean=7.93  n=210
+  N_Criteria                   FAIL  mean=7.80  n=84
+  Question word count          PASS  mean=56.70  n=306
+  Question word count          NOCON mean=45.94  n=210
+  Question word count          FAIL  mean=43.93  n=84
+  Doc count (Rel_Docs_List)    PASS  mean=2.02  n=306
+  Doc count (Rel_Docs_List)    NOCON mean=2.26  n=210
+  Doc count (Rel_Docs_List)    FAIL  mean=2.21  n=84
+  Seed_Type composition by verdict (full corpus, not reg-filtered):
+Seed_Type    dynamic_generic  dynamic_reg  generic  reg
+Verdict_cat                                            
+FAIL                    18.3         76.0      1.0  4.8
+NOCON                   11.2         83.0      1.7  4.1
+PASS                    15.4         80.8      1.6  2.2
+
+===== TYPE 2 =====
+  N_Criteria                   PASS  mean=8.81  n=363
+  N_Criteria                   NOCON mean=8.70  n=161
+  N_Criteria                   FAIL  mean=8.83  n=140
+  Question word count          PASS  mean=53.53  n=363
+  Question word count          NOCON mean=41.32  n=161
+  Question word count          FAIL  mean=46.08  n=140
+  Doc count (Rel_Docs_List)    PASS  mean=2.88  n=363
+  Doc count (Rel_Docs_List)    NOCON mean=2.82  n=161
+  Doc count (Rel_Docs_List)    FAIL  mean=2.80  n=140
+  Seed_Type composition by verdict (full corpus, not reg-filtered):
+Seed_Type    dynamic_generic  dynamic_reg  generic  reg
+Verdict_cat                                            
+FAIL                    16.0         78.7      1.2  4.1
+NOCON                    9.5         85.5      0.6  4.5
+PASS                    12.3         82.9      1.7  3.1
+
+===== TYPE 3 =====
+  N_Criteria                   PASS  mean=9.27  n=332
+  N_Criteria                   NOCON mean=9.34  n=179
+  N_Criteria                   FAIL  mean=9.32  n=198
+  Question word count          PASS  mean=55.65  n=332
+  Question word count          NOCON mean=49.69  n=179
+  Question word count          FAIL  mean=53.58  n=198
+  Doc count (Rel_Docs_List)    PASS  mean=3.37  n=332
+  Doc count (Rel_Docs_List)    NOCON mean=3.53  n=179
+  Doc count (Rel_Docs_List)    FAIL  mean=3.63  n=198
+  Seed_Type composition by verdict (full corpus, not reg-filtered):
+Seed_Type    dynamic_generic  dynamic_reg  generic  reg
+Verdict_cat                                            
+FAIL                    18.0         78.3      0.8  2.9
+NOCON                    8.6         86.9      1.0  3.5
+PASS                     9.2         86.8      1.1  3.0
+
+======================================================================
+SECTION 6: criterion-level position and heuristic category fail rates (reg track)
+======================================================================
+
+===== TYPE 1 =====
+-- criterion position fail rate, position 1..8 --
+  pos 1: fail_rate=  8.5%  n=600
+  pos 2: fail_rate= 13.5%  n=600
+  pos 3: fail_rate= 11.8%  n=600
+  pos 4: fail_rate= 11.5%  n=600
+  pos 5: fail_rate= 12.2%  n=600
+  pos 6: fail_rate= 10.5%  n=600
+  pos 7: fail_rate= 13.3%  n=600
+  pos 8: fail_rate= 11.9%  n=555
+-- baseline overall consensus fail rate = 11.7% (n=4755) --
+-- heuristic category fail rate vs baseline (NOT mutually exclusive, validate manually before citing) --
+  numeric_precision      fail_rate= 15.3%  gap= +3.7pp  n=797
+  citation_specificity   fail_rate=  9.5%  gap= -2.2pp  n=95
+  causal_reasoning       fail_rate= 10.1%  gap= -1.6pp  n=189
+  coverage_completeness  fail_rate= 11.1%  gap= -0.5pp  n=225
+  conclusion_gate        fail_rate= 18.1%  gap= +6.4pp  n=83
+  untagged/other         fail_rate= 10.9%  n=3494
+
+===== TYPE 2 =====
+-- criterion position fail rate, position 1..9 --
+  pos 1: fail_rate=  6.0%  n=664
+  pos 2: fail_rate= 10.2%  n=664
+  pos 3: fail_rate=  8.7%  n=664
+  pos 4: fail_rate=  9.3%  n=664
+  pos 5: fail_rate= 13.0%  n=664
+  pos 6: fail_rate=  9.5%  n=664
+  pos 7: fail_rate= 12.3%  n=664
+  pos 8: fail_rate=  9.0%  n=664
+  pos 9: fail_rate=  5.2%  n=522
+-- baseline overall consensus fail rate = 9.4% (n=5834) --
+-- heuristic category fail rate vs baseline (NOT mutually exclusive, validate manually before citing) --
+  numeric_precision      fail_rate= 14.6%  gap= +5.2pp  n=233
+  citation_specificity   fail_rate=  5.7%  gap= -3.6pp  n=70
+  causal_reasoning       fail_rate=  8.1%  gap= -1.3pp  n=235
+  coverage_completeness  fail_rate= 10.4%  gap= +1.0pp  n=308
+  conclusion_gate        fail_rate= 13.7%  gap= +4.4pp  n=124
+  untagged/other         fail_rate=  9.1%  n=4932
+
+===== TYPE 3 =====
+-- criterion position fail rate, position 1..10 --
+  pos 1: fail_rate=  9.7%  n=709
+  pos 2: fail_rate= 14.8%  n=709
+  pos 3: fail_rate= 14.4%  n=709
+  pos 4: fail_rate= 10.2%  n=709
+  pos 5: fail_rate=  8.3%  n=709
+  pos 6: fail_rate=  6.8%  n=709
+  pos 7: fail_rate= 10.0%  n=709
+  pos 8: fail_rate=  9.9%  n=709
+  pos 9: fail_rate=  8.5%  n=709
+  pos 10: fail_rate=  5.2%  n=212
+-- baseline overall consensus fail rate = 10.1% (n=6593) --
+-- heuristic category fail rate vs baseline (NOT mutually exclusive, validate manually before citing) --
+  numeric_precision      fail_rate= 18.0%  gap= +7.9pp  n=128
+  citation_specificity   fail_rate= 21.1%  gap=+10.9pp  n=209
+  causal_reasoning       fail_rate=  5.9%  gap= -4.3pp  n=665
+  coverage_completeness  fail_rate= 10.1%  gap= -0.1pp  n=398
+  conclusion_gate        fail_rate= 16.8%  gap= +6.7pp  n=560
+  untagged/other         fail_rate=  9.4%  n=4894
+
+======================================================================
+DONE. Sections 1-4 are the core experiment + controls. Sections 5-6 are
+supporting structural evidence for the write-up, section 6 category tags
+need manual validation before citing as anything beyond a lead.
+======================================================================

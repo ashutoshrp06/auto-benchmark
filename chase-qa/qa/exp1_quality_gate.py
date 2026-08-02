@@ -48,6 +48,7 @@ def parse_list(x):
 
 def mcnemar_exact(b, c):
     """Exact two-sided binomial McNemar test on discordant pairs b, c."""
+    b, c = int(b), int(c)
     n = b + c
     if n == 0:
         return float('nan')
@@ -149,6 +150,65 @@ for t in (1, 2, 3):
                 row.append(f'{c} {ok[sel].mean()*100:5.1f}% (n={n:4d}){flag}' if n else f'{c}    n/a')
             print(f'  {name:7s} {tk:4s} ' + '  '.join(row))
 
+# ============================================================
+# 2b. GRADIENT SIGNIFICANCE: PASS vs NOCON and NOCON vs FAIL
+#     Completes the 3-way gradient claim with real p-values.
+#     Reg track only. Holm-corrected across all 12 tests
+#     (3 types x 2 models x 2 comparisons).
+# ============================================================
+print()
+print('=' * 70)
+print('SECTION 2b: gradient significance, PASS-vs-NOCON and NOCON-vs-FAIL, reg track')
+print('=' * 70)
+
+def two_prop_ztest(n1, x1, n2, x2):
+    """Two-proportion z-test. x1, x2 are counts correct, n1, n2 are sample sizes."""
+    p1, p2 = x1 / n1, x2 / n2
+    pp = (x1 + x2) / (n1 + n2)
+    se = math.sqrt(pp * (1 - pp) * (1 / n1 + 1 / n2))
+    if se == 0:
+        return p1, p2, float('nan'), float('nan')
+    z = (p1 - p2) / se
+    p_val = 2 * (1 - 0.5 * (1 + math.erf(abs(z) / math.sqrt(2))))
+    return p1, p2, z, p_val
+
+gradient_tests = []
+for t in (1, 2, 3):
+    j = comb_frames[t]
+    cat = j.Verdict_cat.values
+    reg = j.is_reg.values
+    for name in ('gpt55', 'gemini'):
+        ok = ok_frames[t][name]
+        cells = {}
+        for c in ('PASS', 'NOCON', 'FAIL'):
+            sel = (cat == c) & reg
+            n = int(sel.sum())
+            x = int(ok[sel].sum())
+            cells[c] = (n, x)
+        n_p, x_p = cells['PASS']
+        n_n, x_n = cells['NOCON']
+        n_f, x_f = cells['FAIL']
+
+        p1, p2, z, p_val = two_prop_ztest(n_p, x_p, n_n, x_n)
+        gradient_tests.append((f'type{t}_{name}_PASSvNOCON', p_val, p1, p2, n_p, n_n))
+
+        p1b, p2b, zb, p_valb = two_prop_ztest(n_n, x_n, n_f, x_f)
+        gradient_tests.append((f'type{t}_{name}_NOCONvFAIL', p_valb, p1b, p2b, n_n, n_f))
+
+print(f'{"comparison":30s} {"n1":>5s} {"p1":>7s}  {"n2":>5s} {"p2":>7s}  {"diff":>8s}  {"raw p":>8s}')
+for label, p_val, p1, p2, n1, n2 in gradient_tests:
+    diff = 100 * (p1 - p2)
+    print(f'{label:30s} {n1:5d} {p1*100:6.1f}%  {n2:5d} {p2*100:6.1f}%  {diff:+7.1f}pp  {p_val:8.4f}')
+
+print()
+print('-- Holm correction across these 12 tests --')
+sorted_tests = sorted(gradient_tests, key=lambda x: x[1])
+n_tests = len(sorted_tests)
+for i, (label, p_val, p1, p2, n1, n2) in enumerate(sorted_tests):
+    thresh = 0.05 / (n_tests - i)
+    verdict = 'REJECT (significant)' if p_val < thresh else 'fail to reject'
+    print(f'{label:30s} p={p_val:.4f}  needs <{thresh:.4f}  {verdict}')
+
 
 # ============================================================
 # 3. CONTROL 1: type3 held-rubric check (causal-check vs zero-shot-basic)
@@ -204,8 +264,8 @@ for t in (1, 2, 3):
     acc_g_filt, acc_p_filt = ok_g[sel].mean(), ok_p[sel].mean()
     gap_filt = 100 * (acc_g_filt - acc_p_filt)
 
-    b = (ok_g[sel] & ~ok_p[sel]).sum()   # gemini right, gpt wrong
-    c = (~ok_g[sel] & ok_p[sel]).sum()   # gpt right, gemini wrong
+    b = int((ok_g[sel] & ~ok_p[sel]).sum())   # gemini right, gpt wrong
+    c = int((~ok_g[sel] & ok_p[sel]).sum())   # gpt right, gemini wrong
     p_val = mcnemar_exact(b, c)
 
     print(f'\ntype{t}: unfiltered gap={gap_unfilt:+.2f}pp (n={len(j)})   '

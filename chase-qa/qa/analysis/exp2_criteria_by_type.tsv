@@ -1,0 +1,7 @@
+qa_type	N_Criteria	count	allowed_fail_at_pf75
+1	7	45	1
+1	8	555	2
+2	8	142	2
+2	9	522	2
+3	9	497	2
+3	10	212	2

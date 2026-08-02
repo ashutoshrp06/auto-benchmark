@@ -1,0 +1,6 @@
+Structural upper bound (disagree_frac=0.34): DISAGREE rows cannot exceed Pass_Frac=0.66.
+This is a ceiling, not a measured value -- do not cite 0.66 itself in the write-up.
+Measured max Pass_Frac among actual DISAGREE rows, per unsure_mode (USE THIS NUMBER):
+  unsure_mode=exclude: measured max = 0.6250  (within 0.66 bound)
+  unsure_mode=zero: measured max = 0.6250  (within 0.66 bound)
+  unsure_mode=half: measured max = 0.6250  (within 0.66 bound)

@@ -1,0 +1,233 @@
+Loaded 192 files, 39830 raw rows.
+  generation_outputs/elm-docs-type1-v9-b1-r01/rocketeval/judgments.tsv : 236 rows
+  generation_outputs/elm-docs-type1-v9-b1-r02/rocketeval/judgments.tsv : 238 rows
+  generation_outputs/elm-docs-type1-v9-b1-r03/rocketeval/judgments.tsv : 238 rows
+  generation_outputs/elm-docs-type1-v9-b1-r04/rocketeval/judgments.tsv : 240 rows
+  generation_outputs/elm-docs-type1-v9-b1-r05/rocketeval/judgments.tsv : 238 rows
+  generation_outputs/elm-docs-type1-v9-b1-r06/rocketeval/judgments.tsv : 238 rows
+  generation_outputs/elm-docs-type1-v9-b1-r07/rocketeval/judgments.tsv : 236 rows
+  generation_outputs/elm-docs-type1-v9-b1-r08/rocketeval/judgments.tsv : 224 rows
+  generation_outputs/elm-docs-type1-v9-b1-r09/rocketeval/judgments.tsv : 218 rows
+  generation_outputs/elm-docs-type1-v9-b1-r10/rocketeval/judgments.tsv : 224 rows
+  generation_outputs/elm-docs-type1-v9-b1-r11/rocketeval/judgments.tsv : 216 rows
+  generation_outputs/elm-docs-type1-v9-b1-r12/rocketeval/judgments.tsv : 220 rows
+  generation_outputs/elm-docs-type1-v9-b1-r13/rocketeval/judgments.tsv : 220 rows
+  generation_outputs/elm-docs-type1-v9-b1-r14/rocketeval/judgments.tsv : 224 rows
+  generation_outputs/elm-docs-type1-v9-b1-r15/rocketeval/judgments.tsv : 220 rows
+  generation_outputs/elm-docs-type1-v9-b1-r16/rocketeval/judgments.tsv : 224 rows
+  generation_outputs/elm-docs-type1-v9-b2-r01/rocketeval/judgments.tsv : 160 rows
+  generation_outputs/elm-docs-type1-v9-b2-r02/rocketeval/judgments.tsv : 144 rows
+  generation_outputs/elm-docs-type1-v9-b2-r03/rocketeval/judgments.tsv : 140 rows
+  generation_outputs/elm-docs-type1-v9-b2-r04/rocketeval/judgments.tsv : 140 rows
+  generation_outputs/elm-docs-type1-v9-b2-r05/rocketeval/judgments.tsv : 144 rows
+  generation_outputs/elm-docs-type1-v9-b2-r06/rocketeval/judgments.tsv : 142 rows
+  generation_outputs/elm-docs-type1-v9-b2-r07/rocketeval/judgments.tsv : 144 rows
+  generation_outputs/elm-docs-type1-v9-b2-r08/rocketeval/judgments.tsv : 142 rows
+  generation_outputs/elm-docs-type1-v9-b2-r09/rocketeval/judgments.tsv : 136 rows
+  generation_outputs/elm-docs-type1-v9-b2-r10/rocketeval/judgments.tsv : 142 rows
+  generation_outputs/elm-docs-type1-v9-b2-r11/rocketeval/judgments.tsv : 142 rows
+  generation_outputs/elm-docs-type1-v9-b2-r12/rocketeval/judgments.tsv : 144 rows
+  generation_outputs/elm-docs-type1-v9-b2-r13/rocketeval/judgments.tsv : 140 rows
+  generation_outputs/elm-docs-type1-v9-b2-r14/rocketeval/judgments.tsv : 136 rows
+  generation_outputs/elm-docs-type1-v9-b2-r15/rocketeval/judgments.tsv : 144 rows
+  generation_outputs/elm-docs-type1-v9-b2-r16/rocketeval/judgments.tsv : 144 rows
+  generation_outputs/elm-docs-type1-v9-b3-r01/rocketeval/judgments.tsv : 222 rows
+  generation_outputs/elm-docs-type1-v9-b3-r02/rocketeval/judgments.tsv : 224 rows
+  generation_outputs/elm-docs-type1-v9-b3-r03/rocketeval/judgments.tsv : 220 rows
+  generation_outputs/elm-docs-type1-v9-b3-r04/rocketeval/judgments.tsv : 220 rows
+  generation_outputs/elm-docs-type1-v9-b3-r05/rocketeval/judgments.tsv : 222 rows
+  generation_outputs/elm-docs-type1-v9-b3-r06/rocketeval/judgments.tsv : 206 rows
+  generation_outputs/elm-docs-type1-v9-b3-r07/rocketeval/judgments.tsv : 206 rows
+  generation_outputs/elm-docs-type1-v9-b3-r08/rocketeval/judgments.tsv : 208 rows
+  generation_outputs/elm-docs-type1-v9-b3-r09/rocketeval/judgments.tsv : 198 rows
+  generation_outputs/elm-docs-type1-v9-b3-r10/rocketeval/judgments.tsv : 208 rows
+  generation_outputs/elm-docs-type1-v9-b3-r11/rocketeval/judgments.tsv : 206 rows
+  generation_outputs/elm-docs-type1-v9-b3-r12/rocketeval/judgments.tsv : 208 rows
+  generation_outputs/elm-docs-type1-v9-b3-r13/rocketeval/judgments.tsv : 208 rows
+  generation_outputs/elm-docs-type1-v9-b3-r14/rocketeval/judgments.tsv : 204 rows
+  generation_outputs/elm-docs-type1-v9-b3-r15/rocketeval/judgments.tsv : 208 rows
+  generation_outputs/elm-docs-type1-v9-b3-r16/rocketeval/judgments.tsv : 206 rows
+  generation_outputs/elm-docs-type1-v9-b4-r01/rocketeval/judgments.tsv : 128 rows
+  generation_outputs/elm-docs-type1-v9-b4-r02/rocketeval/judgments.tsv : 128 rows
+  generation_outputs/elm-docs-type1-v9-b4-r03/rocketeval/judgments.tsv : 124 rows
+  generation_outputs/elm-docs-type1-v9-b4-r04/rocketeval/judgments.tsv : 126 rows
+  generation_outputs/elm-docs-type1-v9-b4-r05/rocketeval/judgments.tsv : 122 rows
+  generation_outputs/elm-docs-type1-v9-b4-r06/rocketeval/judgments.tsv : 128 rows
+  generation_outputs/elm-docs-type1-v9-b4-r07/rocketeval/judgments.tsv : 122 rows
+  generation_outputs/elm-docs-type1-v9-b4-r08/rocketeval/judgments.tsv : 128 rows
+  generation_outputs/elm-docs-type1-v9-b4-r09/rocketeval/judgments.tsv : 128 rows
+  generation_outputs/elm-docs-type1-v9-b4-r10/rocketeval/judgments.tsv : 128 rows
+  generation_outputs/elm-docs-type1-v9-b4-r11/rocketeval/judgments.tsv : 126 rows
+  generation_outputs/elm-docs-type1-v9-b4-r12/rocketeval/judgments.tsv : 126 rows
+  generation_outputs/elm-docs-type1-v9-b4-r13/rocketeval/judgments.tsv : 122 rows
+  generation_outputs/elm-docs-type1-v9-b4-r14/rocketeval/judgments.tsv : 112 rows
+  generation_outputs/elm-docs-type1-v9-b4-r15/rocketeval/judgments.tsv : 110 rows
+  generation_outputs/elm-docs-type1-v9-b4-r16/rocketeval/judgments.tsv : 110 rows
+  generation_outputs/elm-docs-type2-v9-b1-r01/rocketeval/judgments.tsv : 300 rows
+  generation_outputs/elm-docs-type2-v9-b1-r02/rocketeval/judgments.tsv : 298 rows
+  generation_outputs/elm-docs-type2-v9-b1-r03/rocketeval/judgments.tsv : 294 rows
+  generation_outputs/elm-docs-type2-v9-b1-r04/rocketeval/judgments.tsv : 300 rows
+  generation_outputs/elm-docs-type2-v9-b1-r05/rocketeval/judgments.tsv : 292 rows
+  generation_outputs/elm-docs-type2-v9-b1-r06/rocketeval/judgments.tsv : 304 rows
+  generation_outputs/elm-docs-type2-v9-b1-r07/rocketeval/judgments.tsv : 304 rows
+  generation_outputs/elm-docs-type2-v9-b1-r08/rocketeval/judgments.tsv : 292 rows
+  generation_outputs/elm-docs-type2-v9-b1-r09/rocketeval/judgments.tsv : 300 rows
+  generation_outputs/elm-docs-type2-v9-b1-r10/rocketeval/judgments.tsv : 284 rows
+  generation_outputs/elm-docs-type2-v9-b1-r11/rocketeval/judgments.tsv : 288 rows
+  generation_outputs/elm-docs-type2-v9-b1-r12/rocketeval/judgments.tsv : 284 rows
+  generation_outputs/elm-docs-type2-v9-b1-r13/rocketeval/judgments.tsv : 278 rows
+  generation_outputs/elm-docs-type2-v9-b1-r14/rocketeval/judgments.tsv : 278 rows
+  generation_outputs/elm-docs-type2-v9-b1-r15/rocketeval/judgments.tsv : 284 rows
+  generation_outputs/elm-docs-type2-v9-b1-r16/rocketeval/judgments.tsv : 278 rows
+  generation_outputs/elm-docs-type2-v9-b2-r01/rocketeval/judgments.tsv : 192 rows
+  generation_outputs/elm-docs-type2-v9-b2-r02/rocketeval/judgments.tsv : 186 rows
+  generation_outputs/elm-docs-type2-v9-b2-r03/rocketeval/judgments.tsv : 194 rows
+  generation_outputs/elm-docs-type2-v9-b2-r04/rocketeval/judgments.tsv : 192 rows
+  generation_outputs/elm-docs-type2-v9-b2-r05/rocketeval/judgments.tsv : 186 rows
+  generation_outputs/elm-docs-type2-v9-b2-r06/rocketeval/judgments.tsv : 190 rows
+  generation_outputs/elm-docs-type2-v9-b2-r07/rocketeval/judgments.tsv : 170 rows
+  generation_outputs/elm-docs-type2-v9-b2-r08/rocketeval/judgments.tsv : 174 rows
+  generation_outputs/elm-docs-type2-v9-b2-r09/rocketeval/judgments.tsv : 178 rows
+  generation_outputs/elm-docs-type2-v9-b2-r10/rocketeval/judgments.tsv : 170 rows
+  generation_outputs/elm-docs-type2-v9-b2-r11/rocketeval/judgments.tsv : 178 rows
+  generation_outputs/elm-docs-type2-v9-b2-r12/rocketeval/judgments.tsv : 174 rows
+  generation_outputs/elm-docs-type2-v9-b2-r13/rocketeval/judgments.tsv : 178 rows
+  generation_outputs/elm-docs-type2-v9-b2-r14/rocketeval/judgments.tsv : 172 rows
+  generation_outputs/elm-docs-type2-v9-b2-r15/rocketeval/judgments.tsv : 176 rows
+  generation_outputs/elm-docs-type2-v9-b2-r16/rocketeval/judgments.tsv : 178 rows
+  generation_outputs/elm-docs-type2-v9-b3-r01/rocketeval/judgments.tsv : 228 rows
+  generation_outputs/elm-docs-type2-v9-b3-r02/rocketeval/judgments.tsv : 224 rows
+  generation_outputs/elm-docs-type2-v9-b3-r03/rocketeval/judgments.tsv : 226 rows
+  generation_outputs/elm-docs-type2-v9-b3-r04/rocketeval/judgments.tsv : 226 rows
+  generation_outputs/elm-docs-type2-v9-b3-r05/rocketeval/judgments.tsv : 224 rows
+  generation_outputs/elm-docs-type2-v9-b3-r06/rocketeval/judgments.tsv : 224 rows
+  generation_outputs/elm-docs-type2-v9-b3-r07/rocketeval/judgments.tsv : 224 rows
+  generation_outputs/elm-docs-type2-v9-b3-r08/rocketeval/judgments.tsv : 232 rows
+  generation_outputs/elm-docs-type2-v9-b3-r09/rocketeval/judgments.tsv : 226 rows
+  generation_outputs/elm-docs-type2-v9-b3-r10/rocketeval/judgments.tsv : 234 rows
+  generation_outputs/elm-docs-type2-v9-b3-r11/rocketeval/judgments.tsv : 210 rows
+  generation_outputs/elm-docs-type2-v9-b3-r12/rocketeval/judgments.tsv : 210 rows
+  generation_outputs/elm-docs-type2-v9-b3-r13/rocketeval/judgments.tsv : 202 rows
+  generation_outputs/elm-docs-type2-v9-b3-r14/rocketeval/judgments.tsv : 210 rows
+  generation_outputs/elm-docs-type2-v9-b3-r15/rocketeval/judgments.tsv : 214 rows
+  generation_outputs/elm-docs-type2-v9-b3-r16/rocketeval/judgments.tsv : 210 rows
+  generation_outputs/elm-docs-type2-v9-b4-r01/rocketeval/judgments.tsv : 154 rows
+  generation_outputs/elm-docs-type2-v9-b4-r02/rocketeval/judgments.tsv : 160 rows
+  generation_outputs/elm-docs-type2-v9-b4-r03/rocketeval/judgments.tsv : 154 rows
+  generation_outputs/elm-docs-type2-v9-b4-r04/rocketeval/judgments.tsv : 154 rows
+  generation_outputs/elm-docs-type2-v9-b4-r05/rocketeval/judgments.tsv : 162 rows
+  generation_outputs/elm-docs-type2-v9-b4-r06/rocketeval/judgments.tsv : 162 rows
+  generation_outputs/elm-docs-type2-v9-b4-r07/rocketeval/judgments.tsv : 158 rows
+  generation_outputs/elm-docs-type2-v9-b4-r08/rocketeval/judgments.tsv : 160 rows
+  generation_outputs/elm-docs-type2-v9-b4-r09/rocketeval/judgments.tsv : 162 rows
+  generation_outputs/elm-docs-type2-v9-b4-r10/rocketeval/judgments.tsv : 144 rows
+  generation_outputs/elm-docs-type2-v9-b4-r11/rocketeval/judgments.tsv : 138 rows
+  generation_outputs/elm-docs-type2-v9-b4-r12/rocketeval/judgments.tsv : 138 rows
+  generation_outputs/elm-docs-type2-v9-b4-r13/rocketeval/judgments.tsv : 140 rows
+  generation_outputs/elm-docs-type2-v9-b4-r14/rocketeval/judgments.tsv : 130 rows
+  generation_outputs/elm-docs-type2-v9-b4-r15/rocketeval/judgments.tsv : 140 rows
+  generation_outputs/elm-docs-type2-v9-b4-r16/rocketeval/judgments.tsv : 142 rows
+  generation_outputs/elm-docs-type3-v9-b1-r01/rocketeval/judgments.tsv : 314 rows
+  generation_outputs/elm-docs-type3-v9-b1-r02/rocketeval/judgments.tsv : 308 rows
+  generation_outputs/elm-docs-type3-v9-b1-r03/rocketeval/judgments.tsv : 318 rows
+  generation_outputs/elm-docs-type3-v9-b1-r04/rocketeval/judgments.tsv : 318 rows
+  generation_outputs/elm-docs-type3-v9-b1-r05/rocketeval/judgments.tsv : 310 rows
+  generation_outputs/elm-docs-type3-v9-b1-r06/rocketeval/judgments.tsv : 310 rows
+  generation_outputs/elm-docs-type3-v9-b1-r07/rocketeval/judgments.tsv : 290 rows
+  generation_outputs/elm-docs-type3-v9-b1-r08/rocketeval/judgments.tsv : 296 rows
+  generation_outputs/elm-docs-type3-v9-b1-r09/rocketeval/judgments.tsv : 298 rows
+  generation_outputs/elm-docs-type3-v9-b1-r10/rocketeval/judgments.tsv : 296 rows
+  generation_outputs/elm-docs-type3-v9-b1-r11/rocketeval/judgments.tsv : 298 rows
+  generation_outputs/elm-docs-type3-v9-b1-r12/rocketeval/judgments.tsv : 294 rows
+  generation_outputs/elm-docs-type3-v9-b1-r13/rocketeval/judgments.tsv : 306 rows
+  generation_outputs/elm-docs-type3-v9-b1-r14/rocketeval/judgments.tsv : 300 rows
+  generation_outputs/elm-docs-type3-v9-b1-r15/rocketeval/judgments.tsv : 294 rows
+  generation_outputs/elm-docs-type3-v9-b1-r16/rocketeval/judgments.tsv : 290 rows
+  generation_outputs/elm-docs-type3-v9-b2-r01/rocketeval/judgments.tsv : 218 rows
+  generation_outputs/elm-docs-type3-v9-b2-r02/rocketeval/judgments.tsv : 204 rows
+  generation_outputs/elm-docs-type3-v9-b2-r03/rocketeval/judgments.tsv : 202 rows
+  generation_outputs/elm-docs-type3-v9-b2-r04/rocketeval/judgments.tsv : 204 rows
+  generation_outputs/elm-docs-type3-v9-b2-r05/rocketeval/judgments.tsv : 206 rows
+  generation_outputs/elm-docs-type3-v9-b2-r06/rocketeval/judgments.tsv : 206 rows
+  generation_outputs/elm-docs-type3-v9-b2-r07/rocketeval/judgments.tsv : 208 rows
+  generation_outputs/elm-docs-type3-v9-b2-r08/rocketeval/judgments.tsv : 204 rows
+  generation_outputs/elm-docs-type3-v9-b2-r09/rocketeval/judgments.tsv : 208 rows
+  generation_outputs/elm-docs-type3-v9-b2-r10/rocketeval/judgments.tsv : 204 rows
+  generation_outputs/elm-docs-type3-v9-b2-r11/rocketeval/judgments.tsv : 202 rows
+  generation_outputs/elm-docs-type3-v9-b2-r12/rocketeval/judgments.tsv : 204 rows
+  generation_outputs/elm-docs-type3-v9-b2-r13/rocketeval/judgments.tsv : 208 rows
+  generation_outputs/elm-docs-type3-v9-b2-r14/rocketeval/judgments.tsv : 204 rows
+  generation_outputs/elm-docs-type3-v9-b2-r15/rocketeval/judgments.tsv : 202 rows
+  generation_outputs/elm-docs-type3-v9-b2-r16/rocketeval/judgments.tsv : 202 rows
+  generation_outputs/elm-docs-type3-v9-b3-r01/rocketeval/judgments.tsv : 280 rows
+  generation_outputs/elm-docs-type3-v9-b3-r02/rocketeval/judgments.tsv : 280 rows
+  generation_outputs/elm-docs-type3-v9-b3-r03/rocketeval/judgments.tsv : 276 rows
+  generation_outputs/elm-docs-type3-v9-b3-r04/rocketeval/judgments.tsv : 276 rows
+  generation_outputs/elm-docs-type3-v9-b3-r05/rocketeval/judgments.tsv : 278 rows
+  generation_outputs/elm-docs-type3-v9-b3-r06/rocketeval/judgments.tsv : 280 rows
+  generation_outputs/elm-docs-type3-v9-b3-r07/rocketeval/judgments.tsv : 264 rows
+  generation_outputs/elm-docs-type3-v9-b3-r08/rocketeval/judgments.tsv : 262 rows
+  generation_outputs/elm-docs-type3-v9-b3-r09/rocketeval/judgments.tsv : 264 rows
+  generation_outputs/elm-docs-type3-v9-b3-r10/rocketeval/judgments.tsv : 264 rows
+  generation_outputs/elm-docs-type3-v9-b3-r11/rocketeval/judgments.tsv : 262 rows
+  generation_outputs/elm-docs-type3-v9-b3-r12/rocketeval/judgments.tsv : 266 rows
+  generation_outputs/elm-docs-type3-v9-b3-r13/rocketeval/judgments.tsv : 260 rows
+  generation_outputs/elm-docs-type3-v9-b3-r14/rocketeval/judgments.tsv : 260 rows
+  generation_outputs/elm-docs-type3-v9-b3-r15/rocketeval/judgments.tsv : 258 rows
+  generation_outputs/elm-docs-type3-v9-b3-r16/rocketeval/judgments.tsv : 254 rows
+  generation_outputs/elm-docs-type3-v9-b4-r01/rocketeval/judgments.tsv : 164 rows
+  generation_outputs/elm-docs-type3-v9-b4-r02/rocketeval/judgments.tsv : 170 rows
+  generation_outputs/elm-docs-type3-v9-b4-r03/rocketeval/judgments.tsv : 166 rows
+  generation_outputs/elm-docs-type3-v9-b4-r04/rocketeval/judgments.tsv : 170 rows
+  generation_outputs/elm-docs-type3-v9-b4-r05/rocketeval/judgments.tsv : 168 rows
+  generation_outputs/elm-docs-type3-v9-b4-r06/rocketeval/judgments.tsv : 170 rows
+  generation_outputs/elm-docs-type3-v9-b4-r07/rocketeval/judgments.tsv : 168 rows
+  generation_outputs/elm-docs-type3-v9-b4-r08/rocketeval/judgments.tsv : 168 rows
+  generation_outputs/elm-docs-type3-v9-b4-r09/rocketeval/judgments.tsv : 166 rows
+  generation_outputs/elm-docs-type3-v9-b4-r10/rocketeval/judgments.tsv : 174 rows
+  generation_outputs/elm-docs-type3-v9-b4-r11/rocketeval/judgments.tsv : 170 rows
+  generation_outputs/elm-docs-type3-v9-b4-r12/rocketeval/judgments.tsv : 170 rows
+  generation_outputs/elm-docs-type3-v9-b4-r13/rocketeval/judgments.tsv : 166 rows
+  generation_outputs/elm-docs-type3-v9-b4-r14/rocketeval/judgments.tsv : 164 rows
+  generation_outputs/elm-docs-type3-v9-b4-r15/rocketeval/judgments.tsv : 170 rows
+  generation_outputs/elm-docs-type3-v9-b4-r16/rocketeval/judgments.tsv : 148 rows
+Duplicate-key diagnostic: 1853 keys with raw-verdict disagreement (includes harmless Unsure<->No swaps); 1848 keys with BINARY (accept/reject) disagreement -- these are the ones that can actually move the reported accept rate / McNemar result.
+  Binary-disagreement count by Judge: {'gemini35flashlite': 745, 'gpt54mini': 1103}
+  Direction if switching keep='first'->keep='last': 864 keys go accept->reject, 926 go reject->accept (if these are roughly balanced, tie-break choice is not driving the result; if lopsided, it is, and the reported diff is not yet trustworthy).
+Deduped (keep='first'): 39830 -> 34360 rows (5470 duplicates removed).
+
+############################################################
+PRIMARY RESULT -- reg-track only
+############################################################
+
+=== type1 reg (n=4755) ===
+  gpt54mini accept rate: 0.6799
+  gemini35flashlite accept rate: 0.8217
+  Diff (author - other): -14.17pp
+  Discordant: b(author Yes/other No)=294 c(author No/other Yes)=968
+  McNemar p=0.0000 (sig @ .05: yes)
+  Unsure rate -- gpt54mini: 0.0017, gemini35flashlite: 0.0000 (diagnostic only, not in McNemar)
+
+=== type2 reg (n=5239) ===
+  gpt54mini accept rate: 0.7253
+  gemini35flashlite accept rate: 0.8643
+  Diff (author - other): -13.90pp
+  Discordant: b(author Yes/other No)=248 c(author No/other Yes)=976
+  McNemar p=0.0000 (sig @ .05: yes)
+  Unsure rate -- gpt54mini: 0.0006, gemini35flashlite: 0.0000 (diagnostic only, not in McNemar)
+
+=== type3 reg (n=4874) ===
+  gpt54mini accept rate: 0.7444
+  gemini35flashlite accept rate: 0.8016
+  Diff (author - other): -5.72pp
+  Discordant: b(author Yes/other No)=451 c(author No/other Yes)=730
+  McNemar p=0.0000 (sig @ .05: yes)
+  Unsure rate -- gpt54mini: 0.0037, gemini35flashlite: 0.0006 (diagnostic only, not in McNemar)
+
+=== pooled reg (n=14868) ===
+  gpt54mini accept rate: 0.7170
+  gemini35flashlite accept rate: 0.8301
+  Diff (author - other): -11.31pp
+  Discordant: b(author Yes/other No)=993 c(author No/other Yes)=2674
+  McNemar p=0.0000 (sig @ .05: yes)
+  Unsure rate -- gpt54mini: 0.0020, gemini35flashlite: 0.0002 (diagnostic only, not in McNemar)
