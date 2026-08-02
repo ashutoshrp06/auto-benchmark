@@ -327,12 +327,24 @@ def extra_check_relevant_type3(args, model, ques, doc_ans_pts, doc_list):
 def programmatic_docs_verify(args, data):
 	ls = data.to_dict(orient='records')
 	new_ls = []
+	removed_ls = []
 
-	if os.path.exists(args.out_dir + "/" + args.folder_name + "/" + args.data + "_verified.tsv"):
-		temp_new_df = pd.read_csv(args.out_dir + "/" + args.folder_name + "/" + args.data + "_verified.tsv", sep="\t")
+	verified_path = args.out_dir + "/" + args.folder_name + "/" + args.data + "_verified.tsv"
+	removed_path = args.out_dir + "/" + args.folder_name + "/" + args.data + "_removed.tsv"
+
+	if os.path.exists(verified_path):
+		temp_new_df = pd.read_csv(verified_path, sep="\t", dtype=str, keep_default_na=False)
 		new_ls = temp_new_df.to_dict(orient='records')
-	
-	start_idx = len(new_ls)
+		for _r in new_ls:
+			for _c in ('Rel_Docs_List', 'Adv_Docs_List'):
+				if isinstance(_r.get(_c), str):
+					_r[_c] = json.loads(_r[_c])
+
+	if os.path.exists(removed_path):
+		temp_removed_df = pd.read_csv(removed_path, sep="\t", dtype=str, keep_default_na=False)
+		removed_ls = temp_removed_df.to_dict(orient='records')
+
+	start_idx = len(new_ls) + len(removed_ls)
 	new_df = pd.DataFrame(new_ls)
 
 	_, sys_prompt = get_verification_prompt("presence", params=("", "", ""))
@@ -356,20 +368,19 @@ def programmatic_docs_verify(args, data):
 		ans_pts = json.loads(ls[i]["Ans_Points"])
 
 		num_keys = len(doc_ans_pts.keys())
-		if num_keys != len(rel_doc_list):
-			rel_doc_list = rel_doc_list[:num_keys]
+		if num_keys > len(rel_doc_list):
+			rec = dict(ls[i])
+			rec["_Removed_Reason"] = "doc_ans_points_{}_gt_rel_docs_{}".format(num_keys, len(rel_doc_list))
+			removed_ls.append(rec)
+			pd.DataFrame(removed_ls).to_csv(removed_path, sep='\t', index=None)
 			with open(args.verification_dir + "/extra_logs.txt", "a") as f:
-				f.write("Number of Docs and Number of ans points mismatched!\n")
+				f.write("DROPPED row " + str(i+1) + ": Doc_Ans_Points has " + str(num_keys) + " docs, Rel_Docs_List has " + str(len(rel_doc_list)) + "\n")
 				f.write("Question: " + str(ques) + "\n")
 				f.write("------------------------------------------------------------------------------\n")
-				if num_keys > len(rel_doc_list):
-					for key_no in range(len(rel_doc_list)+1, num_keys+1):
-						ans_pts_to_del = doc_ans_pts.pop(str(key_no), None)
-						for apt in ans_pts_to_del:
-							matches = [x for x in ans_pts if x.strip() == apt.strip()]
-							if matches: ans_pts.remove(matches[0])
-							ans = ans.replace(apt, "").strip()
-							ans = ans.replace("\n- \n-", "\n-").strip()
+			print("Completed {} / {}... (dropped)".format(i+1, len(ls)), end='\r', flush=True)
+			continue
+		if num_keys < len(rel_doc_list):
+			rel_doc_list = rel_doc_list[:num_keys]
 
 		########################################################################################################
 		# Check if there is any point in the docs that should have been in the answer. Remove them from docs.
@@ -470,12 +481,24 @@ def programmatic_docs_verify(args, data):
 def programmatic_docs_verify_type3(args, data):
     ls = data.to_dict(orient='records')
     new_ls = []
+    removed_ls = []
 
-    if os.path.exists(args.out_dir + "/" + args.folder_name + "/" + args.data + "_verified.tsv"):
-        temp_new_df = pd.read_csv(args.out_dir + "/" + args.folder_name + "/" + args.data + "_verified.tsv", sep="\t")
+    verified_path = args.out_dir + "/" + args.folder_name + "/" + args.data + "_verified.tsv"
+    removed_path = args.out_dir + "/" + args.folder_name + "/" + args.data + "_removed.tsv"
+
+    if os.path.exists(verified_path):
+        temp_new_df = pd.read_csv(verified_path, sep="\t", dtype=str, keep_default_na=False)
         new_ls = temp_new_df.to_dict(orient='records')
+        for _r in new_ls:
+            for _c in ('Rel_Docs_List', 'Adv_Docs_List'):
+                if isinstance(_r.get(_c), str):
+                    _r[_c] = json.loads(_r[_c])
 
-    start_idx = len(new_ls)
+    if os.path.exists(removed_path):
+        temp_removed_df = pd.read_csv(removed_path, sep="\t", dtype=str, keep_default_na=False)
+        removed_ls = temp_removed_df.to_dict(orient='records')
+
+    start_idx = len(new_ls) + len(removed_ls)
     new_df = pd.DataFrame(new_ls)
 
     _, sys_prompt = get_verification_prompt("presence_type3", params=("", "", ""))
@@ -496,7 +519,18 @@ def programmatic_docs_verify_type3(args, data):
         ans_pts = json.loads(ls[i]["Ans_Points"])
 
         num_keys = len(doc_ans_pts.keys())
-        if num_keys != len(rel_doc_list):
+        if num_keys > len(rel_doc_list):
+            rec = dict(ls[i])
+            rec["_Removed_Reason"] = "doc_ans_points_{}_gt_rel_docs_{}".format(num_keys, len(rel_doc_list))
+            removed_ls.append(rec)
+            pd.DataFrame(removed_ls).to_csv(removed_path, sep='\t', index=None)
+            with open(args.verification_dir + "/extra_logs.txt", "a") as f:
+                f.write("DROPPED row " + str(i+1) + ": Doc_Ans_Points has " + str(num_keys) + " docs, Rel_Docs_List has " + str(len(rel_doc_list)) + "\n")
+                f.write("Question: " + str(ques) + "\n")
+                f.write("------------------------------------------------------------------------------\n")
+            print("Completed {} / {}... (dropped)".format(i+1, len(ls)), end='\r', flush=True)
+            continue
+        if num_keys < len(rel_doc_list):
             rel_doc_list = rel_doc_list[:num_keys]
 
         with open(args.verification_dir + "/extra_logs.txt", "a") as f:
@@ -679,8 +713,20 @@ def programmatic_adversarial_verify(args, data):
 					dict_keys = list(doc_ans_pts[j].keys())
 					for doc_key in range(len(dict_keys)):
 						doc_ans_pts[j][str(doc_key+1)] = doc_ans_pts[j].pop(dict_keys[doc_key])
-					ans[j] = ans[j].replace(cur_ans_pt, "").strip()
-					ans[j] = ans[j].replace("- \n", "").strip()
+					_target = cur_ans_pt.strip()
+					_kept = []
+					_dropped = False
+					for _line in ans[j].split("\n"):
+						_raw = _line.strip()
+						_norm = _raw[1:].strip() if _raw[:1] == "-" else _raw
+						if not _dropped and (_norm == _target or _raw == _target):
+							_dropped = True
+							continue
+						_kept.append(_line)
+					if not _dropped:
+						with open(args.verification_dir + "/logs.txt", "a") as f:
+							f.write("WARNING: no Answer line matched the removed point, Answer left unmodified.\nPoint: " + str(cur_ans_pt) + "\n")
+					ans[j] = "\n".join(_kept).strip()
 
 			evidence_left = [x for x in ans_pts[j] if not str(x).strip().lower().startswith("conclusion:")]
 			conclusion_only = len(ans_pts[j]) > 0 and len(evidence_left) == 0
@@ -756,6 +802,8 @@ def main(args):
 	elif args.exp_type == "programmatic_adversarial":
 		data = pd.read_csv(args.out_dir + "/" + args.folder_name + "/" + args.data + ".tsv", sep='\t')
 		programmatic_adversarial_verify(args, data)
+	else:
+		raise ValueError("Unrecognised -exp_type: " + str(args.exp_type))
 	
 if __name__ == "__main__":
 	parser = build_parser()

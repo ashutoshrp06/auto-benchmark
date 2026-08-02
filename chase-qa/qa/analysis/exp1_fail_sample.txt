@@ -1,0 +1,394 @@
+
+==========================================================================================
+TYPE1 QID=q6ed77049f6437127 batch=v8-b2 root=28 q=102 seed=dynamic_reg
+criteria passed: 1/7  (Pass_Frac=0.1429)
+solvers: gpt-5.5 wrong | gemini-3.1-pro wrong
+
+QUESTION:
+What disclosure, knowledge-and-experience, and appropriateness checks must be completed when an investment firm wants to let a retail client trade leveraged contracts for difference through an online platform under FCA derivatives conduct rules?
+
+ANSWER:
+- The client file shows the investor has annual income of £68,000, investable assets of £52,000, and has stated a target of speculative short-term trading rather than capital preservation.
+-
+
+FAILED CRITERIA:
+  [No] C1: Does the question ask specifically for the client file details that the adviser confirmed: annual income of £68,000, investable assets of £52,000, and a stated target of speculative short-term trading rather than capital preservation?
+  [No] C2: Does the question require those exact three facts together, rather than only asking generally about the client’s profile, risk appetite, or trading style?
+  [No] C3: Can the question be answered entirely from the supplied documents without needing any external financial rules, calculations, or market knowledge?
+  [No] C4: Is the question unambiguous, with a single defensible reading that clearly points to the client’s income, investable assets, and speculative short-term trading objective?
+  [No] C6: Does the question demand retrieval of a specific stated fact from the document rather than a generic summary of suitability, risk profile, or platform access controls?
+  [No] C7: Is the question narrow enough that a correct response would need to mention the exact client file figures and objective, and not broader household-file items such as the ISA, pension, bond, or CFD trading history?
+
+CLASSIFY: (a) malformed  (b) unanswerable from docs  (c) well-formed but hard
+
+==========================================================================================
+TYPE1 QID=q3633336b828ee5a7 batch=v8-b2 root=47 q=171 seed=dynamic_reg
+criteria passed: 2/8  (Pass_Frac=0.25)
+solvers: gpt-5.5 wrong | gemini-3.1-pro wrong
+
+QUESTION:
+A retail cryptoasset exchange has started onboarding UK customers and now wants to check whether its customer onboarding, promotions, and transaction monitoring still comply after it changed its account verification workflow. The business has three documents in front of it: the latest onboarding checklist, the updated fees and risk disclosures, and the most recent suspicious activity monitoring report. What specific checks and conclusions should be made from those documents to confirm compliance?
+
+ANSWER:
+- Confirm from the onboarding checklist that each customer completed identity verification and sanctions screening before being allowed to trade.
+- Ensure the onboarding checklist shows high-risk customers were subject to enhanced due diligence where required, rather than being accepted on standard checks alone.
+-
+
+FAILED CRITERIA:
+  [DISAGREE] C2: Does the question also ask about higher-risk customers and whether enhanced due diligence was applied where required, rather than standard checks alone?
+  [No] C3: Does the question avoid being so broad that a general answer about onboarding, KYC, or compliance would be sufficient without mentioning both identity verification and sanctions screening?
+  [DISAGREE] C4: Does the question avoid mentioning the answer’s conclusions in advance, such as stating that the checklist must show identity verification, sanctions screening, and enhanced due diligence?
+  [No] C5: Can the question be answered entirely from the supplied document about the onboarding pack, without needing any outside financial, legal, or compliance knowledge?
+  [No] C6: Is the question unambiguous, with a single defensible reading that refers to the onboarding checklist for customer trading approval and not to any other checklist, pack, or review?
+  [No] C8: Does the question stay narrowly focused on the onboarding checklist items in the document, rather than adding unrelated administrative records or other operational controls from the same file?
+
+CLASSIFY: (a) malformed  (b) unanswerable from docs  (c) well-formed but hard
+
+==========================================================================================
+TYPE1 QID=q5f1edf1bce6732a2 batch=v8-b3 root=28 q=104 seed=dynamic_reg
+criteria passed: 2/7  (Pass_Frac=0.2857)
+solvers: gpt-5.5 wrong | gemini-3.1-pro wrong
+
+QUESTION:
+What checks, disclosures, and affordability evidence must a firm complete before arranging a first charge residential mortgage for a first-time buyer, and what must the mortgage suitability letter explain?
+
+ANSWER:
+- If the application is being made before the sale of another property is completed, the advice must take account of any contingency over funds and must not assume that completion will occur on the expected timetable.
+-
+
+FAILED CRITERIA:
+  [No] C1: Does the question specifically ask about advice when an application is made before the sale of another property has completed, including the need to account for contingency over funds and not assume completion will occur on the expected timetable?
+  [No] C2: Does the question avoid being so broad that a generic answer about mortgage affordability, timing risk, or property-sale uncertainty would suffice instead of the specific instruction not to assume the expected completion timetable?
+  [No] C4: Does the question have a single clear meaning, namely the scenario where mortgage advice must reflect uncertainty because another property has not yet sold, rather than any other kind of completion delay or funding issue?
+  [No] C6: Does the question require retrieval of the exact documented point about pre-completion sale uncertainty, rather than being answerable from general financial common sense alone?
+  [No] C7: Does the question focus narrowly on the timing and contingency issue tied to the sale of another property, rather than mixing in unrelated topics from the documents such as affordability calculations, product fees, or repayment vehicles?
+
+CLASSIFY: (a) malformed  (b) unanswerable from docs  (c) well-formed but hard
+
+==========================================================================================
+TYPE1 QID=q74342ad400d6f8fe batch=v8-b3 root=31 q=115 seed=dynamic_reg
+criteria passed: 0/7  (Pass_Frac=0.0)
+solvers: gpt-5.5 wrong | gemini-3.1-pro wrong
+
+QUESTION:
+A homeowner in their late 40s is thinking about purchasing a regulated home reversion plan to release equity from their main residence. Using the adviser suitability report, the valuation and offer documents, the provider’s correspondence, and the applicable FCA MCOB lifetime mortgage and home reversion rules, what are the key facts and warnings that determine whether the plan is permitted and whether it is appropriate?
+
+ANSWER:
+- The property is valued at £685,000, and the provider’s offer states the homeowner would sell a 40% reversion share in exchange for a lump sum of £164,400.
+-
+
+FAILED CRITERIA:
+  [No] C1: Does the question ask specifically for the property valuation of £685,000 and the provider’s offer of a 40% reversion share for a lump sum of £164,400?
+  [No] C2: Does the question require both figures together, rather than asking only for the valuation or only for the lump sum?
+  [No] C3: Can the question be answered entirely from the supplied documents without needing any outside valuation, equity release, or legal knowledge?
+  [DISAGREE] C4: Is the question unambiguous about the transaction being the equity release illustration, not one of the unrelated items in the file such as pensions, car finance, insurance, ISA subscriptions, or mortgages?
+  [DISAGREE] C5: Does the question avoid giving away the answer by already stating the £685,000 valuation, the 40% reversion share, or the £164,400 lump sum in its own wording?
+  [No] C6: Does the question require retrieval of a specific stated fact from the documents, rather than being answerable from general knowledge about equity release or property finance?
+  [No] C7: Is the question narrow enough that a concise factual answer naming the £685,000 valuation and the £164,400 offer would fully satisfy it, without needing broader explanation or calculation?
+
+CLASSIFY: (a) malformed  (b) unanswerable from docs  (c) well-formed but hard
+
+==========================================================================================
+TYPE1 QID=q05c72569e9117d45 batch=v8-b2 root=34 q=122 seed=dynamic_reg
+criteria passed: 5/8  (Pass_Frac=0.625)
+solvers: gpt-5.5 CORRECT | gemini-3.1-pro wrong
+
+QUESTION:
+For a buyer taking out a regulated residential mortgage with an intermediary, what exact points should be checked in the lender’s factsheet claims, the mortgage illustration, and the broker’s notes before the recommendation is made, including the relevant FCA wording for mortgage communications?
+
+ANSWER:
+- The comparison should verify whether the mortgage quote is based on the correct property value, loan amount, repayment method and mortgage term for the customer’s circumstances.
+- The mortgage illustration should be checked for the interest rate, any initial incentive period, arrangement fees, early repayment charges and the effect of any rate changes on the monthly payment.
+-
+
+FAILED CRITERIA:
+  [No] C3: Is the question narrow enough that a response limited to those two mortgage-file checks would fully answer it, rather than inviting a broader discussion of other file-review items?
+  [DISAGREE] C6: Does the question avoid giving away the answer by already stating that the quote must be checked against the correct property value, loan amount, repayment method, mortgage term, and illustration items?
+  [No] C8: Does the question focus on the comparison and illustration checks only, without mixing in unrelated file-review topics such as affordability, credit status, occupation checks, or repayment strategy?
+
+CLASSIFY: (a) malformed  (b) unanswerable from docs  (c) well-formed but hard
+
+==========================================================================================
+TYPE1 QID=q964dd10e2fe0d74b batch=v8-b3 root=8 q=27 seed=dynamic_reg
+criteria passed: 5/8  (Pass_Frac=0.625)
+solvers: gpt-5.5 CORRECT | gemini-3.1-pro wrong
+
+QUESTION:
+A widow is settling her late spouse’s estate and is checking whether the estate’s chargeable transfers, including a gift made shortly before death and the value of the family home, push the taxable estate above the inheritance tax threshold. She also wants to know whether the adviser’s file shows enough evidence that the suggested mitigation plan was suitable and properly documented. What specific rule-based checks and suitability evidence should be confirmed under HMRC nil-rate band guidance and FCA COBS 9.2 before relying on the adviser’s recommendation?
+
+ANSWER:
+- Confirm that the inheritance tax nil-rate band is £325,000 and that only the amount above that threshold is subject to inheritance tax on the estate.
+- Confirm whether any unused nil-rate band from the deceased spouse or civil partner can be transferred to the widow’s estate, potentially increasing the available threshold.
+- Check whether the lifetime gifts fall within the nil-rate band or qualify for any exemption, and whether any part of the family home is included in the chargeable estate value for inheritance tax purposes.
+-
+
+FAILED CRITERIA:
+  [No] C4: Is the question narrow enough that a response limited to those inheritance tax estate-review points would be sufficient, rather than a broader estate-planning or general tax answer?
+  [DISAGREE] C5: Can the question be answered entirely from the supplied document without needing any outside inheritance tax rules, calculations, or assumptions beyond what is stated there?
+  [No] C7: Does the question avoid giving away the answer by already stating the £325,000 nil-rate band, the transferable spouse or civil partner allowance, or the treatment of gifts and the family home?
+
+CLASSIFY: (a) malformed  (b) unanswerable from docs  (c) well-formed but hard
+
+==========================================================================================
+TYPE2 QID=qcf3fa138de8cfa79 batch=v8-b2 root=29 q=106 seed=dynamic_reg
+criteria passed: 2/9  (Pass_Frac=0.2222)
+solvers: gpt-5.5 CORRECT | gemini-3.1-pro CORRECT
+
+QUESTION:
+A married couple are reviewing an equities-heavy investment plan after one spouse received a bonus and asked the adviser whether they should keep investing the extra money or reduce the amount at risk. Based on the adviser’s email, the couple’s fact-find, the suitability note, and the product literature, does the paperwork support the risk level being recommended for them, and were the cost and risk disclosures clear enough for them to sign up?
+
+ANSWER:
+- The adviser’s email says the couple only wanted to invest the bonus after confirming they could tolerate a higher level of portfolio volatility, and the recommendation was made on that basis.
+- The fact-find records that both spouses had medium-long term objectives, no planned withdrawals, and existing capacity to absorb short-term losses, which supports the recommended risk profile.
+- The suitability note states that the equities-heavy allocation was aligned to their stated time horizon and attitude to risk, and that a lower-risk alternative was discussed but not chosen.
+- The product literature sets out the ongoing charges, possible entry and platform costs, and explains that returns are not guaranteed and capital is at risk.
+-
+
+FAILED CRITERIA:
+  [No] C1: Does the question ask specifically why the recommendation to invest the bonus was made, including the client’s confirmed tolerance for higher portfolio volatility and the adviser’s basis for proceeding?
+  [No] C2: Does the question require the answer to mention the fact-find details that both spouses had medium-long term objectives, no planned withdrawals, and capacity to absorb short-term losses?
+  [No] C3: Does the question ask about the suitability note stating that an equities-heavy allocation matched the stated time horizon and attitude to risk, and that a lower-risk alternative was discussed but not chosen?
+  [No] C4: Does the question ask about the product literature disclosures that ongoing charges, possible entry and platform costs, and the warnings that returns are not guaranteed and capital is at risk were set out in writing?
+  [DISAGREE] C5: Does the question avoid being answerable from just one document by requiring information from the adviser’s email, the fact-find, the suitability note, and the product literature together?
+  [No] C6: Does the question avoid mentioning the answer’s key conclusions itself, such as “higher portfolio volatility,” “equities-heavy allocation,” “lower-risk alternative,” or “capital is at risk,” so that it does not leak the answer?
+  [DISAGREE] C9: Does the question require a response narrow enough that these four points are the expected substance, rather than a broad narrative about all documents in the file?
+
+CLASSIFY: (a) malformed  (b) unanswerable from docs  (c) well-formed but hard
+
+==========================================================================================
+TYPE2 QID=qafee2ba27c304cd1 batch=v8-b1 root=36 q=135 seed=dynamic_reg
+criteria passed: 6/9  (Pass_Frac=0.6667)
+solvers: gpt-5.5 wrong | gemini-3.1-pro CORRECT
+
+QUESTION:
+What checks and disclosures must a firm complete before arranging a cryptoasset transfer for a retail customer, and what specific information should be used to assess whether the transfer instruction can be accepted?
+
+ANSWER:
+- The firm should verify the customer’s identity and, where relevant, the beneficiary’s identity before accepting the transfer instruction.
+- The firm should check whether the receiving wallet is controlled by the customer and confirm the destination address details match the customer’s instruction exactly.
+- The firm should assess whether the transfer involves a sanctioned address, a high-risk counterparty, or other indicators that would require enhanced due diligence or refusal.
+- The firm should provide the customer with clear information about the transfer fees, network costs, and the fact that cryptoasset transfers may be irreversible once executed.
+- The firm should ensure the customer has been warned about the volatility of the asset and the risks of loss arising from operational errors, wrong-address payments, or blockchain congestion before processing the transfer.
+
+FAILED CRITERIA:
+  [DISAGREE] C2: Does the question explicitly require the transfer to be assessed for sanctioned addresses, high-risk counterparties, or other indicators that would trigger enhanced due diligence or refusal?
+  [DISAGREE] C3: Does the question ask for the customer-facing disclosure of transfer fees, network costs, and the fact that cryptoasset transfers may be irreversible once executed?
+  [DISAGREE] C4: Does the question ask for the warning that must be given before processing the transfer about asset volatility and loss risks from operational errors, wrong-address payments, or blockchain congestion?
+
+CLASSIFY: (a) malformed  (b) unanswerable from docs  (c) well-formed but hard
+
+==========================================================================================
+TYPE2 QID=q83b2f16afee76e09 batch=v8-b1 root=1 q=3 seed=reg
+criteria passed: 6/9  (Pass_Frac=0.6667)
+solvers: gpt-5.5 CORRECT | gemini-3.1-pro CORRECT
+
+QUESTION:
+What checks and disclosures must a firm make before arranging a cash ISA for a retail client, and what information about eligibility, tax treatment, and transfers must be explained?
+
+ANSWER:
+- The firm must confirm that the client meets the ISA eligibility conditions and that the subscription can be accepted within the applicable tax year rules.
+- The firm must explain that cash placed in an ISA is generally free of UK income tax on interest, but the tax treatment depends on the client’s personal circumstances and may change in the future.
+- The firm must tell the client about any limits on subscriptions, including the amount that can be paid in across ISAs in the relevant tax year.
+- If the client wishes to transfer an existing ISA, the firm must explain the transfer process and any restrictions that may apply depending on the type of ISA and the provider’s procedures.
+-
+
+FAILED CRITERIA:
+  [DISAGREE] C2: Does the question require the answer to cover all four points in the answer: ISA eligibility conditions, acceptance within the applicable tax year rules, UK income tax treatment of cash in an ISA, subscription limits across ISAs in the relevant tax year, and ISA transfer procedures and provider restrictions?
+  [DISAGREE] C4: Does the question explicitly ask about the general UK income tax treatment of cash placed in an ISA and the fact that the treatment depends on the client’s personal circumstances and may change in the future?
+  [DISAGREE] C5: Does the question explicitly ask about limits on ISA subscriptions, including the amount that can be paid in across ISAs in the relevant tax year?
+
+CLASSIFY: (a) malformed  (b) unanswerable from docs  (c) well-formed but hard
+
+==========================================================================================
+TYPE2 QID=q7799aa66408f8b12 batch=v8-b3 root=44 q=159 seed=dynamic_reg
+criteria passed: 3/8  (Pass_Frac=0.375)
+solvers: gpt-5.5 wrong | gemini-3.1-pro wrong
+
+QUESTION:
+As the attorney for an elderly client considering a lifetime mortgage to raise funds for home improvements, you are reviewing whether the adviser’s correspondence, the product paperwork, and the loan records together show that the equity release arrangement was explained properly and remained suitable. What does the evidence say about how the plan was described, what the client was led to believe about interest, fees, and repayment, and whether any safeguards or limits were set out before and during the advance?
+
+ANSWER:
+- The adviser letter says the lifetime mortgage was recommended as a no-negative-equity home finance option to release a tax-free cash lump sum while the client remained in the property.
+- The FCA Mortgage Conduct of Business summary in the pack says the customer communications should be clear, fair, and not misleading, with the key risks, fees, and repayment features explained in plain language.
+-
+
+FAILED CRITERIA:
+  [DISAGREE] C1: Does the question ask specifically for the adviser letter’s description that the lifetime mortgage was recommended as a no-negative-equity home finance option to release a tax-free cash lump sum while the client remained in the property?
+  [DISAGREE] C2: Does the question ask specifically for the FCA Mortgage Conduct of Business summary wording that customer communications should be clear, fair, and not misleading, with the key risks, fees, and repayment features explained in plain language?
+  [No] C3: Does the question require both the adviser-letter description and the FCA communications standard, rather than asking for only one of them or for a broader summary of the file?
+  [No] C6: Does the question avoid giving away the answer by already stating the exact no-negative-equity, tax-free cash lump sum, and clear/fair/not misleading wording it is meant to elicit?
+  [No] C7: Is the question narrow enough that a concise answer limited to those two specific statements would fully satisfy it, rather than inviting unrelated details about the loan ledger, completion note, or other file contents?
+
+CLASSIFY: (a) malformed  (b) unanswerable from docs  (c) well-formed but hard
+
+==========================================================================================
+TYPE2 QID=qa2c54b75b57d03dc batch=v8-b3 root=36 q=127 seed=dynamic_reg
+criteria passed: 2/9  (Pass_Frac=0.2222)
+solvers: gpt-5.5 CORRECT | gemini-3.1-pro wrong
+
+QUESTION:
+What checks and disclosures should a client and adviser confirm before proceeding with a mortgage recommendation for a first-time buyer, including affordability, fees, and key product risks?
+
+ANSWER:
+- The client should verify from the mortgage application paperwork that the selected property, loan term, and repayment method are fully stated and that the application matches the client’s intended occupation status.
+- The client should confirm from the lender’s affordability assessment that household income, committed expenditure, existing credit commitments, and any stress-tested payment rate have been taken into account before the recommendation is accepted.
+- The client should check the mortgage offer and illustration for the total amount payable, interest rate type, fees, early repayment charges, and any conditions that would affect the overall cost of borrowing.
+- The client should ensure the adviser’s suitability assessment records the client’s objectives, financial position, knowledge and experience, and attitude to interest-rate and payment-risk before any mortgage recommendation is made.
+- The client should confirm the adviser has explained whether the recommended mortgage remains suitable if rates rise, income falls, or the client changes plans for moving or overpaying.
+
+FAILED CRITERIA:
+  [No] C1: Does the question ask specifically about the mortgage application paperwork needing the selected property, loan term, repayment method, and intended occupation status to be fully stated and aligned?
+  [No] C2: Does the question ask specifically about the lender’s affordability assessment needing household income, committed expenditure, existing credit commitments, and any stress-tested payment rate to be taken into account before the recommendation is accepted?
+  [No] C3: Does the question ask specifically about the mortgage offer and illustration needing the total amount payable, interest rate type, fees, early repayment charges, and any conditions affecting the overall cost of borrowing?
+  [No] C4: Does the question ask specifically about the adviser’s suitability assessment needing the client’s objectives, financial position, knowledge and experience, and attitude to interest-rate and payment-risk to be recorded before any mortgage recommendation is made?
+  [No] C5: Does the question ask specifically whether the recommended mortgage remains suitable if rates rise, income falls, or the client changes plans for moving or overpaying?
+  [No] C6: Is the question narrow enough that a correct answer must address all five mortgage-file checks above, rather than only one general mortgage topic or a single document?
+  [DISAGREE] C8: Does the question avoid giving away the answer by not already stating the full set of required checks, figures, and conditions in the question itself?
+
+CLASSIFY: (a) malformed  (b) unanswerable from docs  (c) well-formed but hard
+
+==========================================================================================
+TYPE2 QID=qc354893af2a59479 batch=v8-b3 root=28 q=99 seed=dynamic_reg
+criteria passed: 5/8  (Pass_Frac=0.625)
+solvers: gpt-5.5 wrong | gemini-3.1-pro wrong
+
+QUESTION:
+A solicitor advising an executor on whether to settle a deceased client’s estate by selling listed shares or by holding them for distribution, what information from FCA-style securities disclosures, the broker’s share dealing contract note pack, the portfolio valuation report, and the probate tax schedule should be compared to support that decision?
+
+ANSWER:
+- 
+- The FCA-style securities disclosure material explains the need to compare transaction costs, market risk, and the likely net proceeds from sale against the benefits of retaining the shares for distribution.
+-
+
+FAILED CRITERIA:
+  [DISAGREE] C3: Does the question require an explanation of why the securities disclosure material matters for deciding whether to sell the inherited shares or keep them for beneficiaries, rather than asking only for a generic description of the document?
+  [No] C4: Does the question avoid giving away the answer by not already stating that the FCA-style disclosure compares transaction costs, market risk, and net proceeds against retaining the shares?
+  [DISAGREE] C8: Is the question narrow enough that a short, specific answer about the securities disclosure comparison is appropriate, rather than a broad summary of the entire estate valuation, tax, and timing discussion?
+
+CLASSIFY: (a) malformed  (b) unanswerable from docs  (c) well-formed but hard
+
+==========================================================================================
+TYPE3 QID=qb80f5561be473cad batch=v8-b1 root=82 q=319 seed=dynamic_reg
+criteria passed: 6/9  (Pass_Frac=0.6667)
+solvers: gpt-5.5 CORRECT | gemini-3.1-pro wrong
+
+QUESTION:
+A self-employed business owner has just formed a limited company and wants to explain salary sacrifice and workplace pension contributions to staff through an email and staff pack. If the company also uses an external adviser to help draft the message, what sequence of regulatory and provider requirements determines whether the communication can stay compliant while encouraging employees to consider pension saving?
+
+ANSWER:
+- The employer’s staff message is a non-advised employer communication about pension participation and payslip deductions.\n- \n- \n- Provider employer literature for salary sacrifice sets out that employees need to understand that the arrangement changes contractual pay and pension contributions are based on the sacrificed salary.\n- Adviser email correspondence notes that draft employer wording should avoid implying personal suitability or individual investment advice unless the adviser has assessed the employee’s circumstances.\n- Conclusion: The communication has to be drafted as a fair, clear, non-misleading employer message, with salary sacrifice and pension facts clearly explained, and any personalised recommendation separated from the employer’s general staff information.
+
+FAILED CRITERIA:
+  [DISAGREE] C2: Does the question require the answer to explain that salary sacrifice changes contractual pay and that pension contributions are then based on the sacrificed salary rather than the unreduced salary?
+  [DISAGREE] C6: Does the question require a causal or practical explanation of how the salary sacrifice arrangement affects take-home pay and pension deductions, not just a bare definition of salary sacrifice?
+  [DISAGREE] C9: Does the question avoid giving away the answer by not already stating that the communication must be non-advised, factual, and separated from any personalised recommendation?
+
+CLASSIFY: (a) malformed  (b) unanswerable from docs  (c) well-formed but hard
+
+==========================================================================================
+TYPE3 QID=qaa5a332538792572 batch=v8-b1 root=67 q=261 seed=dynamic_reg
+criteria passed: 6/9  (Pass_Frac=0.6667)
+solvers: gpt-5.5 wrong | gemini-3.1-pro wrong
+
+QUESTION:
+When a customer applies to cash in a flexible ISA after the end of the tax year, why was the withdrawal delayed and then rejected under ISA administration rules?
+
+ANSWER:
+- The customer service note recorded that the instruction was suspended pending verification of the tax-year subscription history.
+- Conclusion: The withdrawal was delayed and then rejected because the ISA administration rules did not allow the requested amount to be withdrawn at that point.
+
+FAILED CRITERIA:
+  [No] C1: Does the question ask specifically about the ISA administration hold for a flexible cash ISA, including the customer service note that the instruction was suspended pending verification of the tax-year subscription history?
+  [DISAGREE] C4: Does the question make clear that the relevant sequence is: withdrawal request submitted after the customer had already subscribed more than the amount previously withdrawn in the same tax year?
+  [DISAGREE] C7: Does the question have a single defensible reading by clearly identifying the flexible cash ISA withdrawal request after the tax year, rather than any other ISA transaction, wrapper event, or account type?
+
+CLASSIFY: (a) malformed  (b) unanswerable from docs  (c) well-formed but hard
+
+==========================================================================================
+TYPE3 QID=qf8995ea3d97870e5 batch=v8-b1 root=74 q=287 seed=dynamic_reg
+criteria passed: 4/10  (Pass_Frac=0.4)
+solvers: gpt-5.5 CORRECT | gemini-3.1-pro wrong
+
+QUESTION:
+As the parent acting under a lasting power of attorney for an adult child, did the adviser’s Junior ISA recommendation and client communication change after the fact-find was updated, and did that same sequence show whether the recommendation was presented as suitable and fair before you were asked to sign?
+
+ANSWER:
+- The fact-find correspondence records that cash needs for the adult child were expected to remain limited for the next few years.\n- The fact-find correspondence also records that the intended time horizon for the Junior ISA was long term, with funds not expected to be accessed until adulthood.\n- The adviser’s suitability letter states that the recommended Junior ISA was chosen over a cash account because the intended investment period was several years.\n- The adviser’s suitability letter includes a risk explanation that the value of the investment could fall as well as rise.\n- \n- Conclusion: The updated fact-find and the adviser’s later suitability letter supported the Junior ISA recommendation as suitable for a long-term objective and showed that the communication to the parent under the lasting power of attorney was presented for review before signature.
+
+FAILED CRITERIA:
+  [No] C1: Does the question ask specifically about the adult child’s cash needs being expected to remain limited for the next few years, rather than asking about unrelated savings or investment items?
+  [DISAGREE] C2: Does the question ask specifically about the Junior ISA being intended as a long-term account with funds not expected to be accessed until adulthood?
+  [DISAGREE] C3: Does the question ask specifically why the Junior ISA was recommended over a cash account, including the reason that the intended investment period was several years?
+  [No] C4: Does the question ask specifically about the risk wording that the value of the investment could fall as well as rise?
+  [No] C7: Does the question avoid giving away the answer by not already stating that the Junior ISA was suitable, long term, or chosen because the investment period was several years?
+  [DISAGREE] C10: Does the question stay narrow enough that a correct answer would focus on the long-term Junior ISA recommendation and the LPA sign-off context, rather than requiring a broad summary of all savings products mentioned in the documents?
+
+CLASSIFY: (a) malformed  (b) unanswerable from docs  (c) well-formed but hard
+
+==========================================================================================
+TYPE3 QID=q6f904bbd992775d8 batch=v8-b3 root=75 q=292 seed=dynamic_reg
+criteria passed: 6/9  (Pass_Frac=0.6667)
+solvers: gpt-5.5 CORRECT | gemini-3.1-pro CORRECT
+
+QUESTION:
+Under FCA MCOB mortgage advice disclosure rules, what sequence of events and wording would show that a borrower’s mortgage product switch was treated as a distinct transaction and that the fees and early repayment charges were disclosed properly?
+
+ANSWER:
+- The mortgage illustration states that the customer is switching from the existing fixed-rate deal to a new product with the same lender.
+- The illustration lists a product fee and an early repayment charge under separate cost headings.
+- The post-completion mortgage statement shows the old deal closed and a new account reference for the switched product.
+- Conclusion: The documents support that the product switch was presented as a separate mortgage transaction and that the fees and early repayment charges were disclosed in a way that met FCA MCOB communication standards.
+
+FAILED CRITERIA:
+  [DISAGREE] C2: Does the question ask specifically whether the illustration lists a product fee and an early repayment charge under separate cost headings, using those exact fee types?
+  [No] C3: Does the question ask specifically about the post-completion mortgage statement showing the old deal closed and a new account reference for the switched product?
+  [DISAGREE] C6: Does the question avoid mentioning the answer’s conclusion that the documents met FCA MCOB communication standards, so that the standard itself must be inferred from the documents rather than given away in the question?
+
+CLASSIFY: (a) malformed  (b) unanswerable from docs  (c) well-formed but hard
+
+==========================================================================================
+TYPE3 QID=q91101ed107c513b9 batch=v8-b2 root=13 q=51 seed=dynamic_reg
+criteria passed: 6/9  (Pass_Frac=0.6667)
+solvers: gpt-5.5 CORRECT | gemini-3.1-pro wrong
+
+QUESTION:
+A self-employed graphic designer is considering making a cryptoasset investment through a UK FCA-registered exchange, and later the exchange’s wallet screening flags a transfer after the client has already exceeded the personal transaction limit. After reviewing the onboarding file, the exchange’s transaction log, and the FCA cryptoasset financial promotions guidance, what sequence of events shows whether the later transfer should be treated as permitted under the promotion rules or as a breach of the applicable restrictions?
+
+ANSWER:
+- The onboarding file records that the client was classified as a retail customer before the higher-risk token promotion was shown.
+- The transaction log shows the client accepted the promotion, completed the purchase, and then submitted a transfer from a screened wallet on a later date.
+- FCA cryptoasset promotional guidance requires firms to check whether an approved or exempt communication was used before the client was prompted to transact.
+- FCA cryptoasset promotional guidance states that a breach occurs when a restricted promotion is followed by a client transaction that was not preceded by the required compliance checks.
+- The exchange’s compliance note records that the wallet screening alert was reviewed after the transfer had already been initiated.
+- Conclusion: The evidence supports that the client’s transfer came after the restricted promotion and incomplete pre-transaction checks, so the later transfer should be treated as a breach of the promotion rules.
+
+FAILED CRITERIA:
+  [DISAGREE] C1: Does the question ask specifically about the onboarding file’s sequence in which the client was classified as a retail customer before the higher-risk token promotion was shown?
+  [DISAGREE] C5: Does the question ask specifically about the exchange’s compliance note that the wallet screening alert was reviewed after the transfer had already been initiated?
+  [DISAGREE] C7: Does the question avoid giving away its own conclusion by not stating that the later transfer should be treated as a breach of the promotion rules?
+
+CLASSIFY: (a) malformed  (b) unanswerable from docs  (c) well-formed but hard
+
+==========================================================================================
+TYPE3 QID=q15ef5a6b0987a885 batch=v8-b3 root=2 q=8 seed=dynamic_reg
+criteria passed: 4/9  (Pass_Frac=0.4444)
+solvers: gpt-5.5 CORRECT | gemini-3.1-pro CORRECT
+
+QUESTION:
+Under FCA cryptoasset financial promotion rules, if a retail customer is evaluating whether a promoted staking service was explained clearly and whether the risk warnings and fee wording stayed consistent across the marketing trail, what sequence of documented events shows whether the promotion, disclosure, and follow-up terms remained aligned when the customer was moved from a web banner to a landing page and then to a confirmation email?
+
+ANSWER:
+- The web banner described the staking service as a “flexible way to earn variable crypto rewards on idle holdings.”
+- The landing page risk section stated that staking rewards were not guaranteed, capital values could fall, and access could be delayed during lock-up periods.
+- The follow-up email said the provider fee was 1.5% of rewards earned and that the customer could withdraw only after the seven-day notice period.
+- The confirmation screen repeated the 1.5% fee, the lock-up period, and the non-guaranteed rewards language in the same order as the landing page.
+- Conclusion: The documented sequence supports that the staking promotion stayed aligned from the initial banner through the disclosure pages and confirmation email, with the fee and risk wording remaining consistent across the process.
+
+FAILED CRITERIA:
+  [No] C2: Does the question require identifying the exact banner wording, “flexible way to earn variable crypto rewards on idle holdings,” as part of the answer?
+  [No] C3: Does the question require the landing-page risk disclosures that staking rewards were not guaranteed, capital values could fall, and access could be delayed during lock-up periods?
+  [No] C4: Does the question require the follow-up email terms that the provider fee was 1.5% of rewards earned and withdrawals were allowed only after the seven-day notice period?
+  [No] C5: Does the question require the confirmation-screen detail that it repeated the 1.5% fee, the lock-up period, and the non-guaranteed rewards language in the same order as the landing page?
+  [DISAGREE] C9: Does the question avoid giving away the answer by already stating the full banner, landing-page, email, and confirmation-screen wording or by explicitly asserting that the sequence stayed aligned?
+
+CLASSIFY: (a) malformed  (b) unanswerable from docs  (c) well-formed but hard

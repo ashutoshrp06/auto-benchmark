@@ -123,9 +123,11 @@ def programmatic_qa_process_type3(data):
 
     for i in range(len(ls)):
         try:
+            if isinstance(ls[i]["Answer"], str):
+                ls[i]["Answer"] = ls[i]["Answer"].replace('\\n', '\n')
+            if isinstance(ls[i]["Documents_Info"], str):
+                ls[i]["Documents_Info"] = ls[i]["Documents_Info"].replace('\\n', '\n')
             answer = ls[i]["Answer"]
-            if isinstance(answer, str):
-                answer = answer.replace('\\n', '\n')
 
             ans_points_og = answer.split("\n")
             ans_points = []
@@ -136,8 +138,6 @@ def programmatic_qa_process_type3(data):
                     ans_points.append(ans_pt.strip())
 
             docs_info = ls[i]["Documents_Info"]
-            if isinstance(docs_info, str):
-                docs_info = docs_info.replace('\\n', '\n')
 
             doc_evidence = {1: []}
             doc_no = 1

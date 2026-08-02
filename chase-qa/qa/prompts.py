@@ -397,7 +397,7 @@ Given below is a situation faced by {question[0]} when searching {question[1]}. 
 Question: {question[2]}
 Answer: {question[3]}
 
-Given below are the assigned answer points for each document.
+Given below are the assigned answer points for each document. The block below tells you exactly how many documents to write. Write one document for every "Document N Answer points assigned:" heading it contains, no more and no fewer. If it lists 5 headings you must output 5 documents, numbered Document 1 to Document 5. Do not merge two headings into one document and do not omit a heading because its points seem short or similar to another's.
 {question[4]}
 
 Your job is to create long documents according to this information. For each document, first create 10-12 unique other points that are in no way related to the topic of the question and answer (different points for each document). These points should discuss very different things about a similar but different topic. The unrelated points must be specific and detailed, with the same level of concrete factual content (figures, named rules, named products) as the assigned answer points, not generic statements. They should sit in a closely adjacent area of personal financial advice so they are difficult to distinguish from the genuine answer points on style or specificity alone, while remaining clearly about a different underlying question. Then use these points along with the assigned answer points to create a long document (at least 1200-1500 words long). The assigned answer points must be discussed taking into account the question. You must only discuss about these points and nothing else. Change the order of the points so that the answer points are embedded inside the document. When embedding each assigned answer point into the dialogue, you may restructure the sentence to fit natural conversation, but every specific fact, figure, rate, date, and named rule within that point must be preserved exactly as given, without paraphrasing, rounding, generalising, or omitting any of it. Assign an appropriate title to the document. Do not summarize or conclude the document in the end.
@@ -628,7 +628,17 @@ Give me 5 examples of real-life scenarios where a USER_PERSONA may seek informat
 Each scenario must be grounded in one of the following:
 (a) One of these existing regulatory areas -- do not invent a new regulatory topic:
 {question[1]}
-(b) A quantitative scenario requiring the client to compare or calculate figures (e.g. comparing pension contributions vs ISA growth, comparing annuity quotes, assessing portfolio risk-adjusted returns), not tied to a specific named regulation.
+(b) A quantitative comparison or calculation the client must work through, not tied to any specific named regulation. Use one of these kinds:
+- Comparing pension contributions against ISA growth over a fixed horizon
+- Comparing two or more annuity quotations on starting income and guarantees
+- Assessing risk-adjusted returns across portfolio options
+- Working out mortgage affordability across competing rate and term combinations
+- Comparing the total cost of borrowing options over their full term
+- Projecting drawdown sustainability against a target income
+- Comparing charges and their compounding effect across product wrappers
+- Working out the tax position across alternative withdrawal orders
+
+Of the 5 scenarios, the second one must be grounded in (b). The other four must be grounded in (a). This split is required, not a preference.
 
 Vary the structure across the 5 scenarios. Do not give every scenario the shape "client doing X seeking Y advice". Vary who the persona is (an individual, a couple, an executor, a trustee, a business owner, someone acting under a power of attorney), what stage they are at (before a decision, part-way through a process, reviewing something already done, correcting an earlier mistake), and what the collection of documents holds (regulator handbook text, provider illustrations, adviser correspondence, account statements, suitability reports).
 

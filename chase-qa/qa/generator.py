@@ -339,7 +339,7 @@ _ALLOWED_OPS = {
 }
 
 def safe_eval_arithmetic(expr):
-	node = ast.parse(expr, mode="eval").body
+	node = ast.parse(expr.replace("^", "**"), mode="eval").body
 	return _safe_eval_node(node)
 
 def _safe_eval_node(node):
@@ -365,7 +365,7 @@ _STEP_PATTERN = re.compile(r"^Step\s+\d+\s*:\s*(.*)$", re.IGNORECASE)
 
 def _extract_literals(expr):
 	try:
-		tree = ast.parse(expr, mode="eval")
+		tree = ast.parse(expr.replace("^", "**"), mode="eval")
 	except Exception:
 		return []
 	nums = []
