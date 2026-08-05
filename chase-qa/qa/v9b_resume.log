@@ -1,0 +1,253 @@
+Stem:       v9b
+Model:      gpt-5.4-mini (elm)
+Target:     900 on track 'reg'
+Batches:    up to 6, scenario-iters 20, qa-iters 1
+Types:      1 2 3
+
+##################################################################
+  BATCH 1 of at most 6   run=v9b-b1
+##################################################################
+-- cleaned corpora already present for every type, skipping generation
+-- type1 already judged, skipping
+-- type2 already judged, skipping
+-- type3 already judged, skipping
+
+-- dedup across: v9b-b1
+Loaded 789 rows from 3 folder(s)
+Batch   QA_Type
+v9b-b1  type1      260
+        type2      256
+        type3      273
+Exact QID duplicates: 0
+Near-duplicate question pairs, cumulative at each threshold:
+  >=   50%:      65 total,       0 cross-batch,       4 cross-type
+  >=   60%:      17 total,       0 cross-batch,       1 cross-type
+  >=   70%:       4 total,       0 cross-batch,       1 cross-type
+  >=   80%:       0 total,       0 cross-batch,       0 cross-type
+  >=   90%:       0 total,       0 cross-batch,       0 cross-type
+Near-duplicates dropped at >= 60% (scope cross_batch, cross_type False): 0
+FINAL: 789 rows in, 789 rows out
+Batch   QA_Type
+v9b-b1  type1      260
+        type2      256
+        type3      273
+Wrote generation_outputs/v9b/combined_corpus.tsv (789 rows, round-trip verified)
+
+-- cumulative count
+combined corpus: 789 rows, all QIDs distinct
+  v9b-b1 type1                  99 counted of   260 cleaned
+  v9b-b1 type2                 119 counted of   256 cleaned
+  v9b-b1 type3                 120 counted of   273 cleaned
+track=reg  pass_frac=0.75  TOTAL=338
+
+  BATCH 1 DONE.  cumulative reg = 338 / 900
+
+##################################################################
+  BATCH 2 of at most 6   run=v9b-b2
+##################################################################
+-- cleaned corpora already present for every type, skipping generation
+-- type1 already judged, skipping
+-- type2 already judged, skipping
+-- type3 already judged, skipping
+
+-- dedup across: v9b-b1,v9b-b2
+Loaded 1426 rows from 6 folder(s)
+Batch   QA_Type
+v9b-b1  type1      260
+        type2      256
+        type3      273
+v9b-b2  type1      196
+        type2      197
+        type3      244
+Exact QID duplicates: 0
+Near-duplicate question pairs, cumulative at each threshold:
+  >=   50%:     105 total,       0 cross-batch,       7 cross-type
+  >=   60%:      24 total,       0 cross-batch,       2 cross-type
+  >=   70%:       6 total,       0 cross-batch,       1 cross-type
+  >=   80%:       0 total,       0 cross-batch,       0 cross-type
+  >=   90%:       0 total,       0 cross-batch,       0 cross-type
+Near-duplicates dropped at >= 60% (scope cross_batch, cross_type False): 0
+FINAL: 1426 rows in, 1426 rows out
+Batch   QA_Type
+v9b-b1  type1      260
+        type2      256
+        type3      273
+v9b-b2  type1      196
+        type2      197
+        type3      244
+Wrote generation_outputs/v9b/combined_corpus.tsv (1426 rows, round-trip verified)
+
+-- cumulative count
+combined corpus: 1426 rows, all QIDs distinct
+  v9b-b1 type1                  99 counted of   260 cleaned
+  v9b-b1 type2                 119 counted of   256 cleaned
+  v9b-b1 type3                 120 counted of   273 cleaned
+  v9b-b2 type1                  81 counted of   196 cleaned
+  v9b-b2 type2                 108 counted of   197 cleaned
+  v9b-b2 type3                 112 counted of   244 cleaned
+track=reg  pass_frac=0.75  TOTAL=639
+
+  BATCH 2 DONE.  cumulative reg = 639 / 900
+
+##################################################################
+  BATCH 3 of at most 6   run=v9b-b3
+##################################################################
+-- cleaned corpora already present for every type, skipping generation
+-- type1 already judged, skipping
+-- type2 already judged, skipping
+-- type3 already judged, skipping
+
+-- dedup across: v9b-b1,v9b-b2,v9b-b3
+Loaded 2032 rows from 9 folder(s)
+Batch   QA_Type
+v9b-b1  type1      260
+        type2      256
+        type3      273
+v9b-b2  type1      196
+        type2      197
+        type3      244
+v9b-b3  type1      191
+        type2      207
+        type3      208
+Exact QID duplicates: 0
+Near-duplicate question pairs, cumulative at each threshold:
+  >=   50%:     158 total,       1 cross-batch,      12 cross-type
+  >=   60%:      33 total,       0 cross-batch,       2 cross-type
+  >=   70%:       6 total,       0 cross-batch,       1 cross-type
+  >=   80%:       0 total,       0 cross-batch,       0 cross-type
+  >=   90%:       0 total,       0 cross-batch,       0 cross-type
+Near-duplicates dropped at >= 60% (scope cross_batch, cross_type False): 0
+FINAL: 2032 rows in, 2032 rows out
+Batch   QA_Type
+v9b-b1  type1      260
+        type2      256
+        type3      273
+v9b-b2  type1      196
+        type2      197
+        type3      244
+v9b-b3  type1      191
+        type2      207
+        type3      208
+Wrote generation_outputs/v9b/combined_corpus.tsv (2032 rows, round-trip verified)
+
+-- cumulative count
+combined corpus: 2032 rows, all QIDs distinct
+  v9b-b1 type1                  99 counted of   260 cleaned
+  v9b-b1 type2                 119 counted of   256 cleaned
+  v9b-b1 type3                 120 counted of   273 cleaned
+  v9b-b2 type1                  81 counted of   196 cleaned
+  v9b-b2 type2                 108 counted of   197 cleaned
+  v9b-b2 type3                 112 counted of   244 cleaned
+  v9b-b3 type1                  79 counted of   191 cleaned
+  v9b-b3 type2                  87 counted of   207 cleaned
+  v9b-b3 type3                  93 counted of   208 cleaned
+track=reg  pass_frac=0.75  TOTAL=898
+
+  BATCH 3 DONE.  cumulative reg = 898 / 900
+
+##################################################################
+  BATCH 4 of at most 6   run=v9b-b4
+##################################################################
+-- cleaned corpora already present for every type, skipping generation
+-- type1 already judged, skipping
+-- type2 already judged, skipping
+-- RocketEval type3 across 16 shard(s)
+  -r01: 16 rows -> generation_outputs/elm-docs-type3-v9b-b4-r01
+  -r02: 16 rows -> generation_outputs/elm-docs-type3-v9b-b4-r02
+  -r03: 16 rows -> generation_outputs/elm-docs-type3-v9b-b4-r03
+  -r04: 16 rows -> generation_outputs/elm-docs-type3-v9b-b4-r04
+  -r05: 15 rows -> generation_outputs/elm-docs-type3-v9b-b4-r05
+  -r06: 15 rows -> generation_outputs/elm-docs-type3-v9b-b4-r06
+  -r07: 15 rows -> generation_outputs/elm-docs-type3-v9b-b4-r07
+  -r08: 15 rows -> generation_outputs/elm-docs-type3-v9b-b4-r08
+  -r09: 15 rows -> generation_outputs/elm-docs-type3-v9b-b4-r09
+  -r10: 15 rows -> generation_outputs/elm-docs-type3-v9b-b4-r10
+  -r11: 15 rows -> generation_outputs/elm-docs-type3-v9b-b4-r11
+  -r12: 15 rows -> generation_outputs/elm-docs-type3-v9b-b4-r12
+  -r13: 15 rows -> generation_outputs/elm-docs-type3-v9b-b4-r13
+  -r14: 15 rows -> generation_outputs/elm-docs-type3-v9b-b4-r14
+  -r15: 15 rows -> generation_outputs/elm-docs-type3-v9b-b4-r15
+  -r16: 15 rows -> generation_outputs/elm-docs-type3-v9b-b4-r16
+  round-trip verified: 244 rows, 19 columns, order preserved
+Merged 16 shards -> generation_outputs/elm-docs-type3-v9b-b4/rocketeval/judgments.tsv
+  judgement rows: 4516  questions: 244  judges: 2
+INFO: judges per criterion: {2: 2258}
+Config: unsure=exclude  pass_frac=0.75  disagree_frac=0.34
+Questions: 244
+Overall: PASS=119 FAIL=74 DISAGREE=51  mean_pass_frac=0.6766
+Seed_Type=dynamic_generic: PASS=18 FAIL=9 DISAGREE=7  mean_pass_frac=0.7199
+Seed_Type=dynamic_reg: PASS=101 FAIL=65 DISAGREE=44  mean_pass_frac=0.6696
+QA_Type=type3: PASS=119 FAIL=74 DISAGREE=51  mean_pass_frac=0.6766
+
+-- dedup across: v9b-b1,v9b-b2,v9b-b3,v9b-b4
+Loaded 2685 rows from 12 folder(s)
+Batch   QA_Type
+v9b-b1  type1      260
+        type2      256
+        type3      273
+v9b-b2  type1      196
+        type2      197
+        type3      244
+v9b-b3  type1      191
+        type2      207
+        type3      208
+v9b-b4  type1      205
+        type2      204
+        type3      244
+Exact QID duplicates: 0
+Near-duplicate question pairs, cumulative at each threshold:
+  >=   50%:     203 total,       2 cross-batch,      18 cross-type
+  >=   60%:      49 total,       0 cross-batch,       3 cross-type
+  >=   70%:       9 total,       0 cross-batch,       1 cross-type
+  >=   80%:       0 total,       0 cross-batch,       0 cross-type
+  >=   90%:       0 total,       0 cross-batch,       0 cross-type
+Near-duplicates dropped at >= 60% (scope cross_batch, cross_type False): 0
+FINAL: 2685 rows in, 2685 rows out
+Batch   QA_Type
+v9b-b1  type1      260
+        type2      256
+        type3      273
+v9b-b2  type1      196
+        type2      197
+        type3      244
+v9b-b3  type1      191
+        type2      207
+        type3      208
+v9b-b4  type1      205
+        type2      204
+        type3      244
+Wrote generation_outputs/v9b/combined_corpus.tsv (2685 rows, round-trip verified)
+
+-- cumulative count
+combined corpus: 2685 rows, all QIDs distinct
+  v9b-b1 type1                  99 counted of   260 cleaned
+  v9b-b1 type2                 119 counted of   256 cleaned
+  v9b-b1 type3                 120 counted of   273 cleaned
+  v9b-b2 type1                  81 counted of   196 cleaned
+  v9b-b2 type2                 108 counted of   197 cleaned
+  v9b-b2 type3                 112 counted of   244 cleaned
+  v9b-b3 type1                  79 counted of   191 cleaned
+  v9b-b3 type2                  87 counted of   207 cleaned
+  v9b-b3 type3                  93 counted of   208 cleaned
+  v9b-b4 type1                  90 counted of   205 cleaned
+  v9b-b4 type2                 100 counted of   204 cleaned
+  v9b-b4 type3                 101 counted of   244 cleaned
+track=reg  pass_frac=0.75  TOTAL=1189
+
+  BATCH 4 DONE.  cumulative reg = 1189 / 900
+
+TARGET REACHED after 4 batch(es).
+
+==================================================================
+  batches run: v9b-b1 v9b-b2 v9b-b3 v9b-b4
+  cumulative reg = 1189, target 900
+  combined corpus: generation_outputs/v9b/combined_corpus.tsv
+==================================================================
+
+wrote generation_outputs/v9b/combined_type1.tsv  852 rows, 4 batch(es), round-trip verified
+wrote generation_outputs/v9b/combined_type2.tsv  864 rows, 4 batch(es), round-trip verified
+wrote generation_outputs/v9b/combined_type3.tsv  969 rows, 4 batch(es), round-trip verified
+
+Next, one run_eval.sh per (type, model, solver prompt) over those files.
+Type 3 needs -e type3-causal-check. Results join back positionally, so the
+split files carry QID and Batch for the analysis frame.

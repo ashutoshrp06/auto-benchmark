@@ -1,0 +1,1176 @@
+Stem:       v9b
+Model:      gpt-5.4-mini (elm)
+Target:     900 on track 'reg'
+Batches:    up to 6, scenario-iters 20, qa-iters 1
+Types:      1 2 3
+
+##################################################################
+  BATCH 1 of at most 6   run=v9b-b1
+##################################################################
+-- emit_scope all, prior scenario files: 0
+Types:      1 2 3
+Run name:   v9b-b1
+Model:      gpt-5.4-mini (elm)
+Stages:     1 to 10
+Shards:     16
+QA iters:   t1=1  t2=1  t3=1
+Scenarios:  elm-scenarios-v9b-b1
+
+==================================================================
+  STAGE 1 - Scenarios (seeded + self-expansion, num_iters 20)
+==================================================================
+/Users/ashu/Downloads/MSc Project Plan/auto-benchmark/chase-qa/qa/generator.py:17: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai # type: ignore
+exemplars: 15 entries, 5 generic, all parseable
+Completed 1 / 20...Completed 2 / 20...Completed 3 / 20...Completed 4 / 20...Completed 5 / 20...Completed 6 / 20...Completed 7 / 20...Completed 8 / 20...Completed 9 / 20...Completed 10 / 20...Completed 11 / 20...Completed 12 / 20...Completed 13 / 20...Completed 14 / 20...Completed 15 / 20...Completed 16 / 20...Completed 17 / 20...Completed 18 / 20...Completed 19 / 20...Completed 20 / 20...Total input tokens:  27660
+Total output tokens:  8249
+  elm-scenarios-v9b-b1: 113 rows
+
+==================================================================
+  STAGE 1b - Shard scenarios into 16 parts
+==================================================================
+  -s01: 8 rows -> generation_outputs/elm-scenarios-v9b-b1-s01
+  -s02: 7 rows -> generation_outputs/elm-scenarios-v9b-b1-s02
+  -s03: 7 rows -> generation_outputs/elm-scenarios-v9b-b1-s03
+  -s04: 7 rows -> generation_outputs/elm-scenarios-v9b-b1-s04
+  -s05: 7 rows -> generation_outputs/elm-scenarios-v9b-b1-s05
+  -s06: 7 rows -> generation_outputs/elm-scenarios-v9b-b1-s06
+  -s07: 7 rows -> generation_outputs/elm-scenarios-v9b-b1-s07
+  -s08: 7 rows -> generation_outputs/elm-scenarios-v9b-b1-s08
+  -s09: 7 rows -> generation_outputs/elm-scenarios-v9b-b1-s09
+  -s10: 7 rows -> generation_outputs/elm-scenarios-v9b-b1-s10
+  -s11: 7 rows -> generation_outputs/elm-scenarios-v9b-b1-s11
+  -s12: 7 rows -> generation_outputs/elm-scenarios-v9b-b1-s12
+  -s13: 7 rows -> generation_outputs/elm-scenarios-v9b-b1-s13
+  -s14: 7 rows -> generation_outputs/elm-scenarios-v9b-b1-s14
+  -s15: 7 rows -> generation_outputs/elm-scenarios-v9b-b1-s15
+  -s16: 7 rows -> generation_outputs/elm-scenarios-v9b-b1-s16
+  round-trip verified: 113 rows, 7 columns
+Wrote manifest: generation_outputs/elm-scenarios-v9b-b1/shards.manifest (16 non-empty shards, 113 rows total)
+launched shard -s01 (pid 67934) -> generation_outputs/logs-v9b-b1/shard-s01.log
+launched shard -s02 (pid 67935) -> generation_outputs/logs-v9b-b1/shard-s02.log
+launched shard -s03 (pid 67937) -> generation_outputs/logs-v9b-b1/shard-s03.log
+launched shard -s04 (pid 67938) -> generation_outputs/logs-v9b-b1/shard-s04.log
+launched shard -s05 (pid 67942) -> generation_outputs/logs-v9b-b1/shard-s05.log
+launched shard -s06 (pid 67945) -> generation_outputs/logs-v9b-b1/shard-s06.log
+launched shard -s07 (pid 67950) -> generation_outputs/logs-v9b-b1/shard-s07.log
+launched shard -s08 (pid 67952) -> generation_outputs/logs-v9b-b1/shard-s08.log
+launched shard -s09 (pid 67956) -> generation_outputs/logs-v9b-b1/shard-s09.log
+launched shard -s10 (pid 67959) -> generation_outputs/logs-v9b-b1/shard-s10.log
+launched shard -s11 (pid 67964) -> generation_outputs/logs-v9b-b1/shard-s11.log
+launched shard -s12 (pid 67966) -> generation_outputs/logs-v9b-b1/shard-s12.log
+launched shard -s13 (pid 67971) -> generation_outputs/logs-v9b-b1/shard-s13.log
+launched shard -s14 (pid 67976) -> generation_outputs/logs-v9b-b1/shard-s14.log
+launched shard -s15 (pid 67978) -> generation_outputs/logs-v9b-b1/shard-s15.log
+launched shard -s16 (pid 67981) -> generation_outputs/logs-v9b-b1/shard-s16.log
+  -s01: OK
+  -s02: OK
+  -s03: OK
+  -s04: OK
+  -s05: OK
+  -s06: OK
+  -s07: OK
+  -s08: OK
+  -s09: OK
+  -s10: OK
+  -s11: OK
+  -s12: OK
+  -s13: OK
+  -s14: OK
+  -s15: OK
+  -s16: OK
+
+------------------------- row counts by stage --------------------
+stage 2 (prog_qa):
+  elm-qa-type1-v9b-b1: 79 rows across 16 shard(s)
+  elm-qa-type2-v9b-b1: 85 rows across 16 shard(s)
+  elm-qa-type3-v9b-b1: 83 rows across 16 shard(s)
+stage 3 (prog_qa_modified):
+  elm-qa-type1-v9b-b1: 78 rows across 16 shard(s)
+  elm-qa-type2-v9b-b1: 78 rows across 16 shard(s)
+  elm-qa-type3-v9b-b1: 83 rows across 16 shard(s)
+stage 4 (adv prog_qa):
+  elm-adv-type1-v9b-b1: 78 rows across 16 shard(s)
+  elm-adv-type2-v9b-b1: 78 rows across 16 shard(s)
+  elm-adv-type3-v9b-b1: 83 rows across 16 shard(s)
+stage 5 (adv prog_qa_modified):
+  elm-adv-type1-v9b-b1: 78 rows across 16 shard(s)
+  elm-adv-type2-v9b-b1: 78 rows across 16 shard(s)
+  elm-adv-type3-v9b-b1: 83 rows across 16 shard(s)
+stage 6 (adv verified):
+  elm-adv-type1-v9b-b1: 78 rows across 16 shard(s)
+  elm-adv-type2-v9b-b1: 77 rows across 16 shard(s)
+  elm-adv-type3-v9b-b1: 83 rows across 16 shard(s)
+stage 7 (programmatic_data):
+  elm-docs-type1-v9b-b1: 78 rows across 16 shard(s)
+  elm-docs-type2-v9b-b1: 77 rows across 16 shard(s)
+  elm-docs-type3-v9b-b1: 83 rows across 16 shard(s)
+stage 8 (programmatic_data_modified):
+  elm-docs-type1-v9b-b1: 293 rows across 16 shard(s)
+  elm-docs-type2-v9b-b1: 291 rows across 16 shard(s)
+  elm-docs-type3-v9b-b1: 321 rows across 16 shard(s)
+stage 9 (docs verified):
+  elm-docs-type1-v9b-b1: 260 rows across 16 shard(s)
+  elm-docs-type2-v9b-b1: 256 rows across 16 shard(s)
+  elm-docs-type3-v9b-b1: 273 rows across 16 shard(s)
+------------------------------------------------------------------
+
+==================================================================
+  STAGE 9b - Merge shards and renumber positional IDs
+==================================================================
+Merged 16 shards -> generation_outputs/elm-docs-type1-v9b-b1/programmatic_data_modified_verified.tsv
+  rows: 260  Root_IDs: 78  qno_mode: global
+Merged 16 shards -> generation_outputs/elm-docs-type2-v9b-b1/programmatic_data_modified_verified.tsv
+  rows: 256  Root_IDs: 77  qno_mode: global
+Merged 16 shards -> generation_outputs/elm-docs-type3-v9b-b1/programmatic_data_modified_verified.tsv
+  rows: 273  Root_IDs: 83  qno_mode: global
+  elm-docs-type1-v9b-b1: 260 rows
+  elm-docs-type2-v9b-b1: 256 rows
+  elm-docs-type3-v9b-b1: 273 rows
+
+==================================================================
+  STAGE 10 - Cleanup (unsharded, cross-row)
+==================================================================
+Max Context Size:  15017
+Rows removed (no relevant documents):  0
+Avg Context Size:  8708.530769230769
+QID: qa_type='type1', 260 unique across 260 rows
+Size of the cleaned data:  260
+Max Context Size:  14719
+Rows removed (no relevant documents):  0
+Avg Context Size:  9852.05859375
+QID: qa_type='type2', 256 unique across 256 rows
+Size of the cleaned data:  256
+Max Context Size:  18041
+Rows removed (no relevant documents):  0
+Avg Context Size:  10163.904761904761
+QID: qa_type='type3', 273 unique across 273 rows
+Size of the cleaned data:  273
+  elm-docs-type1-v9b-b1: 260 rows
+  elm-docs-type2-v9b-b1: 256 rows
+  elm-docs-type3-v9b-b1: 273 rows
+
+==================================================================
+  Pipeline finished: stages 1-10, run v9b-b1, shards 16
+==================================================================
+
+RocketEval next:
+  python checklist_generator.py -out_dir generation_outputs/ -folder_name elm-docs-type1-v9b-b1 -qa_type type1 -model_type elm -model gpt-5.4-mini
+  # judge_panel.py appends (mode='a'). Delete its output before any rerun or rows duplicate.
+  python judge_panel.py -out_dir generation_outputs/ -folder_name elm-docs-type1-v9b-b1
+  python poll_aggregate.py -out_dir generation_outputs/ -folder_name elm-docs-type1-v9b-b1 -unsure exclude -pass_frac 0.75 -disagree_frac 0.34
+  python checklist_generator.py -out_dir generation_outputs/ -folder_name elm-docs-type2-v9b-b1 -qa_type type2 -model_type elm -model gpt-5.4-mini
+  # judge_panel.py appends (mode='a'). Delete its output before any rerun or rows duplicate.
+  python judge_panel.py -out_dir generation_outputs/ -folder_name elm-docs-type2-v9b-b1
+  python poll_aggregate.py -out_dir generation_outputs/ -folder_name elm-docs-type2-v9b-b1 -unsure exclude -pass_frac 0.75 -disagree_frac 0.34
+  python checklist_generator.py -out_dir generation_outputs/ -folder_name elm-docs-type3-v9b-b1 -qa_type type3 -model_type elm -model gpt-5.4-mini
+  # judge_panel.py appends (mode='a'). Delete its output before any rerun or rows duplicate.
+  python judge_panel.py -out_dir generation_outputs/ -folder_name elm-docs-type3-v9b-b1
+  python poll_aggregate.py -out_dir generation_outputs/ -folder_name elm-docs-type3-v9b-b1 -unsure exclude -pass_frac 0.75 -disagree_frac 0.34
+-- stage 1 wrote 98 expanded scenarios (113 rows in scenarios.tsv)
+-- RocketEval type1 across 16 shard(s)
+  -r01: 17 rows -> generation_outputs/elm-docs-type1-v9b-b1-r01
+  -r02: 17 rows -> generation_outputs/elm-docs-type1-v9b-b1-r02
+  -r03: 17 rows -> generation_outputs/elm-docs-type1-v9b-b1-r03
+  -r04: 17 rows -> generation_outputs/elm-docs-type1-v9b-b1-r04
+  -r05: 16 rows -> generation_outputs/elm-docs-type1-v9b-b1-r05
+  -r06: 16 rows -> generation_outputs/elm-docs-type1-v9b-b1-r06
+  -r07: 16 rows -> generation_outputs/elm-docs-type1-v9b-b1-r07
+  -r08: 16 rows -> generation_outputs/elm-docs-type1-v9b-b1-r08
+  -r09: 16 rows -> generation_outputs/elm-docs-type1-v9b-b1-r09
+  -r10: 16 rows -> generation_outputs/elm-docs-type1-v9b-b1-r10
+  -r11: 16 rows -> generation_outputs/elm-docs-type1-v9b-b1-r11
+  -r12: 16 rows -> generation_outputs/elm-docs-type1-v9b-b1-r12
+  -r13: 16 rows -> generation_outputs/elm-docs-type1-v9b-b1-r13
+  -r14: 16 rows -> generation_outputs/elm-docs-type1-v9b-b1-r14
+  -r15: 16 rows -> generation_outputs/elm-docs-type1-v9b-b1-r15
+  -r16: 16 rows -> generation_outputs/elm-docs-type1-v9b-b1-r16
+  round-trip verified: 260 rows, 19 columns, order preserved
+Merged 16 shards -> generation_outputs/elm-docs-type1-v9b-b1/rocketeval/judgments.tsv
+  judgement rows: 4138  questions: 260  judges: 2
+INFO: judges per criterion: {2: 2069}
+Config: unsure=exclude  pass_frac=0.75  disagree_frac=0.34
+Questions: 260
+Overall: PASS=119 FAIL=46 DISAGREE=95  mean_pass_frac=0.5995
+Seed_Type=dynamic_generic: PASS=15 FAIL=4 DISAGREE=8  mean_pass_frac=0.6488
+Seed_Type=dynamic_reg: PASS=89 FAIL=33 DISAGREE=72  mean_pass_frac=0.6063
+Seed_Type=generic: PASS=5 FAIL=1 DISAGREE=3  mean_pass_frac=0.6766
+Seed_Type=reg: PASS=10 FAIL=8 DISAGREE=12  mean_pass_frac=0.4875
+QA_Type=type1: PASS=119 FAIL=46 DISAGREE=95  mean_pass_frac=0.5995
+-- RocketEval type2 across 16 shard(s)
+  -r01: 16 rows -> generation_outputs/elm-docs-type2-v9b-b1-r01
+  -r02: 16 rows -> generation_outputs/elm-docs-type2-v9b-b1-r02
+  -r03: 16 rows -> generation_outputs/elm-docs-type2-v9b-b1-r03
+  -r04: 16 rows -> generation_outputs/elm-docs-type2-v9b-b1-r04
+  -r05: 16 rows -> generation_outputs/elm-docs-type2-v9b-b1-r05
+  -r06: 16 rows -> generation_outputs/elm-docs-type2-v9b-b1-r06
+  -r07: 16 rows -> generation_outputs/elm-docs-type2-v9b-b1-r07
+  -r08: 16 rows -> generation_outputs/elm-docs-type2-v9b-b1-r08
+  -r09: 16 rows -> generation_outputs/elm-docs-type2-v9b-b1-r09
+  -r10: 16 rows -> generation_outputs/elm-docs-type2-v9b-b1-r10
+  -r11: 16 rows -> generation_outputs/elm-docs-type2-v9b-b1-r11
+  -r12: 16 rows -> generation_outputs/elm-docs-type2-v9b-b1-r12
+  -r13: 16 rows -> generation_outputs/elm-docs-type2-v9b-b1-r13
+  -r14: 16 rows -> generation_outputs/elm-docs-type2-v9b-b1-r14
+  -r15: 16 rows -> generation_outputs/elm-docs-type2-v9b-b1-r15
+  -r16: 16 rows -> generation_outputs/elm-docs-type2-v9b-b1-r16
+  round-trip verified: 256 rows, 19 columns, order preserved
+Merged 16 shards -> generation_outputs/elm-docs-type2-v9b-b1/rocketeval/judgments.tsv
+  judgement rows: 4492  questions: 256  judges: 2
+INFO: judges per criterion: {2: 2246}
+Config: unsure=exclude  pass_frac=0.75  disagree_frac=0.34
+Questions: 256
+Overall: PASS=131 FAIL=52 DISAGREE=73  mean_pass_frac=0.6620
+Seed_Type=dynamic_generic: PASS=9 FAIL=6 DISAGREE=7  mean_pass_frac=0.6667
+Seed_Type=dynamic_reg: PASS=103 FAIL=40 DISAGREE=49  mean_pass_frac=0.6704
+Seed_Type=generic: PASS=3 FAIL=3 DISAGREE=4  mean_pass_frac=0.6306
+Seed_Type=reg: PASS=16 FAIL=3 DISAGREE=13  mean_pass_frac=0.6176
+QA_Type=type2: PASS=131 FAIL=52 DISAGREE=73  mean_pass_frac=0.6620
+-- RocketEval type3 across 16 shard(s)
+  -r01: 18 rows -> generation_outputs/elm-docs-type3-v9b-b1-r01
+  -r02: 17 rows -> generation_outputs/elm-docs-type3-v9b-b1-r02
+  -r03: 17 rows -> generation_outputs/elm-docs-type3-v9b-b1-r03
+  -r04: 17 rows -> generation_outputs/elm-docs-type3-v9b-b1-r04
+  -r05: 17 rows -> generation_outputs/elm-docs-type3-v9b-b1-r05
+  -r06: 17 rows -> generation_outputs/elm-docs-type3-v9b-b1-r06
+  -r07: 17 rows -> generation_outputs/elm-docs-type3-v9b-b1-r07
+  -r08: 17 rows -> generation_outputs/elm-docs-type3-v9b-b1-r08
+  -r09: 17 rows -> generation_outputs/elm-docs-type3-v9b-b1-r09
+  -r10: 17 rows -> generation_outputs/elm-docs-type3-v9b-b1-r10
+  -r11: 17 rows -> generation_outputs/elm-docs-type3-v9b-b1-r11
+  -r12: 17 rows -> generation_outputs/elm-docs-type3-v9b-b1-r12
+  -r13: 17 rows -> generation_outputs/elm-docs-type3-v9b-b1-r13
+  -r14: 17 rows -> generation_outputs/elm-docs-type3-v9b-b1-r14
+  -r15: 17 rows -> generation_outputs/elm-docs-type3-v9b-b1-r15
+  -r16: 17 rows -> generation_outputs/elm-docs-type3-v9b-b1-r16
+  round-trip verified: 273 rows, 19 columns, order preserved
+Merged 16 shards -> generation_outputs/elm-docs-type3-v9b-b1/rocketeval/judgments.tsv
+  judgement rows: 5092  questions: 273  judges: 2
+INFO: judges per criterion: {2: 2546}
+Config: unsure=exclude  pass_frac=0.75  disagree_frac=0.34
+Questions: 273
+Overall: PASS=138 FAIL=64 DISAGREE=71  mean_pass_frac=0.6783
+Seed_Type=dynamic_generic: PASS=13 FAIL=8 DISAGREE=4  mean_pass_frac=0.6853
+Seed_Type=dynamic_reg: PASS=105 FAIL=49 DISAGREE=61  mean_pass_frac=0.6702
+Seed_Type=generic: PASS=5 FAIL=2 DISAGREE=3  mean_pass_frac=0.6811
+Seed_Type=reg: PASS=15 FAIL=5 DISAGREE=3  mean_pass_frac=0.7459
+QA_Type=type3: PASS=138 FAIL=64 DISAGREE=71  mean_pass_frac=0.6783
+
+-- dedup across: v9b-b1
+Loaded 789 rows from 3 folder(s)
+Batch   QA_Type
+v9b-b1  type1      260
+        type2      256
+        type3      273
+Exact QID duplicates: 0
+Near-duplicate question pairs, cumulative at each threshold:
+  >=   50%:      65 total,       0 cross-batch,       4 cross-type
+  >=   60%:      17 total,       0 cross-batch,       1 cross-type
+  >=   70%:       4 total,       0 cross-batch,       1 cross-type
+  >=   80%:       0 total,       0 cross-batch,       0 cross-type
+  >=   90%:       0 total,       0 cross-batch,       0 cross-type
+Near-duplicates dropped at >= 60% (scope cross_batch, cross_type False): 0
+FINAL: 789 rows in, 789 rows out
+Batch   QA_Type
+v9b-b1  type1      260
+        type2      256
+        type3      273
+Wrote generation_outputs/v9b/combined_corpus.tsv (789 rows, round-trip verified)
+
+-- cumulative count
+combined corpus: 789 rows, all QIDs distinct
+  v9b-b1 type1                  99 counted of   260 cleaned
+  v9b-b1 type2                 119 counted of   256 cleaned
+  v9b-b1 type3                 120 counted of   273 cleaned
+track=reg  pass_frac=0.75  TOTAL=338
+
+  BATCH 1 DONE.  cumulative reg = 338 / 900
+
+##################################################################
+  BATCH 2 of at most 6   run=v9b-b2
+##################################################################
+-- emit_scope new, prior scenario files: 1
+Types:      1 2 3
+Run name:   v9b-b2
+Model:      gpt-5.4-mini (elm)
+Stages:     1 to 10
+Shards:     16
+QA iters:   t1=1  t2=1  t3=1
+Scenarios:  elm-scenarios-v9b-b2
+
+==================================================================
+  STAGE 1 - Scenarios (seeded + self-expansion, num_iters 20)
+==================================================================
+/Users/ashu/Downloads/MSc Project Plan/auto-benchmark/chase-qa/qa/generator.py:17: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai # type: ignore
+exemplars: 15 entries, 5 generic, all parseable
+comparing against 113 prior scenario(s)
+Completed 1 / 20...Completed 2 / 20...Completed 3 / 20...Completed 4 / 20...Completed 5 / 20...Completed 6 / 20...Completed 7 / 20...Completed 8 / 20...Completed 9 / 20...Completed 10 / 20...Completed 11 / 20...Completed 12 / 20...Completed 13 / 20...Completed 14 / 20...Completed 15 / 20...Completed 16 / 20...Completed 17 / 20...Completed 18 / 20...Completed 19 / 20...Completed 20 / 20...Total input tokens:  27660
+Total output tokens:  8244
+  elm-scenarios-v9b-b2: 94 rows
+
+==================================================================
+  STAGE 1b - Shard scenarios into 16 parts
+==================================================================
+  -s01: 6 rows -> generation_outputs/elm-scenarios-v9b-b2-s01
+  -s02: 6 rows -> generation_outputs/elm-scenarios-v9b-b2-s02
+  -s03: 6 rows -> generation_outputs/elm-scenarios-v9b-b2-s03
+  -s04: 6 rows -> generation_outputs/elm-scenarios-v9b-b2-s04
+  -s05: 6 rows -> generation_outputs/elm-scenarios-v9b-b2-s05
+  -s06: 6 rows -> generation_outputs/elm-scenarios-v9b-b2-s06
+  -s07: 6 rows -> generation_outputs/elm-scenarios-v9b-b2-s07
+  -s08: 6 rows -> generation_outputs/elm-scenarios-v9b-b2-s08
+  -s09: 6 rows -> generation_outputs/elm-scenarios-v9b-b2-s09
+  -s10: 6 rows -> generation_outputs/elm-scenarios-v9b-b2-s10
+  -s11: 6 rows -> generation_outputs/elm-scenarios-v9b-b2-s11
+  -s12: 6 rows -> generation_outputs/elm-scenarios-v9b-b2-s12
+  -s13: 6 rows -> generation_outputs/elm-scenarios-v9b-b2-s13
+  -s14: 6 rows -> generation_outputs/elm-scenarios-v9b-b2-s14
+  -s15: 5 rows -> generation_outputs/elm-scenarios-v9b-b2-s15
+  -s16: 5 rows -> generation_outputs/elm-scenarios-v9b-b2-s16
+  round-trip verified: 94 rows, 7 columns
+Wrote manifest: generation_outputs/elm-scenarios-v9b-b2/shards.manifest (16 non-empty shards, 94 rows total)
+launched shard -s01 (pid 72691) -> generation_outputs/logs-v9b-b2/shard-s01.log
+launched shard -s02 (pid 72692) -> generation_outputs/logs-v9b-b2/shard-s02.log
+launched shard -s03 (pid 72693) -> generation_outputs/logs-v9b-b2/shard-s03.log
+launched shard -s04 (pid 72695) -> generation_outputs/logs-v9b-b2/shard-s04.log
+launched shard -s05 (pid 72698) -> generation_outputs/logs-v9b-b2/shard-s05.log
+launched shard -s06 (pid 72701) -> generation_outputs/logs-v9b-b2/shard-s06.log
+launched shard -s07 (pid 72703) -> generation_outputs/logs-v9b-b2/shard-s07.log
+launched shard -s08 (pid 72708) -> generation_outputs/logs-v9b-b2/shard-s08.log
+launched shard -s09 (pid 72715) -> generation_outputs/logs-v9b-b2/shard-s09.log
+launched shard -s10 (pid 72719) -> generation_outputs/logs-v9b-b2/shard-s10.log
+launched shard -s11 (pid 72721) -> generation_outputs/logs-v9b-b2/shard-s11.log
+launched shard -s12 (pid 72724) -> generation_outputs/logs-v9b-b2/shard-s12.log
+launched shard -s13 (pid 72729) -> generation_outputs/logs-v9b-b2/shard-s13.log
+launched shard -s14 (pid 72733) -> generation_outputs/logs-v9b-b2/shard-s14.log
+launched shard -s15 (pid 72737) -> generation_outputs/logs-v9b-b2/shard-s15.log
+launched shard -s16 (pid 72739) -> generation_outputs/logs-v9b-b2/shard-s16.log
+  -s01: OK
+  -s02: OK
+  -s03: OK
+  -s04: FAILED at stage 9
+  -s05: OK
+  -s06: OK
+  -s07: OK
+  -s08: OK
+  -s09: OK
+  -s10: OK
+  -s11: OK
+  -s12: OK
+  -s13: OK
+  -s14: OK
+  -s15: OK
+  -s16: OK
+
+SHARD FAILURES: -s04:9
+
+Inspect generation_outputs/logs-v9b-b2/shard<sfx>.log, then rerun that shard with --from <stage>.
+Stage 2 has no resume and overwrites prog_qa.tsv, so a stage-2 rerun
+restarts that shard's QA generation from scratch (no duplication).
+
+-- run_pipeline.sh exited 1 for v9b-b2, attempting shard recovery
+   salvaging 15 of 16 shard(s): -s01 -s02 -s03 -s05 -s06 -s07 -s08 -s09 -s10 -s11 -s12 -s13 -s14 -s15 -s16
+Types:      1 2 3
+Run name:   v9b-b2
+Model:      gpt-5.4-mini (elm)
+Stages:     9 to 10
+Shards:     16
+QA iters:   t1=1  t2=1  t3=1
+Scenarios:  elm-scenarios-v9b-b2
+launched shard -s01 (pid 75922) -> generation_outputs/logs-v9b-b2/shard-s01.log
+launched shard -s02 (pid 75923) -> generation_outputs/logs-v9b-b2/shard-s02.log
+launched shard -s03 (pid 75924) -> generation_outputs/logs-v9b-b2/shard-s03.log
+launched shard -s05 (pid 75925) -> generation_outputs/logs-v9b-b2/shard-s05.log
+launched shard -s06 (pid 75928) -> generation_outputs/logs-v9b-b2/shard-s06.log
+launched shard -s07 (pid 75931) -> generation_outputs/logs-v9b-b2/shard-s07.log
+launched shard -s08 (pid 75934) -> generation_outputs/logs-v9b-b2/shard-s08.log
+launched shard -s09 (pid 75938) -> generation_outputs/logs-v9b-b2/shard-s09.log
+launched shard -s10 (pid 75941) -> generation_outputs/logs-v9b-b2/shard-s10.log
+launched shard -s11 (pid 75945) -> generation_outputs/logs-v9b-b2/shard-s11.log
+launched shard -s12 (pid 75948) -> generation_outputs/logs-v9b-b2/shard-s12.log
+launched shard -s13 (pid 75950) -> generation_outputs/logs-v9b-b2/shard-s13.log
+launched shard -s14 (pid 75953) -> generation_outputs/logs-v9b-b2/shard-s14.log
+launched shard -s15 (pid 75957) -> generation_outputs/logs-v9b-b2/shard-s15.log
+launched shard -s16 (pid 75959) -> generation_outputs/logs-v9b-b2/shard-s16.log
+  -s01: OK
+  -s02: OK
+  -s03: OK
+  -s05: OK
+  -s06: OK
+  -s07: OK
+  -s08: OK
+  -s09: OK
+  -s10: OK
+  -s11: OK
+  -s12: OK
+  -s13: OK
+  -s14: OK
+  -s15: OK
+  -s16: OK
+
+------------------------- row counts by stage --------------------
+stage 9 (docs verified):
+  elm-docs-type1-v9b-b2: 196 rows across 15 shard(s)
+  elm-docs-type2-v9b-b2: 197 rows across 15 shard(s)
+  elm-docs-type3-v9b-b2: 244 rows across 15 shard(s)
+------------------------------------------------------------------
+
+==================================================================
+  STAGE 9b - Merge shards and renumber positional IDs
+==================================================================
+Merged 15 shards -> generation_outputs/elm-docs-type1-v9b-b2/programmatic_data_modified_verified.tsv
+  rows: 196  Root_IDs: 59  qno_mode: global
+Merged 15 shards -> generation_outputs/elm-docs-type2-v9b-b2/programmatic_data_modified_verified.tsv
+  rows: 197  Root_IDs: 63  qno_mode: global
+Merged 15 shards -> generation_outputs/elm-docs-type3-v9b-b2/programmatic_data_modified_verified.tsv
+  rows: 244  Root_IDs: 73  qno_mode: global
+  elm-docs-type1-v9b-b2: 196 rows
+  elm-docs-type2-v9b-b2: 197 rows
+  elm-docs-type3-v9b-b2: 244 rows
+
+==================================================================
+  STAGE 10 - Cleanup (unsharded, cross-row)
+==================================================================
+Max Context Size:  14384
+Rows removed (no relevant documents):  0
+Avg Context Size:  8183.923469387755
+QID: qa_type='type1', 196 unique across 196 rows
+Size of the cleaned data:  196
+Max Context Size:  14770
+Rows removed (no relevant documents):  0
+Avg Context Size:  9691.162436548224
+QID: qa_type='type2', 197 unique across 197 rows
+Size of the cleaned data:  197
+Max Context Size:  16635
+Rows removed (no relevant documents):  0
+Avg Context Size:  10608.438524590163
+QID: qa_type='type3', 244 unique across 244 rows
+Size of the cleaned data:  244
+  elm-docs-type1-v9b-b2: 196 rows
+  elm-docs-type2-v9b-b2: 197 rows
+  elm-docs-type3-v9b-b2: 244 rows
+
+==================================================================
+  Pipeline finished: stages 9-10, run v9b-b2, shards 16
+==================================================================
+
+RocketEval next:
+  python checklist_generator.py -out_dir generation_outputs/ -folder_name elm-docs-type1-v9b-b2 -qa_type type1 -model_type elm -model gpt-5.4-mini
+  # judge_panel.py appends (mode='a'). Delete its output before any rerun or rows duplicate.
+  python judge_panel.py -out_dir generation_outputs/ -folder_name elm-docs-type1-v9b-b2
+  python poll_aggregate.py -out_dir generation_outputs/ -folder_name elm-docs-type1-v9b-b2 -unsure exclude -pass_frac 0.75 -disagree_frac 0.34
+  python checklist_generator.py -out_dir generation_outputs/ -folder_name elm-docs-type2-v9b-b2 -qa_type type2 -model_type elm -model gpt-5.4-mini
+  # judge_panel.py appends (mode='a'). Delete its output before any rerun or rows duplicate.
+  python judge_panel.py -out_dir generation_outputs/ -folder_name elm-docs-type2-v9b-b2
+  python poll_aggregate.py -out_dir generation_outputs/ -folder_name elm-docs-type2-v9b-b2 -unsure exclude -pass_frac 0.75 -disagree_frac 0.34
+  python checklist_generator.py -out_dir generation_outputs/ -folder_name elm-docs-type3-v9b-b2 -qa_type type3 -model_type elm -model gpt-5.4-mini
+  # judge_panel.py appends (mode='a'). Delete its output before any rerun or rows duplicate.
+  python judge_panel.py -out_dir generation_outputs/ -folder_name elm-docs-type3-v9b-b2
+  python poll_aggregate.py -out_dir generation_outputs/ -folder_name elm-docs-type3-v9b-b2 -unsure exclude -pass_frac 0.75 -disagree_frac 0.34
+-- recovered v9b-b2 from 15 shard(s)
+-- stage 1 wrote 94 expanded scenarios (94 rows in scenarios.tsv)
+-- RocketEval type1 across 16 shard(s)
+  -r01: 13 rows -> generation_outputs/elm-docs-type1-v9b-b2-r01
+  -r02: 13 rows -> generation_outputs/elm-docs-type1-v9b-b2-r02
+  -r03: 13 rows -> generation_outputs/elm-docs-type1-v9b-b2-r03
+  -r04: 13 rows -> generation_outputs/elm-docs-type1-v9b-b2-r04
+  -r05: 12 rows -> generation_outputs/elm-docs-type1-v9b-b2-r05
+  -r06: 12 rows -> generation_outputs/elm-docs-type1-v9b-b2-r06
+  -r07: 12 rows -> generation_outputs/elm-docs-type1-v9b-b2-r07
+  -r08: 12 rows -> generation_outputs/elm-docs-type1-v9b-b2-r08
+  -r09: 12 rows -> generation_outputs/elm-docs-type1-v9b-b2-r09
+  -r10: 12 rows -> generation_outputs/elm-docs-type1-v9b-b2-r10
+  -r11: 12 rows -> generation_outputs/elm-docs-type1-v9b-b2-r11
+  -r12: 12 rows -> generation_outputs/elm-docs-type1-v9b-b2-r12
+  -r13: 12 rows -> generation_outputs/elm-docs-type1-v9b-b2-r13
+  -r14: 12 rows -> generation_outputs/elm-docs-type1-v9b-b2-r14
+  -r15: 12 rows -> generation_outputs/elm-docs-type1-v9b-b2-r15
+  -r16: 12 rows -> generation_outputs/elm-docs-type1-v9b-b2-r16
+  round-trip verified: 196 rows, 19 columns, order preserved
+Merged 16 shards -> generation_outputs/elm-docs-type1-v9b-b2/rocketeval/judgments.tsv
+  judgement rows: 3110  questions: 196  judges: 2
+INFO: judges per criterion: {2: 1555}
+Config: unsure=exclude  pass_frac=0.75  disagree_frac=0.34
+Questions: 196
+Overall: PASS=94 FAIL=33 DISAGREE=69  mean_pass_frac=0.5919
+Seed_Type=dynamic_generic: PASS=13 FAIL=6 DISAGREE=4  mean_pass_frac=0.6693
+Seed_Type=dynamic_reg: PASS=81 FAIL=27 DISAGREE=65  mean_pass_frac=0.5816
+QA_Type=type1: PASS=94 FAIL=33 DISAGREE=69  mean_pass_frac=0.5919
+-- RocketEval type2 across 16 shard(s)
+  -r01: 13 rows -> generation_outputs/elm-docs-type2-v9b-b2-r01
+  -r02: 13 rows -> generation_outputs/elm-docs-type2-v9b-b2-r02
+  -r03: 13 rows -> generation_outputs/elm-docs-type2-v9b-b2-r03
+  -r04: 13 rows -> generation_outputs/elm-docs-type2-v9b-b2-r04
+  -r05: 13 rows -> generation_outputs/elm-docs-type2-v9b-b2-r05
+  -r06: 12 rows -> generation_outputs/elm-docs-type2-v9b-b2-r06
+  -r07: 12 rows -> generation_outputs/elm-docs-type2-v9b-b2-r07
+  -r08: 12 rows -> generation_outputs/elm-docs-type2-v9b-b2-r08
+  -r09: 12 rows -> generation_outputs/elm-docs-type2-v9b-b2-r09
+  -r10: 12 rows -> generation_outputs/elm-docs-type2-v9b-b2-r10
+  -r11: 12 rows -> generation_outputs/elm-docs-type2-v9b-b2-r11
+  -r12: 12 rows -> generation_outputs/elm-docs-type2-v9b-b2-r12
+  -r13: 12 rows -> generation_outputs/elm-docs-type2-v9b-b2-r13
+  -r14: 12 rows -> generation_outputs/elm-docs-type2-v9b-b2-r14
+  -r15: 12 rows -> generation_outputs/elm-docs-type2-v9b-b2-r15
+  -r16: 12 rows -> generation_outputs/elm-docs-type2-v9b-b2-r16
+  round-trip verified: 197 rows, 19 columns, order preserved
+Merged 16 shards -> generation_outputs/elm-docs-type2-v9b-b2/rocketeval/judgments.tsv
+  judgement rows: 3478  questions: 197  judges: 2
+INFO: judges per criterion: {2: 1739}
+Config: unsure=exclude  pass_frac=0.75  disagree_frac=0.34
+Questions: 197
+Overall: PASS=116 FAIL=32 DISAGREE=49  mean_pass_frac=0.6874
+Seed_Type=dynamic_generic: PASS=8 FAIL=1 DISAGREE=3  mean_pass_frac=0.7801
+Seed_Type=dynamic_reg: PASS=108 FAIL=31 DISAGREE=46  mean_pass_frac=0.6814
+QA_Type=type2: PASS=116 FAIL=32 DISAGREE=49  mean_pass_frac=0.6874
+-- RocketEval type3 across 16 shard(s)
+  -r01: 16 rows -> generation_outputs/elm-docs-type3-v9b-b2-r01
+  -r02: 16 rows -> generation_outputs/elm-docs-type3-v9b-b2-r02
+  -r03: 16 rows -> generation_outputs/elm-docs-type3-v9b-b2-r03
+  -r04: 16 rows -> generation_outputs/elm-docs-type3-v9b-b2-r04
+  -r05: 15 rows -> generation_outputs/elm-docs-type3-v9b-b2-r05
+  -r06: 15 rows -> generation_outputs/elm-docs-type3-v9b-b2-r06
+  -r07: 15 rows -> generation_outputs/elm-docs-type3-v9b-b2-r07
+  -r08: 15 rows -> generation_outputs/elm-docs-type3-v9b-b2-r08
+  -r09: 15 rows -> generation_outputs/elm-docs-type3-v9b-b2-r09
+  -r10: 15 rows -> generation_outputs/elm-docs-type3-v9b-b2-r10
+  -r11: 15 rows -> generation_outputs/elm-docs-type3-v9b-b2-r11
+  -r12: 15 rows -> generation_outputs/elm-docs-type3-v9b-b2-r12
+  -r13: 15 rows -> generation_outputs/elm-docs-type3-v9b-b2-r13
+  -r14: 15 rows -> generation_outputs/elm-docs-type3-v9b-b2-r14
+  -r15: 15 rows -> generation_outputs/elm-docs-type3-v9b-b2-r15
+  -r16: 15 rows -> generation_outputs/elm-docs-type3-v9b-b2-r16
+  round-trip verified: 244 rows, 19 columns, order preserved
+Merged 16 shards -> generation_outputs/elm-docs-type3-v9b-b2/rocketeval/judgments.tsv
+  judgement rows: 4542  questions: 244  judges: 2
+INFO: judges per criterion: {2: 2271}
+Config: unsure=exclude  pass_frac=0.75  disagree_frac=0.34
+Questions: 244
+Overall: PASS=118 FAIL=73 DISAGREE=53  mean_pass_frac=0.6650
+Seed_Type=dynamic_generic: PASS=6 FAIL=5 DISAGREE=6  mean_pass_frac=0.5869
+Seed_Type=dynamic_reg: PASS=112 FAIL=68 DISAGREE=47  mean_pass_frac=0.6709
+QA_Type=type3: PASS=118 FAIL=73 DISAGREE=53  mean_pass_frac=0.6650
+
+-- dedup across: v9b-b1,v9b-b2
+Loaded 1426 rows from 6 folder(s)
+Batch   QA_Type
+v9b-b1  type1      260
+        type2      256
+        type3      273
+v9b-b2  type1      196
+        type2      197
+        type3      244
+Exact QID duplicates: 0
+Near-duplicate question pairs, cumulative at each threshold:
+  >=   50%:     105 total,       0 cross-batch,       7 cross-type
+  >=   60%:      24 total,       0 cross-batch,       2 cross-type
+  >=   70%:       6 total,       0 cross-batch,       1 cross-type
+  >=   80%:       0 total,       0 cross-batch,       0 cross-type
+  >=   90%:       0 total,       0 cross-batch,       0 cross-type
+Near-duplicates dropped at >= 60% (scope cross_batch, cross_type False): 0
+FINAL: 1426 rows in, 1426 rows out
+Batch   QA_Type
+v9b-b1  type1      260
+        type2      256
+        type3      273
+v9b-b2  type1      196
+        type2      197
+        type3      244
+Wrote generation_outputs/v9b/combined_corpus.tsv (1426 rows, round-trip verified)
+
+-- cumulative count
+combined corpus: 1426 rows, all QIDs distinct
+  v9b-b1 type1                  99 counted of   260 cleaned
+  v9b-b1 type2                 119 counted of   256 cleaned
+  v9b-b1 type3                 120 counted of   273 cleaned
+  v9b-b2 type1                  81 counted of   196 cleaned
+  v9b-b2 type2                 108 counted of   197 cleaned
+  v9b-b2 type3                 112 counted of   244 cleaned
+track=reg  pass_frac=0.75  TOTAL=639
+
+  BATCH 2 DONE.  cumulative reg = 639 / 900
+
+##################################################################
+  BATCH 3 of at most 6   run=v9b-b3
+##################################################################
+-- emit_scope new, prior scenario files: 2
+Types:      1 2 3
+Run name:   v9b-b3
+Model:      gpt-5.4-mini (elm)
+Stages:     1 to 10
+Shards:     16
+QA iters:   t1=1  t2=1  t3=1
+Scenarios:  elm-scenarios-v9b-b3
+
+==================================================================
+  STAGE 1 - Scenarios (seeded + self-expansion, num_iters 20)
+==================================================================
+/Users/ashu/Downloads/MSc Project Plan/auto-benchmark/chase-qa/qa/generator.py:17: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai # type: ignore
+exemplars: 15 entries, 5 generic, all parseable
+comparing against 207 prior scenario(s)
+Completed 1 / 20...Completed 2 / 20...Completed 3 / 20...Completed 4 / 20...Completed 5 / 20...Completed 6 / 20...Completed 7 / 20...Completed 8 / 20...Completed 9 / 20...Completed 10 / 20...Completed 11 / 20...Completed 12 / 20...Completed 13 / 20...Completed 14 / 20...Completed 15 / 20...Completed 16 / 20...Completed 17 / 20...Completed 18 / 20...Completed 19 / 20...Completed 20 / 20...Total input tokens:  27660
+Total output tokens:  8087
+  elm-scenarios-v9b-b3: 91 rows
+
+==================================================================
+  STAGE 1b - Shard scenarios into 16 parts
+==================================================================
+  -s01: 6 rows -> generation_outputs/elm-scenarios-v9b-b3-s01
+  -s02: 6 rows -> generation_outputs/elm-scenarios-v9b-b3-s02
+  -s03: 6 rows -> generation_outputs/elm-scenarios-v9b-b3-s03
+  -s04: 6 rows -> generation_outputs/elm-scenarios-v9b-b3-s04
+  -s05: 6 rows -> generation_outputs/elm-scenarios-v9b-b3-s05
+  -s06: 6 rows -> generation_outputs/elm-scenarios-v9b-b3-s06
+  -s07: 6 rows -> generation_outputs/elm-scenarios-v9b-b3-s07
+  -s08: 6 rows -> generation_outputs/elm-scenarios-v9b-b3-s08
+  -s09: 6 rows -> generation_outputs/elm-scenarios-v9b-b3-s09
+  -s10: 6 rows -> generation_outputs/elm-scenarios-v9b-b3-s10
+  -s11: 6 rows -> generation_outputs/elm-scenarios-v9b-b3-s11
+  -s12: 5 rows -> generation_outputs/elm-scenarios-v9b-b3-s12
+  -s13: 5 rows -> generation_outputs/elm-scenarios-v9b-b3-s13
+  -s14: 5 rows -> generation_outputs/elm-scenarios-v9b-b3-s14
+  -s15: 5 rows -> generation_outputs/elm-scenarios-v9b-b3-s15
+  -s16: 5 rows -> generation_outputs/elm-scenarios-v9b-b3-s16
+  round-trip verified: 91 rows, 7 columns
+Wrote manifest: generation_outputs/elm-scenarios-v9b-b3/shards.manifest (16 non-empty shards, 91 rows total)
+launched shard -s01 (pid 76673) -> generation_outputs/logs-v9b-b3/shard-s01.log
+launched shard -s02 (pid 76674) -> generation_outputs/logs-v9b-b3/shard-s02.log
+launched shard -s03 (pid 76676) -> generation_outputs/logs-v9b-b3/shard-s03.log
+launched shard -s04 (pid 76679) -> generation_outputs/logs-v9b-b3/shard-s04.log
+launched shard -s05 (pid 76680) -> generation_outputs/logs-v9b-b3/shard-s05.log
+launched shard -s06 (pid 76682) -> generation_outputs/logs-v9b-b3/shard-s06.log
+launched shard -s07 (pid 76684) -> generation_outputs/logs-v9b-b3/shard-s07.log
+launched shard -s08 (pid 76692) -> generation_outputs/logs-v9b-b3/shard-s08.log
+launched shard -s09 (pid 76696) -> generation_outputs/logs-v9b-b3/shard-s09.log
+launched shard -s10 (pid 76698) -> generation_outputs/logs-v9b-b3/shard-s10.log
+launched shard -s11 (pid 76703) -> generation_outputs/logs-v9b-b3/shard-s11.log
+launched shard -s12 (pid 76707) -> generation_outputs/logs-v9b-b3/shard-s12.log
+launched shard -s13 (pid 76709) -> generation_outputs/logs-v9b-b3/shard-s13.log
+launched shard -s14 (pid 76713) -> generation_outputs/logs-v9b-b3/shard-s14.log
+launched shard -s15 (pid 76717) -> generation_outputs/logs-v9b-b3/shard-s15.log
+launched shard -s16 (pid 76722) -> generation_outputs/logs-v9b-b3/shard-s16.log
+  -s01: OK
+  -s02: OK
+  -s03: FAILED at stage 9
+  -s04: OK
+  -s05: OK
+  -s06: OK
+  -s07: OK
+  -s08: OK
+  -s09: OK
+  -s10: OK
+  -s11: OK
+  -s12: OK
+  -s13: OK
+  -s14: OK
+  -s15: OK
+  -s16: OK
+
+SHARD FAILURES: -s03:9
+
+Inspect generation_outputs/logs-v9b-b3/shard<sfx>.log, then rerun that shard with --from <stage>.
+Stage 2 has no resume and overwrites prog_qa.tsv, so a stage-2 rerun
+restarts that shard's QA generation from scratch (no duplication).
+
+-- run_pipeline.sh exited 1 for v9b-b3, attempting shard recovery
+   salvaging 15 of 16 shard(s): -s01 -s02 -s04 -s05 -s06 -s07 -s08 -s09 -s10 -s11 -s12 -s13 -s14 -s15 -s16
+Types:      1 2 3
+Run name:   v9b-b3
+Model:      gpt-5.4-mini (elm)
+Stages:     9 to 10
+Shards:     16
+QA iters:   t1=1  t2=1  t3=1
+Scenarios:  elm-scenarios-v9b-b3
+launched shard -s01 (pid 79949) -> generation_outputs/logs-v9b-b3/shard-s01.log
+launched shard -s02 (pid 79950) -> generation_outputs/logs-v9b-b3/shard-s02.log
+launched shard -s04 (pid 79951) -> generation_outputs/logs-v9b-b3/shard-s04.log
+launched shard -s05 (pid 79952) -> generation_outputs/logs-v9b-b3/shard-s05.log
+launched shard -s06 (pid 79954) -> generation_outputs/logs-v9b-b3/shard-s06.log
+launched shard -s07 (pid 79959) -> generation_outputs/logs-v9b-b3/shard-s07.log
+launched shard -s08 (pid 79963) -> generation_outputs/logs-v9b-b3/shard-s08.log
+launched shard -s09 (pid 79966) -> generation_outputs/logs-v9b-b3/shard-s09.log
+launched shard -s10 (pid 79968) -> generation_outputs/logs-v9b-b3/shard-s10.log
+launched shard -s11 (pid 79969) -> generation_outputs/logs-v9b-b3/shard-s11.log
+launched shard -s12 (pid 79970) -> generation_outputs/logs-v9b-b3/shard-s12.log
+launched shard -s13 (pid 79973) -> generation_outputs/logs-v9b-b3/shard-s13.log
+launched shard -s14 (pid 79978) -> generation_outputs/logs-v9b-b3/shard-s14.log
+launched shard -s15 (pid 79981) -> generation_outputs/logs-v9b-b3/shard-s15.log
+launched shard -s16 (pid 79984) -> generation_outputs/logs-v9b-b3/shard-s16.log
+  -s01: OK
+  -s02: OK
+  -s04: OK
+  -s05: OK
+  -s06: OK
+  -s07: OK
+  -s08: OK
+  -s09: OK
+  -s10: OK
+  -s11: OK
+  -s12: OK
+  -s13: OK
+  -s14: OK
+  -s15: OK
+  -s16: OK
+
+------------------------- row counts by stage --------------------
+stage 9 (docs verified):
+  elm-docs-type1-v9b-b3: 191 rows across 15 shard(s)
+  elm-docs-type2-v9b-b3: 207 rows across 15 shard(s)
+  elm-docs-type3-v9b-b3: 208 rows across 15 shard(s)
+------------------------------------------------------------------
+
+==================================================================
+  STAGE 9b - Merge shards and renumber positional IDs
+==================================================================
+Merged 15 shards -> generation_outputs/elm-docs-type1-v9b-b3/programmatic_data_modified_verified.tsv
+  rows: 191  Root_IDs: 60  qno_mode: global
+Merged 15 shards -> generation_outputs/elm-docs-type2-v9b-b3/programmatic_data_modified_verified.tsv
+  rows: 207  Root_IDs: 66  qno_mode: global
+Merged 15 shards -> generation_outputs/elm-docs-type3-v9b-b3/programmatic_data_modified_verified.tsv
+  rows: 208  Root_IDs: 60  qno_mode: global
+  elm-docs-type1-v9b-b3: 191 rows
+  elm-docs-type2-v9b-b3: 207 rows
+  elm-docs-type3-v9b-b3: 208 rows
+
+==================================================================
+  STAGE 10 - Cleanup (unsharded, cross-row)
+==================================================================
+Max Context Size:  13695
+Rows removed (no relevant documents):  0
+Avg Context Size:  8446.30890052356
+QID: qa_type='type1', 191 unique across 191 rows
+Size of the cleaned data:  191
+Max Context Size:  15231
+Rows removed (no relevant documents):  0
+Avg Context Size:  9191.62801932367
+QID: qa_type='type2', 207 unique across 207 rows
+Size of the cleaned data:  207
+Max Context Size:  16678
+Rows removed (no relevant documents):  0
+Avg Context Size:  10352.51923076923
+QID: qa_type='type3', 208 unique across 208 rows
+Size of the cleaned data:  208
+  elm-docs-type1-v9b-b3: 191 rows
+  elm-docs-type2-v9b-b3: 207 rows
+  elm-docs-type3-v9b-b3: 208 rows
+
+==================================================================
+  Pipeline finished: stages 9-10, run v9b-b3, shards 16
+==================================================================
+
+RocketEval next:
+  python checklist_generator.py -out_dir generation_outputs/ -folder_name elm-docs-type1-v9b-b3 -qa_type type1 -model_type elm -model gpt-5.4-mini
+  # judge_panel.py appends (mode='a'). Delete its output before any rerun or rows duplicate.
+  python judge_panel.py -out_dir generation_outputs/ -folder_name elm-docs-type1-v9b-b3
+  python poll_aggregate.py -out_dir generation_outputs/ -folder_name elm-docs-type1-v9b-b3 -unsure exclude -pass_frac 0.75 -disagree_frac 0.34
+  python checklist_generator.py -out_dir generation_outputs/ -folder_name elm-docs-type2-v9b-b3 -qa_type type2 -model_type elm -model gpt-5.4-mini
+  # judge_panel.py appends (mode='a'). Delete its output before any rerun or rows duplicate.
+  python judge_panel.py -out_dir generation_outputs/ -folder_name elm-docs-type2-v9b-b3
+  python poll_aggregate.py -out_dir generation_outputs/ -folder_name elm-docs-type2-v9b-b3 -unsure exclude -pass_frac 0.75 -disagree_frac 0.34
+  python checklist_generator.py -out_dir generation_outputs/ -folder_name elm-docs-type3-v9b-b3 -qa_type type3 -model_type elm -model gpt-5.4-mini
+  # judge_panel.py appends (mode='a'). Delete its output before any rerun or rows duplicate.
+  python judge_panel.py -out_dir generation_outputs/ -folder_name elm-docs-type3-v9b-b3
+  python poll_aggregate.py -out_dir generation_outputs/ -folder_name elm-docs-type3-v9b-b3 -unsure exclude -pass_frac 0.75 -disagree_frac 0.34
+-- recovered v9b-b3 from 15 shard(s)
+-- stage 1 wrote 91 expanded scenarios (91 rows in scenarios.tsv)
+-- RocketEval type1 across 16 shard(s)
+  -r01: 12 rows -> generation_outputs/elm-docs-type1-v9b-b3-r01
+  -r02: 12 rows -> generation_outputs/elm-docs-type1-v9b-b3-r02
+  -r03: 12 rows -> generation_outputs/elm-docs-type1-v9b-b3-r03
+  -r04: 12 rows -> generation_outputs/elm-docs-type1-v9b-b3-r04
+  -r05: 12 rows -> generation_outputs/elm-docs-type1-v9b-b3-r05
+  -r06: 12 rows -> generation_outputs/elm-docs-type1-v9b-b3-r06
+  -r07: 12 rows -> generation_outputs/elm-docs-type1-v9b-b3-r07
+  -r08: 12 rows -> generation_outputs/elm-docs-type1-v9b-b3-r08
+  -r09: 12 rows -> generation_outputs/elm-docs-type1-v9b-b3-r09
+  -r10: 12 rows -> generation_outputs/elm-docs-type1-v9b-b3-r10
+  -r11: 12 rows -> generation_outputs/elm-docs-type1-v9b-b3-r11
+  -r12: 12 rows -> generation_outputs/elm-docs-type1-v9b-b3-r12
+  -r13: 12 rows -> generation_outputs/elm-docs-type1-v9b-b3-r13
+  -r14: 12 rows -> generation_outputs/elm-docs-type1-v9b-b3-r14
+  -r15: 12 rows -> generation_outputs/elm-docs-type1-v9b-b3-r15
+  -r16: 11 rows -> generation_outputs/elm-docs-type1-v9b-b3-r16
+  round-trip verified: 191 rows, 19 columns, order preserved
+Merged 16 shards -> generation_outputs/elm-docs-type1-v9b-b3/rocketeval/judgments.tsv
+  judgement rows: 3036  questions: 191  judges: 2
+INFO: judges per criterion: {2: 1518}
+Config: unsure=exclude  pass_frac=0.75  disagree_frac=0.34
+Questions: 191
+Overall: PASS=97 FAIL=23 DISAGREE=71  mean_pass_frac=0.6125
+Seed_Type=dynamic_generic: PASS=18 FAIL=3 DISAGREE=10  mean_pass_frac=0.6694
+Seed_Type=dynamic_reg: PASS=79 FAIL=20 DISAGREE=61  mean_pass_frac=0.6015
+QA_Type=type1: PASS=97 FAIL=23 DISAGREE=71  mean_pass_frac=0.6125
+-- RocketEval type2 across 16 shard(s)
+  -r01: 13 rows -> generation_outputs/elm-docs-type2-v9b-b3-r01
+  -r02: 13 rows -> generation_outputs/elm-docs-type2-v9b-b3-r02
+  -r03: 13 rows -> generation_outputs/elm-docs-type2-v9b-b3-r03
+  -r04: 13 rows -> generation_outputs/elm-docs-type2-v9b-b3-r04
+  -r05: 13 rows -> generation_outputs/elm-docs-type2-v9b-b3-r05
+  -r06: 13 rows -> generation_outputs/elm-docs-type2-v9b-b3-r06
+  -r07: 13 rows -> generation_outputs/elm-docs-type2-v9b-b3-r07
+  -r08: 13 rows -> generation_outputs/elm-docs-type2-v9b-b3-r08
+  -r09: 13 rows -> generation_outputs/elm-docs-type2-v9b-b3-r09
+  -r10: 13 rows -> generation_outputs/elm-docs-type2-v9b-b3-r10
+  -r11: 13 rows -> generation_outputs/elm-docs-type2-v9b-b3-r11
+  -r12: 13 rows -> generation_outputs/elm-docs-type2-v9b-b3-r12
+  -r13: 13 rows -> generation_outputs/elm-docs-type2-v9b-b3-r13
+  -r14: 13 rows -> generation_outputs/elm-docs-type2-v9b-b3-r14
+  -r15: 13 rows -> generation_outputs/elm-docs-type2-v9b-b3-r15
+  -r16: 12 rows -> generation_outputs/elm-docs-type2-v9b-b3-r16
+  round-trip verified: 207 rows, 19 columns, order preserved
+Merged 16 shards -> generation_outputs/elm-docs-type2-v9b-b3/rocketeval/judgments.tsv
+  judgement rows: 3612  questions: 207  judges: 2
+INFO: judges per criterion: {2: 1806}
+Config: unsure=exclude  pass_frac=0.75  disagree_frac=0.34
+Questions: 207
+Overall: PASS=112 FAIL=43 DISAGREE=52  mean_pass_frac=0.6811
+Seed_Type=dynamic_generic: PASS=25 FAIL=7 DISAGREE=7  mean_pass_frac=0.7432
+Seed_Type=dynamic_reg: PASS=87 FAIL=36 DISAGREE=45  mean_pass_frac=0.6667
+QA_Type=type2: PASS=112 FAIL=43 DISAGREE=52  mean_pass_frac=0.6811
+-- RocketEval type3 across 16 shard(s)
+  -r01: 13 rows -> generation_outputs/elm-docs-type3-v9b-b3-r01
+  -r02: 13 rows -> generation_outputs/elm-docs-type3-v9b-b3-r02
+  -r03: 13 rows -> generation_outputs/elm-docs-type3-v9b-b3-r03
+  -r04: 13 rows -> generation_outputs/elm-docs-type3-v9b-b3-r04
+  -r05: 13 rows -> generation_outputs/elm-docs-type3-v9b-b3-r05
+  -r06: 13 rows -> generation_outputs/elm-docs-type3-v9b-b3-r06
+  -r07: 13 rows -> generation_outputs/elm-docs-type3-v9b-b3-r07
+  -r08: 13 rows -> generation_outputs/elm-docs-type3-v9b-b3-r08
+  -r09: 13 rows -> generation_outputs/elm-docs-type3-v9b-b3-r09
+  -r10: 13 rows -> generation_outputs/elm-docs-type3-v9b-b3-r10
+  -r11: 13 rows -> generation_outputs/elm-docs-type3-v9b-b3-r11
+  -r12: 13 rows -> generation_outputs/elm-docs-type3-v9b-b3-r12
+  -r13: 13 rows -> generation_outputs/elm-docs-type3-v9b-b3-r13
+  -r14: 13 rows -> generation_outputs/elm-docs-type3-v9b-b3-r14
+  -r15: 13 rows -> generation_outputs/elm-docs-type3-v9b-b3-r15
+  -r16: 13 rows -> generation_outputs/elm-docs-type3-v9b-b3-r16
+  round-trip verified: 208 rows, 19 columns, order preserved
+Merged 16 shards -> generation_outputs/elm-docs-type3-v9b-b3/rocketeval/judgments.tsv
+  judgement rows: 3872  questions: 208  judges: 2
+INFO: judges per criterion: {2: 1936}
+Config: unsure=exclude  pass_frac=0.75  disagree_frac=0.34
+Questions: 208
+Overall: PASS=108 FAIL=58 DISAGREE=42  mean_pass_frac=0.6780
+Seed_Type=dynamic_generic: PASS=15 FAIL=11 DISAGREE=6  mean_pass_frac=0.6826
+Seed_Type=dynamic_reg: PASS=93 FAIL=47 DISAGREE=36  mean_pass_frac=0.6772
+QA_Type=type3: PASS=108 FAIL=58 DISAGREE=42  mean_pass_frac=0.6780
+
+-- dedup across: v9b-b1,v9b-b2,v9b-b3
+Loaded 2032 rows from 9 folder(s)
+Batch   QA_Type
+v9b-b1  type1      260
+        type2      256
+        type3      273
+v9b-b2  type1      196
+        type2      197
+        type3      244
+v9b-b3  type1      191
+        type2      207
+        type3      208
+Exact QID duplicates: 0
+Near-duplicate question pairs, cumulative at each threshold:
+  >=   50%:     158 total,       1 cross-batch,      12 cross-type
+  >=   60%:      33 total,       0 cross-batch,       2 cross-type
+  >=   70%:       6 total,       0 cross-batch,       1 cross-type
+  >=   80%:       0 total,       0 cross-batch,       0 cross-type
+  >=   90%:       0 total,       0 cross-batch,       0 cross-type
+Near-duplicates dropped at >= 60% (scope cross_batch, cross_type False): 0
+FINAL: 2032 rows in, 2032 rows out
+Batch   QA_Type
+v9b-b1  type1      260
+        type2      256
+        type3      273
+v9b-b2  type1      196
+        type2      197
+        type3      244
+v9b-b3  type1      191
+        type2      207
+        type3      208
+Wrote generation_outputs/v9b/combined_corpus.tsv (2032 rows, round-trip verified)
+
+-- cumulative count
+combined corpus: 2032 rows, all QIDs distinct
+  v9b-b1 type1                  99 counted of   260 cleaned
+  v9b-b1 type2                 119 counted of   256 cleaned
+  v9b-b1 type3                 120 counted of   273 cleaned
+  v9b-b2 type1                  81 counted of   196 cleaned
+  v9b-b2 type2                 108 counted of   197 cleaned
+  v9b-b2 type3                 112 counted of   244 cleaned
+  v9b-b3 type1                  79 counted of   191 cleaned
+  v9b-b3 type2                  87 counted of   207 cleaned
+  v9b-b3 type3                  93 counted of   208 cleaned
+track=reg  pass_frac=0.75  TOTAL=898
+
+  BATCH 3 DONE.  cumulative reg = 898 / 900
+
+##################################################################
+  BATCH 4 of at most 6   run=v9b-b4
+##################################################################
+-- emit_scope new, prior scenario files: 3
+Types:      1 2 3
+Run name:   v9b-b4
+Model:      gpt-5.4-mini (elm)
+Stages:     1 to 10
+Shards:     16
+QA iters:   t1=1  t2=1  t3=1
+Scenarios:  elm-scenarios-v9b-b4
+
+==================================================================
+  STAGE 1 - Scenarios (seeded + self-expansion, num_iters 20)
+==================================================================
+/Users/ashu/Downloads/MSc Project Plan/auto-benchmark/chase-qa/qa/generator.py:17: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai # type: ignore
+exemplars: 15 entries, 5 generic, all parseable
+comparing against 298 prior scenario(s)
+Completed 1 / 20...Completed 2 / 20...Completed 3 / 20...Completed 4 / 20...Completed 5 / 20...Completed 6 / 20...Completed 7 / 20...Completed 8 / 20...Completed 9 / 20...Completed 10 / 20...Completed 11 / 20...Completed 12 / 20...Completed 13 / 20...Completed 14 / 20...Completed 15 / 20...Completed 16 / 20...Completed 17 / 20...Completed 18 / 20...Completed 19 / 20...Completed 20 / 20...Total input tokens:  27660
+Total output tokens:  8200
+  elm-scenarios-v9b-b4: 96 rows
+
+==================================================================
+  STAGE 1b - Shard scenarios into 16 parts
+==================================================================
+  -s01: 6 rows -> generation_outputs/elm-scenarios-v9b-b4-s01
+  -s02: 6 rows -> generation_outputs/elm-scenarios-v9b-b4-s02
+  -s03: 6 rows -> generation_outputs/elm-scenarios-v9b-b4-s03
+  -s04: 6 rows -> generation_outputs/elm-scenarios-v9b-b4-s04
+  -s05: 6 rows -> generation_outputs/elm-scenarios-v9b-b4-s05
+  -s06: 6 rows -> generation_outputs/elm-scenarios-v9b-b4-s06
+  -s07: 6 rows -> generation_outputs/elm-scenarios-v9b-b4-s07
+  -s08: 6 rows -> generation_outputs/elm-scenarios-v9b-b4-s08
+  -s09: 6 rows -> generation_outputs/elm-scenarios-v9b-b4-s09
+  -s10: 6 rows -> generation_outputs/elm-scenarios-v9b-b4-s10
+  -s11: 6 rows -> generation_outputs/elm-scenarios-v9b-b4-s11
+  -s12: 6 rows -> generation_outputs/elm-scenarios-v9b-b4-s12
+  -s13: 6 rows -> generation_outputs/elm-scenarios-v9b-b4-s13
+  -s14: 6 rows -> generation_outputs/elm-scenarios-v9b-b4-s14
+  -s15: 6 rows -> generation_outputs/elm-scenarios-v9b-b4-s15
+  -s16: 6 rows -> generation_outputs/elm-scenarios-v9b-b4-s16
+  round-trip verified: 96 rows, 7 columns
+Wrote manifest: generation_outputs/elm-scenarios-v9b-b4/shards.manifest (16 non-empty shards, 96 rows total)
+launched shard -s01 (pid 80714) -> generation_outputs/logs-v9b-b4/shard-s01.log
+launched shard -s02 (pid 80715) -> generation_outputs/logs-v9b-b4/shard-s02.log
+launched shard -s03 (pid 80716) -> generation_outputs/logs-v9b-b4/shard-s03.log
+launched shard -s04 (pid 80718) -> generation_outputs/logs-v9b-b4/shard-s04.log
+launched shard -s05 (pid 80720) -> generation_outputs/logs-v9b-b4/shard-s05.log
+launched shard -s06 (pid 80723) -> generation_outputs/logs-v9b-b4/shard-s06.log
+launched shard -s07 (pid 80727) -> generation_outputs/logs-v9b-b4/shard-s07.log
+launched shard -s08 (pid 80733) -> generation_outputs/logs-v9b-b4/shard-s08.log
+launched shard -s09 (pid 80736) -> generation_outputs/logs-v9b-b4/shard-s09.log
+launched shard -s10 (pid 80740) -> generation_outputs/logs-v9b-b4/shard-s10.log
+launched shard -s11 (pid 80745) -> generation_outputs/logs-v9b-b4/shard-s11.log
+launched shard -s12 (pid 80748) -> generation_outputs/logs-v9b-b4/shard-s12.log
+launched shard -s13 (pid 80753) -> generation_outputs/logs-v9b-b4/shard-s13.log
+launched shard -s14 (pid 80757) -> generation_outputs/logs-v9b-b4/shard-s14.log
+launched shard -s15 (pid 80761) -> generation_outputs/logs-v9b-b4/shard-s15.log
+launched shard -s16 (pid 80765) -> generation_outputs/logs-v9b-b4/shard-s16.log
+  -s01: OK
+  -s02: OK
+  -s03: OK
+  -s04: FAILED at stage 9
+  -s05: OK
+  -s06: OK
+  -s07: OK
+  -s08: OK
+  -s09: OK
+  -s10: OK
+  -s11: OK
+  -s12: OK
+  -s13: OK
+  -s14: OK
+  -s15: OK
+  -s16: OK
+
+SHARD FAILURES: -s04:9
+
+Inspect generation_outputs/logs-v9b-b4/shard<sfx>.log, then rerun that shard with --from <stage>.
+Stage 2 has no resume and overwrites prog_qa.tsv, so a stage-2 rerun
+restarts that shard's QA generation from scratch (no duplication).
+
+-- run_pipeline.sh exited 1 for v9b-b4, attempting shard recovery
+   salvaging 15 of 16 shard(s): -s01 -s02 -s03 -s05 -s06 -s07 -s08 -s09 -s10 -s11 -s12 -s13 -s14 -s15 -s16
+Types:      1 2 3
+Run name:   v9b-b4
+Model:      gpt-5.4-mini (elm)
+Stages:     9 to 10
+Shards:     16
+QA iters:   t1=1  t2=1  t3=1
+Scenarios:  elm-scenarios-v9b-b4
+launched shard -s01 (pid 84189) -> generation_outputs/logs-v9b-b4/shard-s01.log
+launched shard -s02 (pid 84190) -> generation_outputs/logs-v9b-b4/shard-s02.log
+launched shard -s03 (pid 84191) -> generation_outputs/logs-v9b-b4/shard-s03.log
+launched shard -s05 (pid 84192) -> generation_outputs/logs-v9b-b4/shard-s05.log
+launched shard -s06 (pid 84195) -> generation_outputs/logs-v9b-b4/shard-s06.log
+launched shard -s07 (pid 84196) -> generation_outputs/logs-v9b-b4/shard-s07.log
+launched shard -s08 (pid 84201) -> generation_outputs/logs-v9b-b4/shard-s08.log
+launched shard -s09 (pid 84206) -> generation_outputs/logs-v9b-b4/shard-s09.log
+launched shard -s10 (pid 84210) -> generation_outputs/logs-v9b-b4/shard-s10.log
+launched shard -s11 (pid 84213) -> generation_outputs/logs-v9b-b4/shard-s11.log
+launched shard -s12 (pid 84214) -> generation_outputs/logs-v9b-b4/shard-s12.log
+launched shard -s13 (pid 84215) -> generation_outputs/logs-v9b-b4/shard-s13.log
+launched shard -s14 (pid 84217) -> generation_outputs/logs-v9b-b4/shard-s14.log
+launched shard -s15 (pid 84221) -> generation_outputs/logs-v9b-b4/shard-s15.log
+launched shard -s16 (pid 84222) -> generation_outputs/logs-v9b-b4/shard-s16.log
+  -s01: OK
+  -s02: OK
+  -s03: OK
+  -s05: OK
+  -s06: OK
+  -s07: OK
+  -s08: OK
+  -s09: OK
+  -s10: OK
+  -s11: OK
+  -s12: OK
+  -s13: OK
+  -s14: OK
+  -s15: OK
+  -s16: OK
+
+------------------------- row counts by stage --------------------
+stage 9 (docs verified):
+  elm-docs-type1-v9b-b4: 205 rows across 15 shard(s)
+  elm-docs-type2-v9b-b4: 204 rows across 15 shard(s)
+  elm-docs-type3-v9b-b4: 245 rows across 15 shard(s)
+------------------------------------------------------------------
+
+==================================================================
+  STAGE 9b - Merge shards and renumber positional IDs
+==================================================================
+Merged 15 shards -> generation_outputs/elm-docs-type1-v9b-b4/programmatic_data_modified_verified.tsv
+  rows: 205  Root_IDs: 62  qno_mode: global
+Merged 15 shards -> generation_outputs/elm-docs-type2-v9b-b4/programmatic_data_modified_verified.tsv
+  rows: 204  Root_IDs: 61  qno_mode: global
+Merged 15 shards -> generation_outputs/elm-docs-type3-v9b-b4/programmatic_data_modified_verified.tsv
+  rows: 245  Root_IDs: 74  qno_mode: global
+  elm-docs-type1-v9b-b4: 205 rows
+  elm-docs-type2-v9b-b4: 204 rows
+  elm-docs-type3-v9b-b4: 245 rows
+
+==================================================================
+  STAGE 10 - Cleanup (unsharded, cross-row)
+==================================================================
+Max Context Size:  15859
+Rows removed (no relevant documents):  0
+Avg Context Size:  8799.682926829268
+QID: qa_type='type1', 205 unique across 205 rows
+Size of the cleaned data:  205
+Max Context Size:  15849
+Rows removed (no relevant documents):  0
+Avg Context Size:  9871.916666666666
+QID: qa_type='type2', 204 unique across 204 rows
+Size of the cleaned data:  204
+Max Context Size:  17132
+Rows removed (no relevant documents):  0
+Avg Context Size:  10311.804081632654
+QID: qa_type='type3', 244 unique across 245 rows
+WARNING: 1 QID value(s) occur more than once. Identical (Persona, Environment, Question) inside this corpus.
+Size of the cleaned data:  245
+  elm-docs-type1-v9b-b4: 205 rows
+  elm-docs-type2-v9b-b4: 204 rows
+  elm-docs-type3-v9b-b4: 245 rows
+
+==================================================================
+  Pipeline finished: stages 9-10, run v9b-b4, shards 16
+==================================================================
+
+RocketEval next:
+  python checklist_generator.py -out_dir generation_outputs/ -folder_name elm-docs-type1-v9b-b4 -qa_type type1 -model_type elm -model gpt-5.4-mini
+  # judge_panel.py appends (mode='a'). Delete its output before any rerun or rows duplicate.
+  python judge_panel.py -out_dir generation_outputs/ -folder_name elm-docs-type1-v9b-b4
+  python poll_aggregate.py -out_dir generation_outputs/ -folder_name elm-docs-type1-v9b-b4 -unsure exclude -pass_frac 0.75 -disagree_frac 0.34
+  python checklist_generator.py -out_dir generation_outputs/ -folder_name elm-docs-type2-v9b-b4 -qa_type type2 -model_type elm -model gpt-5.4-mini
+  # judge_panel.py appends (mode='a'). Delete its output before any rerun or rows duplicate.
+  python judge_panel.py -out_dir generation_outputs/ -folder_name elm-docs-type2-v9b-b4
+  python poll_aggregate.py -out_dir generation_outputs/ -folder_name elm-docs-type2-v9b-b4 -unsure exclude -pass_frac 0.75 -disagree_frac 0.34
+  python checklist_generator.py -out_dir generation_outputs/ -folder_name elm-docs-type3-v9b-b4 -qa_type type3 -model_type elm -model gpt-5.4-mini
+  # judge_panel.py appends (mode='a'). Delete its output before any rerun or rows duplicate.
+  python judge_panel.py -out_dir generation_outputs/ -folder_name elm-docs-type3-v9b-b4
+  python poll_aggregate.py -out_dir generation_outputs/ -folder_name elm-docs-type3-v9b-b4 -unsure exclude -pass_frac 0.75 -disagree_frac 0.34
+-- recovered v9b-b4 from 15 shard(s)
+-- stage 1 wrote 96 expanded scenarios (96 rows in scenarios.tsv)
+-- RocketEval type1 across 16 shard(s)
+  -r01: 13 rows -> generation_outputs/elm-docs-type1-v9b-b4-r01
+  -r02: 13 rows -> generation_outputs/elm-docs-type1-v9b-b4-r02
+  -r03: 13 rows -> generation_outputs/elm-docs-type1-v9b-b4-r03
+  -r04: 13 rows -> generation_outputs/elm-docs-type1-v9b-b4-r04
+  -r05: 13 rows -> generation_outputs/elm-docs-type1-v9b-b4-r05
+  -r06: 13 rows -> generation_outputs/elm-docs-type1-v9b-b4-r06
+  -r07: 13 rows -> generation_outputs/elm-docs-type1-v9b-b4-r07
+  -r08: 13 rows -> generation_outputs/elm-docs-type1-v9b-b4-r08
+  -r09: 13 rows -> generation_outputs/elm-docs-type1-v9b-b4-r09
+  -r10: 13 rows -> generation_outputs/elm-docs-type1-v9b-b4-r10
+  -r11: 13 rows -> generation_outputs/elm-docs-type1-v9b-b4-r11
+  -r12: 13 rows -> generation_outputs/elm-docs-type1-v9b-b4-r12
+  -r13: 13 rows -> generation_outputs/elm-docs-type1-v9b-b4-r13
+  -r14: 12 rows -> generation_outputs/elm-docs-type1-v9b-b4-r14
+  -r15: 12 rows -> generation_outputs/elm-docs-type1-v9b-b4-r15
+  -r16: 12 rows -> generation_outputs/elm-docs-type1-v9b-b4-r16
+  round-trip verified: 205 rows, 19 columns, order preserved
+Merged 16 shards -> generation_outputs/elm-docs-type1-v9b-b4/rocketeval/judgments.tsv
+  judgement rows: 3244  questions: 205  judges: 2
+INFO: judges per criterion: {2: 1622}
+Config: unsure=exclude  pass_frac=0.75  disagree_frac=0.34
+Questions: 205
+Overall: PASS=101 FAIL=31 DISAGREE=73  mean_pass_frac=0.6075
+Seed_Type=dynamic_generic: PASS=11 FAIL=4 DISAGREE=8  mean_pass_frac=0.6615
+Seed_Type=dynamic_reg: PASS=90 FAIL=27 DISAGREE=65  mean_pass_frac=0.6007
+QA_Type=type1: PASS=101 FAIL=31 DISAGREE=73  mean_pass_frac=0.6075
+-- RocketEval type2 across 16 shard(s)
+  -r01: 13 rows -> generation_outputs/elm-docs-type2-v9b-b4-r01
+  -r02: 13 rows -> generation_outputs/elm-docs-type2-v9b-b4-r02
+  -r03: 13 rows -> generation_outputs/elm-docs-type2-v9b-b4-r03
+  -r04: 13 rows -> generation_outputs/elm-docs-type2-v9b-b4-r04
+  -r05: 13 rows -> generation_outputs/elm-docs-type2-v9b-b4-r05
+  -r06: 13 rows -> generation_outputs/elm-docs-type2-v9b-b4-r06
+  -r07: 13 rows -> generation_outputs/elm-docs-type2-v9b-b4-r07
+  -r08: 13 rows -> generation_outputs/elm-docs-type2-v9b-b4-r08
+  -r09: 13 rows -> generation_outputs/elm-docs-type2-v9b-b4-r09
+  -r10: 13 rows -> generation_outputs/elm-docs-type2-v9b-b4-r10
+  -r11: 13 rows -> generation_outputs/elm-docs-type2-v9b-b4-r11
+  -r12: 13 rows -> generation_outputs/elm-docs-type2-v9b-b4-r12
+  -r13: 12 rows -> generation_outputs/elm-docs-type2-v9b-b4-r13
+  -r14: 12 rows -> generation_outputs/elm-docs-type2-v9b-b4-r14
+  -r15: 12 rows -> generation_outputs/elm-docs-type2-v9b-b4-r15
+  -r16: 12 rows -> generation_outputs/elm-docs-type2-v9b-b4-r16
+  round-trip verified: 204 rows, 19 columns, order preserved
+Merged 16 shards -> generation_outputs/elm-docs-type2-v9b-b4/rocketeval/judgments.tsv
+  judgement rows: 3556  questions: 204  judges: 2
+INFO: judges per criterion: {2: 1778}
+Config: unsure=exclude  pass_frac=0.75  disagree_frac=0.34
+Questions: 204
+Overall: PASS=110 FAIL=36 DISAGREE=58  mean_pass_frac=0.6848
+Seed_Type=dynamic_generic: PASS=10 FAIL=2 DISAGREE=2  mean_pass_frac=0.8065
+Seed_Type=dynamic_reg: PASS=100 FAIL=34 DISAGREE=56  mean_pass_frac=0.6758
+QA_Type=type2: PASS=110 FAIL=36 DISAGREE=58  mean_pass_frac=0.6848
+-- RocketEval type3 across 16 shard(s)
+ERROR: QID is not unique (1 duplicate row(s)). Investigate, do not suppress.

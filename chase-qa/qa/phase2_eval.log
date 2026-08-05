@@ -1,0 +1,852 @@
+Input:      generation_outputs/v9b/combined_type1.tsv
+Run:        type1-gemini31pro-v9b-noirrelevant
+Solver:     gpt-5.5 (elm) / zero-shot-no-irrelevant
+Judge:      gpt-5.4-mini (elm) / zero-shot-basic
+Shards:     16
+Stage:      eval
+
+--- splitting predictions ---
+  s01: rows 0..53 (54) -> outputs/_shards-type1-gemini31pro-v9b-noirrelevant/predictions-type1-gemini31pro-v9b-noirrelevant-s01.tsv
+  s02: rows 54..107 (54) -> outputs/_shards-type1-gemini31pro-v9b-noirrelevant/predictions-type1-gemini31pro-v9b-noirrelevant-s02.tsv
+  s03: rows 108..161 (54) -> outputs/_shards-type1-gemini31pro-v9b-noirrelevant/predictions-type1-gemini31pro-v9b-noirrelevant-s03.tsv
+  s04: rows 162..215 (54) -> outputs/_shards-type1-gemini31pro-v9b-noirrelevant/predictions-type1-gemini31pro-v9b-noirrelevant-s04.tsv
+  s05: rows 216..268 (53) -> outputs/_shards-type1-gemini31pro-v9b-noirrelevant/predictions-type1-gemini31pro-v9b-noirrelevant-s05.tsv
+  s06: rows 269..321 (53) -> outputs/_shards-type1-gemini31pro-v9b-noirrelevant/predictions-type1-gemini31pro-v9b-noirrelevant-s06.tsv
+  s07: rows 322..374 (53) -> outputs/_shards-type1-gemini31pro-v9b-noirrelevant/predictions-type1-gemini31pro-v9b-noirrelevant-s07.tsv
+  s08: rows 375..427 (53) -> outputs/_shards-type1-gemini31pro-v9b-noirrelevant/predictions-type1-gemini31pro-v9b-noirrelevant-s08.tsv
+  s09: rows 428..480 (53) -> outputs/_shards-type1-gemini31pro-v9b-noirrelevant/predictions-type1-gemini31pro-v9b-noirrelevant-s09.tsv
+  s10: rows 481..533 (53) -> outputs/_shards-type1-gemini31pro-v9b-noirrelevant/predictions-type1-gemini31pro-v9b-noirrelevant-s10.tsv
+  s11: rows 534..586 (53) -> outputs/_shards-type1-gemini31pro-v9b-noirrelevant/predictions-type1-gemini31pro-v9b-noirrelevant-s11.tsv
+  s12: rows 587..639 (53) -> outputs/_shards-type1-gemini31pro-v9b-noirrelevant/predictions-type1-gemini31pro-v9b-noirrelevant-s12.tsv
+  s13: rows 640..692 (53) -> outputs/_shards-type1-gemini31pro-v9b-noirrelevant/predictions-type1-gemini31pro-v9b-noirrelevant-s13.tsv
+  s14: rows 693..745 (53) -> outputs/_shards-type1-gemini31pro-v9b-noirrelevant/predictions-type1-gemini31pro-v9b-noirrelevant-s14.tsv
+  s15: rows 746..798 (53) -> outputs/_shards-type1-gemini31pro-v9b-noirrelevant/predictions-type1-gemini31pro-v9b-noirrelevant-s15.tsv
+  s16: rows 799..851 (53) -> outputs/_shards-type1-gemini31pro-v9b-noirrelevant/predictions-type1-gemini31pro-v9b-noirrelevant-s16.tsv
+  round-trip verified: 852 rows, 6 columns, order preserved
+Wrote manifest: outputs/_shards-type1-gemini31pro-v9b-noirrelevant/predictions-type1-gemini31pro-v9b-noirrelevant.manifest (16 shards)
+
+--- evaluator ---
+  launched eval-s01 (pid 90910)
+  launched eval-s02 (pid 90913)
+  launched eval-s03 (pid 90916)
+  launched eval-s04 (pid 90919)
+  launched eval-s05 (pid 90922)
+  launched eval-s06 (pid 90925)
+  launched eval-s07 (pid 90928)
+  launched eval-s08 (pid 90931)
+  launched eval-s09 (pid 90934)
+  launched eval-s10 (pid 90938)
+  launched eval-s11 (pid 90940)
+  launched eval-s12 (pid 90943)
+  launched eval-s13 (pid 90947)
+  launched eval-s14 (pid 90950)
+  launched eval-s15 (pid 90952)
+  launched eval-s16 (pid 90956)
+  -s01: OK
+  -s02: OK
+  -s03: OK
+  -s04: OK
+  -s05: OK
+  -s06: OK
+  -s07: OK
+  -s08: OK
+  -s09: OK
+  -s10: OK
+  -s11: OK
+  -s12: OK
+  -s13: OK
+  -s14: OK
+  -s15: OK
+  -s16: OK
+
+--- merging results ---
+Merged 16 shards -> outputs/type1-gemini31pro-v9b-noirrelevant-eval/result.tsv
+  rows: 852
+  Accuracy: 0.5751173708920188 (490.0/852)
+  merged 852 of 852 rows
+
+==================================================================
+  Done: type1-gemini31pro-v9b-noirrelevant
+==================================================================
+  Accuracy: outputs/type1-gemini31pro-v9b-noirrelevant-eval/eval_logs.txt (MERGED TOTAL line)
+Input:      generation_outputs/v9b/combined_type2.tsv
+Run:        type2-gemini31pro-v9b-noirrelevant
+Solver:     gpt-5.5 (elm) / zero-shot-no-irrelevant
+Judge:      gpt-5.4-mini (elm) / zero-shot-basic
+Shards:     16
+Stage:      eval
+
+--- splitting predictions ---
+  s01: rows 0..53 (54) -> outputs/_shards-type2-gemini31pro-v9b-noirrelevant/predictions-type2-gemini31pro-v9b-noirrelevant-s01.tsv
+  s02: rows 54..107 (54) -> outputs/_shards-type2-gemini31pro-v9b-noirrelevant/predictions-type2-gemini31pro-v9b-noirrelevant-s02.tsv
+  s03: rows 108..161 (54) -> outputs/_shards-type2-gemini31pro-v9b-noirrelevant/predictions-type2-gemini31pro-v9b-noirrelevant-s03.tsv
+  s04: rows 162..215 (54) -> outputs/_shards-type2-gemini31pro-v9b-noirrelevant/predictions-type2-gemini31pro-v9b-noirrelevant-s04.tsv
+  s05: rows 216..269 (54) -> outputs/_shards-type2-gemini31pro-v9b-noirrelevant/predictions-type2-gemini31pro-v9b-noirrelevant-s05.tsv
+  s06: rows 270..323 (54) -> outputs/_shards-type2-gemini31pro-v9b-noirrelevant/predictions-type2-gemini31pro-v9b-noirrelevant-s06.tsv
+  s07: rows 324..377 (54) -> outputs/_shards-type2-gemini31pro-v9b-noirrelevant/predictions-type2-gemini31pro-v9b-noirrelevant-s07.tsv
+  s08: rows 378..431 (54) -> outputs/_shards-type2-gemini31pro-v9b-noirrelevant/predictions-type2-gemini31pro-v9b-noirrelevant-s08.tsv
+  s09: rows 432..485 (54) -> outputs/_shards-type2-gemini31pro-v9b-noirrelevant/predictions-type2-gemini31pro-v9b-noirrelevant-s09.tsv
+  s10: rows 486..539 (54) -> outputs/_shards-type2-gemini31pro-v9b-noirrelevant/predictions-type2-gemini31pro-v9b-noirrelevant-s10.tsv
+  s11: rows 540..593 (54) -> outputs/_shards-type2-gemini31pro-v9b-noirrelevant/predictions-type2-gemini31pro-v9b-noirrelevant-s11.tsv
+  s12: rows 594..647 (54) -> outputs/_shards-type2-gemini31pro-v9b-noirrelevant/predictions-type2-gemini31pro-v9b-noirrelevant-s12.tsv
+  s13: rows 648..701 (54) -> outputs/_shards-type2-gemini31pro-v9b-noirrelevant/predictions-type2-gemini31pro-v9b-noirrelevant-s13.tsv
+  s14: rows 702..755 (54) -> outputs/_shards-type2-gemini31pro-v9b-noirrelevant/predictions-type2-gemini31pro-v9b-noirrelevant-s14.tsv
+  s15: rows 756..809 (54) -> outputs/_shards-type2-gemini31pro-v9b-noirrelevant/predictions-type2-gemini31pro-v9b-noirrelevant-s15.tsv
+  s16: rows 810..863 (54) -> outputs/_shards-type2-gemini31pro-v9b-noirrelevant/predictions-type2-gemini31pro-v9b-noirrelevant-s16.tsv
+  round-trip verified: 864 rows, 6 columns, order preserved
+Wrote manifest: outputs/_shards-type2-gemini31pro-v9b-noirrelevant/predictions-type2-gemini31pro-v9b-noirrelevant.manifest (16 shards)
+
+--- evaluator ---
+  launched eval-s01 (pid 91078)
+  launched eval-s02 (pid 91081)
+  launched eval-s03 (pid 91084)
+  launched eval-s04 (pid 91087)
+  launched eval-s05 (pid 91090)
+  launched eval-s06 (pid 91093)
+  launched eval-s07 (pid 91096)
+  launched eval-s08 (pid 91098)
+  launched eval-s09 (pid 91102)
+  launched eval-s10 (pid 91104)
+  launched eval-s11 (pid 91108)
+  launched eval-s12 (pid 91111)
+  launched eval-s13 (pid 91114)
+  launched eval-s14 (pid 91117)
+  launched eval-s15 (pid 91123)
+  launched eval-s16 (pid 91126)
+  -s01: OK
+  -s02: OK
+  -s03: OK
+  -s04: OK
+  -s05: OK
+  -s06: OK
+  -s07: OK
+  -s08: OK
+  -s09: OK
+  -s10: OK
+  -s11: OK
+  -s12: OK
+  -s13: OK
+  -s14: OK
+  -s15: OK
+  -s16: OK
+
+--- merging results ---
+Merged 16 shards -> outputs/type2-gemini31pro-v9b-noirrelevant-eval/result.tsv
+  rows: 864
+  Accuracy: 0.6041666666666666 (522.0/864)
+  merged 864 of 864 rows
+
+==================================================================
+  Done: type2-gemini31pro-v9b-noirrelevant
+==================================================================
+  Accuracy: outputs/type2-gemini31pro-v9b-noirrelevant-eval/eval_logs.txt (MERGED TOTAL line)
+Input:      generation_outputs/v9b/combined_type3.tsv
+Run:        type3-gemini31pro-v9b-noirrelevant
+Solver:     gpt-5.5 (elm) / zero-shot-no-irrelevant
+Judge:      gpt-5.4-mini (elm) / type3-causal-check
+Shards:     16
+Stage:      eval
+
+--- splitting predictions ---
+  s01: rows 0..60 (61) -> outputs/_shards-type3-gemini31pro-v9b-noirrelevant/predictions-type3-gemini31pro-v9b-noirrelevant-s01.tsv
+  s02: rows 61..121 (61) -> outputs/_shards-type3-gemini31pro-v9b-noirrelevant/predictions-type3-gemini31pro-v9b-noirrelevant-s02.tsv
+  s03: rows 122..182 (61) -> outputs/_shards-type3-gemini31pro-v9b-noirrelevant/predictions-type3-gemini31pro-v9b-noirrelevant-s03.tsv
+  s04: rows 183..243 (61) -> outputs/_shards-type3-gemini31pro-v9b-noirrelevant/predictions-type3-gemini31pro-v9b-noirrelevant-s04.tsv
+  s05: rows 244..304 (61) -> outputs/_shards-type3-gemini31pro-v9b-noirrelevant/predictions-type3-gemini31pro-v9b-noirrelevant-s05.tsv
+  s06: rows 305..365 (61) -> outputs/_shards-type3-gemini31pro-v9b-noirrelevant/predictions-type3-gemini31pro-v9b-noirrelevant-s06.tsv
+  s07: rows 366..426 (61) -> outputs/_shards-type3-gemini31pro-v9b-noirrelevant/predictions-type3-gemini31pro-v9b-noirrelevant-s07.tsv
+  s08: rows 427..487 (61) -> outputs/_shards-type3-gemini31pro-v9b-noirrelevant/predictions-type3-gemini31pro-v9b-noirrelevant-s08.tsv
+  s09: rows 488..548 (61) -> outputs/_shards-type3-gemini31pro-v9b-noirrelevant/predictions-type3-gemini31pro-v9b-noirrelevant-s09.tsv
+  s10: rows 549..608 (60) -> outputs/_shards-type3-gemini31pro-v9b-noirrelevant/predictions-type3-gemini31pro-v9b-noirrelevant-s10.tsv
+  s11: rows 609..668 (60) -> outputs/_shards-type3-gemini31pro-v9b-noirrelevant/predictions-type3-gemini31pro-v9b-noirrelevant-s11.tsv
+  s12: rows 669..728 (60) -> outputs/_shards-type3-gemini31pro-v9b-noirrelevant/predictions-type3-gemini31pro-v9b-noirrelevant-s12.tsv
+  s13: rows 729..788 (60) -> outputs/_shards-type3-gemini31pro-v9b-noirrelevant/predictions-type3-gemini31pro-v9b-noirrelevant-s13.tsv
+  s14: rows 789..848 (60) -> outputs/_shards-type3-gemini31pro-v9b-noirrelevant/predictions-type3-gemini31pro-v9b-noirrelevant-s14.tsv
+  s15: rows 849..908 (60) -> outputs/_shards-type3-gemini31pro-v9b-noirrelevant/predictions-type3-gemini31pro-v9b-noirrelevant-s15.tsv
+  s16: rows 909..968 (60) -> outputs/_shards-type3-gemini31pro-v9b-noirrelevant/predictions-type3-gemini31pro-v9b-noirrelevant-s16.tsv
+  round-trip verified: 969 rows, 6 columns, order preserved
+Wrote manifest: outputs/_shards-type3-gemini31pro-v9b-noirrelevant/predictions-type3-gemini31pro-v9b-noirrelevant.manifest (16 shards)
+
+--- evaluator ---
+  launched eval-s01 (pid 91204)
+  launched eval-s02 (pid 91207)
+  launched eval-s03 (pid 91210)
+  launched eval-s04 (pid 91213)
+  launched eval-s05 (pid 91216)
+  launched eval-s06 (pid 91219)
+  launched eval-s07 (pid 91222)
+  launched eval-s08 (pid 91225)
+  launched eval-s09 (pid 91228)
+  launched eval-s10 (pid 91230)
+  launched eval-s11 (pid 91234)
+  launched eval-s12 (pid 91236)
+  launched eval-s13 (pid 91240)
+  launched eval-s14 (pid 91242)
+  launched eval-s15 (pid 91246)
+  launched eval-s16 (pid 91248)
+  -s01: OK
+  -s02: OK
+  -s03: OK
+  -s04: OK
+  -s05: OK
+  -s06: OK
+  -s07: OK
+  -s08: OK
+  -s09: OK
+  -s10: OK
+  -s11: OK
+  -s12: OK
+  -s13: OK
+  -s14: OK
+  -s15: OK
+  -s16: OK
+
+--- merging results ---
+Merged 16 shards -> outputs/type3-gemini31pro-v9b-noirrelevant-eval/result.tsv
+  rows: 969
+  Accuracy: 0.42105263157894735 (408.0/969)
+  merged 969 of 969 rows
+
+==================================================================
+  Done: type3-gemini31pro-v9b-noirrelevant
+==================================================================
+  Accuracy: outputs/type3-gemini31pro-v9b-noirrelevant-eval/eval_logs.txt (MERGED TOTAL line)
+Input:      generation_outputs/v9b/combined_type1.tsv
+Run:        type1-flashlite-v9b-noirrelevant
+Solver:     gpt-5.5 (elm) / zero-shot-no-irrelevant
+Judge:      gpt-5.4-mini (elm) / zero-shot-basic
+Shards:     16
+Stage:      eval
+
+--- splitting predictions ---
+  s01: rows 0..53 (54) -> outputs/_shards-type1-flashlite-v9b-noirrelevant/predictions-type1-flashlite-v9b-noirrelevant-s01.tsv
+  s02: rows 54..107 (54) -> outputs/_shards-type1-flashlite-v9b-noirrelevant/predictions-type1-flashlite-v9b-noirrelevant-s02.tsv
+  s03: rows 108..161 (54) -> outputs/_shards-type1-flashlite-v9b-noirrelevant/predictions-type1-flashlite-v9b-noirrelevant-s03.tsv
+  s04: rows 162..215 (54) -> outputs/_shards-type1-flashlite-v9b-noirrelevant/predictions-type1-flashlite-v9b-noirrelevant-s04.tsv
+  s05: rows 216..268 (53) -> outputs/_shards-type1-flashlite-v9b-noirrelevant/predictions-type1-flashlite-v9b-noirrelevant-s05.tsv
+  s06: rows 269..321 (53) -> outputs/_shards-type1-flashlite-v9b-noirrelevant/predictions-type1-flashlite-v9b-noirrelevant-s06.tsv
+  s07: rows 322..374 (53) -> outputs/_shards-type1-flashlite-v9b-noirrelevant/predictions-type1-flashlite-v9b-noirrelevant-s07.tsv
+  s08: rows 375..427 (53) -> outputs/_shards-type1-flashlite-v9b-noirrelevant/predictions-type1-flashlite-v9b-noirrelevant-s08.tsv
+  s09: rows 428..480 (53) -> outputs/_shards-type1-flashlite-v9b-noirrelevant/predictions-type1-flashlite-v9b-noirrelevant-s09.tsv
+  s10: rows 481..533 (53) -> outputs/_shards-type1-flashlite-v9b-noirrelevant/predictions-type1-flashlite-v9b-noirrelevant-s10.tsv
+  s11: rows 534..586 (53) -> outputs/_shards-type1-flashlite-v9b-noirrelevant/predictions-type1-flashlite-v9b-noirrelevant-s11.tsv
+  s12: rows 587..639 (53) -> outputs/_shards-type1-flashlite-v9b-noirrelevant/predictions-type1-flashlite-v9b-noirrelevant-s12.tsv
+  s13: rows 640..692 (53) -> outputs/_shards-type1-flashlite-v9b-noirrelevant/predictions-type1-flashlite-v9b-noirrelevant-s13.tsv
+  s14: rows 693..745 (53) -> outputs/_shards-type1-flashlite-v9b-noirrelevant/predictions-type1-flashlite-v9b-noirrelevant-s14.tsv
+  s15: rows 746..798 (53) -> outputs/_shards-type1-flashlite-v9b-noirrelevant/predictions-type1-flashlite-v9b-noirrelevant-s15.tsv
+  s16: rows 799..851 (53) -> outputs/_shards-type1-flashlite-v9b-noirrelevant/predictions-type1-flashlite-v9b-noirrelevant-s16.tsv
+  round-trip verified: 852 rows, 6 columns, order preserved
+Wrote manifest: outputs/_shards-type1-flashlite-v9b-noirrelevant/predictions-type1-flashlite-v9b-noirrelevant.manifest (16 shards)
+
+--- evaluator ---
+  launched eval-s01 (pid 91312)
+  launched eval-s02 (pid 91315)
+  launched eval-s03 (pid 91318)
+  launched eval-s04 (pid 91321)
+  launched eval-s05 (pid 91324)
+  launched eval-s06 (pid 91327)
+  launched eval-s07 (pid 91330)
+  launched eval-s08 (pid 91333)
+  launched eval-s09 (pid 91335)
+  launched eval-s10 (pid 91339)
+  launched eval-s11 (pid 91341)
+  launched eval-s12 (pid 91344)
+  launched eval-s13 (pid 91346)
+  launched eval-s14 (pid 91350)
+  launched eval-s15 (pid 91353)
+  launched eval-s16 (pid 91355)
+  -s01: OK
+  -s02: OK
+  -s03: OK
+  -s04: OK
+  -s05: OK
+  -s06: OK
+  -s07: OK
+  -s08: OK
+  -s09: OK
+  -s10: OK
+  -s11: OK
+  -s12: OK
+  -s13: OK
+  -s14: OK
+  -s15: OK
+  -s16: OK
+
+--- merging results ---
+Merged 16 shards -> outputs/type1-flashlite-v9b-noirrelevant-eval/result.tsv
+  rows: 852
+  Accuracy: 0.4471830985915493 (381.0/852)
+  merged 852 of 852 rows
+
+==================================================================
+  Done: type1-flashlite-v9b-noirrelevant
+==================================================================
+  Accuracy: outputs/type1-flashlite-v9b-noirrelevant-eval/eval_logs.txt (MERGED TOTAL line)
+Input:      generation_outputs/v9b/combined_type2.tsv
+Run:        type2-flashlite-v9b-noirrelevant
+Solver:     gpt-5.5 (elm) / zero-shot-no-irrelevant
+Judge:      gpt-5.4-mini (elm) / zero-shot-basic
+Shards:     16
+Stage:      eval
+
+--- splitting predictions ---
+  s01: rows 0..53 (54) -> outputs/_shards-type2-flashlite-v9b-noirrelevant/predictions-type2-flashlite-v9b-noirrelevant-s01.tsv
+  s02: rows 54..107 (54) -> outputs/_shards-type2-flashlite-v9b-noirrelevant/predictions-type2-flashlite-v9b-noirrelevant-s02.tsv
+  s03: rows 108..161 (54) -> outputs/_shards-type2-flashlite-v9b-noirrelevant/predictions-type2-flashlite-v9b-noirrelevant-s03.tsv
+  s04: rows 162..215 (54) -> outputs/_shards-type2-flashlite-v9b-noirrelevant/predictions-type2-flashlite-v9b-noirrelevant-s04.tsv
+  s05: rows 216..269 (54) -> outputs/_shards-type2-flashlite-v9b-noirrelevant/predictions-type2-flashlite-v9b-noirrelevant-s05.tsv
+  s06: rows 270..323 (54) -> outputs/_shards-type2-flashlite-v9b-noirrelevant/predictions-type2-flashlite-v9b-noirrelevant-s06.tsv
+  s07: rows 324..377 (54) -> outputs/_shards-type2-flashlite-v9b-noirrelevant/predictions-type2-flashlite-v9b-noirrelevant-s07.tsv
+  s08: rows 378..431 (54) -> outputs/_shards-type2-flashlite-v9b-noirrelevant/predictions-type2-flashlite-v9b-noirrelevant-s08.tsv
+  s09: rows 432..485 (54) -> outputs/_shards-type2-flashlite-v9b-noirrelevant/predictions-type2-flashlite-v9b-noirrelevant-s09.tsv
+  s10: rows 486..539 (54) -> outputs/_shards-type2-flashlite-v9b-noirrelevant/predictions-type2-flashlite-v9b-noirrelevant-s10.tsv
+  s11: rows 540..593 (54) -> outputs/_shards-type2-flashlite-v9b-noirrelevant/predictions-type2-flashlite-v9b-noirrelevant-s11.tsv
+  s12: rows 594..647 (54) -> outputs/_shards-type2-flashlite-v9b-noirrelevant/predictions-type2-flashlite-v9b-noirrelevant-s12.tsv
+  s13: rows 648..701 (54) -> outputs/_shards-type2-flashlite-v9b-noirrelevant/predictions-type2-flashlite-v9b-noirrelevant-s13.tsv
+  s14: rows 702..755 (54) -> outputs/_shards-type2-flashlite-v9b-noirrelevant/predictions-type2-flashlite-v9b-noirrelevant-s14.tsv
+  s15: rows 756..809 (54) -> outputs/_shards-type2-flashlite-v9b-noirrelevant/predictions-type2-flashlite-v9b-noirrelevant-s15.tsv
+  s16: rows 810..863 (54) -> outputs/_shards-type2-flashlite-v9b-noirrelevant/predictions-type2-flashlite-v9b-noirrelevant-s16.tsv
+  round-trip verified: 864 rows, 6 columns, order preserved
+Wrote manifest: outputs/_shards-type2-flashlite-v9b-noirrelevant/predictions-type2-flashlite-v9b-noirrelevant.manifest (16 shards)
+
+--- evaluator ---
+  launched eval-s01 (pid 91477)
+  launched eval-s02 (pid 91480)
+  launched eval-s03 (pid 91483)
+  launched eval-s04 (pid 91486)
+  launched eval-s05 (pid 91488)
+  launched eval-s06 (pid 91492)
+  launched eval-s07 (pid 91495)
+  launched eval-s08 (pid 91498)
+  launched eval-s09 (pid 91501)
+  launched eval-s10 (pid 91504)
+  launched eval-s11 (pid 91507)
+  launched eval-s12 (pid 91509)
+  launched eval-s13 (pid 91512)
+  launched eval-s14 (pid 91514)
+  launched eval-s15 (pid 91518)
+  launched eval-s16 (pid 91521)
+  -s01: OK
+  -s02: OK
+  -s03: OK
+  -s04: OK
+  -s05: OK
+  -s06: OK
+  -s07: OK
+  -s08: OK
+  -s09: OK
+  -s10: OK
+  -s11: OK
+  -s12: OK
+  -s13: OK
+  -s14: OK
+  -s15: OK
+  -s16: OK
+
+--- merging results ---
+Merged 16 shards -> outputs/type2-flashlite-v9b-noirrelevant-eval/result.tsv
+  rows: 864
+  Accuracy: 0.4212962962962963 (364.0/864)
+  merged 864 of 864 rows
+
+==================================================================
+  Done: type2-flashlite-v9b-noirrelevant
+==================================================================
+  Accuracy: outputs/type2-flashlite-v9b-noirrelevant-eval/eval_logs.txt (MERGED TOTAL line)
+Input:      generation_outputs/v9b/combined_type3.tsv
+Run:        type3-flashlite-v9b-noirrelevant
+Solver:     gpt-5.5 (elm) / zero-shot-no-irrelevant
+Judge:      gpt-5.4-mini (elm) / type3-causal-check
+Shards:     16
+Stage:      eval
+
+--- splitting predictions ---
+  s01: rows 0..60 (61) -> outputs/_shards-type3-flashlite-v9b-noirrelevant/predictions-type3-flashlite-v9b-noirrelevant-s01.tsv
+  s02: rows 61..121 (61) -> outputs/_shards-type3-flashlite-v9b-noirrelevant/predictions-type3-flashlite-v9b-noirrelevant-s02.tsv
+  s03: rows 122..182 (61) -> outputs/_shards-type3-flashlite-v9b-noirrelevant/predictions-type3-flashlite-v9b-noirrelevant-s03.tsv
+  s04: rows 183..243 (61) -> outputs/_shards-type3-flashlite-v9b-noirrelevant/predictions-type3-flashlite-v9b-noirrelevant-s04.tsv
+  s05: rows 244..304 (61) -> outputs/_shards-type3-flashlite-v9b-noirrelevant/predictions-type3-flashlite-v9b-noirrelevant-s05.tsv
+  s06: rows 305..365 (61) -> outputs/_shards-type3-flashlite-v9b-noirrelevant/predictions-type3-flashlite-v9b-noirrelevant-s06.tsv
+  s07: rows 366..426 (61) -> outputs/_shards-type3-flashlite-v9b-noirrelevant/predictions-type3-flashlite-v9b-noirrelevant-s07.tsv
+  s08: rows 427..487 (61) -> outputs/_shards-type3-flashlite-v9b-noirrelevant/predictions-type3-flashlite-v9b-noirrelevant-s08.tsv
+  s09: rows 488..548 (61) -> outputs/_shards-type3-flashlite-v9b-noirrelevant/predictions-type3-flashlite-v9b-noirrelevant-s09.tsv
+  s10: rows 549..608 (60) -> outputs/_shards-type3-flashlite-v9b-noirrelevant/predictions-type3-flashlite-v9b-noirrelevant-s10.tsv
+  s11: rows 609..668 (60) -> outputs/_shards-type3-flashlite-v9b-noirrelevant/predictions-type3-flashlite-v9b-noirrelevant-s11.tsv
+  s12: rows 669..728 (60) -> outputs/_shards-type3-flashlite-v9b-noirrelevant/predictions-type3-flashlite-v9b-noirrelevant-s12.tsv
+  s13: rows 729..788 (60) -> outputs/_shards-type3-flashlite-v9b-noirrelevant/predictions-type3-flashlite-v9b-noirrelevant-s13.tsv
+  s14: rows 789..848 (60) -> outputs/_shards-type3-flashlite-v9b-noirrelevant/predictions-type3-flashlite-v9b-noirrelevant-s14.tsv
+  s15: rows 849..908 (60) -> outputs/_shards-type3-flashlite-v9b-noirrelevant/predictions-type3-flashlite-v9b-noirrelevant-s15.tsv
+  s16: rows 909..968 (60) -> outputs/_shards-type3-flashlite-v9b-noirrelevant/predictions-type3-flashlite-v9b-noirrelevant-s16.tsv
+  round-trip verified: 969 rows, 6 columns, order preserved
+Wrote manifest: outputs/_shards-type3-flashlite-v9b-noirrelevant/predictions-type3-flashlite-v9b-noirrelevant.manifest (16 shards)
+
+--- evaluator ---
+  launched eval-s01 (pid 91651)
+  launched eval-s02 (pid 91654)
+  launched eval-s03 (pid 91657)
+  launched eval-s04 (pid 91660)
+  launched eval-s05 (pid 91663)
+  launched eval-s06 (pid 91666)
+  launched eval-s07 (pid 91668)
+  launched eval-s08 (pid 91671)
+  launched eval-s09 (pid 91675)
+  launched eval-s10 (pid 91677)
+  launched eval-s11 (pid 91680)
+  launched eval-s12 (pid 91683)
+  launched eval-s13 (pid 91687)
+  launched eval-s14 (pid 91690)
+  launched eval-s15 (pid 91692)
+  launched eval-s16 (pid 91696)
+  -s01: OK
+  -s02: OK
+  -s03: OK
+  -s04: OK
+  -s05: OK
+  -s06: OK
+  -s07: OK
+  -s08: OK
+  -s09: OK
+  -s10: OK
+  -s11: OK
+  -s12: OK
+  -s13: OK
+  -s14: OK
+  -s15: OK
+  -s16: OK
+
+--- merging results ---
+Merged 16 shards -> outputs/type3-flashlite-v9b-noirrelevant-eval/result.tsv
+  rows: 969
+  Accuracy: 0.24458204334365324 (237.0/969)
+  merged 969 of 969 rows
+
+==================================================================
+  Done: type3-flashlite-v9b-noirrelevant
+==================================================================
+  Accuracy: outputs/type3-flashlite-v9b-noirrelevant-eval/eval_logs.txt (MERGED TOTAL line)
+Input:      generation_outputs/v9b/combined_type1.tsv
+Run:        type1-gpt55-v9b-noirrelevant
+Solver:     gpt-5.5 (elm) / zero-shot-no-irrelevant
+Judge:      gpt-5.4-mini (elm) / zero-shot-basic
+Shards:     16
+Stage:      eval
+
+--- splitting predictions ---
+  s01: rows 0..53 (54) -> outputs/_shards-type1-gpt55-v9b-noirrelevant/predictions-type1-gpt55-v9b-noirrelevant-s01.tsv
+  s02: rows 54..107 (54) -> outputs/_shards-type1-gpt55-v9b-noirrelevant/predictions-type1-gpt55-v9b-noirrelevant-s02.tsv
+  s03: rows 108..161 (54) -> outputs/_shards-type1-gpt55-v9b-noirrelevant/predictions-type1-gpt55-v9b-noirrelevant-s03.tsv
+  s04: rows 162..215 (54) -> outputs/_shards-type1-gpt55-v9b-noirrelevant/predictions-type1-gpt55-v9b-noirrelevant-s04.tsv
+  s05: rows 216..268 (53) -> outputs/_shards-type1-gpt55-v9b-noirrelevant/predictions-type1-gpt55-v9b-noirrelevant-s05.tsv
+  s06: rows 269..321 (53) -> outputs/_shards-type1-gpt55-v9b-noirrelevant/predictions-type1-gpt55-v9b-noirrelevant-s06.tsv
+  s07: rows 322..374 (53) -> outputs/_shards-type1-gpt55-v9b-noirrelevant/predictions-type1-gpt55-v9b-noirrelevant-s07.tsv
+  s08: rows 375..427 (53) -> outputs/_shards-type1-gpt55-v9b-noirrelevant/predictions-type1-gpt55-v9b-noirrelevant-s08.tsv
+  s09: rows 428..480 (53) -> outputs/_shards-type1-gpt55-v9b-noirrelevant/predictions-type1-gpt55-v9b-noirrelevant-s09.tsv
+  s10: rows 481..533 (53) -> outputs/_shards-type1-gpt55-v9b-noirrelevant/predictions-type1-gpt55-v9b-noirrelevant-s10.tsv
+  s11: rows 534..586 (53) -> outputs/_shards-type1-gpt55-v9b-noirrelevant/predictions-type1-gpt55-v9b-noirrelevant-s11.tsv
+  s12: rows 587..639 (53) -> outputs/_shards-type1-gpt55-v9b-noirrelevant/predictions-type1-gpt55-v9b-noirrelevant-s12.tsv
+  s13: rows 640..692 (53) -> outputs/_shards-type1-gpt55-v9b-noirrelevant/predictions-type1-gpt55-v9b-noirrelevant-s13.tsv
+  s14: rows 693..745 (53) -> outputs/_shards-type1-gpt55-v9b-noirrelevant/predictions-type1-gpt55-v9b-noirrelevant-s14.tsv
+  s15: rows 746..798 (53) -> outputs/_shards-type1-gpt55-v9b-noirrelevant/predictions-type1-gpt55-v9b-noirrelevant-s15.tsv
+  s16: rows 799..851 (53) -> outputs/_shards-type1-gpt55-v9b-noirrelevant/predictions-type1-gpt55-v9b-noirrelevant-s16.tsv
+  round-trip verified: 852 rows, 6 columns, order preserved
+Wrote manifest: outputs/_shards-type1-gpt55-v9b-noirrelevant/predictions-type1-gpt55-v9b-noirrelevant.manifest (16 shards)
+
+--- evaluator ---
+  launched eval-s01 (pid 91802)
+  launched eval-s02 (pid 91805)
+  launched eval-s03 (pid 91808)
+  launched eval-s04 (pid 91811)
+  launched eval-s05 (pid 91814)
+  launched eval-s06 (pid 91817)
+  launched eval-s07 (pid 91820)
+  launched eval-s08 (pid 91823)
+  launched eval-s09 (pid 91826)
+  launched eval-s10 (pid 91829)
+  launched eval-s11 (pid 91831)
+  launched eval-s12 (pid 91834)
+  launched eval-s13 (pid 91838)
+  launched eval-s14 (pid 91841)
+  launched eval-s15 (pid 91844)
+  launched eval-s16 (pid 91846)
+  -s01: OK
+  -s02: OK
+  -s03: OK
+  -s04: OK
+  -s05: OK
+  -s06: OK
+  -s07: OK
+  -s08: OK
+  -s09: OK
+  -s10: OK
+  -s11: OK
+  -s12: OK
+  -s13: OK
+  -s14: OK
+  -s15: OK
+  -s16: OK
+
+--- merging results ---
+Merged 16 shards -> outputs/type1-gpt55-v9b-noirrelevant-eval/result.tsv
+  rows: 852
+  Accuracy: 0.539906103286385 (460.0/852)
+  merged 852 of 852 rows
+
+==================================================================
+  Done: type1-gpt55-v9b-noirrelevant
+==================================================================
+  Accuracy: outputs/type1-gpt55-v9b-noirrelevant-eval/eval_logs.txt (MERGED TOTAL line)
+Input:      generation_outputs/v9b/combined_type2.tsv
+Run:        type2-gpt55-v9b-noirrelevant
+Solver:     gpt-5.5 (elm) / zero-shot-no-irrelevant
+Judge:      gpt-5.4-mini (elm) / zero-shot-basic
+Shards:     16
+Stage:      eval
+
+--- splitting predictions ---
+  s01: rows 0..53 (54) -> outputs/_shards-type2-gpt55-v9b-noirrelevant/predictions-type2-gpt55-v9b-noirrelevant-s01.tsv
+  s02: rows 54..107 (54) -> outputs/_shards-type2-gpt55-v9b-noirrelevant/predictions-type2-gpt55-v9b-noirrelevant-s02.tsv
+  s03: rows 108..161 (54) -> outputs/_shards-type2-gpt55-v9b-noirrelevant/predictions-type2-gpt55-v9b-noirrelevant-s03.tsv
+  s04: rows 162..215 (54) -> outputs/_shards-type2-gpt55-v9b-noirrelevant/predictions-type2-gpt55-v9b-noirrelevant-s04.tsv
+  s05: rows 216..269 (54) -> outputs/_shards-type2-gpt55-v9b-noirrelevant/predictions-type2-gpt55-v9b-noirrelevant-s05.tsv
+  s06: rows 270..323 (54) -> outputs/_shards-type2-gpt55-v9b-noirrelevant/predictions-type2-gpt55-v9b-noirrelevant-s06.tsv
+  s07: rows 324..377 (54) -> outputs/_shards-type2-gpt55-v9b-noirrelevant/predictions-type2-gpt55-v9b-noirrelevant-s07.tsv
+  s08: rows 378..431 (54) -> outputs/_shards-type2-gpt55-v9b-noirrelevant/predictions-type2-gpt55-v9b-noirrelevant-s08.tsv
+  s09: rows 432..485 (54) -> outputs/_shards-type2-gpt55-v9b-noirrelevant/predictions-type2-gpt55-v9b-noirrelevant-s09.tsv
+  s10: rows 486..539 (54) -> outputs/_shards-type2-gpt55-v9b-noirrelevant/predictions-type2-gpt55-v9b-noirrelevant-s10.tsv
+  s11: rows 540..593 (54) -> outputs/_shards-type2-gpt55-v9b-noirrelevant/predictions-type2-gpt55-v9b-noirrelevant-s11.tsv
+  s12: rows 594..647 (54) -> outputs/_shards-type2-gpt55-v9b-noirrelevant/predictions-type2-gpt55-v9b-noirrelevant-s12.tsv
+  s13: rows 648..701 (54) -> outputs/_shards-type2-gpt55-v9b-noirrelevant/predictions-type2-gpt55-v9b-noirrelevant-s13.tsv
+  s14: rows 702..755 (54) -> outputs/_shards-type2-gpt55-v9b-noirrelevant/predictions-type2-gpt55-v9b-noirrelevant-s14.tsv
+  s15: rows 756..809 (54) -> outputs/_shards-type2-gpt55-v9b-noirrelevant/predictions-type2-gpt55-v9b-noirrelevant-s15.tsv
+  s16: rows 810..863 (54) -> outputs/_shards-type2-gpt55-v9b-noirrelevant/predictions-type2-gpt55-v9b-noirrelevant-s16.tsv
+  round-trip verified: 864 rows, 6 columns, order preserved
+Wrote manifest: outputs/_shards-type2-gpt55-v9b-noirrelevant/predictions-type2-gpt55-v9b-noirrelevant.manifest (16 shards)
+
+--- evaluator ---
+  launched eval-s01 (pid 91921)
+  launched eval-s02 (pid 91924)
+  launched eval-s03 (pid 91927)
+  launched eval-s04 (pid 91930)
+  launched eval-s05 (pid 91933)
+  launched eval-s06 (pid 91935)
+  launched eval-s07 (pid 91939)
+  launched eval-s08 (pid 91942)
+  launched eval-s09 (pid 91945)
+  launched eval-s10 (pid 91948)
+  launched eval-s11 (pid 91951)
+  launched eval-s12 (pid 91954)
+  launched eval-s13 (pid 91956)
+  launched eval-s14 (pid 91958)
+  launched eval-s15 (pid 91960)
+  launched eval-s16 (pid 91966)
+  -s01: OK
+  -s02: OK
+  -s03: OK
+  -s04: OK
+  -s05: OK
+  -s06: OK
+  -s07: OK
+  -s08: OK
+  -s09: OK
+  -s10: OK
+  -s11: OK
+  -s12: OK
+  -s13: OK
+  -s14: OK
+  -s15: OK
+  -s16: OK
+
+--- merging results ---
+Merged 16 shards -> outputs/type2-gpt55-v9b-noirrelevant-eval/result.tsv
+  rows: 864
+  Accuracy: 0.5902777777777778 (510.0/864)
+  merged 864 of 864 rows
+
+==================================================================
+  Done: type2-gpt55-v9b-noirrelevant
+==================================================================
+  Accuracy: outputs/type2-gpt55-v9b-noirrelevant-eval/eval_logs.txt (MERGED TOTAL line)
+Input:      generation_outputs/v9b/combined_type3.tsv
+Run:        type3-gpt55-v9b-noirrelevant
+Solver:     gpt-5.5 (elm) / zero-shot-no-irrelevant
+Judge:      gpt-5.4-mini (elm) / type3-causal-check
+Shards:     16
+Stage:      eval
+
+--- splitting predictions ---
+  s01: rows 0..60 (61) -> outputs/_shards-type3-gpt55-v9b-noirrelevant/predictions-type3-gpt55-v9b-noirrelevant-s01.tsv
+  s02: rows 61..121 (61) -> outputs/_shards-type3-gpt55-v9b-noirrelevant/predictions-type3-gpt55-v9b-noirrelevant-s02.tsv
+  s03: rows 122..182 (61) -> outputs/_shards-type3-gpt55-v9b-noirrelevant/predictions-type3-gpt55-v9b-noirrelevant-s03.tsv
+  s04: rows 183..243 (61) -> outputs/_shards-type3-gpt55-v9b-noirrelevant/predictions-type3-gpt55-v9b-noirrelevant-s04.tsv
+  s05: rows 244..304 (61) -> outputs/_shards-type3-gpt55-v9b-noirrelevant/predictions-type3-gpt55-v9b-noirrelevant-s05.tsv
+  s06: rows 305..365 (61) -> outputs/_shards-type3-gpt55-v9b-noirrelevant/predictions-type3-gpt55-v9b-noirrelevant-s06.tsv
+  s07: rows 366..426 (61) -> outputs/_shards-type3-gpt55-v9b-noirrelevant/predictions-type3-gpt55-v9b-noirrelevant-s07.tsv
+  s08: rows 427..487 (61) -> outputs/_shards-type3-gpt55-v9b-noirrelevant/predictions-type3-gpt55-v9b-noirrelevant-s08.tsv
+  s09: rows 488..548 (61) -> outputs/_shards-type3-gpt55-v9b-noirrelevant/predictions-type3-gpt55-v9b-noirrelevant-s09.tsv
+  s10: rows 549..608 (60) -> outputs/_shards-type3-gpt55-v9b-noirrelevant/predictions-type3-gpt55-v9b-noirrelevant-s10.tsv
+  s11: rows 609..668 (60) -> outputs/_shards-type3-gpt55-v9b-noirrelevant/predictions-type3-gpt55-v9b-noirrelevant-s11.tsv
+  s12: rows 669..728 (60) -> outputs/_shards-type3-gpt55-v9b-noirrelevant/predictions-type3-gpt55-v9b-noirrelevant-s12.tsv
+  s13: rows 729..788 (60) -> outputs/_shards-type3-gpt55-v9b-noirrelevant/predictions-type3-gpt55-v9b-noirrelevant-s13.tsv
+  s14: rows 789..848 (60) -> outputs/_shards-type3-gpt55-v9b-noirrelevant/predictions-type3-gpt55-v9b-noirrelevant-s14.tsv
+  s15: rows 849..908 (60) -> outputs/_shards-type3-gpt55-v9b-noirrelevant/predictions-type3-gpt55-v9b-noirrelevant-s15.tsv
+  s16: rows 909..968 (60) -> outputs/_shards-type3-gpt55-v9b-noirrelevant/predictions-type3-gpt55-v9b-noirrelevant-s16.tsv
+  round-trip verified: 969 rows, 6 columns, order preserved
+Wrote manifest: outputs/_shards-type3-gpt55-v9b-noirrelevant/predictions-type3-gpt55-v9b-noirrelevant.manifest (16 shards)
+
+--- evaluator ---
+  launched eval-s01 (pid 92068)
+  launched eval-s02 (pid 92071)
+  launched eval-s03 (pid 92074)
+  launched eval-s04 (pid 92077)
+  launched eval-s05 (pid 92080)
+  launched eval-s06 (pid 92083)
+  launched eval-s07 (pid 92086)
+  launched eval-s08 (pid 92089)
+  launched eval-s09 (pid 92092)
+  launched eval-s10 (pid 92095)
+  launched eval-s11 (pid 92098)
+  launched eval-s12 (pid 92101)
+  launched eval-s13 (pid 92103)
+  launched eval-s14 (pid 92107)
+  launched eval-s15 (pid 92110)
+  launched eval-s16 (pid 92112)
+  -s01: OK
+  -s02: OK
+  -s03: OK
+  -s04: OK
+  -s05: OK
+  -s06: OK
+  -s07: OK
+  -s08: OK
+  -s09: OK
+  -s10: OK
+  -s11: OK
+  -s12: OK
+  -s13: OK
+  -s14: OK
+  -s15: OK
+  -s16: OK
+
+--- merging results ---
+Merged 16 shards -> outputs/type3-gpt55-v9b-noirrelevant-eval/result.tsv
+  rows: 969
+  Accuracy: 0.5459236326109391 (529.0/969)
+  merged 969 of 969 rows
+
+==================================================================
+  Done: type3-gpt55-v9b-noirrelevant
+==================================================================
+  Accuracy: outputs/type3-gpt55-v9b-noirrelevant-eval/eval_logs.txt (MERGED TOTAL line)
+Input:      generation_outputs/v9b/combined_type1.tsv
+Run:        type1-gpt54mini-v9b-noirrelevant
+Solver:     gpt-5.5 (elm) / zero-shot-no-irrelevant
+Judge:      gpt-5.4-mini (elm) / zero-shot-basic
+Shards:     16
+Stage:      eval
+
+--- splitting predictions ---
+  s01: rows 0..53 (54) -> outputs/_shards-type1-gpt54mini-v9b-noirrelevant/predictions-type1-gpt54mini-v9b-noirrelevant-s01.tsv
+  s02: rows 54..107 (54) -> outputs/_shards-type1-gpt54mini-v9b-noirrelevant/predictions-type1-gpt54mini-v9b-noirrelevant-s02.tsv
+  s03: rows 108..161 (54) -> outputs/_shards-type1-gpt54mini-v9b-noirrelevant/predictions-type1-gpt54mini-v9b-noirrelevant-s03.tsv
+  s04: rows 162..215 (54) -> outputs/_shards-type1-gpt54mini-v9b-noirrelevant/predictions-type1-gpt54mini-v9b-noirrelevant-s04.tsv
+  s05: rows 216..268 (53) -> outputs/_shards-type1-gpt54mini-v9b-noirrelevant/predictions-type1-gpt54mini-v9b-noirrelevant-s05.tsv
+  s06: rows 269..321 (53) -> outputs/_shards-type1-gpt54mini-v9b-noirrelevant/predictions-type1-gpt54mini-v9b-noirrelevant-s06.tsv
+  s07: rows 322..374 (53) -> outputs/_shards-type1-gpt54mini-v9b-noirrelevant/predictions-type1-gpt54mini-v9b-noirrelevant-s07.tsv
+  s08: rows 375..427 (53) -> outputs/_shards-type1-gpt54mini-v9b-noirrelevant/predictions-type1-gpt54mini-v9b-noirrelevant-s08.tsv
+  s09: rows 428..480 (53) -> outputs/_shards-type1-gpt54mini-v9b-noirrelevant/predictions-type1-gpt54mini-v9b-noirrelevant-s09.tsv
+  s10: rows 481..533 (53) -> outputs/_shards-type1-gpt54mini-v9b-noirrelevant/predictions-type1-gpt54mini-v9b-noirrelevant-s10.tsv
+  s11: rows 534..586 (53) -> outputs/_shards-type1-gpt54mini-v9b-noirrelevant/predictions-type1-gpt54mini-v9b-noirrelevant-s11.tsv
+  s12: rows 587..639 (53) -> outputs/_shards-type1-gpt54mini-v9b-noirrelevant/predictions-type1-gpt54mini-v9b-noirrelevant-s12.tsv
+  s13: rows 640..692 (53) -> outputs/_shards-type1-gpt54mini-v9b-noirrelevant/predictions-type1-gpt54mini-v9b-noirrelevant-s13.tsv
+  s14: rows 693..745 (53) -> outputs/_shards-type1-gpt54mini-v9b-noirrelevant/predictions-type1-gpt54mini-v9b-noirrelevant-s14.tsv
+  s15: rows 746..798 (53) -> outputs/_shards-type1-gpt54mini-v9b-noirrelevant/predictions-type1-gpt54mini-v9b-noirrelevant-s15.tsv
+  s16: rows 799..851 (53) -> outputs/_shards-type1-gpt54mini-v9b-noirrelevant/predictions-type1-gpt54mini-v9b-noirrelevant-s16.tsv
+  round-trip verified: 852 rows, 6 columns, order preserved
+Wrote manifest: outputs/_shards-type1-gpt54mini-v9b-noirrelevant/predictions-type1-gpt54mini-v9b-noirrelevant.manifest (16 shards)
+
+--- evaluator ---
+  launched eval-s01 (pid 92243)
+  launched eval-s02 (pid 92246)
+  launched eval-s03 (pid 92249)
+  launched eval-s04 (pid 92252)
+  launched eval-s05 (pid 92255)
+  launched eval-s06 (pid 92258)
+  launched eval-s07 (pid 92261)
+  launched eval-s08 (pid 92264)
+  launched eval-s09 (pid 92267)
+  launched eval-s10 (pid 92270)
+  launched eval-s11 (pid 92273)
+  launched eval-s12 (pid 92276)
+  launched eval-s13 (pid 92279)
+  launched eval-s14 (pid 92282)
+  launched eval-s15 (pid 92285)
+  launched eval-s16 (pid 92288)
+  -s01: OK
+  -s02: OK
+  -s03: OK
+  -s04: OK
+  -s05: OK
+  -s06: OK
+  -s07: OK
+  -s08: OK
+  -s09: OK
+  -s10: OK
+  -s11: OK
+  -s12: OK
+  -s13: OK
+  -s14: OK
+  -s15: OK
+  -s16: OK
+
+--- merging results ---
+Merged 16 shards -> outputs/type1-gpt54mini-v9b-noirrelevant-eval/result.tsv
+  rows: 852
+  Accuracy: 0.5657276995305164 (482.0/852)
+  merged 852 of 852 rows
+
+==================================================================
+  Done: type1-gpt54mini-v9b-noirrelevant
+==================================================================
+  Accuracy: outputs/type1-gpt54mini-v9b-noirrelevant-eval/eval_logs.txt (MERGED TOTAL line)
+Input:      generation_outputs/v9b/combined_type2.tsv
+Run:        type2-gpt54mini-v9b-noirrelevant
+Solver:     gpt-5.5 (elm) / zero-shot-no-irrelevant
+Judge:      gpt-5.4-mini (elm) / zero-shot-basic
+Shards:     16
+Stage:      eval
+
+--- splitting predictions ---
+  s01: rows 0..53 (54) -> outputs/_shards-type2-gpt54mini-v9b-noirrelevant/predictions-type2-gpt54mini-v9b-noirrelevant-s01.tsv
+  s02: rows 54..107 (54) -> outputs/_shards-type2-gpt54mini-v9b-noirrelevant/predictions-type2-gpt54mini-v9b-noirrelevant-s02.tsv
+  s03: rows 108..161 (54) -> outputs/_shards-type2-gpt54mini-v9b-noirrelevant/predictions-type2-gpt54mini-v9b-noirrelevant-s03.tsv
+  s04: rows 162..215 (54) -> outputs/_shards-type2-gpt54mini-v9b-noirrelevant/predictions-type2-gpt54mini-v9b-noirrelevant-s04.tsv
+  s05: rows 216..269 (54) -> outputs/_shards-type2-gpt54mini-v9b-noirrelevant/predictions-type2-gpt54mini-v9b-noirrelevant-s05.tsv
+  s06: rows 270..323 (54) -> outputs/_shards-type2-gpt54mini-v9b-noirrelevant/predictions-type2-gpt54mini-v9b-noirrelevant-s06.tsv
+  s07: rows 324..377 (54) -> outputs/_shards-type2-gpt54mini-v9b-noirrelevant/predictions-type2-gpt54mini-v9b-noirrelevant-s07.tsv
+  s08: rows 378..431 (54) -> outputs/_shards-type2-gpt54mini-v9b-noirrelevant/predictions-type2-gpt54mini-v9b-noirrelevant-s08.tsv
+  s09: rows 432..485 (54) -> outputs/_shards-type2-gpt54mini-v9b-noirrelevant/predictions-type2-gpt54mini-v9b-noirrelevant-s09.tsv
+  s10: rows 486..539 (54) -> outputs/_shards-type2-gpt54mini-v9b-noirrelevant/predictions-type2-gpt54mini-v9b-noirrelevant-s10.tsv
+  s11: rows 540..593 (54) -> outputs/_shards-type2-gpt54mini-v9b-noirrelevant/predictions-type2-gpt54mini-v9b-noirrelevant-s11.tsv
+  s12: rows 594..647 (54) -> outputs/_shards-type2-gpt54mini-v9b-noirrelevant/predictions-type2-gpt54mini-v9b-noirrelevant-s12.tsv
+  s13: rows 648..701 (54) -> outputs/_shards-type2-gpt54mini-v9b-noirrelevant/predictions-type2-gpt54mini-v9b-noirrelevant-s13.tsv
+  s14: rows 702..755 (54) -> outputs/_shards-type2-gpt54mini-v9b-noirrelevant/predictions-type2-gpt54mini-v9b-noirrelevant-s14.tsv
+  s15: rows 756..809 (54) -> outputs/_shards-type2-gpt54mini-v9b-noirrelevant/predictions-type2-gpt54mini-v9b-noirrelevant-s15.tsv
+  s16: rows 810..863 (54) -> outputs/_shards-type2-gpt54mini-v9b-noirrelevant/predictions-type2-gpt54mini-v9b-noirrelevant-s16.tsv
+  round-trip verified: 864 rows, 6 columns, order preserved
+Wrote manifest: outputs/_shards-type2-gpt54mini-v9b-noirrelevant/predictions-type2-gpt54mini-v9b-noirrelevant.manifest (16 shards)
+
+--- evaluator ---
+  launched eval-s01 (pid 92362)
+  launched eval-s02 (pid 92365)
+  launched eval-s03 (pid 92368)
+  launched eval-s04 (pid 92371)
+  launched eval-s05 (pid 92374)
+  launched eval-s06 (pid 92377)
+  launched eval-s07 (pid 92380)
+  launched eval-s08 (pid 92383)
+  launched eval-s09 (pid 92386)
+  launched eval-s10 (pid 92389)
+  launched eval-s11 (pid 92392)
+  launched eval-s12 (pid 92395)
+  launched eval-s13 (pid 92398)
+  launched eval-s14 (pid 92400)
+  launched eval-s15 (pid 92403)
+  launched eval-s16 (pid 92407)
+  -s01: OK
+  -s02: OK
+  -s03: OK
+  -s04: OK
+  -s05: OK
+  -s06: OK
+  -s07: OK
+  -s08: OK
+  -s09: OK
+  -s10: OK
+  -s11: OK
+  -s12: OK
+  -s13: OK
+  -s14: OK
+  -s15: OK
+  -s16: OK
+
+--- merging results ---
+Merged 16 shards -> outputs/type2-gpt54mini-v9b-noirrelevant-eval/result.tsv
+  rows: 864
+  Accuracy: 0.5694444444444444 (492.0/864)
+  merged 864 of 864 rows
+
+==================================================================
+  Done: type2-gpt54mini-v9b-noirrelevant
+==================================================================
+  Accuracy: outputs/type2-gpt54mini-v9b-noirrelevant-eval/eval_logs.txt (MERGED TOTAL line)
+Input:      generation_outputs/v9b/combined_type3.tsv
+Run:        type3-gpt54mini-v9b-noirrelevant
+Solver:     gpt-5.5 (elm) / zero-shot-no-irrelevant
+Judge:      gpt-5.4-mini (elm) / type3-causal-check
+Shards:     16
+Stage:      eval
+
+--- splitting predictions ---
+  s01: rows 0..60 (61) -> outputs/_shards-type3-gpt54mini-v9b-noirrelevant/predictions-type3-gpt54mini-v9b-noirrelevant-s01.tsv
+  s02: rows 61..121 (61) -> outputs/_shards-type3-gpt54mini-v9b-noirrelevant/predictions-type3-gpt54mini-v9b-noirrelevant-s02.tsv
+  s03: rows 122..182 (61) -> outputs/_shards-type3-gpt54mini-v9b-noirrelevant/predictions-type3-gpt54mini-v9b-noirrelevant-s03.tsv
+  s04: rows 183..243 (61) -> outputs/_shards-type3-gpt54mini-v9b-noirrelevant/predictions-type3-gpt54mini-v9b-noirrelevant-s04.tsv
+  s05: rows 244..304 (61) -> outputs/_shards-type3-gpt54mini-v9b-noirrelevant/predictions-type3-gpt54mini-v9b-noirrelevant-s05.tsv
+  s06: rows 305..365 (61) -> outputs/_shards-type3-gpt54mini-v9b-noirrelevant/predictions-type3-gpt54mini-v9b-noirrelevant-s06.tsv
+  s07: rows 366..426 (61) -> outputs/_shards-type3-gpt54mini-v9b-noirrelevant/predictions-type3-gpt54mini-v9b-noirrelevant-s07.tsv
+  s08: rows 427..487 (61) -> outputs/_shards-type3-gpt54mini-v9b-noirrelevant/predictions-type3-gpt54mini-v9b-noirrelevant-s08.tsv
+  s09: rows 488..548 (61) -> outputs/_shards-type3-gpt54mini-v9b-noirrelevant/predictions-type3-gpt54mini-v9b-noirrelevant-s09.tsv
+  s10: rows 549..608 (60) -> outputs/_shards-type3-gpt54mini-v9b-noirrelevant/predictions-type3-gpt54mini-v9b-noirrelevant-s10.tsv
+  s11: rows 609..668 (60) -> outputs/_shards-type3-gpt54mini-v9b-noirrelevant/predictions-type3-gpt54mini-v9b-noirrelevant-s11.tsv
+  s12: rows 669..728 (60) -> outputs/_shards-type3-gpt54mini-v9b-noirrelevant/predictions-type3-gpt54mini-v9b-noirrelevant-s12.tsv
+  s13: rows 729..788 (60) -> outputs/_shards-type3-gpt54mini-v9b-noirrelevant/predictions-type3-gpt54mini-v9b-noirrelevant-s13.tsv
+  s14: rows 789..848 (60) -> outputs/_shards-type3-gpt54mini-v9b-noirrelevant/predictions-type3-gpt54mini-v9b-noirrelevant-s14.tsv
+  s15: rows 849..908 (60) -> outputs/_shards-type3-gpt54mini-v9b-noirrelevant/predictions-type3-gpt54mini-v9b-noirrelevant-s15.tsv
+  s16: rows 909..968 (60) -> outputs/_shards-type3-gpt54mini-v9b-noirrelevant/predictions-type3-gpt54mini-v9b-noirrelevant-s16.tsv
+  round-trip verified: 969 rows, 6 columns, order preserved
+Wrote manifest: outputs/_shards-type3-gpt54mini-v9b-noirrelevant/predictions-type3-gpt54mini-v9b-noirrelevant.manifest (16 shards)
+
+--- evaluator ---
+  launched eval-s01 (pid 92473)
+  launched eval-s02 (pid 92476)
+  launched eval-s03 (pid 92479)
+  launched eval-s04 (pid 92482)
+  launched eval-s05 (pid 92485)
+  launched eval-s06 (pid 92488)
+  launched eval-s07 (pid 92491)
+  launched eval-s08 (pid 92494)
+  launched eval-s09 (pid 92497)
+  launched eval-s10 (pid 92500)
+  launched eval-s11 (pid 92503)
+  launched eval-s12 (pid 92506)
+  launched eval-s13 (pid 92509)
+  launched eval-s14 (pid 92512)
+  launched eval-s15 (pid 92515)
+  launched eval-s16 (pid 92518)
+  -s01: OK
+  -s02: OK
+  -s03: OK
+  -s04: OK
+  -s05: OK
+  -s06: OK
+  -s07: OK
+  -s08: OK
+  -s09: OK
+  -s10: OK
+  -s11: OK
+  -s12: OK
+  -s13: OK
+  -s14: OK
+  -s15: OK
+  -s16: OK
+
+--- merging results ---
+Merged 16 shards -> outputs/type3-gpt54mini-v9b-noirrelevant-eval/result.tsv
+  rows: 969
+  Accuracy: 0.5015479876160991 (486.0/969)
+  merged 969 of 969 rows
+
+==================================================================
+  Done: type3-gpt54mini-v9b-noirrelevant
+==================================================================
+  Accuracy: outputs/type3-gpt54mini-v9b-noirrelevant-eval/eval_logs.txt (MERGED TOTAL line)
