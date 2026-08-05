@@ -1,12 +1,15 @@
 """
 exp6_v9b_significance.py
-McNemar exact + cluster bootstrap (clustered by Root_ID) for the
+McNemar exact + cluster bootstrap (clustered by Batch+Root_ID) for the
 gemini31pro vs gpt55 crossover, replicated on v9b.
 
-result.tsv only has a flat 1..N positional 'ID', not Root_ID. Root_ID/
-Question_No are recovered by joining back to the source corpus file on
-sorted-ID position, verified zero-mismatch on Question text for all
-three types before this script was written.
+result.tsv only has a flat 1..N positional 'ID'. Root_ID/Question_No/Batch/QID
+are recovered by joining back to the source corpus file on sorted-ID position,
+verified zero-mismatch on Question text for all three types. Root_ID and
+Question_No restart from 1 in every batch and are NOT globally unique across
+the combined file (confirmed: 541/852 duplicate (Root_ID, Question_No) keys
+in type1 alone), so QID is used as the merge key instead, and Batch+Root_ID
+as the cluster key for adversarial siblings.
 """
 import pandas as pd
 import numpy as np
@@ -47,6 +50,9 @@ def load_result_with_keys(result_path, corpus_path):
         raise ValueError(f"{result_path}: row count mismatch vs {corpus_path} "
                           f"({len(res)} vs {len(corpus)})")
 
+    if corpus['QID'].nunique() != len(corpus):
+        raise ValueError(f"{corpus_path}: QID is not unique, cannot use as merge key")
+
     r = pd.to_numeric(res['Result'], errors='coerce')
     n_null = r.isna().sum()
     if n_null:
@@ -61,8 +67,10 @@ def load_result_with_keys(result_path, corpus_path):
         raise ValueError(f"{result_path}: {mismatches} Question mismatches at "
                           f"matched position, positional join unsafe")
 
+    res['QID'] = corpus['QID'].values
+    res['Batch'] = corpus['Batch'].values
     res['Root_ID'] = corpus['Root_ID'].values
-    res['Question_No'] = corpus['Question_No'].values
+    res['Cluster_Key'] = res['Batch'] + '_' + res['Root_ID']
     return res
 
 for t in [1, 2, 3]:
@@ -70,17 +78,13 @@ for t in [1, 2, 3]:
     pg = load_result_with_keys(f'outputs/type{t}-gemini31pro-v9b-noirrelevant-eval/result.tsv', corpus_path)
     pp = load_result_with_keys(f'outputs/type{t}-gpt55-v9b-noirrelevant-eval/result.tsv', corpus_path)
 
-    m = pg.merge(pp, on=['Root_ID', 'Question_No'], suffixes=('_gem', '_gpt'), validate='one_to_one')
-    if len(m) != len(pg) or len(m) != len(pp):
-        print(f"type{t}: WARNING merge row count mismatch, "
-              f"gem={len(pg)} gpt={len(pp)} merged={len(m)}")
-        continue
+    m = pg.merge(pp, on='QID', suffixes=('_gem', '_gpt'), validate='one_to_one')
 
     b = int((m['Correct_gem'] & ~m['Correct_gpt']).sum())
     c = int((~m['Correct_gem'] & m['Correct_gpt']).sum())
     p = mcnemar_exact(b, c)
 
-    diff_mean, lo, hi = cluster_bootstrap_diff(m, 'Correct_gem', 'Correct_gpt', 'Root_ID')
+    diff_mean, lo, hi = cluster_bootstrap_diff(m, 'Correct_gem', 'Correct_gpt', 'Cluster_Key_gem')
 
     acc_gem = m['Correct_gem'].mean()
     acc_gpt = m['Correct_gpt'].mean()
