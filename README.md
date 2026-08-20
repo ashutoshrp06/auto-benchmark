@@ -10,21 +10,27 @@ This is an MSc dissertation project (University of Edinburgh), built on top of a
 
 ```
 auto-benchmark/
-├── chase-qa-base/     Vendored upstream McGill-NLP/CHASE repo, unmodified
-│                       (git subtree). Reference and diff baseline only, do
-│                       not edit or run pipeline stages from here.
-└── chase-qa/           Working copy. CHASE-Finance lives in qa/; code/ and
-                        math/ are the upstream CHASE-Code and CHASE-Math
-                        domains, carried over unused.
-    ├── qa/             CHASE-Finance pipeline, evaluation, and analysis
-    ├── code/            (upstream CHASE-Code, untouched)
-    ├── math/            (upstream CHASE-Math, untouched)
+├── chase-qa-base/    Vendored upstream McGill-NLP/CHASE repo (git subtree).
+│                     qa/ carries two small patches and a baseline corpus,
+│                     see "CHASE-QA baseline generation" below.
+└── chase-qa/         Working copy. CHASE-Finance lives in qa/; code/ and
+                      math/ are the untouched upstream CHASE-Code and
+                      CHASE-Math domains.
+    ├── qa/           CHASE-Finance pipeline, evaluation, and analysis
+    ├── code/         (upstream CHASE-Code, untouched)
+    ├── math/         (upstream CHASE-Math, untouched)
     └── requirements.txt
 ```
 
 `chase-qa/README.md` and `chase-qa/qa/README.md` are the original upstream CHASE-QA documentation and describe the generic (non-Finance) pipeline. This file documents the CHASE-Finance extension that actually runs in `qa/`.
 
 Fastest way in: skim [The final run](#the-final-run) to see the concrete commands that produced the shipped corpus, then use [Pipeline](#pipeline-chase-qaqa) as the reference for running any stage on its own.
+
+## CHASE-QA baseline generation
+
+`chase-qa-base/qa/generator.py` and `chase-qa-base/qa/models.py` carry two small patches on top of the vendored upstream, needed to actually run the vanilla CHASE-QA pipeline against the ELM proxy rather than a locally hosted vLLM model: the `vllm` import in `models.py` is wrapped in a `try`/`except` so its absence doesn't hard-fail the module, and `_get_chat_response` retries with the offending parameter stripped or renamed (`max_tokens` to `max_completion_tokens`) on an OpenAI `unsupported_parameter` error. `generator.py`'s `programmatic_scenario_generation` also had its five hardcoded example scenario rows emptied out, since scenario generation here reads from an external `annotated_scenarios.txt` instead.
+
+That file, `chase-qa-base/qa/annotated_scenarios.txt`, holds the 15-persona seed pool used to produce the CHASE-QA ablation baseline. `runs/shard1`, `runs/shard2`, and `runs/shard3` each hold the persona subset used for that shard; `runs/smoketest` is an identical copy of `shard1`, used as a single-shard dry run before committing to all three. `chase-qa-base/qa/baseline_corpus.tsv` is the resulting corpus: 145 rows, split 53/40/52 across the three shards (`_s1`/`_s2`/`_s3` suffixes on `Root_ID`), confirmed by reading the file directly rather than trusting the row count in any log.
 
 ## Dependencies and install
 
