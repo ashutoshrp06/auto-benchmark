@@ -1,0 +1,14 @@
+USER_PERSONA: Parent planning children's education savings
+COLLECTION_OF_DOCS: FCA COBS 9 suitability and COBS 4 disclosure rules for Junior ISAs
+
+USER_PERSONA: Client holding an onshore investment bond, wants a lump sum without triggering a chargeable event
+COLLECTION_OF_DOCS: Adviser calculating the 5% cumulative tax-deferred withdrawal allowance and unused allowance carry-forward
+
+USER_PERSONA: Small business owner setting up workplace pension schemes
+COLLECTION_OF_DOCS: Pensions Act 2008 auto-enrolment duties and FCA workplace pension default fund charge cap rules
+
+USER_PERSONA: Investor evaluating cryptoasset investment products
+COLLECTION_OF_DOCS: FCA PS23/6 cryptoasset financial promotion rules
+
+USER_PERSONA: Client with a young family, existing life cover from a previous employer scheme, new mortgage
+COLLECTION_OF_DOCS: Adviser assessing whether existing cover meets income-replacement and mortgage-payoff need

@@ -1,0 +1,14 @@
+USER_PERSONA: Retiree comparing guaranteed annuity quotes against remaining pot value
+COLLECTION_OF_DOCS: Adviser computing guaranteed income for life across provider quotes with different escalation/guarantee terms
+
+USER_PERSONA: Homebuyer seeking mortgage affordability advice
+COLLECTION_OF_DOCS: FCA MCOB 11.6 responsible lending and affordability assessment rules
+
+USER_PERSONA: High-net-worth individual seeking estate planning strategies
+COLLECTION_OF_DOCS: HMRC inheritance tax nil-rate band rules (gov.uk) and FCA COBS 9.2 suitability requirements for advisers
+
+USER_PERSONA: Mid-career client with a stated moderate risk tolerance, existing multi-asset portfolio
+COLLECTION_OF_DOCS: Adviser reviewing whether current asset allocation matches the client's risk profile
+
+USER_PERSONA: Individual considering equity release on their property
+COLLECTION_OF_DOCS: FCA MCOB 8 and MCOB 9 equity release advising and disclosure rules

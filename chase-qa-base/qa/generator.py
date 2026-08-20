@@ -58,13 +58,7 @@ def jaccard_similarity(set1, set2):
 	return similarity
 
 def programmatic_scenario_generation(model, prompt_type, num_iters, max_tokens, temperature, stop, tik_encoding):
-	pred_ls = [
-		[1, "College student", "Intranet on the university website", 0],
-		[2, "Intern doctor at a hospital", "Encyclopedia of diseases", 0],
-		[3, "Immigrant in NYC", "Laws on renting and subletting", 0],
-		[4, "HR manager at a top law firm", "Court and newspaper records", 0],
-		[5, "Scientist at an NGO", "Government website for Income Tax", 0]
-	]
+	pred_ls = []
 
 	tot_ip_tokens = 0
 	tot_op_tokens = 0

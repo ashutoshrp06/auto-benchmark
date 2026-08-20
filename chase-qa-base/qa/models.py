@@ -16,8 +16,11 @@ from tenacity.retry import retry_if_exception_type
 from tenacity.wait import wait_random_exponential
 import tiktoken
 
-from vllm import LLMEngine, EngineArgs, SamplingParams, RequestOutput
-from vllm.lora.request import LoRARequest
+try:
+	from vllm import LLMEngine, EngineArgs, SamplingParams, RequestOutput
+	from vllm.lora.request import LoRARequest
+except ImportError:
+	LLMEngine = EngineArgs = SamplingParams = RequestOutput = LoRARequest = None
 
 def load_model(model_name, peft_model=None, pp_size=1, tp_size=4):
 	additional_configs = {}
@@ -85,33 +88,35 @@ def _get_completion_response(client, engine, prompt, sys_prompt, max_tokens, tem
 	)
 def _get_chat_response(client, engine, prompt, sys_prompt, max_tokens, temperature, top_p, n, stop, presence_penalty, frequency_penalty):
 	if "Mixtral-8x22B" in engine or "gemma" in engine:
-		return client.chat.completions.create(
-			model=engine,
-			messages = [
-				{"role": "user", "content": sys_prompt + "\n\n" + prompt}
-			],
-			max_tokens=max_tokens,
-			temperature=temperature,
-			top_p=top_p,
-			n=n,
-			stop=stop,
-			presence_penalty=presence_penalty,
-			frequency_penalty=frequency_penalty
-		)
-	return client.chat.completions.create(
-		model=engine,
+		messages = [{"role": "user", "content": sys_prompt + "\n\n" + prompt}]
+	else:
 		messages = [
 			{"role": "system", "content": sys_prompt},
 			{"role": "user", "content": prompt}
-		],
+		]
+
+	kwargs = dict(
+		model=engine,
+		messages=messages,
 		max_tokens=max_tokens,
 		temperature=temperature,
 		top_p=top_p,
 		n=n,
 		stop=stop,
 		presence_penalty=presence_penalty,
-		frequency_penalty=frequency_penalty
+		frequency_penalty=frequency_penalty,
 	)
+
+	while True:
+		try:
+			return client.chat.completions.create(**kwargs)
+		except openai.BadRequestError as e:
+			if e.code == "unsupported_parameter" and e.param == "max_tokens" and "max_tokens" in kwargs:
+				kwargs["max_completion_tokens"] = kwargs.pop("max_tokens")
+			elif e.code == "unsupported_parameter" and e.param in kwargs:
+				kwargs.pop(e.param)
+			else:
+				raise
 
 
 @retry(

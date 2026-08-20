@@ -1,0 +1,14 @@
+USER_PERSONA: Retail client seeking pension consolidation advice
+COLLECTION_OF_DOCS: FCA COBS 19 pension transfer rules
+
+USER_PERSONA: First-time investor consulting a financial adviser
+COLLECTION_OF_DOCS: FCA Consumer Duty (PRIN 2A) and COBS 4 communication rules
+
+USER_PERSONA: Higher-rate taxpayer deciding where additional monthly savings should go, workplace pension top-up or a stocks & shares ISA
+COLLECTION_OF_DOCS: Adviser computing net effective return after tax relief on the pension side vs tax-free growth on the ISA side
+
+USER_PERSONA: Client approaching retirement reviewing drawdown options
+COLLECTION_OF_DOCS: FCA COBS 9.2 suitability requirements and HMRC PTM056510 money purchase annual allowance rules
+
+USER_PERSONA: Client weighing long-term care funding options against their pension
+COLLECTION_OF_DOCS: FCA COBS 16.6 communications on long-term care insurance and drawdown pensions
