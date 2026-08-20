@@ -1,0 +1,161 @@
+Root_ID	Question_No	Persona	Environment	Question	Answer	Ans_Points	Doc_Ans_Points	Rel_Docs_List	Adv_Question	Adv_Answer	Adv_Ans_Pts	Adv_Doc_Ans_Pts	Adv_Docs_List	Documents
+1	1	persona	environment	Baseline question 1?	- baseline point 1	"[""baseline point""]"	"{""1"": [""baseline point""], ""2"": [""baseline point""]}"	"[""Title: baseline 1 document 1\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 1 document 2\nText:\nAdviser: line one.\nClient: line two.""]"	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+2	1	persona	environment	Baseline question 2?	- baseline point 2	"[""baseline point""]"	"{""1"": [""baseline point""], ""2"": [""baseline point""], ""3"": [""baseline point""]}"	"[""Title: baseline 2 document 1\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 2 document 2\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 2 document 3\nText:\nAdviser: line one.\nClient: line two.""]"	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+3	1	persona	environment	Baseline question 3?	- baseline point 3	"[""baseline point""]"	"{""1"": [""baseline point""], ""2"": [""baseline point""], ""3"": [""baseline point""], ""4"": [""baseline point""]}"	"""[\""Title: baseline 3 document 1\\nText:\\nAdviser: line one.\\nClient: line two.\"", \""Title: baseline 3 document 2\\nText:\\nAdviser: line one.\\nClient: line two.\"", \""Title: baseline 3 document 3\\nText:\\nAdviser: line one.\\nClient: line two.\"", \""Title: baseline 3 document 4\\nText:\\nAdviser: line one.\\nClient: line two.\""]"""	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+4	1	persona	environment	Baseline question 4?	- baseline point 4	"[""baseline point""]"	"{""1"": [""baseline point""]}"	"[""Title: baseline 4 document 1\nText:\nAdviser: line one.\nClient: line two.""]"	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+5	1	persona	environment	Baseline question 5?	- baseline point 5	"[""baseline point""]"	"{""1"": [""baseline point""], ""2"": [""baseline point""]}"	"[""Title: baseline 5 document 1\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 5 document 2\nText:\nAdviser: line one.\nClient: line two.""]"	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+6	1	persona	environment	Baseline question 6?	- baseline point 6	"[""baseline point""]"	"{""1"": [""baseline point""], ""2"": [""baseline point""], ""3"": [""baseline point""]}"	"""[\""Title: baseline 6 document 1\\nText:\\nAdviser: line one.\\nClient: line two.\"", \""Title: baseline 6 document 2\\nText:\\nAdviser: line one.\\nClient: line two.\"", \""Title: baseline 6 document 3\\nText:\\nAdviser: line one.\\nClient: line two.\""]"""	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+7	1	persona	environment	Baseline question 7?	- baseline point 7	"[""baseline point""]"	"{""1"": [""baseline point""], ""2"": [""baseline point""], ""3"": [""baseline point""], ""4"": [""baseline point""]}"	"[""Title: baseline 7 document 1\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 7 document 2\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 7 document 3\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 7 document 4\nText:\nAdviser: line one.\nClient: line two.""]"	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+8	1	persona	environment	Baseline question 8?	- baseline point 8	"[""baseline point""]"	"{""1"": [""baseline point""]}"	"[""Title: baseline 8 document 1\nText:\nAdviser: line one.\nClient: line two.""]"	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+9	1	persona	environment	Baseline question 9?	- baseline point 9	"[""baseline point""]"	"{""1"": [""baseline point""], ""2"": [""baseline point""]}"	"""[\""Title: baseline 9 document 1\\nText:\\nAdviser: line one.\\nClient: line two.\"", \""Title: baseline 9 document 2\\nText:\\nAdviser: line one.\\nClient: line two.\""]"""	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+10	1	persona	environment	Baseline question 10?	- baseline point 10	"[""baseline point""]"	"{""1"": [""baseline point""], ""2"": [""baseline point""], ""3"": [""baseline point""]}"	"[""Title: baseline 10 document 1\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 10 document 2\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 10 document 3\nText:\nAdviser: line one.\nClient: line two.""]"	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+11	1	persona	environment	Baseline question 11?	- baseline point 11	"[""baseline point""]"	"{""1"": [""baseline point""], ""2"": [""baseline point""], ""3"": [""baseline point""], ""4"": [""baseline point""]}"	"[""Title: baseline 11 document 1\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 11 document 2\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 11 document 3\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 11 document 4\nText:\nAdviser: line one.\nClient: line two.""]"	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+12	1	persona	environment	Baseline question 12?	- baseline point 12	"[""baseline point""]"	"{""1"": [""baseline point""]}"	"""[\""Title: baseline 12 document 1\\nText:\\nAdviser: line one.\\nClient: line two.\""]"""	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+13	1	persona	environment	Baseline question 13?	- baseline point 13	"[""baseline point""]"	"{""1"": [""baseline point""], ""2"": [""baseline point""]}"	"[""Title: baseline 13 document 1\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 13 document 2\nText:\nAdviser: line one.\nClient: line two.""]"	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+14	1	persona	environment	Baseline question 14?	- baseline point 14	"[""baseline point""]"	"{""1"": [""baseline point""], ""2"": [""baseline point""], ""3"": [""baseline point""]}"	"[""Title: baseline 14 document 1\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 14 document 2\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 14 document 3\nText:\nAdviser: line one.\nClient: line two.""]"	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+15	1	persona	environment	Baseline question 15?	- baseline point 15	"[""baseline point""]"	"{""1"": [""baseline point""], ""2"": [""baseline point""], ""3"": [""baseline point""], ""4"": [""baseline point""]}"	"""[\""Title: baseline 15 document 1\\nText:\\nAdviser: line one.\\nClient: line two.\"", \""Title: baseline 15 document 2\\nText:\\nAdviser: line one.\\nClient: line two.\"", \""Title: baseline 15 document 3\\nText:\\nAdviser: line one.\\nClient: line two.\"", \""Title: baseline 15 document 4\\nText:\\nAdviser: line one.\\nClient: line two.\""]"""	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+16	1	persona	environment	Baseline question 16?	- baseline point 16	"[""baseline point""]"	"{""1"": [""baseline point""]}"	"[""Title: baseline 16 document 1\nText:\nAdviser: line one.\nClient: line two.""]"	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+17	1	persona	environment	Baseline question 17?	- baseline point 17	"[""baseline point""]"	"{""1"": [""baseline point""], ""2"": [""baseline point""]}"	"[""Title: baseline 17 document 1\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 17 document 2\nText:\nAdviser: line one.\nClient: line two.""]"	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+18	1	persona	environment	Baseline question 18?	- baseline point 18	"[""baseline point""]"	"{""1"": [""baseline point""], ""2"": [""baseline point""], ""3"": [""baseline point""]}"	"""[\""Title: baseline 18 document 1\\nText:\\nAdviser: line one.\\nClient: line two.\"", \""Title: baseline 18 document 2\\nText:\\nAdviser: line one.\\nClient: line two.\"", \""Title: baseline 18 document 3\\nText:\\nAdviser: line one.\\nClient: line two.\""]"""	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+19	1	persona	environment	Baseline question 19?	- baseline point 19	"[""baseline point""]"	"{""1"": [""baseline point""], ""2"": [""baseline point""], ""3"": [""baseline point""], ""4"": [""baseline point""]}"	"[""Title: baseline 19 document 1\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 19 document 2\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 19 document 3\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 19 document 4\nText:\nAdviser: line one.\nClient: line two.""]"	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+20	1	persona	environment	Baseline question 20?	- baseline point 20	"[""baseline point""]"	"{""1"": [""baseline point""]}"	"[""Title: baseline 20 document 1\nText:\nAdviser: line one.\nClient: line two.""]"	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+21	1	persona	environment	Baseline question 21?	- baseline point 21	"[""baseline point""]"	"{""1"": [""baseline point""], ""2"": [""baseline point""]}"	"""[\""Title: baseline 21 document 1\\nText:\\nAdviser: line one.\\nClient: line two.\"", \""Title: baseline 21 document 2\\nText:\\nAdviser: line one.\\nClient: line two.\""]"""	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+22	1	persona	environment	Baseline question 22?	- baseline point 22	"[""baseline point""]"	"{""1"": [""baseline point""], ""2"": [""baseline point""], ""3"": [""baseline point""]}"	"[""Title: baseline 22 document 1\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 22 document 2\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 22 document 3\nText:\nAdviser: line one.\nClient: line two.""]"	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+23	1	persona	environment	Baseline question 23?	- baseline point 23	"[""baseline point""]"	"{""1"": [""baseline point""], ""2"": [""baseline point""], ""3"": [""baseline point""], ""4"": [""baseline point""]}"	"[""Title: baseline 23 document 1\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 23 document 2\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 23 document 3\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 23 document 4\nText:\nAdviser: line one.\nClient: line two.""]"	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+24	1	persona	environment	Baseline question 24?	- baseline point 24	"[""baseline point""]"	"{""1"": [""baseline point""]}"	"""[\""Title: baseline 24 document 1\\nText:\\nAdviser: line one.\\nClient: line two.\""]"""	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+25	1	persona	environment	Baseline question 25?	- baseline point 25	"[""baseline point""]"	"{""1"": [""baseline point""], ""2"": [""baseline point""]}"	"[""Title: baseline 25 document 1\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 25 document 2\nText:\nAdviser: line one.\nClient: line two.""]"	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+26	1	persona	environment	Baseline question 26?	- baseline point 26	"[""baseline point""]"	"{""1"": [""baseline point""], ""2"": [""baseline point""], ""3"": [""baseline point""]}"	"[""Title: baseline 26 document 1\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 26 document 2\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 26 document 3\nText:\nAdviser: line one.\nClient: line two.""]"	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+27	1	persona	environment	Baseline question 27?	- baseline point 27	"[""baseline point""]"	"{""1"": [""baseline point""], ""2"": [""baseline point""], ""3"": [""baseline point""], ""4"": [""baseline point""]}"	"""[\""Title: baseline 27 document 1\\nText:\\nAdviser: line one.\\nClient: line two.\"", \""Title: baseline 27 document 2\\nText:\\nAdviser: line one.\\nClient: line two.\"", \""Title: baseline 27 document 3\\nText:\\nAdviser: line one.\\nClient: line two.\"", \""Title: baseline 27 document 4\\nText:\\nAdviser: line one.\\nClient: line two.\""]"""	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+28	1	persona	environment	Baseline question 28?	- baseline point 28	"[""baseline point""]"	"{""1"": [""baseline point""]}"	"[""Title: baseline 28 document 1\nText:\nAdviser: line one.\nClient: line two.""]"	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+29	1	persona	environment	Baseline question 29?	- baseline point 29	"[""baseline point""]"	"{""1"": [""baseline point""], ""2"": [""baseline point""]}"	"[""Title: baseline 29 document 1\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 29 document 2\nText:\nAdviser: line one.\nClient: line two.""]"	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+30	1	persona	environment	Baseline question 30?	- baseline point 30	"[""baseline point""]"	"{""1"": [""baseline point""], ""2"": [""baseline point""], ""3"": [""baseline point""]}"	"""[\""Title: baseline 30 document 1\\nText:\\nAdviser: line one.\\nClient: line two.\"", \""Title: baseline 30 document 2\\nText:\\nAdviser: line one.\\nClient: line two.\"", \""Title: baseline 30 document 3\\nText:\\nAdviser: line one.\\nClient: line two.\""]"""	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+31	1	persona	environment	Baseline question 31?	- baseline point 31	"[""baseline point""]"	"{""1"": [""baseline point""], ""2"": [""baseline point""], ""3"": [""baseline point""], ""4"": [""baseline point""]}"	"[""Title: baseline 31 document 1\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 31 document 2\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 31 document 3\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 31 document 4\nText:\nAdviser: line one.\nClient: line two.""]"	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+32	1	persona	environment	Baseline question 32?	- baseline point 32	"[""baseline point""]"	"{""1"": [""baseline point""]}"	"[""Title: baseline 32 document 1\nText:\nAdviser: line one.\nClient: line two.""]"	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+33	1	persona	environment	Baseline question 33?	- baseline point 33	"[""baseline point""]"	"{""1"": [""baseline point""], ""2"": [""baseline point""]}"	"""[\""Title: baseline 33 document 1\\nText:\\nAdviser: line one.\\nClient: line two.\"", \""Title: baseline 33 document 2\\nText:\\nAdviser: line one.\\nClient: line two.\""]"""	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+34	1	persona	environment	Baseline question 34?	- baseline point 34	"[""baseline point""]"	"{""1"": [""baseline point""], ""2"": [""baseline point""], ""3"": [""baseline point""]}"	"[""Title: baseline 34 document 1\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 34 document 2\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 34 document 3\nText:\nAdviser: line one.\nClient: line two.""]"	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+35	1	persona	environment	Baseline question 35?	- baseline point 35	"[""baseline point""]"	"{""1"": [""baseline point""], ""2"": [""baseline point""], ""3"": [""baseline point""], ""4"": [""baseline point""]}"	"[""Title: baseline 35 document 1\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 35 document 2\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 35 document 3\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 35 document 4\nText:\nAdviser: line one.\nClient: line two.""]"	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+36	1	persona	environment	Baseline question 36?	- baseline point 36	"[""baseline point""]"	"{""1"": [""baseline point""]}"	"""[\""Title: baseline 36 document 1\\nText:\\nAdviser: line one.\\nClient: line two.\""]"""	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+37	1	persona	environment	Baseline question 37?	- baseline point 37	"[""baseline point""]"	"{""1"": [""baseline point""], ""2"": [""baseline point""]}"	"[""Title: baseline 37 document 1\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 37 document 2\nText:\nAdviser: line one.\nClient: line two.""]"	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+38	1	persona	environment	Baseline question 38?	- baseline point 38	"[""baseline point""]"	"{""1"": [""baseline point""], ""2"": [""baseline point""], ""3"": [""baseline point""]}"	"[""Title: baseline 38 document 1\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 38 document 2\nText:\nAdviser: line one.\nClient: line two."", ""Title: baseline 38 document 3\nText:\nAdviser: line one.\nClient: line two.""]"	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+39	1	persona	environment	Baseline question 39?	- baseline point 39	"[""baseline point""]"	"{""1"": [""baseline point""], ""2"": [""baseline point""], ""3"": [""baseline point""], ""4"": [""baseline point""]}"	"""[\""Title: baseline 39 document 1\\nText:\\nAdviser: line one.\\nClient: line two.\"", \""Title: baseline 39 document 2\\nText:\\nAdviser: line one.\\nClient: line two.\"", \""Title: baseline 39 document 3\\nText:\\nAdviser: line one.\\nClient: line two.\"", \""Title: baseline 39 document 4\\nText:\\nAdviser: line one.\\nClient: line two.\""]"""	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"
+40	1	persona	environment	Baseline question 40?	- baseline point 40	"[""baseline point""]"	"{""1"": [""baseline point""]}"	"[""Title: baseline 40 document 1\nText:\nAdviser: line one.\nClient: line two.""]"	adv question	adv answer	[]	{}	[]	"Document 1:
+Title: x
+Text:
+y"

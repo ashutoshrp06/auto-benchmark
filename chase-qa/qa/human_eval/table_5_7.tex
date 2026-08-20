@@ -1,0 +1,17 @@
+\begin{table}[h]
+\centering
+\begin{tabular}{lrrrr}
+\toprule
+Population & $n$ & Answer correct & Clause governs & Traces to clause \\
+\midrule
+CHASE-Finance PASS & 12 & 12 & 3 & 3 \\
+CHASE-Finance FAIL & 8 & 8 & 4 & 4 \\
+CHASE-Finance DISAGREE & 10 & 10 & 3 & 3 \\
+\midrule
+CHASE-Finance, all & 30 & 30 & 10 & 10 \\
+CHASE-QA (unmodified) & 30 & 30 & n/a & n/a \\
+\bottomrule
+\end{tabular}
+\caption{Self-rated human evaluation counts. Correctness covers all 60 items. The 2 clause judgements cover the 30 CHASE-Finance regulatory-track items alone, since the baseline preserves no seed lineage and carries no source clause to read an answer against, so the columns run different denominators.}
+\label{tab:human-eval}
+\end{table}

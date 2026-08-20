@@ -1,0 +1,61 @@
+Item_ID	Frame	Grounding_Applicable	Batch	Root_ID	Question_No	QID	Verdict	Pass_Frac	No_Majority_Frac	N_Criteria	Seed_Type	N_Docs	N_Ans_Points
+I001	chase_finance	yes	v9-b1	1	1	q0000000000000001	PASS	0.888889	0.0	9	reg	3	
+I002	chase_finance	yes	v9-b1	41	1	q0000000000000041	DISAGREE	0.555556	0.444444	9	reg	3	
+I003	baseline	no		9	1							3	3
+I004	baseline	no		24	1							3	3
+I005	baseline	no		22	1							3	3
+I006	baseline	no		36	1							3	3
+I007	chase_finance	yes	v9-b1	38	1	q0000000000000038	DISAGREE	0.555556	0.444444	9	reg	3	
+I008	chase_finance	yes	v9-b1	4	1	q0000000000000004	PASS	0.888889	0.0	9	reg	3	
+I009	baseline	no		2	1							3	3
+I010	baseline	no		26	1							3	3
+I011	baseline	no		32	1							3	3
+I012	chase_finance	yes	v9-b1	30	1	q0000000000000030	FAIL	0.444444	0.0	9	dynamic_reg	3	
+I013	baseline	no		15	1							3	3
+I014	chase_finance	yes	v9-b1	36	1	q0000000000000036	DISAGREE	0.555556	0.444444	9	reg	3	
+I015	baseline	no		38	1							3	3
+I016	chase_finance	yes	v9-b1	33	1	q0000000000000033	FAIL	0.444444	0.0	9	dynamic_reg	3	
+I017	baseline	no		39	1							3	3
+I018	chase_finance	yes	v9-b1	14	1	q0000000000000014	PASS	0.888889	0.0	9	reg	3	
+I019	chase_finance	yes	v9-b1	20	1	q0000000000000020	PASS	0.888889	0.0	9	reg	3	
+I020	chase_finance	yes	v9-b1	11	1	q0000000000000011	PASS	0.888889	0.0	9	reg	3	
+I021	chase_finance	yes	v9-b1	9	1	q0000000000000009	PASS	0.888889	0.0	9	reg	3	
+I022	chase_finance	yes	v9-b1	2	1	q0000000000000002	PASS	0.888889	0.0	9	reg	3	
+I023	baseline	no		25	1							3	3
+I024	chase_finance	yes	v9-b1	26	1	q0000000000000026	FAIL	0.444444	0.0	9	dynamic_reg	3	
+I025	baseline	no		12	1							3	3
+I026	chase_finance	yes	v9-b1	18	1	q0000000000000018	PASS	0.888889	0.0	9	reg	3	
+I027	chase_finance	yes	v9-b1	28	1	q0000000000000028	FAIL	0.444444	0.0	9	dynamic_reg	3	
+I028	baseline	no		8	1							3	3
+I029	chase_finance	yes	v9-b1	10	1	q0000000000000010	PASS	0.888889	0.0	9	reg	3	
+I030	baseline	no		5	1							3	3
+I031	chase_finance	yes	v9-b1	51	1	q0000000000000051	DISAGREE	0.555556	0.444444	9	reg	3	
+I032	baseline	no		11	1							3	3
+I033	baseline	no		19	1							3	3
+I034	chase_finance	yes	v9-b1	42	1	q0000000000000042	DISAGREE	0.555556	0.444444	9	reg	3	
+I035	chase_finance	yes	v9-b1	13	1	q0000000000000013	PASS	0.888889	0.0	9	reg	3	
+I036	baseline	no		10	1							3	3
+I037	baseline	no		6	1							3	3
+I038	baseline	no		18	1							3	3
+I039	baseline	no		3	1							3	3
+I040	baseline	no		7	1							3	3
+I041	chase_finance	yes	v9-b1	21	1	q0000000000000021	FAIL	0.444444	0.0	9	dynamic_reg	3	
+I042	chase_finance	yes	v9-b1	47	1	q0000000000000047	DISAGREE	0.555556	0.444444	9	reg	3	
+I043	baseline	no		30	1							3	3
+I044	chase_finance	yes	v9-b1	5	1	q0000000000000005	PASS	0.888889	0.0	9	reg	3	
+I045	chase_finance	yes	v9-b1	50	1	q0000000000000050	DISAGREE	0.555556	0.444444	9	reg	3	
+I046	baseline	no		27	1							3	3
+I047	baseline	no		21	1							3	3
+I048	baseline	no		31	1							3	3
+I049	chase_finance	yes	v9-b1	24	1	q0000000000000024	FAIL	0.444444	0.0	9	dynamic_reg	3	
+I050	baseline	no		28	1							3	3
+I051	baseline	no		1	1							3	3
+I052	baseline	no		16	1							3	3
+I053	chase_finance	yes	v9-b1	27	1	q0000000000000027	FAIL	0.444444	0.0	9	dynamic_reg	3	
+I054	chase_finance	yes	v9-b1	15	1	q0000000000000015	PASS	0.888889	0.0	9	reg	3	
+I055	baseline	no		40	1							3	3
+I056	chase_finance	yes	v9-b1	35	1	q0000000000000035	FAIL	0.444444	0.0	9	dynamic_reg	3	
+I057	baseline	no		13	1							3	3
+I058	chase_finance	yes	v9-b1	40	1	q0000000000000040	DISAGREE	0.555556	0.444444	9	reg	3	
+I059	chase_finance	yes	v9-b1	52	1	q0000000000000052	DISAGREE	0.555556	0.444444	9	reg	3	
+I060	chase_finance	yes	v9-b1	48	1	q0000000000000048	DISAGREE	0.555556	0.444444	9	reg	3	

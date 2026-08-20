@@ -1,39 +1,45 @@
 """
-Exp 2 -- Is the benchmark an artefact of my thresholds?
+exp2b_significance_sweep.py
 
-Sweeps the gate (pass_frac x unsure_mode) and re-derives, at every setting:
-  - surviving reg-track corpus size, per type and overall
-  - type composition of the surviving corpus
-  - reg+PASS accuracy and 4-model ranking, per type
+Extends exp2's pass_frac x unsure_mode sweep with actual paired significance
+testing (McNemar + cluster-bootstrap 95% CI), gemini31pro vs gpt55, matching
+the exact method used in exp6_v9b_significance.py (that script's mcnemar_exact
+and cluster_bootstrap_diff are reused verbatim below) so this sweep's numbers
+are comparable to the v8/v9/v9b headline table at the matching pass_frac=0.75
+point, not just directionally similar under a different test.
 
-Also empirically checks the carried-forward claim that no DISAGREE row
-survives above pass_frac 0.66 at disagree_frac=0.34 (structural, from
-Pass_Frac + No_Majority_Frac <= 1) -- do not assume it, verify it here.
+exp2's accuracy-only sweep answered "does the ranking change." This answers
+"is the gap ever not statistically distinguishable from chance, at any
+threshold" -- a stricter question. Gate-loading, aggregation, and corpus/
+solver-loading logic is copied unmodified from the verified exp2_threshold_
+sensitivity.py (same paths, same Batch-collision guard, same duplicate-ID
+guard) -- do not edit that logic here without mirroring back.
 
-Rubric sensitivity (type3-causal-check vs zero-shot-basic) is NOT re-run
-here -- already measured (+14.8pp / +15.1pp, ordering preserved). This
-script covers the gate-threshold axis only.
+v9 corpus only (matching exp2's scope). Not v9b -- that's a separate corpus
+with its own directory structure (generation_outputs/v9b/...) and would need
+CORPUS_DIR/GATE_PATTERN/RESULT_PATTERN repointed if run on it.
+
+Cluster bootstrap is the expensive part: N_BOOT=10000 x 11 pass_fracs x 3
+unsure_modes x 3 types = 99 cells, benchmarked at ~3.3s/cell worst case
+(n~800, ~800 clusters) -> ~5.5 min ceiling, faster in practice since n shrinks
+at high pass_frac. Set RUN_BOOTSTRAP=False below for a McNemar-only fast pass
+first if you want to sanity-check before committing to the full run.
 
 Run from repo root:
-    python3 exp2_threshold_sensitivity.py
+    python3 exp2b_significance_sweep.py
 
-Inputs (must exist, no fallback / no silent skip):
-    generation_outputs/elm-docs-type{T}-v9-b{1..4}/rocketeval/judgments.tsv
-    generation_outputs/v9/combined_type{T}.tsv
-    outputs/type{T}-{MODEL}-v9-noirrelevant-eval/result.tsv
-    outputs/type{T}-{MODEL}-v9-noirrelevant-zsb-eval/result.tsv   (type3 only, if present)
+Inputs: identical to exp2_threshold_sensitivity.py.
 
 Outputs:
-    analysis/exp2_accuracy_grid.tsv     -- one row per (unsure_mode, pass_frac, type, model)
-    analysis/exp2_corpus_grid.tsv       -- one row per (unsure_mode, pass_frac, type), incl. pass_rate
-    analysis/exp2_criteria_by_type.tsv  -- N_Criteria distribution per type + allowed-failures at pf=0.75
-    analysis/exp2_disagree_check.txt    -- measured DISAGREE ceiling vs the carried-forward 0.66 bound
-    stdout                              -- ranking-stability + composition + criteria summary
+    analysis/exp2b_significance_grid.tsv  -- one row per (unsure_mode, pass_frac, type):
+        n, acc_gem, acc_gpt, diff, b, c, mcnemar_p, cluster_diff_mean, cluster95_lo,
+        cluster95_hi, leader_matches_pf75
+    stdout -- summary table + explicit flag on any cell where the leader flips
+              relative to pass_frac=0.75 within the same (unsure_mode, type)
 """
 
 import os
-import sys
-import glob
+import math
 import numpy as np
 import pandas as pd
 
@@ -42,11 +48,14 @@ import pandas as pd
 # ---------------------------------------------------------------------------
 TYPES = [1, 2, 3]
 BATCHES = ["b1", "b2", "b3", "b4"]
-MODELS = ["gpt55", "gemini31pro", "gemini31flashlite", "gpt54mini"]
 UNSURE_MODES = ["exclude", "zero", "half"]
 PASS_FRAC_GRID = np.round(np.arange(0.50, 1.001, 0.05), 2)
-DISAGREE_FRAC = 0.34  # held fixed; this experiment sweeps pass_frac, not disagree_frac
+DISAGREE_FRAC = 0.34
 REG_SEED_TYPES = {"reg", "dynamic_reg"}
+RUN_BOOTSTRAP = True  # set False for a fast McNemar-only pass
+
+N_BOOT = 10000
+np.random.seed(42)  # matches exp6_v9b_significance.py exactly
 
 GEN_DIR = "generation_outputs"
 CORPUS_DIR = "generation_outputs/v9"
@@ -59,9 +68,36 @@ RESULT_PATTERN = OUT_DIR + "/type{t}-{m}-v9-noirrelevant-eval/result.tsv"
 
 
 # ---------------------------------------------------------------------------
-# Consensus logic -- copied verbatim from poll_aggregate.py so this script is
-# self-contained. Any change there must be mirrored here or results diverge
-# silently.
+# Significance functions -- copied verbatim from exp6_v9b_significance.py.
+# Do not modify without mirroring back; the whole point of this script is
+# comparability to that table's numbers.
+# ---------------------------------------------------------------------------
+def mcnemar_exact(b, c):
+    b, c = int(b), int(c)
+    n = b + c
+    if n == 0:
+        return float('nan')
+    k = min(b, c)
+    def binom_cdf_le(k, n):
+        return sum(math.comb(n, i) for i in range(0, k + 1)) / (2 ** n)
+    return min(2 * binom_cdf_le(k, n), 1.0)
+
+
+def cluster_bootstrap_diff(a, b, clus, n_boot=N_BOOT):
+    """a, b: bool arrays (correct/incorrect per row). clus: cluster id per row."""
+    clusters = np.unique(clus)
+    idx_by_cluster = {c: np.where(clus == c)[0] for c in clusters}
+    diffs = np.empty(n_boot)
+    for i in range(n_boot):
+        sampled = np.random.choice(clusters, size=len(clusters), replace=True)
+        idxs = np.concatenate([idx_by_cluster[c] for c in sampled])
+        diffs[i] = a[idxs].mean() - b[idxs].mean()
+    lo, hi = np.percentile(diffs, [2.5, 97.5])
+    return diffs.mean(), lo, hi
+
+
+# ---------------------------------------------------------------------------
+# Gate + consensus logic -- copied verbatim from exp2_threshold_sensitivity.py.
 # ---------------------------------------------------------------------------
 def verdict_to_score(v, unsure_mode):
     if v == "Yes":
@@ -72,7 +108,7 @@ def verdict_to_score(v, unsure_mode):
         return 0.0
     if unsure_mode == "half":
         return 0.5
-    return np.nan  # exclude
+    return np.nan
 
 
 def criterion_consensus(verdicts, unsure_mode):
@@ -92,9 +128,6 @@ def criterion_consensus(verdicts, unsure_mode):
     return label, float(np.mean(valid)), (not unanimous)
 
 
-# ---------------------------------------------------------------------------
-# Load gate judgments for one type, all 4 batches
-# ---------------------------------------------------------------------------
 def load_gate_judgments(qa_type):
     frames = []
     per_batch_unique = []
@@ -103,7 +136,7 @@ def load_gate_judgments(qa_type):
         if not os.path.exists(path):
             raise SystemExit(f"ERROR: missing gate file {path}")
         df_b = pd.read_csv(path, sep="\t", dtype=str, keep_default_na=False)
-        df_b["Batch"] = f"v9-{b}"  # confirmed format matches corpus Batch column exactly
+        df_b["Batch"] = f"v9-{b}"
         per_batch_unique.append(df_b[["Root_ID", "Question_No"]].drop_duplicates().shape[0])
         frames.append(df_b)
     j = pd.concat(frames, ignore_index=True)
@@ -113,38 +146,22 @@ def load_gate_judgments(qa_type):
     if miss.any():
         raise SystemExit(f"ERROR: {int(miss.sum())} gate row(s) missing group cols for type{qa_type}")
 
-    # Root_ID is scoped per batch, NOT globally unique (confirmed empirically:
-    # concatenating without Batch produced 5822 dup rows, 2500 of them spanning
-    # >1 batch -- a real collision, not judge_panel resume noise). Batch is now
-    # part of every key below, resolving this.
     dup_key = ["Batch", "Root_ID", "Question_No", "Criterion_No", "Judge"]
     n_dup = int(j.duplicated(subset=dup_key).sum())
     if n_dup:
-        raise SystemExit(
-            f"ERROR: {n_dup} duplicate (batch, question, criterion, judge) row(s) in type{qa_type} "
-            f"gate judgments. This is now a genuine within-batch resume duplicate (Batch is already "
-            f"disambiguated) -- judge_panel.py appends on resume, dedupe before using."
-        )
+        raise SystemExit(f"ERROR: {n_dup} duplicate (batch, question, criterion, judge) row(s) in type{qa_type}")
 
     n_q_concat = j[["Batch", "Root_ID", "Question_No"]].drop_duplicates().shape[0]
     n_q_expected = sum(per_batch_unique)
     if n_q_concat != n_q_expected:
         raise SystemExit(
-            f"ERROR: type{qa_type} unexpected count after Batch-tagging: concatenated unique "
-            f"(Batch, Root_ID, Question_No) = {n_q_concat}, expected {n_q_expected}. Something "
-            f"other than the known cross-batch collision is going on -- investigate before proceeding."
+            f"ERROR: type{qa_type} unexpected count after Batch-tagging: got {n_q_concat}, "
+            f"expected {n_q_expected}. Investigate before proceeding."
         )
-
-    print(f"type{qa_type} gate: {len(j)} criterion-rows, {n_q_concat} unique (batch, question) pairs "
-          f"across {len(BATCHES)} batches, verified against per-batch counts {per_batch_unique}")
+    print(f"type{qa_type} gate: {len(j)} criterion-rows, {n_q_concat} unique (batch, question) pairs")
     return j
 
 
-# ---------------------------------------------------------------------------
-# Aggregate to question level for a given unsure_mode.
-# Pass_Frac / No_Majority_Frac are threshold-independent; the pass_frac
-# THRESHOLD is applied later in apply_threshold().
-# ---------------------------------------------------------------------------
 def aggregate_gate(j, unsure_mode):
     rows = []
     group_cols = ["Batch", "Root_ID", "Question_No", "QA_Type", "Seed_Type"]
@@ -181,25 +198,20 @@ def apply_threshold(agg_df, pass_frac_thresh, disagree_frac=DISAGREE_FRAC):
     return out
 
 
-# ---------------------------------------------------------------------------
-# Corpus + solver results, joined positionally, validated by exact Question match
-# ---------------------------------------------------------------------------
 def load_corpus(qa_type):
     path = CORPUS_PATTERN.format(t=qa_type)
     if not os.path.exists(path):
         raise SystemExit(f"ERROR: missing corpus file {path}")
     df = pd.read_csv(path, sep="\t", dtype=str, keep_default_na=False)
     df = df.reset_index(drop=True)
-    df["ID"] = df.index + 1  # 1-indexed, matches result.tsv ID
+    df["ID"] = df.index + 1
     return df[["ID", "Batch", "Root_ID", "Question_No", "Seed_Type", "Question"]]
 
 
-def load_solver_results(qa_type, model, corpus_df, variant=""):
+def load_solver_results(qa_type, model, corpus_df):
     path = RESULT_PATTERN.format(t=qa_type, m=model)
-    if variant:
-        path = path.replace("-eval/", f"-{variant}-eval/")
     if not os.path.exists(path):
-        return None  # caller decides whether missing is fatal
+        raise SystemExit(f"ERROR: missing result file {path}")
     res = pd.read_csv(path, sep="\t", dtype=str, keep_default_na=False)
     if "Result" not in res.columns or "ID" not in res.columns:
         raise SystemExit(f"ERROR: {path} missing ID/Result columns")
@@ -208,29 +220,22 @@ def load_solver_results(qa_type, model, corpus_df, variant=""):
 
     dup_ids = int(res["ID"].duplicated().sum())
     if dup_ids:
-        raise SystemExit(
-            f"ERROR: {path} has {dup_ids} duplicate ID value(s). Documented failure mode: a "
-            f"cancelled shard run resumed under a different -s value appends instead of "
-            f"replacing (e.g. 222 rows -> 273). rm -rf the run dir and re-merge before using."
-        )
+        raise SystemExit(f"ERROR: {path} has {dup_ids} duplicate ID value(s)")
     missing_ids = set(corpus_df["ID"]) - set(res["ID"])
     if missing_ids:
-        raise SystemExit(f"ERROR: {path} missing {len(missing_ids)} ID(s) present in corpus, e.g. {sorted(missing_ids)[:5]}")
+        raise SystemExit(f"ERROR: {path} missing {len(missing_ids)} ID(s) present in corpus")
 
     merged = corpus_df.merge(res[["ID", "Question", "Result"]], on="ID", suffixes=("", "_res"))
     if len(merged) != len(corpus_df):
-        raise SystemExit(f"ERROR: {path} row count {len(res)} does not match corpus {len(corpus_df)} for type{qa_type}")
+        raise SystemExit(f"ERROR: {path} row count mismatch vs corpus for type{qa_type}")
     mismatches = int((merged["Question"] != merged["Question_res"]).sum())
     if mismatches:
-        raise SystemExit(
-            f"ERROR: {mismatches} positional Question mismatch(es) between corpus and {path}. "
-            f"Positional join is invalid -- do not trust this file's ID ordering."
-        )
+        raise SystemExit(f"ERROR: {mismatches} positional Question mismatch(es) for {path}")
     return merged[["Batch", "Root_ID", "Question_No", "Result"]]
 
 
 # ---------------------------------------------------------------------------
-# Main sweep
+# Main
 # ---------------------------------------------------------------------------
 def main():
     os.makedirs(ANALYSIS_DIR, exist_ok=True)
@@ -238,156 +243,93 @@ def main():
     gate_raw = {t: load_gate_judgments(t) for t in TYPES}
     corpus = {t: load_corpus(t) for t in TYPES}
 
-    # cache solver results per (type, model) -- loaded once, filtered many times
-    solver_cache = {}
+    # Paired gem/gpt correctness per type, computed once (doesn't depend on
+    # pass_frac/unsure_mode), then filtered to the reg+PASS subset at each grid point.
+    paired = {}
     for t in TYPES:
-        for m in MODELS:
-            r = load_solver_results(t, m, corpus[t])
-            if r is None:
-                print(f"WARNING: no result.tsv for type{t}/{m} -- excluded from ranking at all thresholds")
-            solver_cache[(t, m)] = r
+        sres_gem = load_solver_results(t, "gemini31pro", corpus[t]).rename(columns={"Result": "Correct_gem"})
+        sres_gem["Correct_gem"] = sres_gem["Correct_gem"].astype(bool)
+        sres_gpt = load_solver_results(t, "gpt55", corpus[t]).rename(columns={"Result": "Correct_gpt"})
+        sres_gpt["Correct_gpt"] = sres_gpt["Correct_gpt"].astype(bool)
+        pr = sres_gem.merge(sres_gpt, on=["Batch", "Root_ID", "Question_No"], how="inner", validate="one_to_one")
+        if len(pr) != len(sres_gem):
+            raise SystemExit(f"ERROR: type{t} gem/gpt pairing dropped rows -- key mismatch between the two result files")
+        pr["Cluster_Key"] = pr["Batch"] + "_" + pr["Root_ID"]
+        paired[t] = pr
+        print(f"type{t}: {len(pr)} paired gemini31pro/gpt55 rows")
 
-    accuracy_rows = []
-    corpus_rows = []
-    disagree_maxfrac_by_mode = {}
-    agg_by_type_exclude = None  # captured below, needed after the loop for N_Criteria table
-
+    results = []
     for unsure_mode in UNSURE_MODES:
         agg = {t: aggregate_gate(gate_raw[t], unsure_mode) for t in TYPES}
-        if unsure_mode == "exclude":
-            agg_by_type_exclude = agg
-
-        # disagree-claim check: fixed disagree_frac, verdict independent of pass_frac_thresh
-        # for the DISAGREE branch itself, so check once per unsure_mode using any threshold
-        probe = {t: apply_threshold(agg[t], 0.75) for t in TYPES}
-        all_disagree_pf = pd.concat([probe[t].loc[probe[t]["Verdict"] == "DISAGREE", "Pass_Frac"] for t in TYPES])
-        disagree_maxfrac_by_mode[unsure_mode] = float(all_disagree_pf.max()) if len(all_disagree_pf) else float("nan")
-
         for pf in PASS_FRAC_GRID:
-            comp_counts = {}
             for t in TYPES:
                 thr = apply_threshold(agg[t], pf)
                 reg_pass = thr[(thr["Verdict"] == "PASS") & (thr["Track"] == "reg")]
-                comp_counts[t] = len(reg_pass)
-                n_reg_total = int((thr["Track"] == "reg").sum())
-                corpus_rows.append({
-                    "unsure_mode": unsure_mode, "pass_frac": pf, "qa_type": t,
-                    "n_reg_pass": len(reg_pass),
-                    "n_reg_total": n_reg_total,
-                    "pass_rate": (len(reg_pass) / n_reg_total) if n_reg_total else float("nan"),
-                })
+                sub = reg_pass[["Batch", "Root_ID", "Question_No"]].merge(
+                    paired[t], on=["Batch", "Root_ID", "Question_No"], how="inner"
+                )
 
-                for m in MODELS:
-                    sres = solver_cache[(t, m)]
-                    if sres is None:
-                        continue
-                    j = reg_pass.merge(sres, on=["Batch", "Root_ID", "Question_No"], how="inner")
-                    if len(j) == 0:
-                        acc = float("nan")
-                    else:
-                        acc = float(j["Result"].mean())
-                    accuracy_rows.append({
-                        "unsure_mode": unsure_mode, "pass_frac": pf, "qa_type": t,
-                        "model": m, "n": len(j), "accuracy": acc,
+                n = len(sub)
+                if n == 0:
+                    results.append({
+                        "unsure_mode": unsure_mode, "pass_frac": pf, "qa_type": t, "n": 0,
+                        "acc_gem": float("nan"), "acc_gpt": float("nan"), "diff": float("nan"),
+                        "b": 0, "c": 0, "mcnemar_p": float("nan"),
+                        "cluster_diff_mean": float("nan"), "cluster95_lo": float("nan"), "cluster95_hi": float("nan"),
                     })
+                    continue
 
-    acc_df = pd.DataFrame(accuracy_rows)
-    corpus_df = pd.DataFrame(corpus_rows)
-    acc_df.to_csv(os.path.join(ANALYSIS_DIR, "exp2_accuracy_grid.tsv"), sep="\t", index=False)
-    corpus_df.to_csv(os.path.join(ANALYSIS_DIR, "exp2_corpus_grid.tsv"), sep="\t", index=False)
+                a = sub["Correct_gem"].values
+                g = sub["Correct_gpt"].values
+                acc_gem = float(a.mean())
+                acc_gpt = float(g.mean())
+                b = int((a & ~g).sum())
+                c = int((~a & g).sum())
+                p = mcnemar_exact(b, c)
 
-    # ------------------------------------------------------------------
-    # Disagree claim: the carried-forward number was "cannot exceed 0.66"
-    # (structural upper bound, from Pass_Frac + No_Majority_Frac <= 1 at
-    # disagree_frac=0.34). That bound is real but loose -- report the
-    # MEASURED max instead, which is what should go in the dissertation.
-    # ------------------------------------------------------------------
-    with open(os.path.join(ANALYSIS_DIR, "exp2_disagree_check.txt"), "w") as f:
-        f.write("Structural upper bound (disagree_frac=0.34): DISAGREE rows cannot exceed Pass_Frac=0.66.\n")
-        f.write("This is a ceiling, not a measured value -- do not cite 0.66 itself in the write-up.\n")
-        f.write("Measured max Pass_Frac among actual DISAGREE rows, per unsure_mode (USE THIS NUMBER):\n")
-        for mode, mx in disagree_maxfrac_by_mode.items():
-            within_bound = "within 0.66 bound" if (np.isnan(mx) or mx <= 0.66) else "EXCEEDS 0.66 BOUND -- investigate"
-            f.write(f"  unsure_mode={mode}: measured max = {mx:.4f}  ({within_bound})\n")
-    print("\n--- DISAGREE ceiling: measured vs structural 0.66 bound ---")
-    for mode, mx in disagree_maxfrac_by_mode.items():
-        within_bound = "within bound" if (np.isnan(mx) or mx <= 0.66) else "EXCEEDS BOUND"
-        print(f"  unsure_mode={mode}: measured max Pass_Frac among DISAGREE rows = {mx:.4f}  ({within_bound})")
+                if RUN_BOOTSTRAP:
+                    cdm, clo, chi = cluster_bootstrap_diff(a, g, sub["Cluster_Key"].values)
+                else:
+                    cdm, clo, chi = float("nan"), float("nan"), float("nan")
 
-    # ------------------------------------------------------------------
-    # Ranking stability: for each (unsure_mode, type), does the accuracy-based
-    # model ranking on reg+PASS change across the pass_frac grid?
-    # ------------------------------------------------------------------
-    print("\n--- Ranking stability across pass_frac grid (0.50-1.00, step 0.05) ---")
+                results.append({
+                    "unsure_mode": unsure_mode, "pass_frac": pf, "qa_type": t, "n": n,
+                    "acc_gem": acc_gem, "acc_gpt": acc_gpt, "diff": acc_gem - acc_gpt,
+                    "b": b, "c": c, "mcnemar_p": p,
+                    "cluster_diff_mean": cdm, "cluster95_lo": clo, "cluster95_hi": chi,
+                })
+            print(f"  unsure_mode={unsure_mode} pf={pf} done")
+
+    res_df = pd.DataFrame(results)
+
+    # leader_matches_pf75: same sign of diff as this (unsure_mode, type)'s own pf=0.75 cell
+    res_df["leader_matches_pf75"] = None
     for unsure_mode in UNSURE_MODES:
         for t in TYPES:
-            sub = acc_df[(acc_df["unsure_mode"] == unsure_mode) & (acc_df["qa_type"] == t)]
-            rankings = []
-            for pf in PASS_FRAC_GRID:
-                row = sub[sub["pass_frac"] == pf].dropna(subset=["accuracy"])
-                if len(row) < 2:
-                    continue
-                order = tuple(row.sort_values("accuracy", ascending=False)["model"])
-                rankings.append((pf, order))
-            uniq_orders = set(o for _, o in rankings)
-            stable = len(uniq_orders) == 1
-            print(f"  unsure_mode={unsure_mode} type{t}: {'STABLE' if stable else 'CHANGES'} "
-                  f"({len(uniq_orders)} distinct ranking(s) across {len(rankings)} settings)")
-            if not stable:
-                for pf, order in rankings:
-                    print(f"      pf={pf}: {order}")
+            ref = res_df[(res_df.unsure_mode == unsure_mode) & (res_df.qa_type == t) & (res_df.pass_frac == 0.75)]
+            if len(ref) == 0 or pd.isna(ref["diff"].iloc[0]):
+                continue
+            ref_sign = np.sign(ref["diff"].iloc[0])
+            mask = (res_df.unsure_mode == unsure_mode) & (res_df.qa_type == t)
+            res_df.loc[mask, "leader_matches_pf75"] = res_df.loc[mask, "diff"].apply(
+                lambda d: (np.sign(d) == ref_sign) if not pd.isna(d) else None
+            )
 
-    # operating-threshold sanity number requested explicitly: pass_frac=0.75
-    print("\n--- Operating threshold (pass_frac=0.75) reg+PASS accuracy, for the write-up table ---")
-    op = acc_df[(acc_df["pass_frac"] == 0.75) & (acc_df["unsure_mode"] == "exclude")]
-    print(op[["qa_type", "model", "n", "accuracy"]].sort_values(["qa_type", "model"]).to_string(index=False))
+    res_df.to_csv(os.path.join(ANALYSIS_DIR, "exp2b_significance_grid.tsv"), sep="\t", index=False)
 
-    # ------------------------------------------------------------------
-    # Corpus composition + pass rate by type, across the grid (unsure_mode=exclude,
-    # the default/reported mode). Printed directly so no follow-up command is needed.
-    # ------------------------------------------------------------------
-    print("\n--- reg n_reg_pass by type, across pass_frac grid (unsure_mode=exclude) ---")
-    comp = corpus_df[corpus_df["unsure_mode"] == "exclude"]
-    piv_n = comp.pivot(index="pass_frac", columns="qa_type", values="n_reg_pass")
-    piv_n["total"] = piv_n.sum(axis=1)
-    print(piv_n)
-    print("\n--- pass_rate (n_reg_pass / n_reg_total) by type, across pass_frac grid (unsure_mode=exclude) ---")
-    piv_rate = comp.pivot(index="pass_frac", columns="qa_type", values="pass_rate")
-    print(piv_rate.round(4))
+    print("\n--- Full significance grid (unsure_mode=exclude) ---")
+    show = res_df[res_df.unsure_mode == "exclude"].sort_values(["qa_type", "pass_frac"])
+    print(show[["qa_type", "pass_frac", "n", "acc_gem", "acc_gpt", "diff", "b", "c", "mcnemar_p", "leader_matches_pf75"]]
+          .to_string(index=False))
 
-    # ------------------------------------------------------------------
-    # N_Criteria distribution by type + exact allowed-failure count at pf=0.75.
-    # Restricted to reg track, matching every other table in this experiment --
-    # aggregate_gate() doesn't compute Track (that only happens in
-    # apply_threshold()), so it's derived here directly from Seed_Type. Without
-    # this filter the table would silently mix in generic-track checklists,
-    # which may have a different N_Criteria distribution (different generation
-    # template) and would misstate the reg-track standard being reported on.
-    #
-    # pass_frac>=0.75 means n_pass/n_crit >= 0.75, i.e. n_pass >= ceil(0.75*n_crit),
-    # i.e. allowed_fail = n_crit - ceil(0.75*n_crit). Computed from real N_Criteria
-    # values (unsure_mode does not affect N_Criteria, only which criteria score as
-    # Yes/No/DISAGREE, so this is taken from the exclude-mode aggregation).
-    # ------------------------------------------------------------------
-    import math
-    crit_rows = []
-    for t in TYPES:
-        reg_only = agg_by_type_exclude[t][agg_by_type_exclude[t]["Seed_Type"].isin(REG_SEED_TYPES)]
-        vc = reg_only["N_Criteria"].value_counts().sort_index()
-        for n_crit, count in vc.items():
-            n_crit = int(n_crit)
-            allowed_fail = n_crit - math.ceil(0.75 * n_crit)
-            crit_rows.append({
-                "qa_type": t, "N_Criteria": n_crit, "count": int(count),
-                "allowed_fail_at_pf75": allowed_fail,
-            })
-    crit_df = pd.DataFrame(crit_rows)
-    crit_df.to_csv(os.path.join(ANALYSIS_DIR, "exp2_criteria_by_type.tsv"), sep="\t", index=False)
-    print("\n--- N_Criteria distribution by type (reg track only), allowed failures at pass_frac=0.75 ---")
-    print(crit_df.to_string(index=False))
+    print("\n--- Cells where the leader flips relative to this type's own pass_frac=0.75 ---")
+    flips = res_df[res_df["leader_matches_pf75"] == False]
+    if len(flips) == 0:
+        print("  none -- leader is consistent with the pf=0.75 result at every threshold tested, all unsure_modes")
+    else:
+        print(flips[["unsure_mode", "qa_type", "pass_frac", "n", "diff", "mcnemar_p"]].to_string(index=False))
 
-    print(f"\nWrote {ANALYSIS_DIR}/exp2_accuracy_grid.tsv, exp2_corpus_grid.tsv, "
-          f"exp2_criteria_by_type.tsv, exp2_disagree_check.txt")
+    print(f"\nWrote {ANALYSIS_DIR}/exp2b_significance_grid.tsv")
 
 
 if __name__ == "__main__":

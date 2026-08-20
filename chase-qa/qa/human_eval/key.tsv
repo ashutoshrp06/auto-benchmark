@@ -1,0 +1,61 @@
+Item_ID	Frame	Grounding_Applicable	Batch	Root_ID	Question_No	QID	Verdict	Pass_Frac	No_Majority_Frac	N_Criteria	Seed_Type	N_Docs	N_Ans_Points
+I001	chase_finance	yes	v9-b2	52	152	q64814817a4d2330f	PASS	0.888889	0.0	9	dynamic_reg	3	
+I002	baseline	no		1_s3	3_s3							3	3
+I003	chase_finance	yes	v9-b1	18	59	q9fd13e40d7714f0a	PASS	0.777778	0.111111	9	dynamic_reg	2	
+I004	chase_finance	yes	v9-b1	68	211	q82fb776b232d95d5	FAIL	0.666667	0.333333	9	dynamic_reg	2	
+I005	baseline	no		11_s1	37_s1							1	1
+I006	baseline	no		7_s1	27_s1							3	3
+I007	chase_finance	yes	v9-b3	16	48	q8fc61fde9513050e	DISAGREE	0.5	0.375	8	dynamic_reg	2	
+I008	chase_finance	yes	v9-b2	56	165	q2e047283ec22f314	DISAGREE	0.222222	0.555556	9	dynamic_reg	3	
+I009	chase_finance	yes	v9-b1	5	16	q50c4f05872f51d19	PASS	0.777778	0.111111	9	reg	2	
+I010	baseline	no		10_s2	33_s2							2	2
+I011	chase_finance	yes	v9-b1	58	181	qed515136467e168a	PASS	0.888889	0.111111	9	dynamic_reg	4	
+I012	baseline	no		17_s3	52_s3							2	2
+I013	baseline	no		6_s2	19_s2							3	3
+I014	baseline	no		7_s3	19_s3							1	1
+I015	chase_finance	yes	v9-b1	71	222	q7bce116ffe99e58b	PASS	0.888889	0.0	9	dynamic_reg	1	
+I016	baseline	no		9_s2	27_s2							1	1
+I017	chase_finance	yes	v9-b3	17	50	q2c77b98af9559893	FAIL	0.666667	0.333333	9	dynamic_reg	3	
+I018	chase_finance	yes	v9-b2	24	72	q8c4e899ed9dee311	PASS	1.0	0.0	8	dynamic_reg	1	
+I019	chase_finance	yes	v9-b4	32	95	qda383ef789867b07	FAIL	0.555556	0.333333	9	dynamic_reg	3	
+I020	chase_finance	yes	v9-b3	14	40	qd59de5ab9e66d18f	PASS	0.777778	0.222222	9	dynamic_reg	4	
+I021	chase_finance	yes	v9-b4	3	5	q0d4bcec5bd878f9b	DISAGREE	0.0	0.625	8	dynamic_reg	1	
+I022	baseline	no		10_s1	35_s1							1	1
+I023	baseline	no		12_s1	43_s1							1	1
+I024	baseline	no		15_s1	52_s1							2	2
+I025	baseline	no		16_s1	56_s1							2	2
+I026	baseline	no		6_s2	17_s2							3	3
+I027	chase_finance	yes	v9-b4	26	77	qf0605e80cb01bcee	PASS	0.888889	0.0	9	dynamic_reg	3	
+I028	chase_finance	yes	v9-b4	17	51	qa478bbe77d3e0d14	FAIL	0.222222	0.333333	9	dynamic_reg	3	
+I029	chase_finance	yes	v9-b2	29	87	q4d6d886b853f6f9f	DISAGREE	0.333333	0.666667	9	dynamic_reg	3	
+I030	chase_finance	yes	v9-b3	22	67	q0ef8a59be5999b16	PASS	0.888889	0.111111	9	dynamic_reg	3	
+I031	chase_finance	yes	v9-b4	34	103	q59c58935634c4f1e	PASS	0.875	0.0	8	dynamic_reg	2	
+I032	baseline	no		10_s2	32_s2							3	3
+I033	baseline	no		5_s3	14_s3							2	2
+I034	chase_finance	yes	v9-b2	23	65	qc74e855919e7e4e1	FAIL	0.375	0.0	8	dynamic_reg	2	
+I035	chase_finance	yes	v9-b3	47	153	qa5f8b20d1e1d15df	DISAGREE	0.555556	0.444444	9	dynamic_reg	4	
+I036	baseline	no		4_s3	13_s3							2	2
+I037	chase_finance	yes	v9-b2	32	94	qb66f59d482590dff	PASS	0.888889	0.111111	9	dynamic_reg	4	
+I038	chase_finance	yes	v9-b2	47	139	qf0b540f39d8cb923	DISAGREE	0.444444	0.555556	9	dynamic_reg	3	
+I039	baseline	no		7_s1	26_s1							2	2
+I040	baseline	no		11_s3	32_s3							1	1
+I041	baseline	no		13_s1	45_s1							2	2
+I042	chase_finance	yes	v9-b1	33	103	q59f3371593bac8b5	FAIL	0.666667	0.222222	9	dynamic_reg	2	
+I043	baseline	no		7_s2	22_s2							1	1
+I044	baseline	no		9_s3	24_s3							4	4
+I045	chase_finance	yes	v9-b4	15	46	q005243ae2ae8193e	PASS	0.888889	0.111111	9	dynamic_reg	2	
+I046	baseline	no		14_s3	40_s3							1	1
+I047	chase_finance	yes	v9-b3	47	155	qf2ed17f9a3b18f27	FAIL	0.0	0.125	8	dynamic_reg	2	
+I048	baseline	no		14_s3	42_s3							1	1
+I049	chase_finance	yes	v9-b3	46	151	q8c292f8b1906e098	DISAGREE	0.333333	0.666667	9	dynamic_reg	4	
+I050	baseline	no		9_s3	23_s3							3	3
+I051	chase_finance	yes	v9-b2	49	144	qc67733ac9d7faf82	DISAGREE	0.555556	0.444444	9	dynamic_reg	3	
+I052	baseline	no		5_s1	18_s1							1	1
+I053	baseline	no		6_s2	18_s2							3	3
+I054	baseline	no		18_s1	61_s1							2	2
+I055	chase_finance	yes	v9-b1	56	173	q5a0e48dd52f16edd	DISAGREE	0.555556	0.444444	9	dynamic_reg	3	
+I056	baseline	no		3_s3	10_s3							3	3
+I057	baseline	no		6_s3	17_s3							4	4
+I058	baseline	no		10_s3	28_s3							3	3
+I059	chase_finance	yes	v9-b2	15	38	qc5427a288a1a1b13	FAIL	0.666667	0.333333	9	dynamic_reg	3	
+I060	chase_finance	yes	v9-b1	1	4	qefcb69546592ea37	DISAGREE	0.444444	0.555556	9	reg	3	

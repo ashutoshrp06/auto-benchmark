@@ -1,0 +1,61 @@
+Item_ID	Answer_Correct	Clause_Governs	Traces_To_Source	Reason
+I001	y	n	n	"""domain: clause covers auto-enrolment and scheme charge caps, question asks about cryptoasset scheme launch checks; C: answer traces to the documents, not the clause"""
+I002	y	n/a	n/a	
+I003	y	n	n	"""instrument: clause covers non-MiFID designated investment suitability, question asks about commercial vehicle asset finance; C: answer traces to the documents, not the clause"""
+I004	y	y	y	
+I005	y	n/a	n/a	
+I006	y	n/a	n/a	""
+I007	y	n	n	"""domain: clause covers pension transfers, question asks about commercial secured lending; C: answer traces to the documents, not the clause"""
+I008	y	y	y	
+I009	y	y	y	
+I010	y	n/a	n/a	
+I011	y	n	n	"""instrument: clause covers pension transfers, question asks about a regulated lifetime mortgage; MCOB 8 and 9 seeded correctly at I008; C: answer traces to the documents, not the clause"""
+I012	y	n/a	n/a	
+I013	y	n/a	n/a	
+I014	y	n/a	n/a	
+I015	y	n	n	"""provision: clause operates post-contract on life policies and drawdown funds, question asks about pre-sale cryptoasset promotion clarity; C: answer traces to the documents, not the clause"""
+I016	y	n/a	n/a	
+I017	y	n	n	"""instrument: clause covers investment suitability and money purchase annual allowance, question asks about lifetime mortgage arrangement; MCOB 8 and 9 seeded correctly at I008; C: answer traces to the documents, not the clause"""
+I018	y	n	n	"""domain: clause covers pension transfers, question asks about gifting listed shares into trust; C: answer traces to the documents, not the clause"""
+I019	y	y	y	
+I020	y	n	n	"""instrument: clause covers investment suitability and money purchase annual allowance, question asks about mortgage affordability; MCOB 11.6 seeded correctly at I037; C: answer traces to the documents, not the clause"""
+I021	y	y	y	
+I022	y	n/a	n/a	
+I023	y	n/a	n/a	
+I024	y	n/a	n/a	
+I025	y	n/a	n/a	
+I026	y	n/a	n/a	
+I027	y	y	y	
+I028	y	n	n	"""instrument: clause covers auto-enrolment and scheme charge caps, question asks about lifetime mortgage checks; MCOB 8 and 9 seeded correctly at I021; C: answer traces to the documents, not the clause"""
+I029	y	n	n	"""domain: clause covers pension transfers, question asks about cryptoasset exchange account evidence; C: answer traces to the documents, not the clause"""
+I030	y	n	n	"""domain: clause covers pension transfers, question asks about credit card arrears forbearance; C: answer traces to the documents, not the clause"""
+I031	y	n	n	"""provision: clause operates post-contract on life policies, question asks about pre-sale mortgage and life quote disclosure; C: answer traces to the documents, not the clause"""
+I032	y	n/a	n/a	""
+I033	y	n/a	n/a	
+I034	y	y	y	
+I035	y	y	y	
+I036	y	n/a	n/a	
+I037	y	y	y	
+I038	y	n	n	"""domain: clause covers pension transfers, question asks about cryptoasset promotion approval and risk warnings; C: answer traces to the documents, not the clause"""
+I039	y	n/a	n/a	
+I040	y	n/a	n/a	
+I041	y	n/a	n/a	
+I042	y	n	n	"""instrument: clause covers inheritance tax and investment suitability, question asks about lifetime mortgage LTV and repayment charges; MCOB 8 seeded correctly at I034; C: answer traces to the documents, not the clause"""
+I043	y	n/a	n/a	
+I044	y	n/a	n/a	
+I045	y	n	n	"""instrument: clause covers investment suitability and money purchase annual allowance, question asks about cash ISA transfer costs; C: answer traces to the documents, not the clause"""
+I046	y	n/a	n/a	
+I047	y	n	n	"""provision: clause sets outcome standards, question asks what disclosure content must be provided; C: answer traces to the documents, not the clause"""
+I048	y	n/a	n/a	
+I049	y	n	n	"""instrument: clause covers pension transfers, question asks about lifetime mortgage and linked insurance disclosure; MCOB 8 and 9 seeded correctly at I021; C: answer traces to the documents, not the clause"""
+I050	y	n/a	n/a	
+I051	y	n	n	"""provision: clause operates post-contract on life policies and drawdown funds, question asks about pre-sale structured product disclosure; C: answer traces to the documents, not the clause"""
+I052	y	n/a	n/a	
+I053	y	n/a	n/a	
+I054	y	n/a	n/a	
+I055	y	n	n	"""domain: clause covers equity release advising and disclosure, question asks about corporate AML onboarding and sanctions screening; C: answer traces to the documents, not the clause"""
+I056	y	n/a	n/a	
+I057	y	n/a	n/a	
+I058	y	n/a	n/a	
+I059	y	y	y	
+I060	y	n	n	"""domain: clause covers pension transfers, question asks about cryptoasset client onboarding and due diligence; C: answer traces to the documents, not the clause"""

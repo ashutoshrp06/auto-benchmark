@@ -1,0 +1,61 @@
+Item_ID	Frame	Grounding_Applicable	Verdict	Seed_Type	Root_ID	Question_No	Batch	Answer_Correct	Clause_Governs	Traces_To_Source	Reason
+I001	chase_finance	yes	PASS	dynamic_reg	52	152	v9-b2	yes	no	no	"""domain: clause covers auto-enrolment and scheme charge caps, question asks about cryptoasset scheme launch checks; C: answer traces to the documents, not the clause"""
+I002	baseline	no			1_s3	3_s3		yes	n/a	n/a	
+I003	chase_finance	yes	PASS	dynamic_reg	18	59	v9-b1	yes	no	no	"""instrument: clause covers non-MiFID designated investment suitability, question asks about commercial vehicle asset finance; C: answer traces to the documents, not the clause"""
+I004	chase_finance	yes	FAIL	dynamic_reg	68	211	v9-b1	yes	yes	yes	
+I005	baseline	no			11_s1	37_s1		yes	n/a	n/a	
+I006	baseline	no			7_s1	27_s1		yes	n/a	n/a	
+I007	chase_finance	yes	DISAGREE	dynamic_reg	16	48	v9-b3	yes	no	no	"""domain: clause covers pension transfers, question asks about commercial secured lending; C: answer traces to the documents, not the clause"""
+I008	chase_finance	yes	DISAGREE	dynamic_reg	56	165	v9-b2	yes	yes	yes	
+I009	chase_finance	yes	PASS	reg	5	16	v9-b1	yes	yes	yes	
+I010	baseline	no			10_s2	33_s2		yes	n/a	n/a	
+I011	chase_finance	yes	PASS	dynamic_reg	58	181	v9-b1	yes	no	no	"""instrument: clause covers pension transfers, question asks about a regulated lifetime mortgage; MCOB 8 and 9 seeded correctly at I008; C: answer traces to the documents, not the clause"""
+I012	baseline	no			17_s3	52_s3		yes	n/a	n/a	
+I013	baseline	no			6_s2	19_s2		yes	n/a	n/a	
+I014	baseline	no			7_s3	19_s3		yes	n/a	n/a	
+I015	chase_finance	yes	PASS	dynamic_reg	71	222	v9-b1	yes	no	no	"""provision: clause operates post-contract on life policies and drawdown funds, question asks about pre-sale cryptoasset promotion clarity; C: answer traces to the documents, not the clause"""
+I016	baseline	no			9_s2	27_s2		yes	n/a	n/a	
+I017	chase_finance	yes	FAIL	dynamic_reg	17	50	v9-b3	yes	no	no	"""instrument: clause covers investment suitability and money purchase annual allowance, question asks about lifetime mortgage arrangement; MCOB 8 and 9 seeded correctly at I008; C: answer traces to the documents, not the clause"""
+I018	chase_finance	yes	PASS	dynamic_reg	24	72	v9-b2	yes	no	no	"""domain: clause covers pension transfers, question asks about gifting listed shares into trust; C: answer traces to the documents, not the clause"""
+I019	chase_finance	yes	FAIL	dynamic_reg	32	95	v9-b4	yes	yes	yes	
+I020	chase_finance	yes	PASS	dynamic_reg	14	40	v9-b3	yes	no	no	"""instrument: clause covers investment suitability and money purchase annual allowance, question asks about mortgage affordability; MCOB 11.6 seeded correctly at I037; C: answer traces to the documents, not the clause"""
+I021	chase_finance	yes	DISAGREE	dynamic_reg	3	5	v9-b4	yes	yes	yes	
+I022	baseline	no			10_s1	35_s1		yes	n/a	n/a	
+I023	baseline	no			12_s1	43_s1		yes	n/a	n/a	
+I024	baseline	no			15_s1	52_s1		yes	n/a	n/a	
+I025	baseline	no			16_s1	56_s1		yes	n/a	n/a	
+I026	baseline	no			6_s2	17_s2		yes	n/a	n/a	
+I027	chase_finance	yes	PASS	dynamic_reg	26	77	v9-b4	yes	yes	yes	
+I028	chase_finance	yes	FAIL	dynamic_reg	17	51	v9-b4	yes	no	no	"""instrument: clause covers auto-enrolment and scheme charge caps, question asks about lifetime mortgage checks; MCOB 8 and 9 seeded correctly at I021; C: answer traces to the documents, not the clause"""
+I029	chase_finance	yes	DISAGREE	dynamic_reg	29	87	v9-b2	yes	no	no	"""domain: clause covers pension transfers, question asks about cryptoasset exchange account evidence; C: answer traces to the documents, not the clause"""
+I030	chase_finance	yes	PASS	dynamic_reg	22	67	v9-b3	yes	no	no	"""domain: clause covers pension transfers, question asks about credit card arrears forbearance; C: answer traces to the documents, not the clause"""
+I031	chase_finance	yes	PASS	dynamic_reg	34	103	v9-b4	yes	no	no	"""provision: clause operates post-contract on life policies, question asks about pre-sale mortgage and life quote disclosure; C: answer traces to the documents, not the clause"""
+I032	baseline	no			10_s2	32_s2		yes	n/a	n/a	
+I033	baseline	no			5_s3	14_s3		yes	n/a	n/a	
+I034	chase_finance	yes	FAIL	dynamic_reg	23	65	v9-b2	yes	yes	yes	
+I035	chase_finance	yes	DISAGREE	dynamic_reg	47	153	v9-b3	yes	yes	yes	
+I036	baseline	no			4_s3	13_s3		yes	n/a	n/a	
+I037	chase_finance	yes	PASS	dynamic_reg	32	94	v9-b2	yes	yes	yes	
+I038	chase_finance	yes	DISAGREE	dynamic_reg	47	139	v9-b2	yes	no	no	"""domain: clause covers pension transfers, question asks about cryptoasset promotion approval and risk warnings; C: answer traces to the documents, not the clause"""
+I039	baseline	no			7_s1	26_s1		yes	n/a	n/a	
+I040	baseline	no			11_s3	32_s3		yes	n/a	n/a	
+I041	baseline	no			13_s1	45_s1		yes	n/a	n/a	
+I042	chase_finance	yes	FAIL	dynamic_reg	33	103	v9-b1	yes	no	no	"""instrument: clause covers inheritance tax and investment suitability, question asks about lifetime mortgage LTV and repayment charges; MCOB 8 seeded correctly at I034; C: answer traces to the documents, not the clause"""
+I043	baseline	no			7_s2	22_s2		yes	n/a	n/a	
+I044	baseline	no			9_s3	24_s3		yes	n/a	n/a	
+I045	chase_finance	yes	PASS	dynamic_reg	15	46	v9-b4	yes	no	no	"""instrument: clause covers investment suitability and money purchase annual allowance, question asks about cash ISA transfer costs; C: answer traces to the documents, not the clause"""
+I046	baseline	no			14_s3	40_s3		yes	n/a	n/a	
+I047	chase_finance	yes	FAIL	dynamic_reg	47	155	v9-b3	yes	no	no	"""provision: clause sets outcome standards, question asks what disclosure content must be provided; C: answer traces to the documents, not the clause"""
+I048	baseline	no			14_s3	42_s3		yes	n/a	n/a	
+I049	chase_finance	yes	DISAGREE	dynamic_reg	46	151	v9-b3	yes	no	no	"""instrument: clause covers pension transfers, question asks about lifetime mortgage and linked insurance disclosure; MCOB 8 and 9 seeded correctly at I021; C: answer traces to the documents, not the clause"""
+I050	baseline	no			9_s3	23_s3		yes	n/a	n/a	
+I051	chase_finance	yes	DISAGREE	dynamic_reg	49	144	v9-b2	yes	no	no	"""provision: clause operates post-contract on life policies and drawdown funds, question asks about pre-sale structured product disclosure; C: answer traces to the documents, not the clause"""
+I052	baseline	no			5_s1	18_s1		yes	n/a	n/a	
+I053	baseline	no			6_s2	18_s2		yes	n/a	n/a	
+I054	baseline	no			18_s1	61_s1		yes	n/a	n/a	
+I055	chase_finance	yes	DISAGREE	dynamic_reg	56	173	v9-b1	yes	no	no	"""domain: clause covers equity release advising and disclosure, question asks about corporate AML onboarding and sanctions screening; C: answer traces to the documents, not the clause"""
+I056	baseline	no			3_s3	10_s3		yes	n/a	n/a	
+I057	baseline	no			6_s3	17_s3		yes	n/a	n/a	
+I058	baseline	no			10_s3	28_s3		yes	n/a	n/a	
+I059	chase_finance	yes	FAIL	dynamic_reg	15	38	v9-b2	yes	yes	yes	
+I060	chase_finance	yes	DISAGREE	reg	1	4	v9-b1	yes	no	no	"""domain: clause covers pension transfers, question asks about cryptoasset client onboarding and due diligence; C: answer traces to the documents, not the clause"""

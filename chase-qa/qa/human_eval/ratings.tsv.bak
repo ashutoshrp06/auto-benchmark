@@ -1,0 +1,61 @@
+Item_ID	Answer_Correct	Clause_Governs	Traces_To_Source	Reason
+I001	y	n	n	"""B: clause covers auto-enrolment and scheme charge caps, question asks about cryptoasset scheme launch checks; C: answer traces to the documents, not the clause"""
+I002	y	n/a	n/a	
+I003	y	n	n	"""B: clause covers designated investment suitability, question asks about commercial vehicle asset finance; C: answer traces to the documents, not the clause"""
+I004	y	y	y	
+I005	y	n/a	n/a	
+I006	6	n/a	n/a	
+I007	y	n	n	
+I008	y	y	y	
+I009	y	y	y	
+I010	y	n/a	n/a	
+I011				
+I012		n/a	n/a	
+I013		n/a	n/a	
+I014		n/a	n/a	
+I015				
+I016		n/a	n/a	
+I017				
+I018				
+I019				
+I020				
+I021				
+I022		n/a	n/a	
+I023		n/a	n/a	
+I024		n/a	n/a	
+I025		n/a	n/a	
+I026		n/a	n/a	
+I027				
+I028				
+I029				
+I030				
+I031				
+I032		n/a	n/a	
+I033		n/a	n/a	
+I034				
+I035				
+I036		n/a	n/a	
+I037				
+I038				
+I039		n/a	n/a	
+I040		n/a	n/a	
+I041		n/a	n/a	
+I042				
+I043		n/a	n/a	
+I044		n/a	n/a	
+I045				
+I046		n/a	n/a	
+I047				
+I048		n/a	n/a	
+I049				
+I050		n/a	n/a	
+I051				
+I052		n/a	n/a	
+I053		n/a	n/a	
+I054		n/a	n/a	
+I055				
+I056		n/a	n/a	
+I057		n/a	n/a	
+I058		n/a	n/a	
+I059				
+I060				

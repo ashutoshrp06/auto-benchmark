@@ -1,0 +1,142 @@
+
+======================================================================
+SOURCE: human_eval/ratings.tsv joined to human_eval/key.tsv
+======================================================================
+items 60 chase_finance 30 baseline 30
+
+======================================================================
+1. FAILURE SHAPE SPLIT  (prefix of Reason on governance failures)
+======================================================================
+governance failures 20
+shape counts {'domain': 8, 'instrument': 8, 'provision': 4}
+sum of shapes 20
+unlabelled reasons []
+  domain      I001 I007 I018 I029 I030 I038 I055 I060
+  instrument  I003 I011 I017 I020 I028 I042 I045 I049
+  provision   I015 I031 I047 I051
+
+======================================================================
+2. GOVERNANCE BY PANEL VERDICT  (both readings)
+======================================================================
+verdict      n  governs  fails  sum check
+PASS        12        3      9         ok
+FAIL         8        4      4         ok
+DISAGREE    10        3      7         ok
+TOTAL       30       10     20
+
+======================================================================
+5. ITEM-LEVEL IDENTITY OF B AND C FAILURES
+======================================================================
+governance failures 20
+tracing failures    20
+identical item sets: True
+governance only: []
+tracing only   : []
+
+======================================================================
+3. CLAUSE HEADS ACROSS THE 30 CHASE-FINANCE ITEMS
+======================================================================
+clause head counts across the sample:
+   11  COBS 19.1
+    5  COBS 9.2
+    4  MCOB 8
+    3  COBS 16.6
+    2  HMRC Inheritance Tax
+    2  PRIN 2
+    2  Pensions Act 2008
+    1  MCOB 11.6
+
+MCOB items only:
+  I008  MCOB 8       governance=governs  q=A divorced homeowner received an initial illustration from a lifetime 
+  I021  MCOB 8       governance=governs  q=An attorney acting under a lasting power of attorney for an elderly pa
+  I034  MCOB 8       governance=governs  q=A homeowner in their late 60s has received an initial equity release i
+  I037  MCOB 11.6    governance=governs  q=A homeowner with irregular self-employed earnings has had their mortga
+  I055  MCOB 8       governance=fails  q=What client identification, sanctions screening, and suspicious activi
+
+======================================================================
+6. FINAL ALLOCATION ON BOTH SIDES  (from key.tsv)
+======================================================================
+chase_finance by verdict : {'DISAGREE': 10, 'FAIL': 8, 'PASS': 12}
+baseline by document count: {1: 10, 2: 9, 3: 9, 4: 2}
+baseline N_Docs equals N_Ans_Points on every row: True
+
+======================================================================
+10. ALLOCATION AS A FUNCTION OF POPULATION, NOT OF THE DRAW
+======================================================================
+baseline population by answer-point keys: {1: 47, 2: 45, 3: 43, 4: 10} total 145
+exact shares  : {1: 9.724, 2: 9.31, 3: 8.897, 4: 2.069}
+allocation    : {1: 10, 2: 9, 3: 9, 4: 2} sum 30
+drawn         : {1: 10, 2: 9, 3: 9, 4: 2}
+allocation matches draw: True
+seed recorded in the run command: 20260816 (see run history)
+
+======================================================================
+7. JUDGEMENT WORDING AND ORDER, AS RENDERED
+======================================================================
+  A. Is the answer correct given the documents above?  Yes / No
+  B. Does the clause above govern the question asked?  Yes / No
+  C. Does the answer trace to the clause above?  Yes / No
+  This item carries no source clause. Record n/a against B and C, which the rating file already holds.
+items rendered       60
+source clause blocks 30
+B precedes C in every clause item : True
+clause printed after the documents: True
+
+======================================================================
+8. WHAT THE ITEM FILE SHOWED  (documents per item against corpus fields)
+======================================================================
+CHASE-FINANCE: documents shown against Rel_Docs_List and full Documents field
+  I001  shown=3  Rel_Docs_List=3  Documents_field=12
+  I003  shown=2  Rel_Docs_List=2  Documents_field=9
+  I004  shown=2  Rel_Docs_List=2  Documents_field=7
+  I007  shown=2  Rel_Docs_List=2  Documents_field=11
+BASELINE: documents shown against Rel_Docs_List and full Documents field
+  I002  shown=3  Rel_Docs_List=3  Documents_field=12
+  I005  shown=1  Rel_Docs_List=1  Documents_field=7
+  I006  shown=3  Rel_Docs_List=3  Documents_field=12
+  I010  shown=2  Rel_Docs_List=2  Documents_field=10
+
+ALL 60 ITEMS:
+  items where shown count differs from Rel_Docs_List: {'chase_finance': [], 'baseline': []}
+  items where Rel_Docs_List is smaller than the full Documents field: {'chase_finance': 30, 'baseline': 27} of {'chase_finance': 30, 'baseline': 30}
+  reading: a smaller Rel_Docs_List means adversarial documents were dropped for that item
+
+======================================================================
+9. WHAT THE KEY RECORDED AND WHAT THE ITEM FILE WITHHELD
+======================================================================
+key columns  : ['Item_ID', 'Frame', 'Grounding_Applicable', 'Batch', 'Root_ID', 'Question_No', 'QID', 'Verdict', 'Pass_Frac', 'No_Majority_Frac', 'N_Criteria', 'Seed_Type', 'N_Docs', 'N_Ans_Points']
+item fields  : ['Answer', 'Documents', 'Item_ID', 'Question', 'Reg_Text']
+structural leak, key fields appearing as item fields: []
+substring hits in item text, free prose not labels: {'PASS': 0, 'FAIL': 0, 'DISAGREE': 0, 'chase_finance': 0}
+items carrying clause text: 30
+
+======================================================================
+11. GROUNDING CHECK VERDICT DENOMINATOR
+======================================================================
+grounding verdicts by draw, type and value:
+   ('other', 'type1', 'false') 588
+   ('other', 'type1', 'true') 281
+   ('other', 'type2', 'false') 370
+   ('other', 'type2', 'true') 355
+   ('other', 'type3', 'false') 437
+   ('other', 'type3', 'true') 351
+   ('v9', 'type1', 'false') 314
+   ('v9', 'type1', 'true') 188
+   ('v9', 'type2', 'false') 172
+   ('v9', 'type2', 'true') 235
+   ('v9', 'type3', 'false') 249
+   ('v9', 'type3', 'true') 219
+   ('v9b', 'type1', 'false') 315
+   ('v9b', 'type1', 'true') 238
+   ('v9b', 'type2', 'false') 194
+   ('v9b', 'type2', 'true') 270
+   ('v9b', 'type3', 'false') 259
+   ('v9b', 'type3', 'true') 267
+total 5302
+NOTE: these count calls including rechecks after a correction, not rows.
+
+======================================================================
+12. TOPIC CHECK RUNS
+======================================================================
+topic verdicts by draw: {('other', 'False'): 30, ('other', 'True'): 1336, ('v9', 'False'): 8, ('v9', 'True'): 901, ('v9b', 'False'): 4, ('v9b', 'True'): 1037}
+total 3316

@@ -356,3 +356,33 @@ print('DONE. Sections 1-4 are the core experiment + controls. Sections 5-6 are')
 print('supporting structural evidence for the write-up, section 6 category tags')
 print('need manual validation before citing as anything beyond a lead.')
 print('=' * 70)
+# Section 5: PASS-vs-FAIL two-proportion z-test, reg track, noirrelevant cond, per type/model
+# Independent samples (disjoint question sets), NOT McNemar (no pairing).
+from statsmodels.stats.proportion import proportions_ztest
+from statsmodels.stats.multitest import multipletests
+
+df = pd.read_csv("analysis/v9_frame.tsv", sep="\t")
+mask = (df["Track"] == "reg") & (df["Cond"] == "noirrelevant") & (df["Verdict"].isin(["PASS", "FAIL"]))
+sub = df[mask]
+
+print("SECTION 5: PASS-vs-FAIL two-proportion z-test, reg track, noirrelevant cond")
+results = []
+for qa_type in ["type1", "type2", "type3"]:
+    for model in ["gpt55", "gemini31pro"]:
+        cell = sub[(sub["QA_Type"] == qa_type) & (sub["Model"] == model)]
+        p = cell[cell["Verdict"] == "PASS"]["Result"]
+        f = cell[cell["Verdict"] == "FAIL"]["Result"]
+        count = [p.sum(), f.sum()]
+        nobs = [len(p), len(f)]
+        stat, pval = proportions_ztest(count, nobs)
+        results.append((qa_type, model, len(p), p.mean(), len(f), f.mean(), pval))
+        print(f"{qa_type}_{model}_PASSvFAIL  n_pass={len(p)} pass_acc={p.mean():.4f}  "
+              f"n_fail={len(f)} fail_acc={f.mean():.4f}  p={pval:.5f}")
+
+pvals = [r[6] for r in results]
+reject, corrected, _, _ = multipletests(pvals, method="holm")
+print("\n-- Holm correction across these 6 tests --")
+for r, rej, corr in sorted(zip(results, reject, corrected), key=lambda x: x[0][6]):
+    qa_type, model, n_p, acc_p, n_f, acc_f, pval = r
+    tag = "REJECT (significant)" if rej else "fail to reject"
+    print(f"{qa_type}_{model}_PASSvFAIL  raw_p={pval:.5f}  holm_corrected_p={corr:.5f}  {tag}")
